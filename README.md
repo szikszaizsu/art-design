@@ -1,7 +1,7 @@
-# Szikszaizsu portfólió
+# Szikszai Zsuzsu portfólió
 
-Statikus változat a Framerben közzétett portfólióról. A mappa közvetlenül
-publikálható GitHubról a Cloudflare Pages szolgáltatással.
+Önálló, reszponzív portfólió weboldal tiszta HTML, CSS és JavaScript
+használatával. Nem igényel Framert, keretrendszert vagy build folyamatot.
 
 ## Cloudflare Pages beállítás
 
@@ -24,6 +24,6 @@ publikálható GitHubról a Cloudflare Pages szolgáltatással.
 - `public/art-work/*/index.html` – a portfólió aloldalai
 - `public/404.html` – hibaoldal
 
-Az oldal jelenlegi Framer képeket, betűtípusokat és JavaScript-modulokat a
-`framerusercontent.com` kiszolgálóról tölti be. Emiatt a megjelenés megmarad,
-de a másolat továbbra is függ a Framer külső erőforrásaitól.
+Az oldal képei a `public/assets` mappában vannak. A tartalom az
+`index.html`, a megjelenés a `styles.css`, az interakciók pedig a `script.js`
+fájlban módosíthatók.
