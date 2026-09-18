@@ -1,4 +1,4 @@
-# Szikszai Zsuzsu portfólió
+# SZIKSZAIZSU portfólió
 
 Önálló, reszponzív portfólió weboldal tiszta HTML, CSS és JavaScript
 használatával. Nem igényel Framert, keretrendszert vagy build folyamatot.
@@ -27,3 +27,4 @@ használatával. Nem igényel Framert, keretrendszert vagy build folyamatot.
 Az oldal képei a `public/assets` mappában vannak. A tartalom az
 `index.html`, a megjelenés a `styles.css`, az interakciók pedig a `script.js`
 fájlban módosíthatók.
+
