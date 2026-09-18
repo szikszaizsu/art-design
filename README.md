@@ -1,4 +1,4 @@
-# SZIKSZAIZSU portfólió
+# Szikszai Zsu portfólió
 
 Önálló, reszponzív portfólió weboldal tiszta HTML, CSS és JavaScript
 használatával. Nem igényel Framert, keretrendszert vagy build folyamatot.
