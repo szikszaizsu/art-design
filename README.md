@@ -13,16 +13,16 @@ publikálható GitHubról a Cloudflare Pages szolgáltatással.
 6. A telepítési beállításoknál használd ezeket az értékeket:
 
    - Framework preset: `None`
-   - Build command: hagyd üresen
-   - Build output directory: `/`
+   - Build command: `exit 0`
+   - Build output directory: `public`
 
 7. Indítsd el a telepítést. A Cloudflare egy `pages.dev` címet ad az oldalhoz.
 
 ## Felépítés
 
-- `index.html` – kezdőlap
-- `art-work/*/index.html` – a portfólió aloldalai
-- `404.html` – hibaoldal
+- `public/index.html` – kezdőlap
+- `public/art-work/*/index.html` – a portfólió aloldalai
+- `public/404.html` – hibaoldal
 
 Az oldal jelenlegi Framer képeket, betűtípusokat és JavaScript-modulokat a
 `framerusercontent.com` kiszolgálóról tölti be. Emiatt a megjelenés megmarad,
