@@ -3,8 +3,8 @@
   --muted: #6f655e;
   --paper: #f8f2ed;
   --surface: #fffaf6;
-  --accent: #ef6b2e;
-  --nav-hover: #8f1f1f;
+  --accent: #8f1f1f;
+  --nav-hover: #681414;
   --line: rgba(23, 19, 16, .14);
   --radius: 24px;
   --shadow: 0 18px 50px rgba(42, 24, 13, .12);
@@ -59,10 +59,10 @@ h1 span { color: var(--accent); }
 .project-card h3 { margin-top: 8px; font-size: clamp(2rem, 4vw, 4.2rem); }
 .project-card:hover img { transform: scale(1.035); opacity: .88; }
 .project-wide { grid-column: span 2; min-height: 650px; }
-.contact { padding-block: 120px; background: var(--accent); }
+.contact { padding-block: 120px; background: var(--accent); color: white; }
 .contact-grid { display: grid; grid-template-columns: 1fr .8fr; gap: 80px; }
-.contact .eyebrow { color: var(--ink); }
-.contact-copy > p:not(.eyebrow) { max-width: 570px; font-size: 1.1rem; }
+.contact .eyebrow { color: #fbd8d4; }
+.contact-copy > p:not(.eyebrow) { max-width: 570px; color: #fff1ef; font-size: 1.1rem; }
 .contact-links { margin-top: 36px; display: flex; flex-direction: column; gap: 8px; }
 .contact-links a { width: fit-content; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 .contact-form { padding: 32px; border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
