@@ -108,11 +108,12 @@ h1 span { color: var(--accent); }
 .category-hero .back-link { margin-bottom: 56px; }
 .category-hero h1 { max-width: 1100px; color: var(--accent); }
 .category-hero > p:last-child { max-width: 650px; margin: 28px 0 0; color: var(--muted); font-size: 1.1rem; }
-.category-list { padding-bottom: 130px; display: grid; gap: 70px; }
-.category-card { padding-top: 30px; border-top: 1px solid var(--line); display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px, 6vw, 85px); align-items: center; color: var(--ink); text-decoration: none; }
-.category-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); transition: transform .45s ease; }
+.category-list { padding-bottom: 130px; display: grid; grid-template-columns: repeat(2, minmax(0, 460px)); justify-content: center; gap: 50px; }
+.category-card { padding-top: 24px; border-top: 1px solid var(--line); display: flex; min-width: 0; flex-direction: column; color: var(--ink); text-decoration: none; }
+.category-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius); transition: transform .45s ease; }
+.category-card > div { padding: 24px 4px 0; }
 .category-card div > span { color: var(--accent); font-size: .76rem; font-weight: 850; letter-spacing: .12em; }
-.category-card h2 { margin-top: 12px; font-size: clamp(2.4rem, 5vw, 5.5rem); font-weight: 520; }
+.category-card h2 { margin-top: 12px; font-size: clamp(2.2rem, 3.5vw, 3.8rem); font-weight: 520; }
 .category-card p { max-width: 580px; color: var(--muted); font-size: 1.05rem; }
 .category-card strong { display: inline-block; margin-top: 14px; font-size: .86rem; }
 .category-card:hover img { transform: scale(.985); }
@@ -163,8 +164,7 @@ h1 span { color: var(--accent); }
   .site-footer { padding-block: 28px; flex-direction: column; align-items: flex-start; }
   .category-hero { padding-block: 48px 60px; }
   .category-hero .back-link { margin-bottom: 38px; }
-  .category-list { padding-bottom: 85px; gap: 58px; }
-  .category-card { grid-template-columns: 1fr; gap: 24px; }
+  .category-list { padding-bottom: 85px; grid-template-columns: minmax(0, 470px); gap: 58px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
