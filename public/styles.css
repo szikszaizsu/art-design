@@ -26,7 +26,7 @@ nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -8
 nav a:hover::after, nav a.active::after { right: 0; }
 .site-footer a:hover { color: var(--accent); }
 .menu-button { display: none; }
-.hero { min-height: calc(100vh - 84px); display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(40px, 7vw, 100px); align-items: center; padding-block: 70px; position: relative; }
+.hero { min-height: calc(100vh - 84px); display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(40px, 7vw, 100px); align-items: center; padding-block: 34px 54px; position: relative; }
 .hero-copy { grid-column: 2; grid-row: 1; }
 .eyebrow { margin: 0 0 20px; color: var(--accent); text-transform: uppercase; letter-spacing: .18em; font-size: .75rem; font-weight: 800; }
 h1, h2, h3 { margin: 0; line-height: 1.04; letter-spacing: -.055em; }
@@ -107,7 +107,7 @@ h1 span { color: var(--accent); }
   nav.open { display: flex; }
   .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; }
   .hero-copy, .hero-image { grid-column: auto; grid-row: auto; }
-  .hero { padding-block: 60px; }
+  .hero { padding-block: 30px 48px; }
   h1 { font-size: clamp(3rem, 14vw, 5.5rem); overflow-wrap: anywhere; }
   .hero-image { margin-top: 20px; }
   .about, .work { padding-block: 85px; }
