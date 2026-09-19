@@ -1,4 +1,4 @@
-﻿const menuButton = document.querySelector('.menu-button');
+const menuButton = document.querySelector('.menu-button');
 const navigation = document.querySelector('#main-nav');
 
 document.querySelectorAll('img').forEach((image) => {
@@ -87,7 +87,7 @@ if (form) {
     const data = new FormData(form);
     const subject = encodeURIComponent(`Weboldalas megkeresés — ${data.get('service')}`);
     const body = encodeURIComponent(`Név: ${data.get('name')}\nE-mail: ${data.get('email')}\nTéma: ${data.get('service')}\n\n${data.get('message')}`);
-    window.location.href = `mailto:szikszaizsu@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:szikszaizsu86@gmail.com?subject=${subject}&body=${body}`;
   });
 }
 
