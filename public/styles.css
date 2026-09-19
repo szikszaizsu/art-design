@@ -101,24 +101,24 @@ h1 span { color: var(--accent); }
 .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--accent); }
 .contact-form .button { margin-top: 4px; }
 .form-note { margin-bottom: 0; color: var(--muted); font-size: .8rem; }
-.portfolio-footer { position: relative; padding: 78px 0 26px; overflow: hidden; border-top: 1px solid var(--line); background-color: #f4f4f2; background-image: linear-gradient(rgba(23,19,16,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(23,19,16,.035) 1px, transparent 1px); background-size: 32px 32px; }
-.portfolio-footer::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 12% 35%, rgba(255,255,255,.85), transparent 34%), radial-gradient(circle at 82% 55%, rgba(255,255,255,.78), transparent 38%); }
+.portfolio-footer { position: relative; padding: 82px 0 28px; overflow: hidden; border-top: 1px solid var(--line); background: #f1f1ef; }
+.portfolio-footer::before { content: "SZ"; position: absolute; right: -2vw; bottom: -9vw; color: rgba(104,20,20,.035); font-size: clamp(14rem, 30vw, 32rem); font-weight: 900; line-height: .8; letter-spacing: -.1em; pointer-events: none; }
 .portfolio-footer-grid, .footer-bottom { position: relative; z-index: 1; }
 .portfolio-footer-grid { display: grid; grid-template-columns: 1.15fr .72fr 1fr; gap: clamp(45px, 7vw, 110px); }
-.footer-brand { display: inline-block; color: var(--ink); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -.05em; text-decoration: none; }
+.footer-brand { display: inline-block; color: var(--ink); font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: -.055em; text-decoration: none; }
 .footer-brand span { color: var(--accent); }
-.footer-intro p { max-width: 440px; margin: 22px 0 0; color: var(--muted); font-size: 1rem; }
+.footer-intro p { max-width: 430px; margin: 22px 0 0; color: var(--muted); font-size: 1rem; }
 .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-.footer-column h2 { margin: 4px 0 12px; font-size: .77rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+.footer-column h2 { margin: 4px 0 12px; color: var(--accent); font-size: .72rem; font-weight: 850; letter-spacing: .17em; text-transform: uppercase; }
 .footer-column a { color: var(--muted); text-decoration: none; transition: color .2s ease; }
 .footer-column a:hover { color: var(--accent); }
 .footer-contact a { display: flex; align-items: center; gap: 12px; }
 .follow-title { margin-top: 22px !important; }
 .social-links { display: flex; gap: 12px; }
-.social-link { width: 48px; height: 48px; display: grid !important; place-items: center; border: 1px solid; border-radius: 14px; }
+.social-link { width: 48px; height: 48px; display: grid !important; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: #fff; transition: color .2s ease, background .2s ease, transform .2s ease !important; }
 .social-link svg { width: 21px; height: 21px; fill: currentColor; stroke: currentColor; stroke-width: 1.8; }
-.social-link.facebook { color: #1769cf; border-color: #9bc4f8; background: #e5f0ff; }
-.social-link.instagram { color: #c22968; border-color: #f1abc8; background: #ffe8f1; }
+.social-link.facebook, .social-link.instagram { color: var(--ink); }
+.social-link:hover { color: #fff !important; background: var(--accent); transform: translateY(-3px); }
 .social-link.instagram svg { fill: none; }
 .social-link.instagram .social-dot { fill: currentColor; stroke: none; }
 .footer-bottom { margin-top: 66px; padding-top: 22px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); }
