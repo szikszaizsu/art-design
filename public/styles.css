@@ -20,7 +20,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: #fff; font-family: "Inter", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-optical-sizing: auto; line-height: 1.6; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; pointer-events: none; }
 a { color: inherit; }
 .section-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
 .site-header { width: min(1180px, calc(100% - 48px)); min-height: 84px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }

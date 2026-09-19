@@ -1,6 +1,12 @@
 ﻿const menuButton = document.querySelector('.menu-button');
 const navigation = document.querySelector('#main-nav');
 
+document.querySelectorAll('img').forEach((image) => {
+  image.draggable = false;
+  image.addEventListener('contextmenu', (event) => event.preventDefault());
+  image.addEventListener('dragstart', (event) => event.preventDefault());
+});
+
 if (menuButton && navigation) {
   menuButton.addEventListener('click', () => {
     const open = navigation.classList.toggle('open');
