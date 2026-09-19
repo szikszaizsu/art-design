@@ -44,6 +44,12 @@ if ('IntersectionObserver' in window && sections.length) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
+window.addEventListener('load', () => {
+  if (!window.location.hash) return;
+  const target = document.querySelector(window.location.hash);
+  target?.scrollIntoView({ block: 'start' });
+});
+
 const form = document.querySelector('#contact-form');
 if (form) {
   form.addEventListener('submit', (event) => {
