@@ -7,6 +7,30 @@ document.querySelectorAll('img').forEach((image) => {
   image.addEventListener('dragstart', (event) => event.preventDefault());
 });
 
+const galleryPreview = document.querySelector('.gallery-preview');
+const galleryPreviewImage = galleryPreview?.querySelector('img');
+
+if (galleryPreview && galleryPreviewImage && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const closePreview = () => {
+    galleryPreview.classList.remove('open');
+    galleryPreview.setAttribute('aria-hidden', 'true');
+  };
+
+  document.querySelectorAll('.gallery-item').forEach((item) => {
+    const sourceImage = item.querySelector('img');
+    const openPreview = () => {
+      galleryPreviewImage.src = sourceImage.currentSrc || sourceImage.src;
+      galleryPreviewImage.alt = sourceImage.alt;
+      galleryPreview.classList.add('open');
+      galleryPreview.setAttribute('aria-hidden', 'false');
+    };
+    item.addEventListener('mouseenter', openPreview);
+    item.addEventListener('mouseleave', closePreview);
+    item.addEventListener('focusin', openPreview);
+    item.addEventListener('focusout', closePreview);
+  });
+}
+
 if (menuButton && navigation) {
   menuButton.addEventListener('click', () => {
     const open = navigation.classList.toggle('open');
