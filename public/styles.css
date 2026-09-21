@@ -104,7 +104,6 @@ h1 span { color: var(--accent); }
 .contact-copy > p:not(.eyebrow) { max-width: 570px; color: var(--muted); font-size: 1.1rem; }
 .contact-links { margin-top: 36px; display: flex; flex-direction: column; gap: 8px; }
 .contact-links a { width: fit-content; text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.contact-links .contact-email { font-size: clamp(1.55rem, 3vw, 2.8rem); font-weight: 800; letter-spacing: -.045em; }
 .contact-links .contact-phone { color: var(--muted); font-size: .95rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; }
 .contact-links .contact-phone:hover { color: var(--accent); }
 .contact-form { padding: 32px; border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
