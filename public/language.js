@@ -21,7 +21,7 @@
     'Legyen szó karakteres hirdetésről, átgondolt felületről vagy egyedi műalkotásról, minden jó projekt egy beszélgetéssel kezdődik.': 'Whether it is a striking advertisement, a thoughtful interface or a unique artwork, every great project starts with a conversation.',
     'Teljes név': 'Full name', 'E-mail': 'Email', 'Miben segíthetek?': 'How can I help?', 'Üzenet': 'Message', 'Írj nekem': 'Get in touch',
     'UX/UI tervezés': 'UX/UI design', 'Digitális illusztráció': 'Digital illustration', 'Márka- és kampányvizuál': 'Brand and campaign visuals', 'Képzőművészet': 'Fine art', 'Egyéb': 'Other',
-    'A gomb megnyitja az e-mail alkalmazásodat az előkészített üzenettel.': 'This button opens your email app with your message ready to send.',
+    'Az üzenetet a FormSubmit továbbítja nekem. A küldéshez biztonsági ellenőrzésre lehet szükség.': 'FormSubmit delivers your message to me. A security check may be required before sending.',
     'Digitális és hagyományos alkotások egy személyes portfólióban.': 'Digital and traditional creations in a personal portfolio.',
     'Oldalak': 'Explore', 'Főoldal': 'Home', 'Lépj kapcsolatba velem': 'Get in touch', 'Kövess engem': 'Follow me',
     '© 2026 Szikszai Zsu. Minden jog fenntartva.': '© 2026 Szikszai Zsu. All rights reserved.',

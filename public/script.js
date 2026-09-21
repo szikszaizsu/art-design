@@ -83,12 +83,9 @@ window.addEventListener('load', () => {
 const form = document.querySelector('#contact-form');
 if (form) {
   form.addEventListener('submit', (event) => {
-    event.preventDefault();
     const data = new FormData(form);
     const english = document.documentElement.lang === 'en';
-    const subject = encodeURIComponent(`${english ? 'Website enquiry' : 'Weboldalas megkeresés'} — ${data.get('service')}`);
-    const body = encodeURIComponent(`${english ? 'Name' : 'Név'}: ${data.get('name')}\nE-mail: ${data.get('email')}\n${english ? 'Subject' : 'Téma'}: ${data.get('service')}\n\n${data.get('message')}`);
-    window.location.href = `mailto:szikszaizsu86@gmail.com?subject=${subject}&body=${body}`;
+    form.elements._subject.value = `${english ? 'Website enquiry' : 'Weboldalas megkeresés'} — ${data.get('service')}`;
   });
 }
 
