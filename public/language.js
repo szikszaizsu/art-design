@@ -27,12 +27,14 @@
     '© 2026 Szikszai Zsu. Minden jog fenntartva.': '© 2026 Szikszai Zsu. All rights reserved.',
     'Vissza a főoldalra ↑': 'Back to home ↑', 'Vissza a főoldalra': 'Back to home', '← Vissza a főoldalra': '← Back to home',
     '← Vissza a két fő területhez': '← Back to the main categories', '← Vissza a hagyományos kategóriákhoz': '← Back to traditional categories', '← Vissza a munkákhoz': '← Back to my work',
-    'Digitális': 'Digital', 'Hagyományos': 'Traditional', 'munkák': 'work',
+    'Digitális': 'Digital', 'Hagyományos': 'Traditional', 'munkák': 'work', 'technikák': 'techniques',
     'Digitális alkotások, ahol a vizuális ötlet, a történet és a felhasználói élmény találkozik.': 'Digital creations where visual ideas, storytelling and user experience meet.',
     'Közösségi média és hirdetések': 'Social media and advertising',
     'Kampányképek, digitális illusztráció és vizuális kommunikáció.': 'Campaign imagery, digital illustration and visual communication.',
     'Felhasználói élmény, felülettervezés és vizuális rendszerek.': 'User experience, interface design and visual systems.',
-    'Gyöngyfűzés': 'Beadwork', 'Tojásírás': 'Wax-resist egg decorating',
+    'Gyöngyfűzés': 'Beadwork', 'Tojásírás': 'Wax-resist egg decorating', 'Nemezelés': 'Felting',
+    'Amikor a gyapjú életre kel.': 'When wool comes to life.',
+    'A nemezeléshez tartozó munkák hamarosan itt kapnak helyet.': 'Felting work will soon have its place here.',
     'Viselhető művészet, türelem és apró elemekből épülő minták.': 'Wearable art, patience and patterns built from tiny beads.',
     'Viasztechnika, örökség és generációkon át őrzött motívumok.': 'Wax-resist techniques, heritage and motifs preserved through generations.',
     'Kézművesség · Hagyomány': 'Craft · Tradition', 'Hagyományos mesterség': 'Traditional craft', 'Viselhető művészet': 'Wearable art', 'Kézzel készült': 'Handmade',
@@ -56,7 +58,7 @@
     'Gyöngyfűzött karkötők fekete háttéren': 'Beaded bracelets on a black background', 'Hagyományos mintájú gyöngyfűzött pántok': 'Beaded bands with traditional patterns', 'Fekete, fehér és piros gyöngyfűzött nyakpánt': 'Black, white and red beaded choker', 'Kézen viselt gyöngyfűzött karkötő': 'Beaded bracelet worn on a wrist',
     'Hagyományosan díszített tojások kosárban': 'Traditionally decorated eggs in a basket', 'Kézzel írt tojások természetes kompozícióban': 'Hand-decorated eggs in a natural arrangement', 'Piros és fehér mintás írott tojások': 'Decorated eggs with red and white patterns', 'Viasztechnikával készült hagyományos tojások': 'Traditional eggs decorated using wax-resist techniques',
     'Szikszai Zsu művész és UX/UI tervező portfóliója — hagyományos alkotás, digitális design és MI egyetlen kreatív folyamatban.': 'Artist and UX/UI designer Szikszai Zsu’s portfolio — traditional art, digital design and AI in one creative process.',
-    'Szikszai Zsu digitális munkáinak kategóriái.': 'Explore Szikszai Zsu’s digital work.', 'Szikszai Zsu hagyományos munkáinak kategóriái.': 'Explore Szikszai Zsu’s traditional work.', 'Szikszai Zsu hagyományos gyöngyfűzései.': 'Traditional beadwork by Szikszai Zsu.', 'Szikszai Zsu hagyományos viaszos tojásírásai.': 'Traditional wax-resist egg decorating by Szikszai Zsu.', 'UX és UI tervezés Szikszai Zsutól.': 'UX and UI design by Szikszai Zsu.', 'Közösségi média és hirdetési design Szikszai Zsutól.': 'Social media and advertising design by Szikszai Zsu.'
+    'Szikszai Zsu digitális munkáinak kategóriái.': 'Explore Szikszai Zsu’s digital work.', 'Szikszai Zsu hagyományos munkáinak kategóriái.': 'Explore Szikszai Zsu’s traditional work.', 'Szikszai Zsu hagyományos technikáinak kategóriái.': 'Explore Szikszai Zsu’s traditional techniques.', 'Szikszai Zsu hagyományos gyöngyfűzései.': 'Traditional beadwork by Szikszai Zsu.', 'Szikszai Zsu hagyományos viaszos tojásírásai.': 'Traditional wax-resist egg decorating by Szikszai Zsu.', 'UX és UI tervezés Szikszai Zsutól.': 'UX and UI design by Szikszai Zsu.', 'Közösségi média és hirdetési design Szikszai Zsutól.': 'Social media and advertising design by Szikszai Zsu.'
   };
   const translate = (text) => {
     if (translations[text]) return translations[text];

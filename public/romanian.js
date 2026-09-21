@@ -26,12 +26,14 @@ window.portfolioRomanian = {
   '© 2026 Szikszai Zsu. All rights reserved.': '© 2026 Szikszai Zsu. Toate drepturile rezervate.',
   'Back to home ↑': 'Înapoi la pagina principală ↑', 'Back to home': 'Înapoi la pagina principală', '← Back to home': '← Înapoi la pagina principală',
   '← Back to the main categories': '← Înapoi la categoriile principale', '← Back to traditional categories': '← Înapoi la categoriile tradiționale', '← Back to my work': '← Înapoi la lucrările mele',
-  'Digital': 'Lucrări', 'Traditional': 'Lucrări', 'work': 'digitale',
+  'Digital': 'Lucrări', 'Traditional': 'Tehnici', 'work': 'digitale', 'techniques': 'tradiționale',
   'Digital creations where visual ideas, storytelling and user experience meet.': 'Creații digitale în care se întâlnesc ideile vizuale, povestea și experiența utilizatorului.',
   'Social media and advertising': 'Rețele sociale și publicitate',
   'Campaign imagery, digital illustration and visual communication.': 'Imagini de campanie, ilustrație digitală și comunicare vizuală.',
   'User experience, interface design and visual systems.': 'Experiența utilizatorului, design de interfețe și sisteme vizuale.',
-  'Beadwork': 'Lucrări din mărgele', 'Wax-resist egg decorating': 'Încondeierea ouălor',
+  'Beadwork': 'Lucrări din mărgele', 'Wax-resist egg decorating': 'Încondeierea ouălor', 'Felting': 'Împâslire',
+  'When wool comes to life.': 'Când lâna prinde viață.',
+  'Felting work will soon have its place here.': 'Lucrările de împâslire își vor găsi în curând locul aici.',
   'Wearable art, patience and patterns built from tiny beads.': 'Artă de purtat, răbdare și modele create din mărgele mici.',
   'Wax-resist techniques, heritage and motifs preserved through generations.': 'Tehnica cerii, moștenire culturală și motive păstrate din generație în generație.',
   'Craft · Tradition': 'Meșteșug · Tradiție', 'Traditional craft': 'Meșteșug tradițional', 'Wearable art': 'Artă de purtat', 'Handmade': 'Lucrat manual',
@@ -55,5 +57,5 @@ window.portfolioRomanian = {
   'Beaded bracelets on a black background': 'Brățări din mărgele pe fundal negru', 'Beaded bands with traditional patterns': 'Benzi din mărgele cu modele tradiționale', 'Black, white and red beaded choker': 'Colier la baza gâtului din mărgele negre, albe și roșii', 'Beaded bracelet worn on a wrist': 'Brățară din mărgele purtată la încheietură',
   'Traditionally decorated eggs in a basket': 'Ouă încondeiate tradițional într-un coș', 'Hand-decorated eggs in a natural arrangement': 'Ouă încondeiate manual într-un aranjament natural', 'Decorated eggs with red and white patterns': 'Ouă încondeiate cu modele roșii și albe', 'Traditional eggs decorated using wax-resist techniques': 'Ouă tradiționale încondeiate cu ceară',
   'Artist and UX/UI designer Szikszai Zsu’s portfolio — traditional art, digital design and AI in one creative process.': 'Portofoliul artistei și designerului UX/UI Szikszai Zsu — artă tradițională, design digital și IA într-un singur proces creativ.',
-  'Explore Szikszai Zsu’s digital work.': 'Explorează lucrările digitale ale lui Szikszai Zsu.', 'Explore Szikszai Zsu’s traditional work.': 'Explorează lucrările tradiționale ale lui Szikszai Zsu.', 'Traditional beadwork by Szikszai Zsu.': 'Lucrări tradiționale din mărgele create de Szikszai Zsu.', 'Traditional wax-resist egg decorating by Szikszai Zsu.': 'Ouă încondeiate tradițional cu ceară de Szikszai Zsu.', 'UX and UI design by Szikszai Zsu.': 'Design UX și UI realizat de Szikszai Zsu.', 'Social media and advertising design by Szikszai Zsu.': 'Design pentru rețele sociale și publicitate realizat de Szikszai Zsu.'
+  'Explore Szikszai Zsu’s digital work.': 'Explorează lucrările digitale ale lui Szikszai Zsu.', 'Explore Szikszai Zsu’s traditional work.': 'Explorează lucrările tradiționale ale lui Szikszai Zsu.', 'Explore Szikszai Zsu’s traditional techniques.': 'Explorează tehnicile tradiționale ale lui Szikszai Zsu.', 'Traditional beadwork by Szikszai Zsu.': 'Lucrări tradiționale din mărgele create de Szikszai Zsu.', 'Traditional wax-resist egg decorating by Szikszai Zsu.': 'Ouă încondeiate tradițional cu ceară de Szikszai Zsu.', 'UX and UI design by Szikszai Zsu.': 'Design UX și UI realizat de Szikszai Zsu.', 'Social media and advertising design by Szikszai Zsu.': 'Design pentru rețele sociale și publicitate realizat de Szikszai Zsu.'
 };
