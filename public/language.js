@@ -80,6 +80,20 @@
     });
   });
   const title = document.title;
+  const localize = (text, lang) => {
+    if (lang === 'hu') return text;
+    const english = translate(text);
+    if (lang === 'en') return english;
+    if (text === 'munkák') return location.pathname.includes('hagyomanyos') ? 'tradiționale' : 'digitale';
+    const ro = window.portfolioRomanian || {};
+    if (ro[english]) return ro[english];
+    if (english.endsWith(' — Szikszai Zsu')) {
+      const base = english.replace(' — Szikszai Zsu', '');
+      return (base === 'Page not found' ? 'Pagina nu a fost găsită' : ro[base] || base) + ' — Szikszai Zsu';
+    }
+    if (english.startsWith('Szikszai Zsu — ')) return 'Szikszai Zsu — ' + ro['A one-person creative department'];
+    return english;
+  };
   let header = document.querySelector('.site-header');
   if (!header) {
     header = document.createElement('header');
@@ -91,21 +105,21 @@
   switcher.className = 'language-switch notranslate';
   switcher.setAttribute('translate', 'no');
   switcher.setAttribute('role', 'group');
-  switcher.innerHTML = '<button type="button" translate="no" lang="hu" data-lang="hu">HU</button><button type="button" translate="no" lang="en" data-lang="en">EN</button>';
+  switcher.innerHTML = '<button type="button" translate="no" lang="hu" data-lang="hu">HU</button><button type="button" translate="no" lang="en" data-lang="en">EN</button><button type="button" translate="no" lang="ro" data-lang="ro">RO</button>';
   header.append(switcher);
   function setLanguage(lang) {
     const english = lang === 'en';
     document.documentElement.lang = lang;
     texts.forEach(([node, original]) => {
-      node.textContent = english ? original.replace(original.trim(), translate(original.trim())) : original;
+      node.textContent = original.replace(original.trim(), localize(original.trim(), lang));
     });
-    attributes.forEach(([el, attr, original]) => el.setAttribute(attr, english ? translate(original) : original));
-    document.title = english ? translate(title) : title;
-    switcher.setAttribute('aria-label', english ? 'Language' : 'Nyelv');
+    attributes.forEach(([el, attr, original]) => el.setAttribute(attr, localize(original, lang)));
+    document.title = localize(title, lang);
+    switcher.setAttribute('aria-label', lang === 'ro' ? 'Limbă' : english ? 'Language' : 'Nyelv');
     switcher.querySelectorAll('button').forEach(button => {
       button.textContent = button.dataset.lang.toUpperCase();
       button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
-      button.setAttribute('aria-label', button.dataset.lang === 'hu' ? 'Magyar' : 'English');
+      button.setAttribute('aria-label', { hu: 'Magyar', en: 'English', ro: 'Română' }[button.dataset.lang]);
     });
     try { localStorage.setItem('portfolio-language', lang); } catch {}
     document.querySelectorAll('a[href]').forEach(link => {
@@ -128,5 +142,5 @@
   let saved;
   try { saved = localStorage.getItem('portfolio-language'); } catch {}
   const requested = new URLSearchParams(location.search).get('lang');
-  setLanguage((requested || saved) === 'en' ? 'en' : 'hu');
+  setLanguage(['hu', 'en', 'ro'].includes(requested || saved) ? requested || saved : 'hu');
 })();

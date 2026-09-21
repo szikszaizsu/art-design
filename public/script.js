@@ -85,7 +85,8 @@ if (form) {
   form.addEventListener('submit', (event) => {
     const data = new FormData(form);
     const english = document.documentElement.lang === 'en';
-    form.elements._subject.value = `${english ? 'Website enquiry' : 'Weboldalas megkeresés'} — ${data.get('service')}`;
+    const romanian = document.documentElement.lang === 'ro';
+    form.elements._subject.value = `${romanian ? 'Mesaj de pe site' : english ? 'Website enquiry' : 'Weboldalas megkeresés'} — ${data.get('service')}`;
   });
 }
 
