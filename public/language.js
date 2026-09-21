@@ -122,7 +122,6 @@
       button.setAttribute('aria-label', { hu: 'Magyar', en: 'English', ro: 'Română' }[button.dataset.lang]);
     });
     try { localStorage.setItem('portfolio-language', lang); } catch {}
-    window.dispatchEvent(new CustomEvent('portfolio-language-change', { detail: { lang } }));
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
       if (href.startsWith('#') || /^(mailto:|tel:)/.test(href)) return;
