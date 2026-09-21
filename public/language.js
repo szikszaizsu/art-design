@@ -88,9 +88,10 @@
     document.body.prepend(header);
   }
   const switcher = document.createElement('div');
-  switcher.className = 'language-switch';
+  switcher.className = 'language-switch notranslate';
+  switcher.setAttribute('translate', 'no');
   switcher.setAttribute('role', 'group');
-  switcher.innerHTML = '<button type="button" lang="hu" data-lang="hu">HU</button><button type="button" lang="en" data-lang="en">EN</button>';
+  switcher.innerHTML = '<button type="button" translate="no" lang="hu" data-lang="hu">HU</button><button type="button" translate="no" lang="en" data-lang="en">EN</button>';
   header.append(switcher);
   function setLanguage(lang) {
     const english = lang === 'en';
@@ -102,6 +103,7 @@
     document.title = english ? translate(title) : title;
     switcher.setAttribute('aria-label', english ? 'Language' : 'Nyelv');
     switcher.querySelectorAll('button').forEach(button => {
+      button.textContent = button.dataset.lang.toUpperCase();
       button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
       button.setAttribute('aria-label', button.dataset.lang === 'hu' ? 'Magyar' : 'English');
     });
