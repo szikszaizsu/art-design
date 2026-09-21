@@ -27,7 +27,7 @@ window.portfolioRomanian = {
   'Back to home ↑': 'Înapoi la pagina principală ↑', 'Back to home': 'Înapoi la pagina principală', '← Back to home': '← Înapoi la pagina principală',
   '← Back to the main categories': '← Înapoi la categoriile principale', '← Back to traditional categories': '← Înapoi la categoriile tradiționale', '← Back to my work': '← Înapoi la lucrările mele',
   'Digital': 'Lucrări', 'Traditional': 'Lucrări', 'work': 'digitale',
-  'Explore my digital work by category.': 'Explorează lucrările mele digitale pe categorii.',
+  'Digital creations where visual ideas, storytelling and user experience meet.': 'Creații digitale în care se întâlnesc ideile vizuale, povestea și experiența utilizatorului.',
   'Social media and advertising': 'Rețele sociale și publicitate',
   'Campaign imagery, digital illustration and visual communication.': 'Imagini de campanie, ilustrație digitală și comunicare vizuală.',
   'User experience, interface design and visual systems.': 'Experiența utilizatorului, design de interfețe și sisteme vizuale.',

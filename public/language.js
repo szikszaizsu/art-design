@@ -28,7 +28,7 @@
     'Vissza a főoldalra ↑': 'Back to home ↑', 'Vissza a főoldalra': 'Back to home', '← Vissza a főoldalra': '← Back to home',
     '← Vissza a két fő területhez': '← Back to the main categories', '← Vissza a hagyományos kategóriákhoz': '← Back to traditional categories', '← Vissza a munkákhoz': '← Back to my work',
     'Digitális': 'Digital', 'Hagyományos': 'Traditional', 'munkák': 'work',
-    'Válassz kategóriát. Az új digitális munkák később egyszerűen ide kerülhetnek.': 'Explore my digital work by category.',
+    'Digitális alkotások, ahol a vizuális ötlet, a történet és a felhasználói élmény találkozik.': 'Digital creations where visual ideas, storytelling and user experience meet.',
     'Közösségi média és hirdetések': 'Social media and advertising',
     'Kampányképek, digitális illusztráció és vizuális kommunikáció.': 'Campaign imagery, digital illustration and visual communication.',
     'Felhasználói élmény, felülettervezés és vizuális rendszerek.': 'User experience, interface design and visual systems.',
