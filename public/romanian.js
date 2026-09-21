@@ -14,7 +14,7 @@ window.portfolioRomanian = {
   '01 · Visual communication': '01 · Comunicare vizuală', '02 · Handmade': '02 · Lucrat manual',
   'Digital work': 'Lucrări digitale', 'Traditional work': 'Lucrări tradiționale',
   'UX/UI, social media, campaigns and more digital disciplines.': 'UX/UI, rețele sociale, campanii și alte domenii digitale.',
-  'Traditional techniques that delight the eye and reward the hand.': 'Tehnici tradiționale care încântă privirea și răsplătesc mâna.',
+  'Traditional techniques born from patience, details and personal stories.': 'Tehnici tradiționale născute din răbdare, detalii și povești personale.',
   'Explore categories ↗': 'Explorează categoriile ↗', 'Explore category ↗': 'Explorează categoria ↗',
   'Have an idea?': 'Ai o idee?', 'Let’s bring it to life.': 'Să-i dăm viață împreună.',
   'Whether it is a striking advertisement, a thoughtful interface or a unique artwork, every great project starts with a conversation.': 'Fie că este vorba despre o reclamă expresivă, o interfață bine gândită sau o operă de artă unică, orice proiect reușit începe cu o conversație.',
