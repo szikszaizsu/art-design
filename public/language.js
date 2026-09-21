@@ -15,7 +15,7 @@
     '01 · Vizuális kommunikáció': '01 · Visual communication', '02 · Kézzel készült': '02 · Handmade',
     'Digitális munkák': 'Digital work', 'Hagyományos munkák': 'Traditional work',
     'UX/UI, közösségi média, kampányok és további digitális kategóriák.': 'UX/UI, social media, campaigns and more digital disciplines.',
-    'Gyöngyfűzés, tojásírás és további hagyományos technikák.': 'Beadwork, wax-resist egg decorating and other traditional techniques.',
+    'Mindent a szemnek, semmit a kéznek vesző hagyományos technikák.': 'Traditional techniques that delight the eye and reward the hand.',
     'Belépés a kategóriákhoz ↗': 'Explore categories ↗', 'Kategória megnyitása ↗': 'Explore category ↗',
     'Van egy ötleted?': 'Have an idea?', 'Alkossuk meg együtt.': 'Let’s bring it to life.',
     'Legyen szó karakteres hirdetésről, átgondolt felületről vagy egyedi műalkotásról, minden jó projekt egy beszélgetéssel kezdődik.': 'Whether it is a striking advertisement, a thoughtful interface or a unique artwork, every great project starts with a conversation.',
