@@ -1,4 +1,8 @@
 (() => {
+  const parameters = new URLSearchParams(location.search);
+  if (parameters.get('own-visit') === '1') localStorage.setItem('portfolio-exclude-visits', '1');
+  if (parameters.get('own-visit') === '0') localStorage.removeItem('portfolio-exclude-visits');
+  const excluded = localStorage.getItem('portfolio-exclude-visits') === '1';
   const footer = document.querySelector('.footer-bottom');
   if (!footer) return;
   const counter = document.createElement('p');
@@ -15,7 +19,7 @@
     counter.hidden = false;
   }
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-  fetch('/api/visits', { method: 'POST', headers: { 'X-Visit-Counter': '1' }, credentials: 'same-origin', cache: 'no-store' })
+  fetch('/api/visits', { method: excluded ? 'GET' : 'POST', headers: excluded ? {} : { 'X-Visit-Counter': '1' }, credentials: 'same-origin', cache: 'no-store' })
     .then(response => { if (!response.ok) throw new Error('Unavailable'); return response.json(); })
     .then(data => { if (Number.isSafeInteger(data.count) && data.count >= 0) { count = data.count; render(); } })
     .catch(() => { /* Never display an invented count if the service is unavailable. */ });
