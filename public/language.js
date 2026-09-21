@@ -1,6 +1,6 @@
 (() => {
   const translations = {
-    'Rólam': 'About me', 'Munkáim': 'My work', 'Kapcsolat': 'Contact', 'Menü': 'Menu',
+    'Rólam': 'About me', 'Munkáim': 'My work', 'Elérhetőség': 'Contact details', 'Menü': 'Menu',
     'Egyszemélyes kreatív osztály': 'A one-person creative department',
     'Művészi szem. MI-jártasság. Egyetlen vízió.': 'An artistic eye. AI expertise. One vision.',
     'A klasszikus vizuális gondolkodást digitális tapasztalattal kapcsolom össze, hogy karakteres képi világokat és átgondolt felhasználói élményeket alkossak.': 'I combine classical visual thinking with digital expertise to create distinctive visual worlds and thoughtful user experiences.',
