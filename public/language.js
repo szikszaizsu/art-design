@@ -14,7 +14,7 @@
     'Válogatott munkák': 'Selected work', '„Digitális tisztaság.': '“Digital clarity.', 'Kézzel alkotott lélek.”': 'A handcrafted soul.”',
     '01 · Vizuális kommunikáció': '01 · Visual communication', '02 · Kézzel készült': '02 · Handmade',
     'Digitális munkák': 'Digital work', 'Hagyományos munkák': 'Traditional work',
-    'UX/UI, közösségi média, kampányok és további digitális kategóriák.': 'UX/UI, social media, campaigns and more digital disciplines.',
+    'Vizuális kampányok, digitális illusztrációk és felületek, ahol az ötlet élménnyé válik.': 'Visual campaigns, digital illustrations and interfaces where ideas become experiences.',
     'Hagyományos technikák, amelyek türelemből, részletekből és személyes történetekből születnek.': 'Traditional techniques born from patience, details and personal stories.',
     'Belépés a kategóriákhoz ↗': 'Explore categories ↗', 'Kategória megnyitása ↗': 'Explore category ↗',
     'Van egy ötleted?': 'Have an idea?', 'Alkossuk meg együtt.': 'Let’s bring it to life.',

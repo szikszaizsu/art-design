@@ -13,7 +13,7 @@ window.portfolioRomanian = {
   'Selected work': 'Lucrări selectate', '“Digital clarity.': '„Claritate digitală.', 'A handcrafted soul.”': 'Suflet creat manual.”',
   '01 · Visual communication': '01 · Comunicare vizuală', '02 · Handmade': '02 · Lucrat manual',
   'Digital work': 'Lucrări digitale', 'Traditional work': 'Lucrări tradiționale',
-  'UX/UI, social media, campaigns and more digital disciplines.': 'UX/UI, rețele sociale, campanii și alte domenii digitale.',
+  'Visual campaigns, digital illustrations and interfaces where ideas become experiences.': 'Campanii vizuale, ilustrații digitale și interfețe în care ideile devin experiențe.',
   'Traditional techniques born from patience, details and personal stories.': 'Tehnici tradiționale născute din răbdare, detalii și povești personale.',
   'Explore categories ↗': 'Explorează categoriile ↗', 'Explore category ↗': 'Explorează categoria ↗',
   'Have an idea?': 'Ai o idee?', 'Let’s bring it to life.': 'Să-i dăm viață împreună.',
