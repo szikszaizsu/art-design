@@ -32,7 +32,7 @@
     'Közösségi média és hirdetések': 'Social media and advertising',
     'Kampányképek, digitális illusztráció és vizuális kommunikáció.': 'Campaign imagery, digital illustration and visual communication.',
     'Felhasználói élmény, felülettervezés és vizuális rendszerek.': 'User experience, interface design and visual systems.',
-    'Gyöngyszövés': 'Beadwork', 'Tojásírás': 'Wax-resist egg decorating', 'Nemezelés': 'Felting',
+    'Gyöngyszövés': 'Bead weaving', 'Tojásírás': 'Wax-resist egg decorating', 'Tojásírás viasztechnikával': 'Wax-resist egg decorating', 'Nemezelés': 'Felting',
     'Amikor a gyapjú életre kel.': 'When wool comes to life.',
     'A nemezeléshez tartozó munkák hamarosan itt kapnak helyet.': 'Felting work will soon have its place here.',
     'Viselhető művészet, türelem és apró elemekből épülő minták.': 'Wearable art, patience and patterns built from tiny beads.',

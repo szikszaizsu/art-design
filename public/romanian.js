@@ -31,7 +31,7 @@ window.portfolioRomanian = {
   'Social media and advertising': 'Rețele sociale și publicitate',
   'Campaign imagery, digital illustration and visual communication.': 'Imagini de campanie, ilustrație digitală și comunicare vizuală.',
   'User experience, interface design and visual systems.': 'Experiența utilizatorului, design de interfețe și sisteme vizuale.',
-  'Beadwork': 'Lucrări din mărgele', 'Wax-resist egg decorating': 'Încondeierea ouălor', 'Felting': 'Împâslire',
+  'Bead weaving': 'Țesut cu mărgele', 'Wax-resist egg decorating': 'Încondeierea ouălor cu ceară', 'Felting': 'Împâslire',
   'When wool comes to life.': 'Când lâna prinde viață.',
   'Felting work will soon have its place here.': 'Lucrările de împâslire își vor găsi în curând locul aici.',
   'Wearable art, patience and patterns built from tiny beads.': 'Artă de purtat, răbdare și modele create din mărgele mici.',
