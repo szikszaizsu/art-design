@@ -298,6 +298,100 @@ h1 span { color: var(--accent); }
   .language-switch.open .language-options { opacity: 1; visibility: visible; transform: none; }
   .language-options button { min-height: 40px; padding-inline: 14px; font-size: .85rem; }
 }
+/* ===== Apple-style layer (awesome-design-md/apple): centred stacks, full-bleed alternating tiles,
+   one accent, pill buttons, shadow only on photography. Brand wordmark, serif display and
+   oxblood accent are kept. ===== */
+:root {
+  --parchment: #f5f5f7;
+  --tile-dark: #1d1a18;
+  --radius: 18px;
+  --photo-shadow: 3px 5px 30px rgba(0, 0, 0, .22);
+}
+body { font-size: 17px; line-height: 1.47; }
+.site-header { min-height: 64px; background: transparent; border-bottom: 0; }
+.site-header::before { background: rgba(255, 255, 255, .8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0, 0, 0, .08); }
+nav a, .site-footer a { font-size: .8rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: rgba(23, 19, 16, .82); }
+nav a::after { display: none; }
+nav a:hover, nav a.active { color: var(--accent); }
+
+.button { padding: 12px 24px; gap: 10px; background: var(--accent); font-size: 1.0625rem; font-weight: 400; letter-spacing: 0; text-transform: none; transition: transform .15s ease, background .2s ease; }
+.button:hover { transform: none; background: var(--accent-hover, #681414); }
+.button:active { transform: scale(.95); }
+.button-secondary { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.button-secondary:hover { background: var(--accent); color: #fff; }
+.hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.hero-actions .button { margin-top: 0; }
+
+/* Hero: centred stack, portrait below resting on the canvas */
+.hero { min-height: 0; grid-template-columns: 1fr; gap: 56px; padding-block: 96px 104px; text-align: center; justify-items: center; }
+.hero-copy, .hero-image { grid-column: auto; grid-row: auto; }
+.hero-copy { max-width: 980px; container-type: normal; }
+.eyebrow { display: inline-block; }
+.hero-text { max-width: 640px; margin-inline: auto; color: var(--ink); }
+.hero-quote { margin: 26px auto 0; }
+.hero-image { width: min(460px, 100%); margin: 0; }
+.hero-image img { width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: var(--radius); box-shadow: var(--photo-shadow); }
+.hero-lead, :lang(ro) .hero-lead { white-space: normal; font-size: clamp(1.6rem, 2.6vw, 2.3rem); }
+
+/* Full-bleed alternating tiles: the colour change is the divider */
+.quote-band { padding: 80px 24px; background: var(--tile-dark); }
+.about { width: 100%; max-width: none; padding-inline: max(24px, calc((100% - 1180px) / 2)); background: var(--parchment); }
+.work { border-top: 0; }
+.about, .work { padding-block: 104px; }
+.section-heading { grid-template-columns: 1fr; gap: 0; max-width: 980px; margin: 0 auto 64px; text-align: center; }
+.section-heading .eyebrow, .detail-gallery .eyebrow, .category-hero .eyebrow, .detail-hero .eyebrow { justify-self: center; margin-inline: auto; }
+.about-copy article, .about-copy article:last-child { border-color: rgba(0, 0, 0, .08); }
+.about-copy p, .gateway-content p, .category-card p { color: #3a332e; }
+.about-portrait img { border-radius: var(--radius); }
+
+/* Cards: flat utility cards, hairline, no shadow */
+.gateway-card { background: #fff; border: 1px solid rgba(0, 0, 0, .08); }
+.gateway-card:hover { transform: none; box-shadow: none; }
+.gateway-card:hover img { transform: scale(1.03); }
+.gateway-content { padding: 32px; }
+.category-card img, .category-card-visual, .project-card, .gallery-item, .gallery-grid img { border-radius: var(--radius); }
+.gallery-item:hover, .gallery-item:focus-visible { transform: none; box-shadow: none; }
+
+/* Contact: dark tile */
+.contact { padding-block: 104px; background: var(--tile-dark); color: #fff; border-top: 0; }
+.contact h2 { color: #fff; }
+.contact .eyebrow { color: rgba(255, 255, 255, .7); }
+.contact-copy > p:not(.eyebrow) { color: rgba(255, 255, 255, .78); }
+.contact-form { border-radius: var(--radius); box-shadow: none; color: var(--ink); }
+.contact-form .button { width: 100%; justify-content: center; }
+
+/* Footer: parchment, quiet and dense */
+.portfolio-footer { padding: 64px 0 24px; background: var(--parchment); border-top: 0; box-shadow: none; }
+.portfolio-footer::before { display: none; }
+.footer-column a { color: rgba(23, 19, 16, .8); }
+.social-link { border-color: rgba(0, 0, 0, .08); }
+.social-link:hover { transform: none; }
+
+/* Category & detail pages: centred heroes */
+.category-hero, .detail-hero { text-align: center; }
+.category-hero h1, .detail-hero h1 { margin-inline: auto; }
+.category-hero > .category-intro { margin-inline: auto; }
+.category-hero .back-link, .detail-hero .back-link { display: table; margin-inline: auto; }
+.back-link { font-size: .85rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--accent); }
+.detail-meta { justify-content: center; }
+.detail-image img { border-radius: var(--radius); box-shadow: var(--photo-shadow); }
+.detail-gallery { text-align: center; }
+.detail-gallery h2 { margin-inline: auto; }
+.gateway-content strong, .category-card strong { font-size: .95rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--accent); }
+
+@media (max-width: 820px) {
+  .site-header { min-height: 60px; }
+  .menu-button { font-size: .85rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+  .language-switch .language-toggle { font-size: .85rem; font-weight: 400; letter-spacing: 0; }
+  .hero { gap: 40px; padding-block: 56px 64px; }
+  .hero-image { width: min(360px, 100%); margin-top: 0; }
+  .about { padding-inline: 15px; }
+  .about, .work, .contact { padding-block: 64px; }
+  .quote-band { padding: 56px 20px; }
+  .section-heading { margin-bottom: 40px; }
+  .gateway-content { padding: 24px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
