@@ -342,6 +342,8 @@ nav a:hover, nav a.active { color: var(--accent); }
 .section-heading .eyebrow, .detail-gallery .eyebrow, .category-hero .eyebrow, .detail-hero .eyebrow { justify-self: center; margin-inline: auto; }
 .about-copy article, .about-copy article:last-child { border-color: rgba(0, 0, 0, .08); }
 .about-copy p, .gateway-content p, .category-card p { color: #3a332e; }
+.about-copy article p { grid-column: 3; }
+.about-copy article p + p { margin-top: -8px; }
 .about-portrait img { border-radius: var(--radius); }
 
 /* Cards: flat utility cards, hairline, no shadow */
@@ -386,6 +388,7 @@ nav a:hover, nav a.active { color: var(--accent); }
   .hero { gap: 40px; padding-block: 56px 64px; }
   .hero-image { width: min(360px, 100%); margin-top: 0; }
   .about { padding-inline: 15px; }
+  .about-copy article p { grid-column: 2; }
   .about, .work, .contact { padding-block: 64px; }
   .quote-band { padding: 56px 20px; }
   .section-heading { margin-bottom: 40px; }
