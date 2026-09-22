@@ -19,7 +19,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 104px; }
-body { margin: 0; color: var(--ink); background: #fff; font-family: "Inter", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-optical-sizing: auto; line-height: 1.6; }
+body { margin: 0; overflow-x: clip; color: var(--ink); background: #fff; font-family: "Inter", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-optical-sizing: auto; line-height: 1.6; }
 img { display: block; max-width: 100%; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; pointer-events: none; }
 a { color: inherit; }
 .section-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
@@ -53,6 +53,11 @@ h1 span { color: var(--accent); }
 .button:hover { transform: translateY(-2px); background: var(--accent); }
 .hero-image { grid-column: 1; grid-row: 1; margin: 0; position: relative; }
 .hero-image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+@media (min-width: 821px) {
+  .hero { min-height: calc(100svh - 84px); padding-block: 32px; }
+  .hero-image { display: flex; justify-content: center; }
+  .hero-image img { width: auto; max-width: 100%; height: max(420px, calc(100svh - 84px - 64px)); }
+}
 .quote-band { padding: 28px 24px; background: var(--ink); color: white; overflow: hidden; }
 .quote-band p { width: max-content; max-width: 100%; margin: 0 auto; text-align: center; font-size: clamp(1.4rem, 3vw, 2.4rem); letter-spacing: -.03em; }
 .about, .work { padding-block: 130px; }
