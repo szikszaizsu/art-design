@@ -107,8 +107,19 @@
   switcher.className = 'language-switch notranslate';
   switcher.setAttribute('translate', 'no');
   switcher.setAttribute('role', 'group');
-  switcher.innerHTML = '<button type="button" translate="no" lang="hu" data-lang="hu">HU</button><button type="button" translate="no" lang="en" data-lang="en">EN</button><button type="button" translate="no" lang="ro" data-lang="ro">RO</button>';
+  switcher.innerHTML = '<button type="button" class="language-toggle" translate="no" aria-expanded="false"><span class="language-current"></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="language-options"><button type="button" translate="no" lang="hu" data-lang="hu">HU</button><button type="button" translate="no" lang="en" data-lang="en">EN</button><button type="button" translate="no" lang="ro" data-lang="ro">RO</button></div>';
   header.append(switcher);
+  const languageToggle = switcher.querySelector('.language-toggle');
+  const setSwitcherOpen = open => {
+    switcher.classList.toggle('open', open);
+    languageToggle.setAttribute('aria-expanded', String(open));
+  };
+  document.addEventListener('click', event => {
+    if (!switcher.contains(event.target)) setSwitcherOpen(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') setSwitcherOpen(false);
+  });
   function setLanguage(lang) {
     const english = lang === 'en';
     document.documentElement.lang = lang;
@@ -118,7 +129,10 @@
     attributes.forEach(([el, attr, original]) => el.setAttribute(attr, localize(original, lang)));
     document.title = localize(title, lang);
     switcher.setAttribute('aria-label', lang === 'ro' ? 'Limbă' : english ? 'Language' : 'Nyelv');
-    switcher.querySelectorAll('button').forEach(button => {
+    const names = { hu: 'Magyar', en: 'English', ro: 'Română' };
+    switcher.querySelector('.language-current').textContent = lang.toUpperCase();
+    languageToggle.setAttribute('aria-label', `${lang === 'ro' ? 'Limbă' : english ? 'Language' : 'Nyelv'}: ${names[lang]}`);
+    switcher.querySelectorAll('button[data-lang]').forEach(button => {
       button.textContent = button.dataset.lang.toUpperCase();
       button.setAttribute('aria-pressed', String(button.dataset.lang === lang));
       button.setAttribute('aria-label', { hu: 'Magyar', en: 'English', ro: 'Română' }[button.dataset.lang]);
@@ -136,6 +150,11 @@
   switcher.addEventListener('click', event => {
     const button = event.target.closest('button');
     if (!button) return;
+    if (button === languageToggle) {
+      setSwitcherOpen(!switcher.classList.contains('open'));
+      return;
+    }
+    setSwitcherOpen(false);
     setLanguage(button.dataset.lang);
     const url = new URL(location.href);
     url.searchParams.set('lang', button.dataset.lang);
