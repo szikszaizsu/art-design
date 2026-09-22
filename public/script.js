@@ -69,7 +69,16 @@ if ('IntersectionObserver' in window) {
   revealElements.forEach((element) => element.classList.add('visible'));
 }
 
-const sectionLinks = [...document.querySelectorAll('#main-nav a[href^="#"]')];
+const hero = document.querySelector('.hero');
+const heroCopy = hero?.querySelector('.hero-copy');
+if (hero && heroCopy) {
+  const syncHeroHeight = () => hero.style.setProperty('--hero-copy-height', `${heroCopy.offsetHeight}px`);
+  syncHeroHeight();
+  if ('ResizeObserver' in window) new ResizeObserver(syncHeroHeight).observe(heroCopy);
+  else window.addEventListener('resize', syncHeroHeight);
+}
+
+const sectionLinks =[...document.querySelectorAll('#main-nav a[href^="#"]')];
 const sections = sectionLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
