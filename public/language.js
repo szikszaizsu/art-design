@@ -1,7 +1,7 @@
 (() => {
   const translations = {
     'Rólam': 'About me', 'Munkáim': 'My work', 'Elérhetőség': 'Contact details', 'Menü': 'Menu',
-    'Egyszemélyes kreatív osztály': 'A one-person creative department',
+    'Vizuális alkotó · UX/UI tervező': 'Visual artist · UX/UI designer',
     'Művészi szem. MI-jártasság. Egyetlen vízió.': 'An artistic eye. AI expertise. One vision.',
     'A klasszikus vizuális gondolkodást digitális tapasztalattal kapcsolom össze, hogy karakteres képi világokat és átgondolt felhasználói élményeket alkossak.': 'I combine classical visual thinking with digital expertise to create distinctive visual worlds and thoughtful user experiences.',
     'Dolgozzunk együtt': 'Let’s work together',
@@ -66,7 +66,7 @@
       const title = text.replace(' — Szikszai Zsu', '');
       return (title === 'Az oldal nem található' ? 'Page not found' : translations[title] || title) + ' — Szikszai Zsu';
     }
-    if (text === 'Szikszai Zsu — Egyszemélyes kreatív osztály') return 'Szikszai Zsu — A one-person creative department';
+    if (text === 'Szikszai Zsu — Vizuális alkotó · UX/UI tervező') return 'Szikszai Zsu — Visual artist · UX/UI designer';
     return text;
   };
   const texts = [];
@@ -93,7 +93,7 @@
       const base = english.replace(' — Szikszai Zsu', '');
       return (base === 'Page not found' ? 'Pagina nu a fost găsită' : ro[base] || base) + ' — Szikszai Zsu';
     }
-    if (english.startsWith('Szikszai Zsu — ')) return 'Szikszai Zsu — ' + ro['A one-person creative department'];
+    if (english.startsWith('Szikszai Zsu — ')) return 'Szikszai Zsu — ' + ro['Visual artist · UX/UI designer'];
     return english;
   };
   let header = document.querySelector('.site-header');

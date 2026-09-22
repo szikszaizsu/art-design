@@ -1,6 +1,6 @@
 window.portfolioRomanian = {
   'About me': 'Despre mine', 'My work': 'Lucrările mele', 'Contact details': 'Date de contact', 'Menu': 'Meniu',
-  'A one-person creative department': 'Un departament creativ format dintr-o singură persoană',
+  'Visual artist · UX/UI designer': 'Artist vizual · Designer UX/UI',
   'An artistic eye. AI expertise. One vision.': 'Privire artistică. Competențe în IA. O singură viziune.',
   'I combine classical visual thinking with digital expertise to create distinctive visual worlds and thoughtful user experiences.': 'Îmbin gândirea vizuală clasică și experiența digitală pentru a crea universuri vizuale distincte și experiențe de utilizare bine gândite.',
   'Let’s work together': 'Să lucrăm împreună',
