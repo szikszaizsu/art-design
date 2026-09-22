@@ -10,7 +10,9 @@ document.querySelectorAll('img').forEach((image) => {
 const galleryPreview = document.querySelector('.gallery-preview');
 const galleryPreviewImage = galleryPreview?.querySelector('img');
 
-if (galleryPreview && galleryPreviewImage && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+if (galleryPreview && galleryPreviewImage) {
+  const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
   const closePreview = () => {
     galleryPreview.classList.remove('open');
     galleryPreview.setAttribute('aria-hidden', 'true');
@@ -24,10 +26,20 @@ if (galleryPreview && galleryPreviewImage && window.matchMedia('(hover: hover) a
       galleryPreview.classList.add('open');
       galleryPreview.setAttribute('aria-hidden', 'false');
     };
-    item.addEventListener('mouseenter', openPreview);
-    item.addEventListener('mouseleave', closePreview);
-    item.addEventListener('focusin', openPreview);
-    item.addEventListener('focusout', closePreview);
+
+    if (hasFinePointer) {
+      item.addEventListener('mouseenter', openPreview);
+      item.addEventListener('mouseleave', closePreview);
+      item.addEventListener('focusin', openPreview);
+      item.addEventListener('focusout', closePreview);
+    } else {
+      item.addEventListener('click', openPreview);
+    }
+  });
+
+  galleryPreview.addEventListener('click', closePreview);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closePreview();
   });
 }
 
