@@ -35,6 +35,8 @@ window.portfolioRomanian = {
   'User experience, interface design and visual systems.': 'Experiența utilizatorului, design de interfețe și sisteme vizuale.',
   'Bead weaving': 'Țesut cu mărgele', 'Wax-resist egg decorating': 'Încondeierea ouălor cu ceară', 'Felting': 'Împâslire',
   'When wool comes to life.': 'Când lâna prinde viață.',
+  'When wool comes to life. It all begins with loose, soft fibres – and under the work of my hands they slowly cling together, tighten and take shape. Felting is one of the oldest textile techniques: no weaving, no stitching, only patience, movement and time.': 'Când lâna prinde viață. Totul începe cu fire moi și libere – iar sub munca mâinilor mele ele se prind încet unele de altele, se îndesesc și capătă formă. Împâslirea este una dintre cele mai vechi tehnici textile: fără țesut, fără cusături, doar răbdare, mișcare și timp.',
+  'As with bead weaving and egg decorating, nothing here can be rushed. Wool yields at its own pace – and what remains in my hands at the end is warm, soft and one of a kind: it can never be made exactly the same way again.': 'Ca și la țesutul cu mărgele și la încondeierea ouălor, aici nimic nu poate fi grăbit. Lâna cedează în ritmul ei – iar ceea ce îmi rămâne în mâini la final este cald, moale și unic: nu mai poate fi făcut niciodată exact la fel.',
   'Felting work will soon have its place here.': 'Lucrările de împâslire își vor găsi în curând locul aici.',
   'Wearable art, patience and patterns built from tiny beads.': 'Artă de purtat, răbdare și modele create din mărgele mici.',
   'Wax-resist techniques, heritage and motifs preserved through generations.': 'Tehnica cerii, moștenire culturală și motive păstrate din generație în generație.',

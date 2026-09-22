@@ -36,6 +36,8 @@
     'Felhasználói élmény, felülettervezés és vizuális rendszerek.': 'User experience, interface design and visual systems.',
     'Gyöngyszövés': 'Bead weaving', 'Tojásírás': 'Wax-resist egg decorating', 'Tojásírás viasztechnikával': 'Wax-resist egg decorating', 'Tojásdíszítés': 'Wax-resist egg decorating', 'Nemezelés': 'Felting',
     'Amikor a gyapjú életre kel.': 'When wool comes to life.',
+    'Amikor a gyapjú életre kel. Laza, puha szálakkal kezdődik minden – és a kezem munkája alatt lassan összekapaszkodnak, tömörödnek, formát öltenek. A nemezelés az egyik legősibb textilkészítő technika: nincs benne szövés, nincs öltés, csak türelem, mozdulat és idő.': 'When wool comes to life. It all begins with loose, soft fibres – and under the work of my hands they slowly cling together, tighten and take shape. Felting is one of the oldest textile techniques: no weaving, no stitching, only patience, movement and time.',
+    'Ahogy a gyöngyszövésben és a tojásdíszítésben, itt sem lehet siettetni semmit. A gyapjú a maga tempójában enged – és ami a végén a kezemben marad, meleg, puha és egyszeri: pontosan ugyanúgy soha többé nem készülhet el.': 'As with bead weaving and egg decorating, nothing here can be rushed. Wool yields at its own pace – and what remains in my hands at the end is warm, soft and one of a kind: it can never be made exactly the same way again.',
     'A nemezeléshez tartozó munkák hamarosan itt kapnak helyet.': 'Felting work will soon have its place here.',
     'Viselhető művészet, türelem és apró elemekből épülő minták.': 'Wearable art, patience and patterns built from tiny beads.',
     'Viasztechnika, örökség és generációkon át őrzött motívumok.': 'Wax-resist techniques, heritage and motifs preserved through generations.',
