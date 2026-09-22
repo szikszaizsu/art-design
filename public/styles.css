@@ -199,8 +199,10 @@ h1 span { color: var(--accent); }
 .gallery-preview { position: fixed; z-index: 100; inset: 0; padding: 6vw; display: grid; place-items: center; background: rgba(16,13,11,.82); backdrop-filter: blur(7px); pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease; }
 .gallery-preview.open { opacity: 1; visibility: visible; }
 .gallery-preview img { width: min(720px, 78vw); height: min(720px, 78vh); object-fit: contain; border-radius: 18px; box-shadow: 0 28px 90px rgba(0,0,0,.42); }
+.gallery-counter { display: none; position: absolute; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translateX(-50%); padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; font-size: .85rem; font-weight: 700; letter-spacing: .08em; }
 @media (hover: none), (pointer: coarse) {
-  .gallery-preview.open { pointer-events: auto; cursor: zoom-out; }
+  .gallery-preview.open { pointer-events: auto; cursor: zoom-out; touch-action: none; }
+  .gallery-counter { display: block; }
   .gallery-preview img { width: min(94vw, 720px); height: min(88vh, 720px); }
 }
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
