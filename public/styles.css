@@ -154,7 +154,7 @@ h1 span { color: var(--accent); }
 .category-hero > .category-intro { max-width: 650px; margin: 28px 0 0; color: var(--muted); font-size: 1.1rem; }
 .category-list { padding-bottom: 130px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 .category-card { padding-top: 24px; border-top: 1px solid var(--line); display: flex; min-width: 0; flex-direction: column; color: var(--ink); text-decoration: none; }
-.category-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius); transition: transform .45s ease; }
+.category-card img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius); transition: transform .45s ease; }
 .category-card-visual { width: 100%; aspect-ratio: 1 / 1; display: grid; place-items: center; overflow: hidden; border-radius: var(--radius); background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.7) 0 2%, transparent 12%), radial-gradient(circle at 70% 68%, rgba(78,61,46,.18) 0 2%, transparent 18%), repeating-radial-gradient(circle at 0 0, rgba(255,255,255,.34) 0 1px, transparent 1px 6px), linear-gradient(140deg, #c7bcb0, #978a7e 52%, #d7cec4); transition: transform .45s ease; }
 .category-card-visual span { color: rgba(23,19,16,.78); font-size: clamp(1rem, 2.6vw, 1.55rem); font-weight: 800; letter-spacing: .2em; }
 .category-card > div:not(.category-card-visual) { padding: 24px 4px 0; }
