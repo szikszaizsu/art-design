@@ -331,6 +331,10 @@ nav a:hover, nav a.active { color: var(--accent); }
 .hero-quote { margin: 26px auto 0; }
 .hero-image { width: min(460px, 100%); margin: 0; }
 .hero-image img { width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: var(--radius); box-shadow: var(--photo-shadow); }
+/* Privacy notice */
+.legal .detail-copy h2 { margin: 44px 0 10px; font-size: clamp(1.6rem, 2.6vw, 2rem); font-weight: 600; }
+.legal .detail-copy .legal-updated { margin-top: 44px; font-size: .9rem; }
+.form-note a, .footer-bottom a[href$="adatvedelem/"] { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 /* Portrait: soft entrance, then a slow "breathing" zoom inside a fixed frame */
 .hero-image { overflow: hidden; border-radius: var(--radius); box-shadow: var(--photo-shadow); animation: portrait-in 1.2s cubic-bezier(.2, .7, .2, 1) both; }
 .hero-image img { border-radius: 0; box-shadow: none; transform-origin: 50% 35%; animation: portrait-breathe 14s ease-in-out 1.2s infinite alternate; }
