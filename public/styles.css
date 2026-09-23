@@ -331,6 +331,12 @@ nav a:hover, nav a.active { color: var(--accent); }
 .hero-quote { margin: 26px auto 0; }
 .hero-image { width: min(460px, 100%); margin: 0; }
 .hero-image img { width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: var(--radius); box-shadow: var(--photo-shadow); }
+/* Portrait: soft entrance, then a slow "breathing" zoom inside a fixed frame */
+.hero-image { overflow: hidden; border-radius: var(--radius); box-shadow: var(--photo-shadow); animation: portrait-in 1.2s cubic-bezier(.2, .7, .2, 1) both; }
+.hero-image img { border-radius: 0; box-shadow: none; transform-origin: 50% 35%; animation: portrait-breathe 14s ease-in-out 1.2s infinite alternate; }
+@keyframes portrait-in { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes portrait-breathe { from { transform: scale(1); } to { transform: scale(1.045); } }
+@media (prefers-reduced-motion: reduce) { .hero-image, .hero-image img { animation: none; } }
 .hero-lead, :lang(ro) .hero-lead { white-space: normal; font-size: clamp(1.6rem, 2.6vw, 2.3rem); }
 
 /* Full-bleed alternating tiles: the colour change is the divider */
