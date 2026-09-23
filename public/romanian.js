@@ -36,6 +36,8 @@ window.portfolioRomanian = {
   'Bead weaving': 'Țesut cu mărgele', 'Wax-resist egg decorating': 'Încondeierea ouălor cu ceară', 'Felting': 'Împâslire',
   'When wool comes to life.': 'Când lâna prinde viață.',
   'Coming soon': 'În curând',
+  'Beaded bracelet with a black, clear and red pattern': 'Brățară din mărgele cu model negru, transparent și roșu',
+  'Black, white and red bead-woven bracelet being made on the loom': 'Brățară țesută din mărgele negre, albe și roșii, în lucru pe războiul de țesut',
   'Digital illustration': 'Ilustrație digitală',
   'Stories made of pixels': 'Povești din pixeli',
   'Concepts and AI experiments': 'Concepte și experimente AI',

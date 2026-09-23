@@ -37,6 +37,8 @@
     'Gyöngyszövés': 'Bead weaving', 'Tojásírás': 'Wax-resist egg decorating', 'Tojásírás viasztechnikával': 'Wax-resist egg decorating', 'Tojásdíszítés': 'Wax-resist egg decorating', 'Nemezelés': 'Felting',
     'Amikor a gyapjú életre kel.': 'When wool comes to life.',
     'Hamarosan': 'Coming soon',
+    'Fekete, áttetsző és piros mintás gyöngykarkötő': 'Beaded bracelet with a black, clear and red pattern',
+    'Fekete, fehér és piros gyöngyszövött karkötő készítés közben a szövőkereten': 'Black, white and red bead-woven bracelet being made on the loom',
     'Digitális illusztráció': 'Digital illustration',
     'Történetek pixelekből': 'Stories made of pixels',
     'Koncepció és AI-kísérletek': 'Concepts and AI experiments',
