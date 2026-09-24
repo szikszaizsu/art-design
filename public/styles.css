@@ -365,6 +365,8 @@ nav a:hover, nav a.active { color: var(--accent); }
 .gallery-item:hover, .gallery-item:focus-visible { transform: none; box-shadow: none; }
 .gallery-slot { aspect-ratio: 1 / 1; display: grid; place-items: center; border: 1px dashed rgba(0, 0, 0, .14); border-radius: var(--radius); background: var(--parchment); }
 .category-card > div.gallery-slot { padding: 0; }
+.gallery-entry { margin: 0; }
+.gallery-caption { margin: 12px 0 0; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .24em; text-align: center; text-transform: uppercase; }
 .category-card .gallery-slot span, .gallery-slot span { padding-left: 30px; background: linear-gradient(var(--accent), var(--accent)) left center / 20px 1px no-repeat; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
 
 /* Contact: dark tile */
