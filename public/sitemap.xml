@@ -216,4 +216,52 @@
     <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/adatvedelem/?lang=ro"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/adatvedelem/"/>
   </url>
+  <url>
+    <loc>https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/"/>
+  </url>
+  <url>
+    <loc>https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=en</loc>
+    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/"/>
+  </url>
+  <url>
+    <loc>https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=ro</loc>
+    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/koncepcio-ai/"/>
+  </url>
+  <url>
+    <loc>https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/"/>
+  </url>
+  <url>
+    <loc>https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=en</loc>
+    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/"/>
+  </url>
+  <url>
+    <loc>https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=ro</loc>
+    <lastmod>2026-09-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/grafika-arculat/"/>
+  </url>
 </urlset>
