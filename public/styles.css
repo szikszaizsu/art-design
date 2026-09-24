@@ -372,6 +372,20 @@ input, textarea, select { -webkit-user-select: text; user-select: text; }
 .gallery-caption { margin: 12px 0 0; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .24em; text-align: center; text-transform: uppercase; }
 .category-card .gallery-slot span, .gallery-slot span { padding-left: 30px; background: linear-gradient(var(--accent), var(--accent)) left center / 20px 1px no-repeat; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
 
+/* Services: parchment tile with four flat cards */
+.services { padding-block: 104px; background: var(--parchment); }
+.services-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.service-card { display: flex; flex-direction: column; padding: 32px 28px; border: 1px solid rgba(0, 0, 0, .08); border-radius: var(--radius); background: #fff; }
+.service-number { color: var(--accent); font-family: var(--serif); font-size: 1.15rem; font-style: italic; font-weight: 600; }
+.service-card h3 { margin: 14px 0 12px; font-size: 1.75rem; font-weight: 600; line-height: 1.1; }
+.service-card p { margin: 0 0 28px; color: #3a332e; font-size: .98rem; }
+.service-link { margin-top: auto; color: var(--accent); font-size: .95rem; text-decoration: none; }
+.service-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.services-cta { margin-top: 48px; text-align: center; }
+.services-cta .button { margin-top: 0; }
+@media (max-width: 1000px) { .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .services { padding-block: 64px; } .services-grid { grid-template-columns: 1fr; } .service-card { padding: 26px 22px; } }
+
 /* Contact: dark tile */
 .contact { padding-block: 104px; background: var(--tile-dark); color: #fff; border-top: 0; }
 .contact h2 { color: #fff; }
