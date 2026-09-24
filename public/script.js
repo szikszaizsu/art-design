@@ -7,6 +7,15 @@ document.querySelectorAll('img').forEach((image) => {
   image.addEventListener('dragstart', (event) => event.preventDefault());
 });
 
+// Discourage copying: no context menu, dragging or save/source/print shortcuts anywhere on the page.
+const isFormField = (target) => target instanceof Element && target.closest('input, textarea, select');
+document.addEventListener('contextmenu', (event) => { if (!isFormField(event.target)) event.preventDefault(); });
+document.addEventListener('dragstart', (event) => event.preventDefault());
+document.addEventListener('keydown', (event) => {
+  const key = event.key.toLowerCase();
+  if ((event.ctrlKey || event.metaKey) && ['s', 'u', 'p'].includes(key)) event.preventDefault();
+});
+
 const galleryPreview = document.querySelector('.gallery-preview');
 const galleryPreviewImage = galleryPreview?.querySelector('img');
 
