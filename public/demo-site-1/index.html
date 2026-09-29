@@ -94,23 +94,28 @@
 
   <!-- TREATMENTS LIST -->
   <section class="treat" id="tratamente">
+    <div class="t-blob" aria-hidden="true"></div>
     <div class="wrap">
       <div class="head reveal">
-        <h2>Ce putem trata <em>împreună</em></h2>
+        <div><p class="t-kick"><span class="dot-live"></span>08 tratamente · un singur medic</p>
+        <h2>Ce putem trata <em>împreună</em></h2></div>
         <p>Majoritatea pacienților vin cu mai multe întrebări deodată. E firesc — de aceea planul se construiește în jurul tău, nu după un șablon.</p>
       </div>
       <div class="treat-in">
-        <ul class="tlist">
-          <li class="active" data-img="img/fix.webp?v=3"><div><h3>Aparat dentar fix</h3><p>Bracketuri metalice pentru corecții precise și stabile.</p></div><i>→</i></li>
-          <li data-img="img/alinieri.webp"><div><h3>Alinieri transparente</h3><p>Gutiere aproape invizibile, detașabile, confortabile.</p></div><i>→</i></li>
-          <li data-img="img/ceramic.webp"><div><h3>Aparat ceramic</h3><p>Bracketuri de culoarea dintelui, discrete în orice zâmbet.</p></div><i>→</i></li>
-          <li data-img="img/copii.webp"><div><h3>Ortodonție pentru copii</h3><p>Intervenție la momentul potrivit, de la 7 ani.</p></div><i>→</i></li>
-          <li data-img="img/mobil.webp"><div><h3>Aparat mobil</h3><p>Corecții ușoare și menținerea rezultatelor.</p></div><i>→</i></li>
-          <li data-img="img/protetica.webp"><div><h3>Protetică dentară</h3><p>Coroane, punți și lucrări estetice.</p></div><i>→</i></li>
-          <li data-img="img/reabilitare.webp"><div><h3>Reabilitare orală</h3><p>Planuri complete pentru funcție și estetică.</p></div><i>→</i></li>
-          <li data-img="img/igienizare.webp"><div><h3>Igienizare profesională</h3><p>Detartraj și periaj — baza oricărui tratament.</p></div><i>→</i></li>
+        <ul class="tlist reveal">
+          <li class="active" data-img="img/fix.webp?v=3" data-tag="Precizie" data-dur="12–24 luni"><span class="tn">01</span><div><h3>Aparat dentar fix <span class="tg">Precizie</span></h3><p>Bracketuri metalice pentru corecții precise și stabile.</p></div><i>→</i></li>
+          <li data-img="img/alinieri.webp" data-tag="Invizibil" data-dur="6–18 luni"><span class="tn">02</span><div><h3>Alinieri transparente <span class="tg">Invizibil</span></h3><p>Gutiere aproape invizibile, detașabile, confortabile.</p></div><i>→</i></li>
+          <li data-img="img/ceramic.webp" data-tag="Discret" data-dur="12–24 luni"><span class="tn">03</span><div><h3>Aparat ceramic <span class="tg">Discret</span></h3><p>Bracketuri de culoarea dintelui, discrete în orice zâmbet.</p></div><i>→</i></li>
+          <li data-img="img/copii.webp" data-tag="De la 7 ani" data-dur="control la 6 luni"><span class="tn">04</span><div><h3>Ortodonție pentru copii <span class="tg">De la 7 ani</span></h3><p>Intervenție la momentul potrivit, de la 7 ani.</p></div><i>→</i></li>
+          <li data-img="img/mobil.webp" data-tag="Blând" data-dur="purtare nocturnă"><span class="tn">05</span><div><h3>Aparat mobil <span class="tg">Blând</span></h3><p>Corecții ușoare și menținerea rezultatelor.</p></div><i>→</i></li>
+          <li data-img="img/protetica.webp" data-tag="Estetic" data-dur="2–4 vizite"><span class="tn">06</span><div><h3>Protetică dentară <span class="tg">Estetic</span></h3><p>Coroane, punți și lucrări estetice.</p></div><i>→</i></li>
+          <li data-img="img/reabilitare.webp" data-tag="Complet" data-dur="plan personalizat"><span class="tn">07</span><div><h3>Reabilitare orală <span class="tg">Complet</span></h3><p>Planuri complete pentru funcție și estetică.</p></div><i>→</i></li>
+          <li data-img="img/igienizare.webp" data-tag="La 6 luni" data-dur="45 min"><span class="tn">08</span><div><h3>Igienizare profesională <span class="tg">La 6 luni</span></h3><p>Detartraj și periaj — baza oricărui tratament.</p></div><i>→</i></li>
         </ul>
-        <figure class="tview"><img id="tview" src="img/fix.webp?v=3" alt="Tratament ortodontic"><figcaption id="tcap">Aparat dentar fix</figcaption></figure>
+        <figure class="tview reveal"><img id="tview" src="img/fix.webp?v=3" alt="Tratament ortodontic"><figcaption id="tcap">Aparat dentar fix</figcaption>
+          <div class="t-info"><small>Durată orientativă</small><b id="tdur">12–24 luni</b><span id="ttag">Precizie</span></div>
+          <div class="t-count"><b id="tnum">01</b>/08</div>
+        </figure>
       </div>
     </div>
   </section>
@@ -152,7 +157,11 @@
           <div><span class="pill">Protetică & reabilitare</span><h3>Zâmbet complet, funcție completă</h3><p>Coroane, punți și planuri de reabilitare — cu un singur medic care vede întregul tablou.</p><a href="#contact" class="btn btn-ghost">Cere o evaluare <i>→</i></a></div>
         </article>
       </div>
-      <div class="assure reveal"><span>✓ Contract cu Casa de Asigurări de Sănătate</span><span>✓ Plata în rate</span><span>✓ Plan de tratament scris, înainte de a începe</span></div>
+      <div class="assure reveal">
+        <div class="as-item"><span class="as-ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Contract cu Casa de Asigurări</b><small>Tratamente decontate parțial sau integral prin CAS.</small></div></div>
+        <div class="as-item"><span class="as-ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span><div><b>Plata în rate</b><small>Împarți costul tratamentului în tranșe lunare.</small></div></div>
+        <div class="as-item"><span class="as-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><div><b>Plan scris, înainte de a începe</b><small>Etape, durată și costuri — fără surprize pe parcurs.</small></div></div>
+      </div>
     </div>
   </section>
 
@@ -220,7 +229,7 @@
         <div class="hero-cta"><a href="#contact" class="btn btn-lime">Programează scanarea <i>→</i></a><a href="#intrebari" class="btn btn-ghost-l">Întrebări frecvente</a></div>
       </div>
       <div class="collage reveal">
-        <img class="c1" src="img/alinieri.webp" alt="Gutieră transparentă" loading="lazy">
+        <img class="c1" src="img/zambet.webp" alt="Zâmbet drept și luminos după tratament" loading="lazy">
         <img class="c2" src="img/ceramic.webp" alt="Dinți aliniați" loading="lazy">
         <blockquote>„Nici colegii nu au observat că port aparat.”<small>Radu P., pacient</small></blockquote>
       </div>
@@ -305,9 +314,11 @@
   bur.addEventListener('click',()=>{const o=menu.classList.toggle('open');bur.setAttribute('aria-expanded',o)});
   menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');bur.setAttribute('aria-expanded',false)}));
   const tv=$('#tview'),tc=$('#tcap');
-  $$('.tlist li').forEach(li=>{const f=()=>{$$('.tlist li').forEach(x=>x.classList.toggle('active',x===li));tv.src=li.dataset.img;tc.textContent=li.querySelector('h3').textContent;};li.addEventListener('mouseenter',f);li.addEventListener('click',f);});
+  $$('.tlist li').forEach(li=>{const f=()=>{if(li.classList.contains('active'))return;$$('.tlist li').forEach(x=>x.classList.toggle('active',x===li));tv.classList.add('swap');setTimeout(()=>{tv.src=li.dataset.img;tv.onload=()=>tv.classList.remove('swap');setTimeout(()=>tv.classList.remove('swap'),250);},180);tc.textContent=li.querySelector('h3').firstChild.textContent.trim();$('#tdur').textContent=li.dataset.dur;$('#ttag').textContent=li.dataset.tag;$('#tnum').textContent=li.querySelector('.tn').textContent;};li.addEventListener('mouseenter',f);li.addEventListener('click',f);});
   const qs=[...$$('.qs figure')];let qi=0;const show=i=>{qi=(i+qs.length)%qs.length;qs.forEach((f,k)=>f.classList.toggle('on',k===qi));$('.qcount').textContent=String(qi+1).padStart(2,'0')+' / '+String(qs.length).padStart(2,'0');$('.qbar i').style.width=((qi+1)/qs.length*100)+'%';};
-  $('.qprev').onclick=()=>show(qi-1);$('.qnext').onclick=()=>show(qi+1);show(0);
+  let qt;const auto=()=>{clearInterval(qt);qt=setInterval(()=>show(qi+1),6000);};
+  $('.qprev').onclick=()=>{show(qi-1);auto();};$('.qnext').onclick=()=>{show(qi+1);auto();};show(0);auto();
+  const tq=$('.testi');tq.addEventListener('mouseenter',()=>clearInterval(qt));tq.addEventListener('mouseleave',auto);
   $$('.acc details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('.acc details').forEach(o=>o!==d&&(o.open=false))}));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   $$('.reveal').forEach(el=>location.search.includes('static')?el.classList.add('in'):io.observe(el));
