@@ -369,3 +369,8 @@ section{padding:110px 0}
   .f-bot .big{text-align:left}
 }
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.spin svg.ring,.hero h1 .star{animation:none}}
+
+/* no text animation (user request): no fade-in, no hover lift on italic words, badge text stays still */
+.reveal,.reveal.in{opacity:1;transform:none;transition:none}
+h1 em:hover,h2 em:hover{transform:none}
+.spin svg.ring{animation:none}
