@@ -38,7 +38,7 @@ h3{font-size:22px;letter-spacing:-.02em;line-height:1.2}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.pop,.pop::after{transition:none;animation:none}.reveal.in .pop::after{transform:scaleX(1)}.reveal{opacity:1;transform:none;transition:none}.track,.spin svg{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.pop,.pop::after{transition:none;animation:none}.reveal{opacity:1;transform:none;transition:none}.track,.spin svg{animation:none!important}}
 
 /* nav */
 /* header: classic full-width bar with a glass finish */
@@ -72,16 +72,8 @@ h3{font-size:22px;letter-spacing:-.02em;line-height:1.2}
 .hero h1{font-size:clamp(38px,5.6vw,80px);margin:28px 0 24px}
 .hero h1 .ln{display:block;white-space:nowrap}
 .pop{position:relative;display:inline-block;padding:0 .06em;cursor:default;transition:transform .5s cubic-bezier(.34,1.56,.64,1),color .3s}
-.pop::after{content:"";position:absolute;left:-.1em;right:-.1em;top:.1em;bottom:.02em;border-radius:.28em;z-index:-1;transform:scaleX(0);transform-origin:left;
-  background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(255,255,255,.25) 50%,rgba(214,236,138,.45));
-  -webkit-backdrop-filter:blur(10px) saturate(170%);backdrop-filter:blur(10px) saturate(170%);
-  border:1px solid rgba(255,255,255,.85);
-  box-shadow:inset 0 2px 2px rgba(255,255,255,.95),inset 0 -6px 12px rgba(214,236,138,.35),0 10px 24px rgba(29,59,44,.12);
-  transition:transform .45s cubic-bezier(.65,0,.35,1),box-shadow .4s,background .4s}
-.reveal.in .pop::after{animation:draw .9s .9s cubic-bezier(.65,0,.35,1) forwards}
 @keyframes draw{to{transform:scaleX(1)}}
 .pop:hover,.pop:focus-visible{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--green);outline:none}
-.pop:hover::after,.pop:focus-visible::after{background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(214,236,138,.6));box-shadow:inset 0 2px 2px rgba(255,255,255,1),inset 0 -6px 14px rgba(214,236,138,.5),0 18px 36px rgba(29,59,44,.2)}
 .hero h1{position:relative;z-index:0}
 .lead{font-size:18px;color:var(--muted);max-width:500px}
 .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:34px}
