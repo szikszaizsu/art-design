@@ -552,12 +552,15 @@ p{letter-spacing:-.005em}
   .partner>.wrap::after{right:22px}
 }
 
-/* ===== LED dot-matrix ===== */
-.next{width:280px}
-.led{display:block;width:100%;height:80px;margin-bottom:12px;border-radius:12px;
-  background:linear-gradient(180deg,rgba(234,243,240,.9),rgba(223,238,234,.6));
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.06),inset 0 0 0 1px rgba(255,255,255,.8)}
-@media (max-width:600px){.next{width:240px}.led{height:80px}}
+/* ===== LED band (bottom of page) ===== */
+.ledband{background:#fff;padding:90px 0 110px}
+.led-panel{position:relative;border-radius:32px;padding:28px 28px 22px;
+  background:linear-gradient(135deg,rgba(234,243,240,.95),rgba(223,238,234,.6));
+  box-shadow:inset 0 1px 1px #fff,inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 1px rgba(62,122,108,.10),0 24px 60px rgba(62,122,108,.12)}
+.ledw{display:block;width:100%;height:119px}
+.led-panel p{text-align:center;margin-top:14px;color:var(--muted);font-size:15px}
+.led-panel p em{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--green-2)}
+@media (max-width:600px){.ledband{padding:60px 0 80px}.led-panel{padding:18px 14px 14px;border-radius:22px}}
 
 /* ===== Glass icons ===== */
 .tlist li i,.qnav button,.check span,.acc summary::after,.p-cta i{
