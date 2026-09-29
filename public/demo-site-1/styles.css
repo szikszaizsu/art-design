@@ -154,9 +154,16 @@ h3{font-size:22px;letter-spacing:-.02em;line-height:1.2}
 .tlist li i{font-style:normal;flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.3s}
 .tlist li.active{padding-left:20px;background:var(--bg);border-radius:16px}
 .tlist li.active i{background:var(--lime);border-color:var(--lime);transform:rotate(-45deg)}
-.tview{position:sticky;top:100px;border-radius:var(--r);overflow:hidden}
-.tview img{width:100%;aspect-ratio:.9;object-fit:cover;transition:opacity .3s}
-.tview figcaption{position:absolute;left:16px;bottom:16px;background:var(--white);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500}
+.tview{position:sticky;top:100px;border-radius:32px;padding:12px;isolation:isolate;
+  background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,.25) 50%,rgba(214,236,138,.25));
+  -webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -10px 20px rgba(214,236,138,.18),0 30px 60px rgba(29,59,44,.14)}
+.tview::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.2px;z-index:-1;pointer-events:none;background:conic-gradient(from var(--ga),rgba(255,255,255,.95),rgba(214,236,138,.95),rgba(255,255,255,.35),rgba(170,215,235,.8),rgba(255,210,235,.6),rgba(255,255,255,.95));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:gspin 9s linear infinite}
+.tview img{width:100%;aspect-ratio:.9;object-fit:cover;border-radius:22px;transition:opacity .3s}
+.tview::after{content:"";position:absolute;left:12px;right:12px;top:12px;height:38%;border-radius:22px 22px 60% 60%/22px 22px 30% 30%;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0))}
+.tview figcaption{position:absolute;left:28px;bottom:28px;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:500;color:var(--green);
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(255,255,255,.6));-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);
+  border:1px solid rgba(255,255,255,.8);box-shadow:inset 0 1px 1px #fff,0 8px 24px rgba(29,59,44,.18)}
 
 /* options bento */
 .opts{padding:110px 0;background:var(--bg)}
