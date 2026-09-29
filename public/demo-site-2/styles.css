@@ -89,8 +89,9 @@ h1 em:hover,h2 em:hover{transform:translateY(-4px) rotate(-3deg)}
 .certs span{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);font-size:15px}
 .certs span svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .hero-img{position:relative;align-self:stretch}
-.hero-img img{width:100%;height:100%;min-height:560px;object-fit:cover;object-position:30% 40%;border-radius:26px 26px 0 0}
-.spin{position:absolute;left:-58px;bottom:90px;width:130px;height:130px;border-radius:50%;display:grid;place-items:center;
+.hero-img{display:flex;justify-content:center;align-items:flex-end}
+.hero-img img{width:auto;height:680px;max-width:100%;object-fit:contain;object-position:bottom;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
+.spin{position:absolute;left:-10px;bottom:150px;width:130px;height:130px;border-radius:50%;display:grid;place-items:center;
   background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 20px 40px rgba(24,32,47,.18),inset 0 1px 1px #fff}
 .spin svg.ring{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
 .spin text{font:700 9px var(--sans);letter-spacing:.22em;fill:var(--ink)}
@@ -341,8 +342,8 @@ section{padding:110px 0}
   section{padding:80px 0}
   .hero-in{grid-template-columns:1fr}
   .hero-text{padding:40px 0 30px}
-  .hero-img img{min-height:0;height:420px;border-radius:22px}
-  .spin{left:auto;right:16px;top:-50px;bottom:auto;width:110px;height:110px}
+  .hero-img img{height:440px}
+  .spin{left:0;right:auto;top:auto;bottom:60px;width:110px;height:110px}
   .duo,.ab-in,.faq-in,.partner-in,.plans{grid-template-columns:1fr}
   .duo{margin-top:20px}
   .ab-head{flex-direction:column;align-items:flex-start}
