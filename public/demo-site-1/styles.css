@@ -590,3 +590,11 @@ html[data-pal="avocado"]{--green:#6E8E43;--green-2:#7E9F52;--lime:#EAF1DD;--lime
 .wm .wdot{margin:0 .02em 0 0;color:var(--green)}
 @media (max-width:860px){.wm{font-size:26px}}
 .wm .wdot{display:inline-block;width:.34em;height:.34em;border-radius:50%;background:var(--green);margin:0 .06em 0 0;vertical-align:baseline}
+
+/* ===== Wordmark: zâmbește•ro ===== */
+.brand svg{display:none}
+.wm{font-family:'Outfit',var(--sans);font-weight:900;font-size:30px;letter-spacing:-.05em;color:var(--ink)}
+.wm .wdot{display:inline-block;width:.26em;height:.26em;border-radius:50%;background:var(--green);margin:0 .09em 0 .1em;vertical-align:.12em}
+.wm .wtld{font-style:normal;font-weight:900;color:var(--green);margin:0}
+.brand.light .wm{color:var(--ink)}
+@media (max-width:860px){.wm{font-size:26px}}
