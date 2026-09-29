@@ -255,6 +255,18 @@ section{padding:110px 0}
 .hours div{display:flex;justify-content:space-between;gap:20px;color:var(--muted)}
 .hours div span:last-child{color:var(--ink);font-weight:600}
 
+.call{background:var(--navy);color:#fff;border-radius:24px;padding:40px 36px;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px rgba(13,21,38,.25)}
+.call .mk{width:52px;height:52px;border-radius:50%;background:var(--blue);display:grid;place-items:center;margin-bottom:10px}
+.call .mk svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.call small{color:#9FB0CF;font-size:15px}
+.call .tel{font-size:clamp(32px,3.4vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.1;transition:color .25s}
+.call .tel:hover{color:var(--blue-2)}
+.call .hours{position:static;background:rgba(255,255,255,.06);box-shadow:none;border:1px solid rgba(255,255,255,.12);margin-top:18px;min-width:0}
+.call .hours b{color:#fff}
+.call .hours div{color:#9FB0CF}
+.call .hours div span:last-child{color:#fff}
+.call p{color:#B8C4DC;font-size:14.5px;margin-top:8px}
+
 /* dROOT partner — same block as demo-site-1, follows droot.ro */
 .partner{--d-olive:#4A5A1F;--d-lime:#C9E201;--d-navy:#07111E;--d-red:#D4431E;--d-bg:#F7F8F4;--d-line:#E3E6DA;color:var(--d-navy);padding:40px 0 120px}
 .partner>.wrap{position:relative;background:var(--d-bg);border:2px solid var(--d-lime);border-radius:40px;padding:84px 64px 64px;box-shadow:0 0 0 10px rgba(201,226,1,.10),0 40px 80px rgba(7,17,30,.08)}
@@ -340,7 +352,9 @@ section{padding:110px 0}
   .sv-grid .ico{margin:24px 0 20px}
   .te-in{grid-template-columns:1fr}
   .te-img img{min-height:340px}
-  .b-imgs{grid-template-columns:1fr 1fr}
+  .b-imgs img{aspect-ratio:3/4.4}
+  .d-note .rate{flex-direction:column;align-items:flex-start}
+  .d-note .rate p{max-width:none}
   .b-stats{grid-template-columns:1fr 1fr}
   .p-list{grid-template-columns:1fr}
   .book-box{grid-template-columns:1fr;padding:44px 22px;background:linear-gradient(180deg,#fff 45%,#DCE8FF 70%,#8CB5FF 100%)}
