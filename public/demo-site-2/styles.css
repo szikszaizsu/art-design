@@ -1,4 +1,4 @@
-/* demo-site-2 · Molar & Co. — men's dental clinic.
+/* demo-site-2 · DentalTop — men's dental clinic.
    Base: PrimeCare (Framer) layout + best bits of ApexCare Dental (arrow buttons, rotating badge, call-back form). */
 :root{
   --bg:#F1F3F7; --white:#fff; --ink:#18202F; --muted:#5E6677; --line:rgba(24,32,47,.1);
@@ -47,6 +47,7 @@ h1 em:hover,h2 em:hover{transform:translateY(-4px) rotate(-3deg)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:-.01em}
 .brand .mk{width:34px;height:34px;border-radius:50%;background:var(--blue);display:grid;place-items:center;flex:none}
 .brand .mk svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.brand .bt{color:var(--blue);font-weight:700}
 .brand small{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--muted);margin-top:1px}
 .menu{display:flex;gap:30px;margin-inline:auto;font-size:15.5px}
 .menu a{position:relative;color:#343C4D}
