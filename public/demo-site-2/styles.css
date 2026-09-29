@@ -68,8 +68,6 @@ h1 em:hover,h2 em:hover{transform:translateY(-4px) rotate(-3deg)}
 
 /* hero */
 .hero{position:relative;padding:40px 0 0;overflow:hidden}
-.hero .script{position:absolute;left:-2%;top:40px;font-family:var(--serif);font-style:italic;font-size:clamp(150px,19vw,290px);line-height:1;color:#fff;opacity:.95;pointer-events:none;white-space:nowrap;
-  text-shadow:0 1px 0 rgba(24,32,47,.04);-webkit-text-stroke:1px rgba(24,32,47,.05)}
 .hero-in{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:end}
 .hero-text{padding:70px 0 60px 60px}
 .hero h1{font-size:clamp(46px,5.4vw,72px);line-height:1;margin-bottom:28px}
