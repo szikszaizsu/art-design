@@ -573,3 +573,8 @@ p{letter-spacing:-.005em}
 .as-ic{position:relative;overflow:hidden}
 .as-ic::before,.tlist li.active i::before{content:"";position:absolute;left:15%;right:15%;top:2px;height:45%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0));pointer-events:none}
 .tlist li i{position:relative}
+
+/* ===== Italic accent words behave like "fără" ===== */
+h2 em{display:inline-block;padding:0 .04em;cursor:default;transition:transform .5s cubic-bezier(.34,1.56,.64,1),color .3s}
+h2 em:hover{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--green)}
+@media (prefers-reduced-motion:reduce){h2 em{transition:none}}
