@@ -193,5 +193,5 @@ document.addEventListener('pointerover', (event) => {
   if (flashLoaded || !event.target.closest?.('.button')) return;
   flashLoaded = true;
   const base = new URL('assets/button-flash/', document.querySelector('link[href*="styles.css"]').href);
-  for (let i = 1; i <= 8; i++) new Image().src = new URL(`flash-${i}.webp`, base).href;
+  for (let i = 1; i <= 8; i++) new Image().src = new URL(`flash-${i}.webp?v=2`, base).href;
 });
