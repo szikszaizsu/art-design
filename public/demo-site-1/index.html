@@ -312,6 +312,8 @@
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   $$('.reveal').forEach(el=>location.search.includes('static')?el.classList.add('in'):io.observe(el));
   const nav=$('.nav');addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
+  const ni=$('.nav-in'),gl=document.createElement('span');gl.className='glare';ni.prepend(gl);
+  ni.addEventListener('pointermove',e=>{const r=ni.getBoundingClientRect();ni.style.setProperty('--mx',(e.clientX-r.left)+'px');ni.style.setProperty('--my',(e.clientY-r.top)+'px');});
 </script>
 </body>
 </html>
