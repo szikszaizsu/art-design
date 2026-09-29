@@ -580,8 +580,18 @@ h2 em:hover{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--gr
 html[data-pal="grey"]{--green:#48484A;--green-2:#6E6E73;--lime:#EFEFF1;--lime-2:#D8D8DD;--sage:#F2F2F4;--sage-2:#E8E8ED;--g-rgb:72,72,74;--g2-rgb:110,110,115;--as1:#F4F4F6;--as2:#E3E3E8}
 html[data-pal="avocado"]{--green:#6E8E43;--green-2:#7E9F52;--lime:#EAF1DD;--lime-2:#CFDDB5;--sage:#F1F5E9;--sage-2:#EAF1DD;--g-rgb:110,142,67;--g2-rgb:126,159,82;--as1:#EEF4E3;--as2:#DCE8C8}
 
-/* ===== Language switch ===== */
-.lang{display:inline-flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:rgba(255,255,255,.6);box-shadow:inset 0 1px 1px #fff,0 0 0 1px rgba(0,0,0,.06);font-size:12px;font-weight:600}
-.lang a{padding:5px 9px;border-radius:999px;color:var(--muted)}
-.lang a[aria-current="true"]{background:var(--green);color:#fff}
+/* ===== Language switch: only the active language shows ===== */
+.lang{position:relative;font-size:12px;font-weight:600}
+.lang summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.45));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:inset 0 1px 1px #fff,0 0 0 1px rgba(0,0,0,.07);color:var(--ink)}
+.lang summary::-webkit-details-marker{display:none}
+.lang summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
+.lang[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+.lang div{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:2px;padding:5px;border-radius:14px;min-width:56px;
+  background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 12px 28px rgba(0,0,0,.12);z-index:60}
+.lang div a{padding:7px 12px;border-radius:10px;text-align:center;color:var(--muted)}
+.lang div a:hover{background:var(--lime);color:var(--green)}
 @media (max-width:860px){.lang{margin-left:auto}.nav .btn-sm{margin-left:8px}}
+/* tooth in the rotating badge */
+.spin i.tooth svg{position:static;inset:auto;animation:none;width:24px;height:24px;color:var(--green);fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
