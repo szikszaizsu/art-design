@@ -576,6 +576,6 @@ h2 em:hover{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--gr
 .big em:hover,h3 em:hover,.sig:hover{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--green)}
 
 /* ===== Footer teeth scene ===== */
-.teeth-scene{--cell:6px;--rows:19;position:relative;width:100%;overflow:hidden;margin:-40px 0 48px}
+.teeth-scene{--cell:6px;--rows:19;position:relative;width:100%;overflow:hidden;margin:48px 0 -28px}
 .teeth-scene canvas{display:block}
 @media (max-width:600px){.teeth-scene{--cell:4px}}
