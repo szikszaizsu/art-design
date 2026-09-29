@@ -185,3 +185,13 @@ if (form) {
   });
 }
 
+
+// Button hover flash: load the eight work images on the first pointer over a button,
+// so the first run of the animation doesn't blink through empty frames.
+let flashLoaded = false;
+document.addEventListener('pointerover', (event) => {
+  if (flashLoaded || !event.target.closest?.('.button')) return;
+  flashLoaded = true;
+  const base = new URL('assets/button-flash/', document.querySelector('link[href*="styles.css"]').href);
+  for (let i = 1; i <= 8; i++) new Image().src = new URL(`flash-${i}.webp`, base).href;
+});
