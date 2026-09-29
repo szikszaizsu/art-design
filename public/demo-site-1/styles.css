@@ -576,12 +576,6 @@ h2 em:hover{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--gr
 .big em,h3 em,.sig,.qs blockquote em{display:inline-block;padding:0 .04em;cursor:default;transition:transform .5s cubic-bezier(.34,1.56,.64,1),color .3s}
 .big em:hover,h3 em:hover,.sig:hover{transform:translateY(-.1em) rotate(-4deg) scale(1.08);color:var(--green)}
 
-/* ===== Footer teeth scene ===== */
-.teeth-scene{--cell:6px;--rows:19;position:relative;width:100%;overflow:hidden;margin:96px 0 -150px}
-.teeth-scene canvas{display:block}
-@media (max-width:860px){.teeth-scene{margin:64px 0 -96px}}
-@media (max-width:600px){.teeth-scene{--cell:4px}}
-
 /* ===== Palette previews (?pal=grey | ?pal=avocado) ===== */
 html[data-pal="grey"]{--green:#48484A;--green-2:#6E6E73;--lime:#EFEFF1;--lime-2:#D8D8DD;--sage:#F2F2F4;--sage-2:#E8E8ED;--g-rgb:72,72,74;--g2-rgb:110,110,115;--as1:#F4F4F6;--as2:#E3E3E8}
 html[data-pal="avocado"]{--green:#6E8E43;--green-2:#7E9F52;--lime:#EAF1DD;--lime-2:#CFDDB5;--sage:#F1F5E9;--sage-2:#EAF1DD;--g-rgb:110,142,67;--g2-rgb:126,159,82;--as1:#EEF4E3;--as2:#DCE8C8}
