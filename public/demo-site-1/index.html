@@ -60,6 +60,7 @@
         <span class="label">Dr. Irina Vasilescu</span>
         <img src="img/despre.webp" alt="Pacientă zâmbitoare în timpul consultației ortodontice" width="736" height="1308">
         <div class="next">
+          <canvas class="led" aria-hidden="true"></canvas>
           <small><span class="dot-live"></span>Următoarea consultație liberă</small>
           <b>Joi, 1 oct · 10:00</b>
           <a href="#contact">Rezervă ora →</a>
@@ -322,6 +323,20 @@
   $$('.acc details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('.acc details').forEach(o=>o!==d&&(o.open=false))}));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   $$('.reveal').forEach(el=>location.search.includes('static')?el.classList.add('in'):io.observe(el));
+  // LED dot-matrix: a pixel tooth trots across, leaving a fading trail
+  (()=>{const cv=$('.led');if(!cv)return;const ctx=cv.getContext('2d');const P=5,R=16;let W,C,buf,x=6,t=0,frame=0;
+    const A=["..XXXX..XXXX..",".XXXXXXXXXXXX.","XXXXXXXXXXXXXX","XXXXXXXXXXXXXX","XXXXXXXXXXXXXX",".XXXXXXXXXXXX.",".XXXXXXXXXXXX.",".XXXXX..XXXXX.","..XXXX..XXXX..","..XXX....XXX..","..XXX....XXX..","..XX......XX..","...X......X..."];
+    const B=A.slice(0,9).concat([".XXX......XXX.",".XX........XX.","XX..........XX","X............X"]);
+    const size=()=>{const r=devicePixelRatio||1;W=cv.clientWidth;C=Math.floor(W/P);cv.width=W*r;cv.height=R*P*r;ctx.setTransform(r,0,0,r,0,0);buf=new Float32Array(C*R);};
+    size();addEventListener('resize',size);
+    const stamp=(spr,ox,oy)=>spr.forEach((row,j)=>[...row].forEach((ch,i)=>{const cx=ox+i,cy=oy+j;if(ch==='X'&&cx>=0&&cx<C&&cy>=0&&cy<R)buf[cy*C+cx]=1;}));
+    const draw=()=>{ctx.clearRect(0,0,W,R*P);for(let j=0;j<R;j++)for(let i=0;i<C;i++){const v=buf[j*C+i];ctx.beginPath();ctx.arc(i*P+P/2,j*P+P/2,v>.05?1.7:1.1,0,7);ctx.fillStyle=v>.05?`rgba(62,122,108,${.18+.82*v})`:'rgba(62,122,108,.13)';ctx.fill();}};
+    const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(still){stamp(A,Math.floor(C/2)-7,1);draw();return;}
+    const tick=()=>{t++;if(t%3===0){for(let k=0;k<buf.length;k++)buf[k]*=.72;x+=1;frame^=(x%2===0?1:0);if(x>C+4)x=-16;stamp(frame?B:A,x,frame?2:1);}
+      if(t%3===0)draw();requestAnimationFrame(tick);};
+    tick();
+  })();
   const nav=$('.nav');addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
 </script>
 </body>
