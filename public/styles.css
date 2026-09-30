@@ -546,3 +546,9 @@ body { line-height: 1.7; }
   .about-copy article h3 { grid-column: 2; }
   .about-copy article p { grid-column: 2; }
 }
+/* Traditional strip: more breathing room inside the card */
+@media (min-width: 821px) {
+  .work-traditional { grid-template-columns: 240px 1fr; gap: 72px; padding: 56px 64px; margin-top: 140px; }
+  .work-traditional h3 { margin-top: 14px; }
+  .work-traditional p { margin: 18px 0 26px; }
+}
