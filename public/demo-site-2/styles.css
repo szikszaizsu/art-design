@@ -383,3 +383,11 @@ section{padding:110px 0}
 /* no text animation (user request): no fade-in, no hover lift on italic words, the round badge keeps rotating */
 .reveal,.reveal.in{opacity:1;transform:none;transition:none}
 h1 em:hover,h2 em:hover{transform:none}
+
+/* service icons move on hover */
+.sv-grid .ico{transition:background .35s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.sv-grid .ico svg{transition:transform .35s}
+.sv-grid article:not(.big):hover .ico{transform:scale(1.12) translateY(-4px)}
+.sv-grid article:not(.big):hover .ico svg{animation:ico-wiggle .7s ease-in-out}
+@keyframes ico-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}
+@media (prefers-reduced-motion:reduce){.sv-grid article:hover .ico,.sv-grid article:hover .ico svg{transform:none;animation:none}}
