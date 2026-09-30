@@ -316,3 +316,22 @@ section{padding:110px 0}
 @media (max-width:1100px){.cm{grid-template-columns:1fr}}
 @media (max-width:720px){.msg{max-width:100%}.menu-card li{font-size:14px}}
 @media (min-width:1101px){.fq-left{position:sticky;top:30px}}
+
+/* steps: one even row + animated round icons (user request 2026-09-30) */
+.st-grid{align-items:stretch}
+.st-grid article.up{margin-top:0}
+.st-grid p{padding-right:44px}
+.st-grid .ico{position:relative}
+.st-grid .ico::after{content:"";position:absolute;inset:-1.5px;border-radius:50%;border:1.5px solid currentColor;animation:ripple 2.8s ease-out infinite}
+.st-grid article:nth-child(2) .ico::after{animation-delay:.9s}
+.st-grid article:nth-child(3) .ico::after{animation-delay:1.8s}
+.st-grid article:nth-child(1) .ico svg{animation:turn 8s linear infinite}
+.st-grid article:nth-child(2) .ico svg{animation:bob 2.4s ease-in-out infinite}
+.st-grid article:nth-child(3) .ico svg{animation:wave 2.6s ease-in-out infinite}
+.st-grid .rnd{transition:background .3s,color .3s,transform .3s}
+.st-grid .rnd:hover{background:var(--lime);border-color:var(--lime);color:var(--ink);transform:rotate(45deg)}
+@keyframes ripple{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.55);opacity:0}}
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes wave{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(2px) scaleY(.8)}}
+@media (prefers-reduced-motion:reduce){.st-grid .ico::after,.st-grid .ico svg{animation:none}}
