@@ -35,7 +35,7 @@ section{padding:110px 0}
 .brand small{font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-left:2px;align-self:flex-end;padding-bottom:2px}
 .brand .mk svg{width:24px;height:24px;fill:currentColor;stroke:none}
 .menu{display:flex;gap:4px;background:#fff;border-radius:99px;padding:5px}
-.menu a{color:var(--ink);font:400 13px/1 var(--serif);padding:10px 14px;border-radius:99px}
+.menu a{color:var(--ink);font:500 13.5px/1 var(--sans);letter-spacing:-.005em;padding:10px 14px;border-radius:99px}
 .menu a:hover{background:var(--panel)}
 .lang{position:relative}
 .lang summary{list-style:none;cursor:pointer;background:#fff;color:var(--ink);border-radius:99px;padding:11px 16px;font:600 12px/1 var(--sans)}
@@ -62,11 +62,11 @@ section{padding:110px 0}
 .loc i{width:32px;height:32px;border-radius:50%;background:var(--lime);display:grid;place-items:center}
 .loc svg{width:16px;height:16px;stroke-width:2.2}
 
-.badge{position:absolute;left:clamp(24px,5vw,72px);bottom:40px;width:118px;height:118px;display:grid;place-items:center;z-index:2}
+.badge{position:absolute;left:clamp(24px,5vw,72px);bottom:40px;width:136px;height:136px;display:grid;place-items:center;z-index:2}
 .badge .ring{position:absolute;inset:0;animation:spin 18s linear infinite}
-.badge text{fill:#fff;font:600 8.6px var(--sans);letter-spacing:.2em}
-.badge span{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;backdrop-filter:blur(8px)}
-.badge span svg{width:22px;height:22px}
+.badge text{fill:#fff;font:700 10.5px var(--sans)}
+.badge span{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;backdrop-filter:blur(8px)}
+.badge span svg{width:34px;height:34px;stroke-width:2.6}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hero-lead{position:absolute;right:clamp(24px,5vw,72px);bottom:44px;max-width:440px;font-size:15.5px;font-weight:300;line-height:1.55;opacity:.92;z-index:2}
 
