@@ -55,7 +55,8 @@ section{padding:70px 0}
 .hero{padding:12px 0 60px}
 .hero-grid{display:grid;grid-template-columns:2.25fr 1fr;grid-template-rows:auto auto auto;gap:16px}
 .h-main{grid-row:1/4;position:relative;border-radius:var(--r);overflow:hidden;min-height:600px;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,4vw,52px);background:var(--cream)}
-.h-main>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%}
+.h-main{background:#F4F5F7}
+.h-main>img{position:absolute;top:0;right:0;width:74%;height:100%;object-fit:cover;object-position:60% 40%}
 .h-main::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,243,236,.97) 0%,rgba(248,243,236,.9) 32%,rgba(248,243,236,.35) 55%,rgba(248,243,236,0) 70%);z-index:1}
 .h-copy,.chips{position:relative;z-index:2}
 .h-copy{max-width:440px}
@@ -219,16 +220,12 @@ section{padding:70px 0}
 .fd img{height:17px;width:auto}
 .demo{font-size:13px;color:var(--mut)}
 
-/* hero trial variants (?hero=a|b|c) */
-.h-main[data-hero=a]>img{object-position:100% 40%}
-.h-main[data-hero=b]>img{object-position:70% 35%}
-.h-main[data-hero=c]>img{object-position:100% 30%}
-
 /* responsive */
 @media (max-width:1100px){
   .menu{gap:18px}
   .hero-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
   .h-main{grid-column:1/3;grid-row:auto;min-height:540px}
+  .h-main>img{width:80%}
   .h-photo{grid-row:span 2}
   .team{grid-template-columns:repeat(2,1fr)}
   .d-chip.c1{left:12px}.d-chip.c2{right:12px}
@@ -255,10 +252,10 @@ section{padding:70px 0}
   .nav-cta{display:none}
   .hero-grid{grid-template-columns:1fr}
   .h-main,.h-photo{grid-column:auto;grid-row:auto}
-  .h-main{min-height:640px;justify-content:flex-start;gap:28px}
-  .h-main>img{object-position:70% 50%;top:auto;height:52%}
-  .h-main::before{background:linear-gradient(180deg,rgba(248,243,236,1) 0%,rgba(248,243,236,1) 46%,rgba(248,243,236,0) 62%)}
-  .chips{margin-top:auto;grid-template-columns:1fr 1fr}
+  .h-main{min-height:780px;justify-content:flex-start;gap:24px}
+  .h-main>img{object-position:62% 35%;top:auto;bottom:0;width:100%;height:40%}
+  .h-main::before{background:linear-gradient(180deg,rgba(248,243,236,1) 0%,rgba(248,243,236,1) 58%,rgba(248,243,236,0) 66%)}
+  .chips{margin-top:0;grid-template-columns:1fr 1fr}
   .chips li{font-size:12.5px;padding:7px 11px}
   .h-photo{height:260px}
   .s-grid,.team,.why-feats{grid-template-columns:1fr}
