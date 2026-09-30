@@ -17,12 +17,12 @@ h2{font-size:clamp(34px,4vw,52px)}
 h1 em,h2 em{font-style:italic;color:var(--accent)}
 .head{margin-bottom:44px}
 .head.center{margin-inline:auto;text-align:center}
-.head h2{white-space:nowrap}  /* section titles stay on one line (user rule) */
+.head h2,.o-in h2{white-space:nowrap;font-size:min(clamp(34px,4vw,52px),6.8vw)}  /* section titles: one line at every width (user rule) */
 h2.two span{display:block;white-space:nowrap}  /* two-part titles: always exactly 2 lines (user rule) */
 .fam h2,.sto-head h2,.why h2.two{font-size:clamp(30px,3.2vw,44px)}
 .head p{color:var(--mut);margin-top:14px;max-width:620px}
 .head.center p{margin-inline:auto}
-@media (max-width:900px){.head h2,.dr h2,.o-in h2{white-space:normal}}
+@media (max-width:900px){.dr h2{white-space:normal}}
 @media (max-width:640px){h2.two span{white-space:normal}}
 .kick{font-size:14px;color:var(--brown);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
 section{padding:70px 0}
@@ -209,7 +209,6 @@ section{padding:70px 0}
 .a4{right:9%;top:57%;animation-delay:-3s}.a5{left:21%;bottom:17%;animation-delay:-4s}.a6{right:28%;bottom:8%;animation-delay:-5s}
 @keyframes bob{50%{transform:translateY(-10px)}}
 .o-in{position:relative;z-index:2;max-width:760px}
-.o-in h2{white-space:nowrap}
 .o-in h2 em{color:#fff}
 .o-in>p{opacity:.9;margin:16px auto 30px;max-width:430px}
 .o-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
