@@ -2,3 +2,12 @@
 # One rule covers demo-site-1, -2, -3 and every future demo-site-N.
 /demo-site-*
   X-Robots-Tag: noindex, nofollow, noimageindex, noarchive
+
+# Demo index page (/weboldalak/) is internal: never indexed.
+/weboldalak/*
+  X-Robots-Tag: noindex, nofollow, noimageindex, noarchive
+
+# Whole site stays out of search engines for now (owner's request, 2026-09-30).
+# Delete this block when the site should be indexed.
+/*
+  X-Robots-Tag: noindex, nofollow

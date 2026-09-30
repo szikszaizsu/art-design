@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noimageindex, noarchive">
+  <title>Weboldal demók · Szikszai Zsu</title>
+  <link rel="icon" href="/assets/favicon.png">
+  <style>
+    @font-face { font-family: "Inter"; src: url("/assets/inter-variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("/assets/cormorant-garamond-latin.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
+    @font-face { font-family: "Cormorant Garamond"; src: url("/assets/cormorant-garamond-latin-ext.woff2") format("woff2"); font-weight: 300 700; font-display: swap; unicode-range: U+0100-024F, U+1E00-1EFF; }
+
+    :root {
+      --bg: #0f0d0c;
+      --card: #1a1715;
+      --line: rgba(255, 255, 255, .09);
+      --text: #f4f1ee;
+      --soft: rgba(244, 241, 238, .66);
+      --muted: rgba(244, 241, 238, .5);
+      --accent: #c24a4a;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 400 17px/1.55 Inter, -apple-system, "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 720px) { .wrap { padding: 0 40px; } }
+
+    header { padding: 28px 0 0; }
+    .brand { font: 600 18px/1 "Cormorant Garamond", Georgia, serif; letter-spacing: .2em; text-transform: uppercase; opacity: .85; transition: opacity .2s; }
+    .brand:hover { opacity: 1; }
+
+    .intro { padding: clamp(56px, 9vw, 110px) 0 clamp(36px, 5vw, 56px); }
+    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+    h1 { margin-top: 14px; font: 500 clamp(52px, 7vw, 96px)/1 "Cormorant Garamond", Georgia, serif; letter-spacing: -.01em; }
+
+    .grid { display: grid; gap: 24px; padding-bottom: 96px; }
+    @media (min-width: 760px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
+
+    .card { min-width: 0; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+    .shot { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #fff; }
+    .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+    .shot:hover img { transform: scale(1.03); }
+
+    .body { display: flex; flex-direction: column; flex: 1; padding: 26px 24px 26px; }
+    .num { font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+    h2 { margin-top: 10px; font: 600 30px/1.1 "Cormorant Garamond", Georgia, serif; }
+    .desc { margin-top: 10px; color: var(--soft); flex: 1; }
+
+    .langs { display: flex; gap: 10px; margin-top: 24px; }
+    .langs a {
+      display: grid; place-items: center; width: 56px; height: 56px;
+      border: 1px solid var(--line); border-radius: 50%;
+      font-size: 15px; font-weight: 600; letter-spacing: .04em;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .langs a:hover, .langs a:focus-visible { background: var(--text); border-color: var(--text); color: var(--bg); outline: none; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="/">Szikszai Zsu</a>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <p class="eyebrow">Belső tesztoldal</p>
+      <h1>Weboldal demók</h1>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <a class="shot" href="/demo-site-1/hu/" aria-label="Demo 1 megnyitása"><img src="img/demo-1.webp" width="1200" height="750" alt="Alinia fogszabályozó rendelő weboldala" loading="lazy"></a>
+        <div class="body">
+          <p class="num">Demo 1</p>
+          <h2>Fogszabályozás</h2>
+          <p class="desc">Alinia, Marosvásárhely. Fehér alap, olívazöld, üveghatású elemek.</p>
+          <nav class="langs" aria-label="Demo 1 nyelvei">
+            <a href="/demo-site-1/" hreflang="ro">RO</a>
+            <a href="/demo-site-1/hu/" hreflang="hu">HU</a>
+            <a href="/demo-site-1/en/" hreflang="en">EN</a>
+          </nav>
+        </div>
+      </article>
+
+      <article class="card">
+        <a class="shot" href="/demo-site-2/hu/" aria-label="Demo 2 megnyitása"><img src="img/demo-2.webp" width="1200" height="750" alt="DentalTop férfi fogászat weboldala" loading="lazy"></a>
+        <div class="body">
+          <p class="num">Demo 2</p>
+          <h2>Fogászat férfiaknak</h2>
+          <p class="desc">DentalTop, Marosvásárhely. Világos alap, sötét zsályazöld.</p>
+          <nav class="langs" aria-label="Demo 2 nyelvei">
+            <a href="/demo-site-2/" hreflang="ro">RO</a>
+            <a href="/demo-site-2/hu/" hreflang="hu">HU</a>
+            <a href="/demo-site-2/en/" hreflang="en">EN</a>
+          </nav>
+        </div>
+      </article>
+
+      <article class="card">
+        <a class="shot" href="/demo-site-3/hu/" aria-label="Demo 3 megnyitása"><img src="img/demo-3.webp" width="1200" height="750" alt="Tihna Dental fogászat weboldala" loading="lazy"></a>
+        <div class="body">
+          <p class="num">Demo 3</p>
+          <h2>Félelem nélküli fogászat</h2>
+          <p class="desc">Tihna Dental, Kolozsvár. Sötét olíva és neonlime, görgetéses megjelenés.</p>
+          <nav class="langs" aria-label="Demo 3 nyelvei">
+            <a href="/demo-site-3/" hreflang="ro">RO</a>
+            <a href="/demo-site-3/hu/" hreflang="hu">HU</a>
+            <a href="/demo-site-3/en/" hreflang="en">EN</a>
+          </nav>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <a href="/">← Vissza a főoldalra</a>
+  </footer>
+</body>
+</html>
