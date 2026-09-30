@@ -1,3 +1,4 @@
 # Demo reference sites must never be indexed (pages, images, every language).
-/demo-site-1/*
+# One rule covers demo-site-1, -2, -3 and every future demo-site-N.
+/demo-site-*
   X-Robots-Tag: noindex, nofollow, noimageindex, noarchive
