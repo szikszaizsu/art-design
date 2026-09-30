@@ -397,3 +397,6 @@ h1 em:hover,h2 em:hover{transform:none}
 .avs span:nth-child(4){animation-delay:2.7s}
 @keyframes av-turn{0%,30%,100%{transform:none;z-index:1}12%{transform:translateY(-7px) scale(1.12);z-index:3;box-shadow:0 8px 16px rgba(23,35,31,.25)}}
 @media (prefers-reduced-motion:reduce){.avs span{animation:none}}
+/* avatar rings like the reference: white gap + green outline */
+.avs span{border:2px solid #fff;box-shadow:0 0 0 2.5px #9DB86A}
+.d-photo .join .avs span{border-color:#fff}
