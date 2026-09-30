@@ -86,7 +86,7 @@ h1 em:hover,h2 em:hover{transform:translateY(-4px) rotate(-3deg)}
 .avs span:first-child{margin-left:0}
 .avs span:nth-child(2){background:var(--blue)}
 .avs span:nth-child(3){background:#7C8699}
-.proof .num{border-left:1px solid var(--line);padding:6px 0 6px 18px;background:linear-gradient(90deg,rgba(255,255,255,.8),transparent);border-radius:0 12px 12px 0;padding-right:40px}
+.proof .num{border-left:1px solid var(--line);padding:6px 0 6px 18px}
 .proof b{display:block;font-size:19px;letter-spacing:-.02em}
 .proof small{font-size:13px;color:var(--muted)}
 .lead{font-size:17px;color:#3A4254;max-width:470px;margin-bottom:30px}
