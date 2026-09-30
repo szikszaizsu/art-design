@@ -1,11 +1,3 @@
-// Hero photo trial: ?hero=a|b|c swaps the hero image (for choosing a new one live)
-const heroV = new URLSearchParams(location.search).get('hero');
-if (/^[abc]$/.test(heroV || '')) {
-  const hm = document.querySelector('.h-main'), hi = hm.querySelector('img');
-  hi.src = hi.getAttribute('src').replace('hero.webp', 'hero-' + heroV + '.webp');
-  hm.dataset.hero = heroV;
-}
-
 // Mobile menu
 const burger = document.querySelector('.burger'), menu = document.getElementById('menu');
 burger.addEventListener('click', () => {
