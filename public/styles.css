@@ -493,3 +493,38 @@ input, textarea, select { -webkit-user-select: text; user-select: text; }
   .work-traditional p { display: none; }
 }
 @media (max-width: 520px) { .work-cats { gap: 28px 14px; } .work-cat h4 { font-size: 1.35rem; } .work-cat p { font-size: .85rem; } }
+
+/* Airy layer: more breathing room on every page */
+body { line-height: 1.7; }
+.about, .work, .services, .contact { padding-block: 150px; }
+.quote-band { padding: 120px 24px; }
+.section-heading { margin-bottom: 96px; }
+.about-grid { gap: 96px; }
+.about-copy article { padding: 44px 0; gap: 28px; }
+.about-copy article p + p { margin-top: 4px; }
+.work-digital-head { margin-bottom: 52px; }
+.work-cats { gap: 36px; }
+.work-traditional { margin-top: 110px; padding: 28px; gap: 44px; }
+.services-grid { gap: 28px; }
+.service-card { padding: 44px 34px; }
+.services-cta { margin-top: 72px; }
+.contact-grid { gap: 120px; }
+.contact-form { padding: 44px; }
+.contact-form label { margin-bottom: 26px; }
+.portfolio-footer { padding-top: 96px; }
+.category-hero, .detail-hero { padding-bottom: 40px; }
+.category-list { gap: 56px 44px; padding-bottom: 170px; }
+.gallery-grid { gap: 28px; }
+@media (max-width: 820px) {
+  .about, .work, .services, .contact { padding-block: 88px; }
+  .quote-band { padding: 72px 20px; }
+  .section-heading { margin-bottom: 56px; }
+  .about-grid { gap: 48px; }
+  .about-copy article { padding: 32px 0; }
+  .work-traditional { margin-top: 64px; padding: 16px; gap: 20px; }
+  .service-card { padding: 32px 26px; }
+  .contact-grid { gap: 56px; }
+  .contact-form { padding: 30px 24px; }
+  .category-list { gap: 64px; padding-bottom: 110px; }
+  .gallery-grid { gap: 18px; }
+}
