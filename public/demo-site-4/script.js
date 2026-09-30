@@ -14,8 +14,22 @@ const go = dir => {
   if (x > max + w / 2) x = 0; else if (x < -w / 2) x = max;
   track.scrollTo({ left: x, behavior: 'smooth' });
 };
-document.querySelector('.stories .prev').addEventListener('click', () => go(-1));
-document.querySelector('.stories .next').addEventListener('click', () => go(1));
+// Autoplay every 6 s; pauses while hovered/focused, restarts the timer after a manual click.
+// Off for ?static screenshots and prefers-reduced-motion.
+const sto = document.querySelector('.stories');
+let auto = null, hold = false;
+const startAuto = () => {
+  clearInterval(auto);
+  if (/static/.test(location.search) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  auto = setInterval(() => { if (!hold && !document.hidden) go(1); }, 6000);
+};
+sto.addEventListener('mouseenter', () => hold = true);
+sto.addEventListener('mouseleave', () => hold = false);
+sto.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) hold = true; });
+sto.addEventListener('focusout', () => hold = false);
+document.querySelector('.stories .prev').addEventListener('click', () => { go(-1); startAuto(); });
+document.querySelector('.stories .next').addEventListener('click', () => { go(1); startAuto(); });
+startAuto();
 
 // FAQ: keep one answer open at a time
 document.querySelectorAll('.acc details').forEach(d => d.addEventListener('toggle', () => {
