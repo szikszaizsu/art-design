@@ -84,6 +84,24 @@
     </div>
   </section>
 
+  <!-- COMFORT MENU: menu card with dotted leaders (unique to demo-site-3) -->
+  <section class="comfort" id="confort">
+    <div class="wrap cm">
+      <div class="cm-head">
+        <p class="kick">Comfort</p>
+        <h2>What helps you<br>stay in the chair</h2>
+        <p>You can ask for any of it from your very first visit. None of it costs extra, except sedation.</p>
+        <span class="cm-stamp">Included with every treatment</span>
+      </div>
+      <div class="menu-card">
+        <span class="mk"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40c-7-3-12-9-12-17 0-3 1-6 2-8 4 2 7 5 9 9 1-6 1-12 1-18 2 5 4 11 4 18 2-4 5-7 9-9 1 2 2 5 2 8 0 8-5 14-12 17z"/></svg></span>
+        <h3>Comfort menu</h3>
+        <ul><li><span>Headphones with your own music</span><i></i><b>included</b></li><li><span>A warm blanket and neck pillow</span><i></i><b>included</b></li><li><span>Sunglasses against the lamp</span><i></i><b>included</b></li><li><span>Numbing gel before any injection</span><i></i><b>included</b></li><li><span>Computer-controlled anaesthesia, no classic syringe</span><i></i><b>included</b></li><li><span>The pause signal: a raised hand</span><i></i><b>any time</b></li><li><span>Conscious sedation</span><i></i><b>on request</b></li></ul>
+        <p class="cm-foot">Tell us what you’d like when you book. You don’t have to explain why.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- STEPS: first card dark, the rest light -->
   <section class="steps" id="pasi">
     <div class="wrap">
@@ -110,10 +128,10 @@
         <div class="arrows"><button class="prev" aria-label="Prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button class="next" aria-label="Next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
       </div>
       <div class="track">
-        <article class="story"><figure><img src="../img/talk.webp" alt="" loading="lazy"><span class="chip">First visit</span></figure><blockquote>“I cried in the waiting room. The doctor sat with me for 20 minutes just to talk. Now I come for a check-up twice a year.”</blockquote><p class="who"><b>Ioana M.</b>34</p></article>
-        <article class="story"><figure><img src="../img/laugh.webp" alt="" loading="lazy"><span class="chip">Cleaning</span></figure><blockquote>“I didn’t think a cleaning could be relaxing. Warm water, music in headphones and a break whenever I asked.”</blockquote><p class="who"><b>Raluca D.</b>29</p></article>
-        <article class="story"><figure><img src="../img/chair.webp" alt="" loading="lazy"><span class="chip">Conscious sedation</span></figure><blockquote>“I needed three root canals. I had them under sedation in a single morning and barely remember a thing.”</blockquote><p class="who"><b>Sorin P.</b>47</p></article>
-        <article class="story"><figure><img src="../img/screen.webp" alt="" loading="lazy"><span class="chip">Veneers</span></figure><blockquote>“After ten years of smiling with my mouth shut, I have veneers. They showed me every step on screen before starting.”</blockquote><p class="who"><b>Andreea L.</b>38</p></article>
+        <article class="story"><figure><img src="../img/talk.webp" alt="" loading="lazy"><span class="chip">First visit</span></figure><blockquote>“I cried in the waiting room. The doctor sat with me for 20 minutes just to talk. Now I come for a check-up twice a year.”</blockquote><div class="fear"><span>Fear, before</span><i><b style="width:90%"></b></i><em>9</em><span>Fear, now</span><i class="now"><b style="width:20%"></b></i><em>2</em></div><p class="who"><b>Ioana M.</b>34</p></article>
+        <article class="story"><figure><img src="../img/laugh.webp" alt="" loading="lazy"><span class="chip">Cleaning</span></figure><blockquote>“I didn’t think a cleaning could be relaxing. Warm water, music in headphones and a break whenever I asked.”</blockquote><div class="fear"><span>Fear, before</span><i><b style="width:70%"></b></i><em>7</em><span>Fear, now</span><i class="now"><b style="width:10%"></b></i><em>1</em></div><p class="who"><b>Raluca D.</b>29</p></article>
+        <article class="story"><figure><img src="../img/chair.webp" alt="" loading="lazy"><span class="chip">Conscious sedation</span></figure><blockquote>“I needed three root canals. I had them under sedation in a single morning and barely remember a thing.”</blockquote><div class="fear"><span>Fear, before</span><i><b style="width:100%"></b></i><em>10</em><span>Fear, now</span><i class="now"><b style="width:30%"></b></i><em>3</em></div><p class="who"><b>Sorin P.</b>47</p></article>
+        <article class="story"><figure><img src="../img/screen.webp" alt="" loading="lazy"><span class="chip">Veneers</span></figure><blockquote>“After ten years of smiling with my mouth shut, I have veneers. They showed me every step on screen before starting.”</blockquote><div class="fear"><span>Fear, before</span><i><b style="width:80%"></b></i><em>8</em><span>Fear, now</span><i class="now"><b style="width:20%"></b></i><em>2</em></div><p class="who"><b>Andreea L.</b>38</p></article>
       </div>
     </div>
   </section>
@@ -145,13 +163,18 @@
   <!-- FAQ -->
   <section class="faq" id="intrebari">
     <div class="wrap faq-in">
-      <div><p class="kick">FAQ</p><h2>What nervous<br>patients ask us</h2><figure><img src="../img/wait.webp" alt="" loading="lazy"></figure></div>
-      <div class="acc">
-        <details open><summary>I’m really scared. Can I really come just to talk?</summary><p>Yes. The first visit is a conversation and a visual check, with no instruments and no treatment. You go home with a plan and decide if and when we continue.</p></details>
-        <details><summary>What is conscious sedation?</summary><p>A medicine that relaxes you deeply, given under supervision. You’re awake and can respond, but you don’t feel anxious and remember very little of the treatment.</p></details>
-        <details><summary>Does the injection hurt?</summary><p>We use computer-controlled anaesthesia that delivers the solution very slowly. We apply a numbing gel first, so you barely feel it.</p></details>
-        <details><summary>Can I stop the treatment at any time?</summary><p>Any time. We agree on a signal at the start, usually a raised hand, and stop straight away every time.</p></details>
-        <details><summary>Will I know the price before we start?</summary><p>Yes. You get the plan in writing, with stages and costs, and treatment only starts once you agree.</p></details>
+      <div class="fq-left"><p class="kick">FAQ</p><h2>What nervous<br>patients ask us</h2><p class="fq-who"><span class="av">AC</span>Dr. Ana Ciobanu answers</p><figure><img src="../img/wait.webp" alt="" loading="lazy"></figure></div>
+      <div class="chat">
+        <div class="msg q"><p>I’m really scared. Can I really come just to talk?</p></div>
+        <div class="msg a"><span class="av">AC</span><p>Yes. The first visit is a conversation and a visual check, with no instruments and no treatment. You go home with a plan and decide if and when we continue.</p></div>
+        <div class="msg q"><p>What is conscious sedation?</p></div>
+        <div class="msg a"><span class="av">AC</span><p>A medicine that relaxes you deeply, given under supervision. You’re awake and can respond, but you don’t feel anxious and remember very little of the treatment.</p></div>
+        <div class="msg q"><p>Does the injection hurt?</p></div>
+        <div class="msg a"><span class="av">AC</span><p>We use computer-controlled anaesthesia that delivers the solution very slowly. We apply a numbing gel first, so you barely feel it.</p></div>
+        <div class="msg q"><p>Can I stop the treatment at any time?</p></div>
+        <div class="msg a"><span class="av">AC</span><p>Any time. We agree on a signal at the start, usually a raised hand, and stop straight away every time.</p></div>
+        <div class="msg q"><p>Will I know the price before we start?</p></div>
+        <div class="msg a"><span class="av">AC</span><p>Yes. You get the plan in writing, with stages and costs, and treatment only starts once you agree.</p></div>
       </div>
     </div>
   </section>

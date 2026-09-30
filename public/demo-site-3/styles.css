@@ -277,3 +277,42 @@ section{padding:110px 0}
   .f-info{grid-template-columns:1fr;margin:50px 0 36px}
   .f-bot nav{display:none}
 }
+
+/* ---------- COMFORT MENU (unique to demo-site-3) ---------- */
+.comfort{padding-top:40px}
+.cm{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,80px);align-items:center}
+.cm-head p:not(.kick){color:var(--mute);font-weight:300;max-width:420px;margin-top:20px}
+.cm-stamp{display:inline-block;margin-top:30px;background:var(--lime);border-radius:99px;padding:10px 18px;font-size:13px;font-weight:600;transform:rotate(-3deg)}
+.menu-card{background:#FBFAF6;border:1px solid var(--line);border-radius:28px;padding:clamp(28px,4vw,52px);box-shadow:0 30px 60px -30px rgba(47,55,27,.25);position:relative}
+.menu-card::before{content:"";position:absolute;inset:10px;border:1px solid var(--line);border-radius:20px;pointer-events:none}
+.menu-card .mk{display:block;width:34px;margin:0 auto 10px;color:var(--olive)}
+.menu-card .mk svg{fill:currentColor;stroke:none;width:34px;height:34px}
+.menu-card h3{font:400 clamp(24px,2.4vw,32px)/1.2 var(--serif);text-align:center;margin-bottom:28px}
+.menu-card ul{list-style:none;display:grid;gap:16px}
+.menu-card li{display:flex;align-items:baseline;gap:10px;font-size:15.5px}
+.menu-card li i{flex:1;border-bottom:1.5px dotted #B9B7AC;transform:translateY(-4px);min-width:20px}
+.menu-card li b{font:italic 400 14px var(--serif);color:var(--olive);white-space:nowrap}
+.cm-foot{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font:italic 400 13.5px/1.6 var(--serif);color:var(--mute)}
+
+/* fear scale in stories */
+.fear{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px 10px;margin:0 12px 18px;padding:12px 14px;background:#fff;border-radius:14px;font-size:11.5px;color:var(--mute)}
+.fear i{height:6px;border-radius:6px;background:var(--line);overflow:hidden}
+.fear i b{display:block;height:100%;background:var(--orange);border-radius:6px}
+.fear i.now b{background:var(--olive)}
+.fear em{font-style:normal;font-weight:700;color:var(--ink);font-size:12px}
+
+/* FAQ as a chat */
+.faq-in{align-items:start}
+.fq-who{display:flex;align-items:center;gap:10px;margin-top:18px;color:var(--mute);font-size:14px}
+.av{flex:none;width:36px;height:36px;border-radius:50%;background:var(--olive);color:var(--lime);display:grid;place-items:center;font-size:12px;font-weight:700}
+.chat{display:grid;gap:12px;background:var(--panel);border-radius:28px;padding:clamp(18px,3vw,32px)}
+.msg{display:flex;gap:10px;max-width:86%}
+.msg p{padding:14px 18px;border-radius:20px;font-size:15px;line-height:1.55}
+.msg.q{justify-self:end}
+.msg.q p{background:var(--olive);color:#fff;border-bottom-right-radius:6px;font-weight:500}
+.msg.a{align-items:flex-end}
+.msg.a p{background:#fff;border-bottom-left-radius:6px;color:#3C3F33;font-weight:300}
+.msg.q+.msg.a{margin-bottom:10px}
+@media (max-width:1100px){.cm{grid-template-columns:1fr}}
+@media (max-width:720px){.msg{max-width:100%}.menu-card li{font-size:14px}}
+@media (min-width:1101px){.fq-left{position:sticky;top:30px}}
