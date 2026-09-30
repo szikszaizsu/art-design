@@ -528,3 +528,12 @@ body { line-height: 1.7; }
   .category-list { gap: 64px; padding-bottom: 110px; }
   .gallery-grid { gap: 18px; }
 }
+/* Work categories: 2×2, image beside text (airier) */
+@media (min-width: 821px) {
+  .work-cats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px 80px; }
+  .work-cat { display: grid; grid-template-columns: minmax(180px, 42%) 1fr; column-gap: 36px; align-items: center; }
+  .work-cat img, .work-cat .gallery-slot { grid-row: 1 / span 3; }
+  .work-cat > span { margin-top: 0; align-self: end; }
+  .work-cat h4 { margin-top: 10px; font-size: clamp(1.8rem, 2.4vw, 2.4rem); }
+  .work-cat p { align-self: start; margin-top: 10px; }
+}
