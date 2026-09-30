@@ -3,7 +3,7 @@
 Önálló, reszponzív portfólió weboldal tiszta HTML, CSS és JavaScript
 használatával. Nem igényel keretrendszert vagy build folyamatot.
 
-- **Élő oldal:** https://art-design.szikszaizsu.workers.dev/
+- **Élő oldal:** https://szikszaizsu.com/ (saját domain; a workers.dev cím már nem él)
 - **Repository:** https://github.com/szikszaizsu/art-design
 - **Nyelvek:** magyar (alapértelmezett), angol (`?lang=en`), román (`?lang=ro`)
 - **Megjelenés:** lásd a `DESIGN.md` fájlt (színek, betűk, komponensek, szabályok)
@@ -28,6 +28,8 @@ automatikusan kikerülnek az élő oldalra.
 - `public/digitalis-munkak/`, `public/hagyomanyos-munkak/` – kategóriaoldalak
 - `public/art-work/*/index.html` – munkaoldalak (gyöngyszövés, tojásdíszítés,
   nemezelés, közösségi média, UX/UI)
+- `public/weboldalak/` – belső demó-gyűjtőoldal (kártyák: `img/demo-N.webp`, RO/HU/EN linkek); új demónál ide is kell egy kártya
+- `public/demo-site-N/` – demó weboldalak (RO alap, `hu/`, `en/`)
 - `public/adatvedelem/` – adatvédelmi tájékoztató
 - `public/404.html` – hibaoldal
 - `public/styles.css` – megjelenés (alapszabályok + „Apple-style layer”)
@@ -47,3 +49,10 @@ automatikusan kikerülnek az élő oldalra.
 - **Új oldal:** egy meglévő oldal másolatából induljon (fejléc, lábléc,
   fordítás, megosztási és nyelvi címkék így együtt jönnek), és kerüljön be a
   `sitemap.xml`-be.
+
+## Indexelés
+
+Jelenleg az **egész oldal noindex** (`public/_headers`, `/*` szabály). Ha az oldalt
+indexelni kell, azt a blokkot kell törölni, és a `robots.txt` / `sitemap.xml`
+címeit `https://szikszaizsu.com/`-ra átírni. A `/demo-site-*` és `/weboldalak/*`
+mindig noindex marad.
