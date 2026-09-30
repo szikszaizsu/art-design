@@ -389,3 +389,11 @@ h1 em:hover,h2 em:hover{transform:none}
 .sv-grid article:not(.big):hover .ico svg{animation:ico-wiggle .7s ease-in-out}
 @keyframes ico-wiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}
 @media (prefers-reduced-motion:reduce){.sv-grid article:hover .ico,.sv-grid article:hover .ico svg{transform:none;animation:none}}
+
+/* avatar circles take turns: each one lifts and comes forward, one after the other, on a loop */
+.avs span{position:relative;animation:av-turn 3.6s ease-in-out infinite}
+.avs span:nth-child(2){animation-delay:.9s}
+.avs span:nth-child(3){animation-delay:1.8s}
+.avs span:nth-child(4){animation-delay:2.7s}
+@keyframes av-turn{0%,30%,100%{transform:none;z-index:1}12%{transform:translateY(-7px) scale(1.12);z-index:3;box-shadow:0 8px 16px rgba(23,35,31,.25)}}
+@media (prefers-reduced-motion:reduce){.avs span{animation:none}}
