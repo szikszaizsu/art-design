@@ -72,6 +72,9 @@ h1 em:hover,h2 em:hover{transform:translateY(-4px) rotate(-3deg)}
 .hero .script i,.hero .script b{font-style:normal;font-weight:400;display:block}
 .hero .script i{color:#fff;clip-path:inset(-50% 46% -50% -50%)}
 .hero .script b{position:absolute;inset:0;color:transparent;-webkit-text-stroke:1.4px #fff;clip-path:inset(-50% -50% -50% 54%)}
+.hero .teeth{position:absolute;left:-90px;top:70px;width:min(860px,70vw);pointer-events:none;opacity:.7;
+  -webkit-mask-image:linear-gradient(90deg,#000 40%,rgba(0,0,0,.3) 100%);mask-image:linear-gradient(90deg,#000 40%,rgba(0,0,0,.3) 100%)}
+.hero .teeth img{display:block;width:100%;height:auto}
 .hero-text,.hero-img{position:relative;z-index:1}
 .hero-in{position:relative;display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:end}
 .hero-text{padding:70px 0 60px 0}
@@ -346,7 +349,8 @@ section{padding:110px 0}
   .lang{margin-left:auto}
   section{padding:80px 0}
   .hero-in{grid-template-columns:1fr}
-    .hero-text{padding:40px 0 30px}
+  .hero .teeth{left:-8vw;top:120px;width:116vw}
+      .hero-text{padding:40px 0 30px}
   .hero-img img{height:440px}
   .spin{left:0;right:auto;top:auto;bottom:60px;width:110px;height:110px}
   .duo,.ab-in,.faq-in,.partner-in,.plans{grid-template-columns:1fr}
