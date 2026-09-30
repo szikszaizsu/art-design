@@ -30,6 +30,8 @@ automatikusan kikerülnek az élő oldalra.
   nemezelés, közösségi média, UX/UI)
 - `public/weboldalak/` – belső demó-gyűjtőoldal (kártyák: `img/demo-N.webp`, RO/HU/EN linkek); új demónál ide is kell egy kártya
 - `public/demo-site-N/` – demó weboldalak (RO alap, `hu/`, `en/`)
+  - `demo-site-1` Alinia (fogszabályozás), `demo-site-2` DentalTop (férfiaknak), `demo-site-3` Tihna Dental (félelem nélkül), `demo-site-4` Livada Dental (családi fogászat, mindoor.framer.website alapján)
+  - A demók forrása (build.py, képek, AGENTS.md) a privát `github.com/szikszaizsu/droot-demo-sites` repóban van; ide csak a kész `site/` mappa kerül (`tools/deploy.sh`), a /weboldalak/ kártyát kézzel kell hozzáadni
 - `public/adatvedelem/` – adatvédelmi tájékoztató
 - `public/404.html` – hibaoldal
 - `public/styles.css` – megjelenés (alapszabályok + „Apple-style layer”)
