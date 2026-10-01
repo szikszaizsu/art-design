@@ -20,7 +20,10 @@
 @media (min-width:760px){.work-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1100px){.work-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
 .work-card{min-width:0;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,19,16,.1);border-top:4px solid #c8f04a;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(42,24,13,.08)}
-.work-shot{display:block;aspect-ratio:16/10;overflow:hidden;background:#2F371B}
+.work-shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:#2F371B}
+.work-go{position:absolute;right:18px;bottom:18px;width:52px;height:52px;border-radius:50%;background:#D4F03C;color:#2F371B;display:grid;place-items:center;transition:transform .3s}
+.work-go svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.work-shot:hover .work-go,.work-shot:focus-visible .work-go{transform:rotate(45deg)}
 .work-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .work-shot:hover img{transform:scale(1.03)}
 .work-body{display:flex;flex-direction:column;flex:1;padding:26px 24px;text-align:left}
@@ -45,13 +48,7 @@
 <main class="detail-main"><section class="detail-hero section-shell"><a class="back-link" href="../../digitalis-munkak/">← Vissza a digitális kategóriákhoz</a><p class="eyebrow">Digitális munkák · Arculat</p><h1>Grafika és arculat</h1><div class="detail-meta"><span>Logó</span><span>Arculat</span><span>Kampányvizuál</span></div></section><section class="detail-copy"><p>Egy márka akkor erős, ha első ránézésre felismerhető. Logókat, színvilágot, tipográfiát és kampányvizuálokat tervezek, amelyek egységes, karakteres képet adnak – a névjegytől a közösségimédia-posztig.</p><a class="button" href="../../digitalis-munkak/">← Vissza a digitális kategóriákhoz</a></section><section class="detail-gallery section-shell" aria-label="Grafika és arculat">
 <div class="work-cards">
 <article class="work-card">
-<a class="work-shot" href="tihna-dental/" aria-label="Tihna Dental logó-bemutató megnyitása"><img src="img/tihna-logo.webp" width="1200" height="750" alt="Tihna Dental logó: vonalas fog lime hullámmal, olíva háttéren" loading="lazy"></a>
-<div class="work-body">
-<p class="work-num">Logó 1</p>
-<h2>Félelem nélküli fogászat</h2>
-<p class="work-desc">Tihna Dental, Kolozsvár. Vonalas fog lélegzet-hullámmal, olíva és neonlime.</p>
-<a class="work-open" href="tihna-dental/"><span>Bemutató megnyitása</span> <span aria-hidden="true">→</span></a>
-</div>
+<a class="work-shot" href="tihna-dental/" aria-label="Tihna Dental logó-bemutató megnyitása"><img src="img/tihna-logo.webp" width="1200" height="750" alt="Tihna Dental logó" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></a>
 </article>
 </div>
 </section></main><footer class="portfolio-footer">
