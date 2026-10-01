@@ -28,6 +28,12 @@ automatikusan kikerülnek az élő oldalra.
 - `public/digitalis-munkak/`, `public/hagyomanyos-munkak/` – kategóriaoldalak
 - `public/art-work/*/index.html` – munkaoldalak (gyöngyszövés, tojásdíszítés,
   nemezelés, közösségi média, UX/UI)
+- `public/art-work/grafika-arculat/` – „Grafika és arculat” kategória: 4 logó-kártya (csak a logó a márka sötét színén + márkaszínű nyíl), mindegyik a saját egyoldalas logó-bemutatójára visz:
+  - `tihna-dental/`, `alinia/`, `dentaltop/`, `livada/` – önálló HTML oldalak (képek data URI-ként benne), `noindex`
+  - kártyaképek: `img/<márka>-logo.webp` (1200×750); a kártyák CSS-e a lap `<head>`-jében van (`.work-card`, `.work-go`)
+  - forrás és generátor: privát `droot-demo-sites` repó, `docs/` mappa (`gen.py` + `tpl.html`, a Tihna kézzel írt: `tihna-logo-bemutato.html`)
+  - a felhasználó NEM kér ide stílusos mockup-borítókat vagy demóra mutató linkeket, csak a fenti logó-kártyákat
+  - kategória-borító (főoldal + `/digitalis-munkak/`): `assets/grafika-mozaik.webp` (1024×1024, a 4 logó elforgatott mozaikja, a webdesign-mozaik párja)
 - `public/weboldalak/` – belső demó-gyűjtőoldal (kártyák: `img/demo-N.webp`, RO/HU/EN linkek); új demónál ide is kell egy kártya
 - `public/demo-site-N/` – demó weboldalak (RO alap, `hu/`, `en/`)
   - `demo-site-1` Alinia (fogszabályozás), `demo-site-2` DentalTop (férfiaknak), `demo-site-3` Tihna Dental (félelem nélkül), `demo-site-4` Livada Dental (családi fogászat, mindoor.framer.website alapján)
