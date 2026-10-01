@@ -394,8 +394,8 @@ input, textarea, select { -webkit-user-select: text; user-select: text; }
 .contact-form { border-radius: var(--radius); box-shadow: none; color: var(--ink); }
 .contact-form .button { width: 100%; justify-content: center; }
 
-/* Footer: parchment, quiet and dense */
-.portfolio-footer { padding: 64px 0 24px; background: var(--parchment); border-top: 0; box-shadow: none; }
+/* Footer: white, quiet and dense */
+.portfolio-footer { padding: 64px 0 24px; background: #fff; border-top: 0; box-shadow: none; }
 .portfolio-footer::before { display: none; }
 .footer-column a { color: rgba(23, 19, 16, .8); }
 .social-link { border-color: rgba(0, 0, 0, .08); }
@@ -433,11 +433,11 @@ input, textarea, select { -webkit-user-select: text; user-select: text; }
   .reveal { opacity: 1; transform: none; }
 }
 
-/* Footer scene: pale-grey pixel artist's table that builds itself block by block (footer-scene.js) */
-.footer-scene { --cell: 4px; --rows: 56; position: relative; height: calc(var(--cell) * var(--rows)); margin-top: 48px; overflow: hidden; pointer-events: none; }
+/* Footer scene: pale-grey pixel mountains + spruce forest that build themselves block by block (footer-scene.js) */
+.footer-scene { --cell: 4px; --rows: 60; position: relative; height: calc(var(--cell) * var(--rows)); margin-top: 48px; overflow: hidden; pointer-events: none; }
 .footer-scene canvas { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); }
 .portfolio-footer:has(.footer-scene) .footer-bottom { margin-top: 0; padding-top: 18px; border-top: 0; }
-@media (min-width: 760px) { .footer-scene { --cell: 5px; --rows: 60; margin-top: 56px; } }
+@media (min-width: 760px) { .footer-scene { --cell: 5px; --rows: 66; margin-top: 56px; } }
 
 /* Social buttons: plain grey tiles; the brand colour appears only on hover / focus, then they lift and tilt */
 .social-links { gap: 10px; }

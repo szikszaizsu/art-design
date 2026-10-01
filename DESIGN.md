@@ -175,8 +175,16 @@ components:
     padding: 80px 24px (56px 20px mobile)
   about:
     backgroundColor: "{colors.parchment} (full-bleed tile)"
-    rows: "number ({typography.number-italic}, accent) | title ({typography.title}) | text column; extra paragraphs stay in the text column"
+    rows: "desktop: number ({typography.number-italic}, accent) | title ({typography.title}) with text below it in the same wide column; portrait is 4:5, not stretched, sticky (top 110px) in a .7fr column"
+  airy-layer:
+    note: "Last block of styles.css. Sections (about/work/services/contact) 150px vertical padding (88px ≤820px), quote band 120px, section-heading margin 96px, body line-height 1.7, wider gaps in about/services/contact/category grids. Keep new sections at least this airy."
+  work-digital:
+    note: "Home 'Válogatott munkák': digital is primary. Kicker + h3 'Digitális munkák' + intro, then .work-cats: 2×2 grid of the 4 digital categories (desktop: square image ~42% left, number + serif h4 + italic tagline beside it, gaps 72/80px; ≤820px: image above text, 2×2). Each .work-cat links straight to the category page (04 → /weboldalak/)."
+    images: "01 assets/illusztracio-valogatas.webp — 3 large paintings (Together tall left, Stone + red-hat profile stacked right), straight grid on parchment, rounded with soft shadow, no room mockups; 04 assets/webdesign-mozaik.webp — tilted mosaic (-14°). illusztracio-mozaik.webp is no longer used."
+  work-traditional:
+    note: "Secondary strip under the digital block: white card, hairline border, desktop padding 56/64px, gap 72px, 140px above it, 240px square image (110px mobile) + kicker, h3 'Hagyományos technikák', text (hidden on mobile), accent link."
   gateway-card:
+    note: "Legacy (no longer used on home)."
     backgroundColor: "{colors.canvas}"
     border: 1px solid {colors.hairline}
     rounded: "{rounded.md}"
@@ -209,10 +217,10 @@ components:
     textColor: "{colors.on-dark}"
     form: "white card, rounded {rounded.md}, no shadow, underline-only inputs, full-width primary button, privacy-notice link below"
   footer:
-    backgroundColor: "{colors.parchment}"
+    backgroundColor: "{colors.canvas}" (white)
     columns: "wordmark + italic tagline | page links | contact + social circles"
     bottom: "copyright · Adatvédelem link · back to top · visit counter"
-    scene: "footer-scene.js canvas above the bottom row on every page — a pixel-block artist's table (easel with folk tulip, written egg, bead loom, UI screen, brushes, books, plants) that builds itself block by block once, when the footer scrolls into view; pale greys + white only; finished scene with prefers-reduced-motion; ?scene=1500 freezes it for screenshots"
+    scene: "footer-scene.js canvas above the bottom row on every page — pale-grey pixel mountains (three ridges, white mist, a wayside cross on the highest dome, sun, clouds) and a dense spruce forest that grows block by block from the middle outwards whenever the footer scrolls into view; pale greys + white only on the white footer; finished scene with prefers-reduced-motion; #scene=1500 freezes it for screenshots"
     social: "rounded 12px tiles (60×56 on mobile), flat grey #ececef with grey icon at rest; on hover / focus they fill with the Facebook / Instagram brand colour, lift 3px and tilt -4° — the one deliberate exception to 'one accent, no gradients or button shadows'"
 ---
 
@@ -221,7 +229,7 @@ components:
 The site is a quiet gallery for one person's work. Structure and rhythm follow Apple's product pages: every section is a centred stack or a full-bleed tile, tiles alternate light and dark so the colour change itself separates sections, buttons are pills, and the only shadow in the system sits under photographs. The brand on top of that chassis is the owner's own: the spaced Cormorant Garamond wordmark `SZIKSZAI ZSU` with its `ART & DESIGN` subline, Cormorant for everything expressive, Inter for everything functional, and one oxblood accent (`{colors.accent}` — #8f1f1f) doing the job Apple gives to blue.
 
 **Key Characteristics:**
-- Page rhythm: white hero → dark quote band → parchment About → white Work → parchment Services → dark Contact → parchment footer.
+- Page rhythm: white hero → dark quote band → parchment About → white Work → parchment Services → dark Contact → white footer.
 - One accent only. Oxblood marks the name, "ZSU", hairlines, links, active states and primary buttons. Never a large background.
 - Display serif (Cormorant Garamond 500/600, often italic); UI/body sans (Inter 400, 17px, line-height 1.47). Small uppercase microcopy is tracked 0.2–0.28em and led by a red hairline, like the wordmark subline.
 - Radius 18px on photos, cards and slots; pills for buttons and toggles.
@@ -231,7 +239,7 @@ The site is a quiet gallery for one person's work. Structure and rhythm follow A
 ## Colors
 - **Accent** `#8f1f1f` / **Accent hover** `#681414` — the single interactive and brand colour.
 - **Ink** `#171310` — headings and primary text. **Body soft** `#3a332e` — card and About paragraphs. **Muted** `#6f655e` — eyebrows, captions, notes.
-- **Canvas** `#ffffff`, **Parchment** `#f5f5f7` (About, footer, slots), **Tile dark** `#1d1a18` (quote band, Contact).
+- **Canvas** `#ffffff`, **Parchment** `#f5f5f7` (About, slots); the footer is white, **Tile dark** `#1d1a18` (quote band, Contact).
 - **Hairline** `rgba(0,0,0,.08)`; dashed slot border `rgba(0,0,0,.14)`.
 
 ## Typography
@@ -260,8 +268,8 @@ See the `components:` block above. Notes:
 - **Digital categories** are four separate pages with four different bodies of work — never reuse an image in two categories:
   01 Digitális illusztráció `/art-work/fragments-of-tomorrow/` (Stone, The Silent, Whispering, Together — 18 captioned images) ·
   02 Koncepció és AI-kísérletek `/art-work/koncepcio-ai/` · 03 Grafika és arculat `/art-work/grafika-arculat/` ·
-  04 Webdesign és digitális felületek `/art-work/digital-horizons/` (02–04: "Hamarosan" slots until material exists).
-- **Favicon**: "SZS" in Cormorant Garamond, off-white on ink black (`assets/favicon.png`, `assets/apple-touch-icon.png`).
+  04 Webdesign és digitális felületek → card links to `/weboldalak/` (website demos; the old `/art-work/digital-horizons/` page still exists but is no longer linked). 03 shows logo cards (Tihna); 02 shows a work card "Fenyves lábléc" (`img/fenyves-lablec.webp`, 1200×750) linking to `/art-work/koncepcio-ai/fenyves-lablec/` — standalone noindex demo page of the footer scene with a replay button; card styles copied from 03 (inline in the page).
+- **Favicon**: "SZ" monogram in Cormorant Garamond 600 on ink black — S off-white, Z burgundy (#c0453f), thin burgundy rule underneath (`assets/favicon.png` 512px, `assets/apple-touch-icon.png` 180px, cache key `?v=sz-logo-1`).
 - **Copy protection** (script.js + CSS): no context menu, no dragging, no text selection, Ctrl/Cmd+S/U/P blocked — form fields excepted. It deters casual saving only; screenshots cannot be prevented.
 
 ## Do's and Don'ts
