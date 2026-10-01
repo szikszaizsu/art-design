@@ -1,7 +1,7 @@
 // Forest tile: a square, endlessly moving pixel landscape in pale greys (the footer's mountains and
-// spruce forest). On first view it builds itself (ridges rise, spruces drop in row by row), then the
-// whole scene glides sideways in parallax layers: far domes slowly, the forest fastest, mist and
-// clouds drifting along. Runs only while the tile is on screen; static finished frame with
+// spruce forest), on a loop: it builds itself (ridges rise, spruces drop in row by row), glides
+// sideways in parallax layers (far domes slowly, the forest fastest, mist and clouds drifting along),
+// then dissolves block by block and builds again a little further along the forest. Runs only while the tile is on screen; static finished frame with
 // prefers-reduced-motion. #scene=N in the URL freezes every tile at N ms (screenshots).
 // Markup: <div class="forest-tile" data-forest-tile aria-hidden="true"><canvas></canvas></div>
 (() => {
@@ -70,6 +70,7 @@
   const easeOutBack = (p) => 1 + 2.70158 * Math.pow(p - 1, 3) + 1.70158 * Math.pow(p - 1, 2);
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
   const GLIDE_AT = 3400, RAMP = 1.8; // ms until the glide starts, seconds to reach full speed
+  const OUT = 10500, CYCLE = 14200;   // ms when the scene starts to dissolve, length of one loop
 
   function makeTile(root) {
     const canvas = root.querySelector("canvas");
@@ -83,16 +84,19 @@
       canvas.width = canvas.height = N * cs;
     }
 
-    function draw(T) {
+    function draw(clockT) {
+      const loop = Math.floor(clockT / CYCLE), T = clockT - loop * CYCLE;
       const u0 = Math.max(0, (T - GLIDE_AT) / 1000);
-      const u = u0 < RAMP ? (u0 * u0) / (2 * RAMP) : u0 - RAMP / 2; // seconds of full-speed travel
+      // seconds of full-speed travel; every loop starts further along the forest
+      const u = (u0 < RAMP ? (u0 * u0) / (2 * RAMP) : u0 - RAMP / 2) + loop * 9;
+      const gone = (from, dur) => clamp01((T - OUT - from) / dur); // 0 → 1 while dissolving
       const Y = (y) => (N - 3 - y) * cs;
       const col = (sx, fr) => { const a = Math.round((sx - fr) * cs); return [a, Math.round((sx + 1 - fr) * cs) - a]; };
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = 1;
 
       // sun
-      const sunA = clamp01((T - 100) / 700);
+      const sunA = clamp01((T - 100) / 700) * (1 - gone(1500, 600));
       if (sunA > 0) {
         ctx.globalAlpha = sunA;
         ctx.fillStyle = G.g1;
@@ -100,7 +104,7 @@
       }
 
       // clouds drifting
-      const cloudA = clamp01((T - 300) / 800);
+      const cloudA = clamp01((T - 300) / 800) * (1 - gone(1300, 700));
       if (cloudA > 0) {
         ctx.globalAlpha = cloudA;
         ctx.fillStyle = G.w0;
@@ -127,7 +131,8 @@
         const o = speed * u, fo = Math.floor(o), fr = o - fo;
         for (let sx = -1; sx <= N; sx++) {
           const wx = sx + fo;
-          const r = easeOut(clamp01((T - delay - Math.abs(sx - N / 2) * 10) / 520));
+          const r = easeOut(clamp01((T - delay - Math.abs(sx - N / 2) * 10) / 520)) *
+            (1 - Math.pow(gone(opts.out + Math.abs(sx - N / 2) * 10, 520), 2));
           if (r <= 0) continue;
           const full = fn(wx) + (opts.spikes ? spikes(wx, opts.spikes, opts.seed) : 0);
           const h = Math.round(full * r);
@@ -136,22 +141,22 @@
           ctx.globalAlpha = 1;
           ctx.fillStyle = color;
           ctx.fillRect(px, Y(h - 1), w, h * cs);
-          if (opts.rim && r === 1) { ctx.fillStyle = opts.rim; ctx.fillRect(px, Y(h - 1), w, cs); }
+          if (opts.rim && r > 0.999) { ctx.fillStyle = opts.rim; ctx.fillRect(px, Y(h - 1), w, cs); }
           // the cross on the high dome
-          if (opts.cross && r === 1 && T > delay + 900) {
+          if (opts.cross && r > 0.999 && T > delay + 900) {
             const m = mod(wx, P), top = fn(wx - (m - PEAK));
             ctx.fillStyle = opts.rim;
-            ctx.globalAlpha = clamp01((T - delay - 900) / 400);
+            ctx.globalAlpha = clamp01((T - delay - 900) / 400) * (1 - gone(0, 300));
             if (m === PEAK) ctx.fillRect(px, Y(top + 4), w, 5 * cs);
             if (m === PEAK - 1 || m === PEAK + 1) ctx.fillRect(px, Y(top + 3), w, cs);
           }
         }
       };
-      ridge(farH, G.g0, 0.5, 0, { rim: G.g2, cross: true });
-      ridge(midH, G.g1, 1.2, 250, { spikes: 0.22, seed: 5 });
+      ridge(farH, G.g0, 0.5, 0, { rim: G.g2, cross: true, out: 1200 });
+      ridge(midH, G.g1, 1.2, 250, { spikes: 0.22, seed: 5, out: 950 });
 
       // mist flowing through the valley
-      const mistA = clamp01((T - 900) / 900);
+      const mistA = clamp01((T - 900) / 900) * (1 - gone(500, 600));
       if (mistA > 0) {
         const o = 4 * u + T / 2500, fo = Math.floor(o), fr = o - fo;
         ctx.globalAlpha = mistA;
@@ -163,9 +168,9 @@
           ctx.fillRect(px, Y(9 + thick), w, thick * cs);
         }
       }
-      ridge(nearH, "#e6e6ea", 2, 500, { spikes: 0.45, seed: 9 });
+      ridge(nearH, "#e6e6ea", 2, 500, { spikes: 0.45, seed: 9, out: 700 });
 
-      // spruces: ghost outline first, then each block drops in; afterwards they glide
+      // spruces: ghost outline first, then each block drops in; they glide, then lift away from the top
       for (const L of LAYERS) {
         const o = L.speed * u;
         const k0 = Math.floor((o - 12) / L.slot) - 1, k1 = Math.ceil((o + N + 12) / L.slot);
@@ -186,15 +191,17 @@
               }
               continue;
             }
-            ctx.globalAlpha = p < 1 ? Math.min(1, p * 2.5) : 1;
+            const q = clamp01((T - OUT - (30 - y) * 14 - Math.abs(t.x - o - N / 2) * 6 - (jit || 0) * 0.5) / 300);
+            if (q >= 1) continue;
+            ctx.globalAlpha = (p < 1 ? Math.min(1, p * 2.5) : 1) * (1 - q);
             ctx.fillStyle = c;
-            ctx.fillRect(px, Y(y) - (p < 1 ? (1 - easeOutBack(p)) * cs * 4 : 0), cs, cs);
+            ctx.fillRect(px, Y(y) - (p < 1 ? (1 - easeOutBack(p)) * cs * 4 : 0) - q * cs * 3, cs, cs);
           }
         }
       }
 
       // ground
-      ctx.globalAlpha = clamp01(T / 400);
+      ctx.globalAlpha = clamp01(T / 400) * (1 - gone(1800, 500));
       ctx.fillStyle = G.g3;
       ctx.fillRect(0, Y(-1), canvas.width, 2 * cs);
       ctx.globalAlpha = 1;
