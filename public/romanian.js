@@ -1,4 +1,5 @@
 window.portfolioRomanian = {
+  'Logo 1': 'Logo 1', 'Fear-free dentistry': 'Stomatologie fără teamă', 'Tihna Dental, Cluj-Napoca. A line-drawn tooth with a breathing wave, olive and neon lime.': 'Tihna Dental, Cluj-Napoca. Un dinte desenat dintr-o singură linie, cu un val de respirație, oliv și lime neon.', 'Open presentation': 'Deschide prezentarea',
   'About me': 'Despre mine', 'My work': 'Lucrările mele', 'Contact details': 'Date de contact', 'Menu': 'Meniu',
   'Visual artist · UX/UI designer': 'Artist vizual · Designer UX/UI',
   'An artistic eye. AI expertise. One vision.': 'Privire artistică. Competențe în IA. O singură viziune.',
