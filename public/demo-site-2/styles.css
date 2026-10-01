@@ -44,11 +44,11 @@ h1 em:hover,h2 em:hover{transform:translateY(-4px) rotate(-3deg)}
 .nav{position:sticky;top:0;z-index:50;background:rgba(241,244,242,.78);-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);transition:box-shadow .3s}
 .nav.scrolled{box-shadow:0 1px 0 var(--line)}
 .nav-in{display:flex;align-items:center;gap:24px;height:86px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;line-height:1;text-transform:uppercase;letter-spacing:-.02em}
 .brand .mk{width:34px;height:34px;border-radius:50%;background:var(--blue);display:grid;place-items:center;flex:none}
 .brand .mk svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
-.brand .bt{color:var(--blue);font-weight:700}
-.brand small{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--muted);margin-top:1px}
+.brand .bt{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.25em;text-transform:none;letter-spacing:0;color:var(--blue)}
+.brand small{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--muted);margin-top:4px;line-height:1.2}
 .menu{display:flex;gap:30px;margin-inline:auto;font-size:15.5px}
 .menu a{position:relative;color:#343C4D}
 .menu a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1.5px;background:var(--blue);transition:right .3s}
