@@ -1,7 +1,8 @@
 // Forest tile: a square, endlessly moving pixel landscape in pale greys (the footer's mountains and
 // spruce forest), on a loop: it builds itself (ridges rise, spruces drop in row by row), glides
 // sideways in parallax layers (far domes slowly, the forest fastest, mist and clouds drifting along),
-// then dissolves block by block and builds again a little further along the forest. Runs only while the tile is on screen; static finished frame with
+// then dissolves block by block and builds again a little further along the forest. Hovering the
+// card starts the build over. Runs only while the tile is on screen; static finished frame with
 // prefers-reduced-motion. #scene=N in the URL freezes every tile at N ms (screenshots).
 // Markup: <div class="forest-tile" data-forest-tile aria-hidden="true"><canvas></canvas></div>
 (() => {
@@ -229,6 +230,12 @@
         if (visible) { started = true; resume(); }
         else { cancelAnimationFrame(raf); raf = 0; }
       }, { threshold: 0.15 }).observe(root);
+      // hovering the card (or the tile itself) starts the build over, on the next stretch of forest
+      (root.closest("a") || root).addEventListener("mouseenter", () => {
+        if (clock % CYCLE < 600) return; // it has only just started
+        clock = (Math.floor(clock / CYCLE) + 1) * CYCLE;
+        if (visible) resume();
+      });
     }
     new ResizeObserver(() => {
       size(); // resizing clears the canvas, so always paint again
