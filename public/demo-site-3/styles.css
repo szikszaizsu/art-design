@@ -33,7 +33,9 @@ section{padding:110px 0}
 .nav{position:absolute;top:22px;left:26px;right:26px;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 10px 10px 22px;border-radius:99px;background:rgba(255,255,255,.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2)}
 .brand{display:flex;align-items:center;gap:8px;font:700 20px/1 var(--serif);margin-right:auto}
 .brand small{font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-left:2px;align-self:flex-end;padding-bottom:2px}
-.brand .mk svg{width:24px;height:24px;fill:currentColor;stroke:none}
+.brand .mk svg{width:30px;height:30px;display:block;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.brand .mk .th{stroke:currentColor;stroke-width:2.6}
+.brand .mk .wv{stroke:var(--lime);stroke-width:3}
 .menu{display:flex;gap:4px;background:#fff;border-radius:99px;padding:5px}
 .menu a{color:var(--ink);font:500 13.5px/1 var(--sans);letter-spacing:-.005em;padding:10px 14px;border-radius:99px}
 .menu a:hover{background:var(--panel)}
