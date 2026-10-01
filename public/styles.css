@@ -532,7 +532,7 @@ body { line-height: 1.7; }
 @media (min-width: 821px) {
   .work-cats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px 80px; }
   .work-cat { display: grid; grid-template-columns: minmax(180px, 42%) 1fr; column-gap: 36px; align-items: center; }
-  .work-cat img, .work-cat .gallery-slot { grid-row: 1 / span 3; }
+  .work-cat img, .work-cat .gallery-slot, .work-cat .forest-tile { grid-row: 1 / span 3; }
   .work-cat > span { margin-top: 0; align-self: end; }
   .work-cat h4 { margin-top: 10px; font-size: clamp(1.8rem, 2.4vw, 2.4rem); }
   .work-cat p { align-self: start; margin-top: 10px; }
@@ -552,3 +552,9 @@ body { line-height: 1.7; }
   .work-traditional h3 { margin-top: 14px; }
   .work-traditional p { margin: 18px 0 26px; }
 }
+
+/* Forest tile: animated pixel mountains + spruce forest in a square image slot (forest-tile.js) */
+.forest-tile { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--radius); background: #fff; border: 1px solid rgba(23,19,16,.08); transition: transform .45s ease; }
+.forest-tile canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+.category-card > .forest-tile { padding: 0; }
+.work-cat:hover .forest-tile, .category-card:hover .forest-tile { transform: scale(.985); }
