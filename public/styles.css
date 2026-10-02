@@ -590,11 +590,14 @@ body { line-height: 1.7; }
 :root[data-theme="dark"] .about-copy p, :root[data-theme="dark"] .gateway-content p, :root[data-theme="dark"] .category-card p,
 :root[data-theme="dark"] .service-card p, :root[data-theme="dark"] .work-digital-head p, :root[data-theme="dark"] .work-traditional p { color: #cfc6be; }
 :root[data-theme="dark"] .gateway-card, :root[data-theme="dark"] .service-card, :root[data-theme="dark"] .work-traditional,
-:root[data-theme="dark"] .forest-tile, :root[data-theme="dark"] .language-options { background: var(--surface); border-color: rgba(255, 255, 255, .08); }
+:root[data-theme="dark"] .language-options { background: var(--surface); border-color: rgba(255, 255, 255, .08); }
 :root[data-theme="dark"] .about-copy article, :root[data-theme="dark"] .about-copy article:last-child { border-color: rgba(255, 255, 255, .1); }
 :root[data-theme="dark"] .gallery-slot { border-color: rgba(255, 255, 255, .16); }
 :root[data-theme="dark"] .social-link { background: #2a2522; color: #a99f96 !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
 :root[data-theme="dark"] .contact-form { background: #1f1b19; }
 :root[data-theme="dark"] .contact-form input, :root[data-theme="dark"] .contact-form select, :root[data-theme="dark"] .contact-form textarea { color: var(--ink); }
-:root[data-theme="dark"] .footer-scene canvas, :root[data-theme="dark"] .forest-tile canvas { filter: invert(.9) hue-rotate(180deg); }
+:root[data-theme="dark"] .footer-scene canvas { filter: invert(.9) hue-rotate(180deg); }
 :root[data-theme="dark"] .portfolio-footer::before { color: rgba(210, 76, 69, .06); }
+
+/* Forest tile stays white in dark theme (animation reads best on white) */
+:root[data-theme="dark"] .forest-tile { background: #fff; border-color: transparent; }
