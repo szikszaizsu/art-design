@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noimageindex, noarchive">
-  <title>Tervező · Szikszai Zsu</title>
+  <title>Tervező</title>
   <link rel="icon" href="/assets/favicon.png?v=sz-logo-1">
   <style>
     @font-face { font-family: "Inter"; src: url("/assets/inter-variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
@@ -12,213 +12,529 @@
     @font-face { font-family: "Cormorant Garamond"; src: url("/assets/cormorant-garamond-latin-ext.woff2") format("woff2"); font-weight: 300 700; font-display: swap; unicode-range: U+0100-024F, U+1E00-1EFF; }
 
     :root {
-      --bg: #141414;
-      --side: #181818;
-      --card: #1e1e1e;
-      --card-hover: #252525;
-      --line: rgba(255, 255, 255, .07);
-      --text: #f2efe9;
-      --soft: rgba(242, 239, 233, .55);
-      --muted: rgba(242, 239, 233, .38);
-      --accent: #c8f04a;
+      --bg: #ffffff;
+      --dot: #c9cdd4;
+      --panel: rgba(255, 255, 255, .92);
+      --card: #ffffff;
+      --card-hover: #f7f8fa;
+      --field: #ffffff;
+      --line: rgba(17, 20, 26, .1);
+      --line-strong: rgba(17, 20, 26, .2);
+      --text: #171a20;
+      --soft: rgba(23, 26, 32, .62);
+      --muted: rgba(23, 26, 32, .42);
+      --accent: #8fb3e8;
+      --accent-strong: #3d6fb8;
+      --accent-ink: #0f1726;
+      --danger: #c24848;
+      --shadow: 0 1px 2px rgba(17, 20, 26, .04), 0 6px 18px rgba(17, 20, 26, .05);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { min-height: 100%; }
     body {
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
+      background-size: 22px 22px;
+      background-attachment: fixed;
       color: var(--text);
       font: 400 15px/1.5 Inter, -apple-system, "Segoe UI", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    [hidden] { display: none !important; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+    input, select, textarea {
+      width: 100%; padding: 10px 14px; border-radius: 10px;
+      background: var(--field); border: 1px solid var(--line-strong);
+      color: var(--text); font: inherit; outline: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; transition: filter .2s, background .2s; }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-ghost { border: 1px solid var(--line-strong); color: var(--soft); background: #fff; }
+    .btn-ghost:hover { color: var(--text); background: #f3f4f6; }
+    .btn-danger { color: var(--danger); border: 1px solid rgba(194, 72, 72, .3); background: #fff; }
+    .btn:disabled { opacity: .5; cursor: default; }
+
+    /* Login */
+    .gate { min-height: 100vh; display: grid; place-items: center; padding: 16px; }
+    .gate form { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 32px 24px; display: grid; gap: 14px; box-shadow: 0 20px 50px rgba(17, 20, 26, .08); }
+    .gate h1 { font: 500 34px/1 "Cormorant Garamond", Georgia, serif; }
+    .gate p { color: var(--soft); font-size: 14px; }
+    .gate .btn { padding: 12px; font-size: 16px; }
+    .error, .gate .error { color: var(--danger); font-size: 13px; }
+    .error:empty { display: none; }
+
+    /* App */
     .layout { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 100vh; }
     .layout > * { min-width: 0; }
     @media (min-width: 860px) { .layout { grid-template-columns: 260px minmax(0, 1fr); } }
 
-    /* Sidebar */
-    aside {
-      background: var(--side);
-      border-bottom: 1px solid var(--line);
-      padding: 20px 16px 12px;
-    }
-    @media (min-width: 860px) {
-      aside { position: sticky; top: 0; height: 100vh; border-bottom: 0; border-right: 1px solid var(--line); padding: 28px 18px; }
-    }
+    aside { background: var(--panel); border-bottom: 1px solid var(--line); padding: 20px 16px 12px; }
+    @media (min-width: 860px) { aside { position: sticky; top: 0; height: 100vh; border-bottom: 0; border-right: 1px solid var(--line); padding: 28px 18px; display: flex; flex-direction: column; } }
     .profile { display: flex; align-items: center; gap: 12px; }
-    .profile img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; background: #2a2a2a; }
-    .profile b { display: block; font-weight: 600; font-size: 15px; letter-spacing: .01em; }
+    .profile img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; background: #eef0f3; }
+    .profile b { display: block; font-weight: 600; font-size: 15px; }
     .profile span { display: block; font-size: 13px; color: var(--soft); }
 
     .label { margin: 30px 10px 10px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
     nav ul { list-style: none; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
     nav ul::-webkit-scrollbar { display: none; }
     @media (min-width: 860px) { nav ul { flex-direction: column; gap: 2px; margin: 0; padding: 0; overflow: visible; } }
-    nav a {
-      display: flex; align-items: center; gap: 10px; white-space: nowrap;
-      padding: 9px 12px; border-radius: 10px;
-      font-size: 14px; color: var(--soft);
-      transition: background .2s, color .2s;
-    }
-    nav a:hover { color: var(--text); background: rgba(255, 255, 255, .04); }
-    nav a[aria-current="page"] { color: var(--text); background: rgba(255, 255, 255, .07); }
-    nav svg { width: 16px; height: 16px; flex: none; opacity: .8; }
+    nav a { display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 9px 12px; border-radius: 10px; font-size: 14px; color: var(--soft); transition: background .2s, color .2s; }
+    nav a:hover { color: var(--text); background: rgba(17, 20, 26, .04); }
+    nav a[aria-current="page"] { color: var(--text); background: rgba(143, 179, 232, .2); }
+    nav svg { width: 16px; height: 16px; flex: none; opacity: .85; }
     nav .count { margin-left: auto; font-size: 12px; color: var(--muted); }
     @media (max-width: 859px) { nav .count { display: none; } }
+    .add-cat { margin-top: 8px; width: 100%; justify-content: flex-start; padding: 9px 12px; font-weight: 500; }
+    @media (max-width: 859px) { .add-cat { width: auto; } }
 
-    .home { display: none; }
-    @media (min-width: 860px) {
-      .home { display: block; position: absolute; bottom: 24px; left: 28px; font: 600 13px/1 "Cormorant Garamond", Georgia, serif; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
-      .home:hover { color: var(--text); }
-    }
+    .side-foot { display: none; }
+    @media (min-width: 860px) { .side-foot { display: grid; gap: 8px; margin-top: auto; } }
 
-    /* Main */
-    main { padding: 28px 16px 80px; }
+    main { padding: 24px 16px 80px; }
     @media (min-width: 860px) { main { padding: 48px 48px 96px; } }
-    .inner { max-width: 760px; margin: 0 auto; }
+    .inner { max-width: 780px; margin: 0 auto; }
 
-    .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
-    h1 { font: 500 clamp(36px, 5vw, 52px)/1 "Cormorant Garamond", Georgia, serif; }
-    .search {
-      width: 100%; max-width: 260px; min-width: 0;
-      padding: 10px 14px; border-radius: 10px;
-      background: var(--card); border: 1px solid var(--line);
-      color: var(--text); font: inherit; font-size: 14px; outline: none;
-    }
-    .search::placeholder { color: var(--muted); }
-    .search:focus { border-color: rgba(200, 240, 74, .5); }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-bottom: 20px; }
+    .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    h1.title { font: 500 clamp(36px, 5vw, 52px)/1 "Cormorant Garamond", Georgia, serif; }
+    .search { max-width: 260px; min-width: 0; }
+    .cat-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 
     .list { display: grid; gap: 10px; }
-    .item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 16px 18px; border-radius: 14px;
-      background: var(--card); border: 1px solid var(--line);
-      transition: background .2s, transform .2s;
-    }
-    .item:hover { background: var(--card-hover); transform: translateY(-1px); }
-    .ico {
-      width: 40px; height: 40px; flex: none; border-radius: 10px;
-      display: grid; place-items: center; overflow: hidden;
-      background: #fff; color: #141414; font-weight: 700; font-size: 16px;
-    }
+    .item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); transition: background .2s, transform .2s; }
+    a.item:hover { background: var(--card-hover); transform: translateY(-1px); }
+    .ico { width: 40px; height: 40px; flex: none; border-radius: 10px; display: grid; place-items: center; overflow: hidden; background: #fff; border: 1px solid var(--line); color: #141414; font-weight: 700; font-size: 16px; }
     .ico img { width: 26px; height: 26px; object-fit: contain; }
     .txt { min-width: 0; flex: 1; }
     .txt b { display: block; font-weight: 600; font-size: 15px; }
     .txt span { display: block; font-size: 13px; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .txt small { display: block; font-size: 12px; color: var(--muted); }
     .arrow { width: 18px; height: 18px; flex: none; color: var(--muted); transition: color .2s, transform .2s; }
-    .item:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
-
+    a.item:hover .arrow { color: var(--accent-strong); transform: translate(2px, -2px); }
+    .acts { display: flex; gap: 4px; flex: none; }
+    .acts button { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; color: var(--soft); }
+    .acts button:hover { background: rgba(17, 20, 26, .06); color: var(--text); }
+    .acts button.del:hover { color: var(--danger); }
+    .acts svg { width: 16px; height: 16px; }
+    @media (max-width: 520px) { .item { flex-wrap: wrap; } .acts { width: 100%; justify-content: flex-end; } }
     .empty { padding: 40px 0; color: var(--muted); text-align: center; }
+
+    /* Dialog */
+    dialog { margin: auto; width: calc(100% - 32px); max-width: 460px; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 18px; padding: 0; box-shadow: 0 24px 60px rgba(17, 20, 26, .18); }
+    dialog::backdrop { background: rgba(17, 20, 26, .35); }
+    dialog form { display: grid; gap: 12px; padding: 24px; }
+    dialog h2 { font: 500 28px/1.1 "Cormorant Garamond", Georgia, serif; margin-bottom: 4px; }
+    dialog label { display: grid; gap: 6px; font-size: 13px; color: var(--soft); }
+    .row { display: flex; gap: 8px; }
+    .row > input { flex: 1; min-width: 0; }
+    .dlg-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+    .icon-title { font-size: 13px; color: var(--soft); margin-bottom: 6px; }
+    .icon-pick { display: flex; flex-wrap: wrap; gap: 6px; }
+    .icon-pick label { display: block; position: relative; }
+    .icon-pick input { position: absolute; opacity: 0; width: 1px; }
+    .icon-pick span { width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; border: 1px solid var(--line-strong); color: var(--soft); cursor: pointer; }
+    .icon-pick input:checked + span { border-color: var(--accent-strong); color: var(--accent-strong); background: rgba(143, 179, 232, .15); }
+    .icon-pick svg { width: 18px; height: 18px; }
+
+    .toast { position: fixed; z-index: 10; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); }
+    .toast.bad { background: var(--danger); color: #fff; }
   </style>
 </head>
 <body>
-  <div class="layout">
+  <!-- Belépés -->
+  <div class="gate" id="gate" hidden>
+    <form id="login-form">
+      <h1>Tervező</h1>
+      <p>Add meg a jelszavad.</p>
+      <label class="sr" for="pw">Jelszó</label>
+      <input id="pw" type="password" placeholder="Jelszó" autocomplete="current-password" autocapitalize="none" spellcheck="false" required>
+      <button class="btn btn-primary" type="submit">Belépés</button>
+      <p class="error" id="login-error" role="alert"></p>
+    </form>
+  </div>
+
+  <!-- Linkek -->
+  <div class="layout" id="app" hidden>
     <aside>
-      <a class="profile" href="/tervezo/">
+      <div class="profile">
         <img src="/assets/portrait-headshot.webp" alt="">
         <div><b>Szikszai Zsu</b><span>Tervező</span></div>
-      </a>
+      </div>
       <p class="label">Források</p>
       <nav><ul id="nav"></ul></nav>
-      <a class="home" href="/">szikszaizsu.com</a>
+      <button class="btn btn-ghost add-cat edit-only" id="add-cat" type="button" hidden>+ Új kategória</button>
+      <div class="side-foot"><a class="btn btn-ghost" href="/">szikszaizsu.com</a></div>
     </aside>
 
     <main>
       <div class="inner">
+        <div class="toolbar">
+          <button class="btn btn-primary edit-only" id="add-link" type="button" hidden>+ Új link</button>
+          <button class="btn btn-ghost" id="toggle-edit" type="button">Szerkesztés</button>
+          <button class="btn btn-ghost" id="logout" type="button">Kilépés</button>
+        </div>
         <div class="head">
-          <h1 id="title">Hasznos linkek</h1>
+          <h1 class="title" id="title"></h1>
           <input class="search" id="search" type="search" placeholder="Keresés…" aria-label="Keresés a linkek között">
+        </div>
+        <div class="cat-tools" id="cat-tools" hidden>
+          <button class="btn btn-ghost" id="cat-edit" type="button">Átnevezés / ikon</button>
+          <button class="btn btn-ghost" id="cat-up" type="button">↑ Feljebb</button>
+          <button class="btn btn-ghost" id="cat-down" type="button">↓ Lejjebb</button>
+          <button class="btn btn-danger" id="cat-del" type="button">Kategória törlése</button>
         </div>
         <div class="list" id="list"></div>
       </div>
     </main>
   </div>
 
+  <!-- Link szerkesztése -->
+  <dialog id="link-dlg">
+    <form method="dialog" id="link-form">
+      <h2 id="link-dlg-title">Új link</h2>
+      <label>Link (URL)
+        <div class="row">
+          <input id="f-url" type="text" inputmode="url" placeholder="https://…" required>
+          <button class="btn btn-ghost" id="f-fill" type="button">Kitöltés</button>
+        </div>
+      </label>
+      <label>Név <input id="f-name" type="text" maxlength="80" required></label>
+      <label>Rövid leírás <input id="f-desc" type="text" maxlength="160"></label>
+      <label>Kategória <select id="f-cat"></select></label>
+      <p class="error" id="link-error" role="alert"></p>
+      <div class="dlg-actions">
+        <button class="btn btn-ghost" value="cancel" formnovalidate type="submit">Mégse</button>
+        <button class="btn btn-primary" value="save" type="submit">Mentés</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Kategória szerkesztése -->
+  <dialog id="cat-dlg">
+    <form method="dialog" id="cat-form">
+      <h2 id="cat-dlg-title">Új kategória</h2>
+      <label>Név <input id="c-name" type="text" maxlength="60" required></label>
+      <div><p class="icon-title">Ikon</p><div class="icon-pick" id="c-icons"></div></div>
+      <div class="dlg-actions">
+        <button class="btn btn-ghost" value="cancel" formnovalidate type="submit">Mégse</button>
+        <button class="btn btn-primary" value="save" type="submit">Mentés</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="/tervezo/icons.js"></script>
   <script>
-    // Ide kerülnek a linkek. Új link: { name, desc, url } a megfelelő kategóriába.
-    const CATEGORIES = [
-      { id: "hasznos-linkek", name: "Hasznos linkek", icon: "link", links: [
-        { name: "Fontshare", desc: "Ingyenes, nagyon jó minőségű betűk", url: "https://www.fontshare.com/" },
-        { name: "Free Faces", desc: "Szép, ingyenes betűtípusok gyűjteménye", url: "https://www.freefaces.gallery/" },
-        { name: "Radix Colors", desc: "Weboldal színpaletta tesztelő", url: "https://www.radix-ui.com/colors/custom" },
-        { name: "Envato Elements", desc: "Alapanyag mindenhez", url: "https://elements.envato.com/" },
-        { name: "Coolors", desc: "Színpaletta generátor", url: "https://coolors.co/" },
-        { name: "Squoosh", desc: "Képtömörítés a böngészőben", url: "https://squoosh.app/" }
-      ]},
-      { id: "grafika", name: "Grafika és ikonok", icon: "pen", links: [
-        { name: "Minimal Mockups", desc: "Sok jó, ingyenes mockup", url: "https://www.minimalmockups.com/" },
-        { name: "Tabler Icons", desc: "5600+ vektor ikon", url: "https://tabler.io/icons" },
-        { name: "Phosphor Icons", desc: "Minőségi vektor ikonok", url: "https://phosphoricons.com/" },
-        { name: "Lordicon", desc: "Animált ikonkészlet", url: "https://lordicon.com/" },
-        { name: "Google Fonts Icons", desc: "Material Symbols ikonok", url: "https://fonts.google.com/icons" }
-      ]},
-      { id: "ai", name: "AI", icon: "spark", links: [
-        { name: "Magnific", desc: "Képnagyítás, nagy felbontás", url: "https://magnific.ai/" },
-        { name: "ElevenLabs", desc: "Narráció, hang", url: "https://elevenlabs.io/" },
-        { name: "Claude", desc: "Szöveg, kód, ötletelés", url: "https://claude.ai/" }
-      ]},
-      { id: "promptok", name: "Promptok", icon: "note", links: [] }
-    ];
-
-    const ICONS = {
-      link: '<path d="M9 15l6-6M10.5 6.5l1.8-1.8a4 4 0 0 1 5.7 5.7l-1.8 1.8M13.5 17.5l-1.8 1.8a4 4 0 0 1-5.7-5.7l1.8-1.8"/>',
-      pen: '<path d="M4 20l4-1 11-11-3-3L5 16l-1 4zM14 6l3 3"/>',
-      spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16z"/>',
-      note: '<path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/>'
+    const ICONS = window.TERVEZO_ICONS;
+    const API = "/tervezo/api/";
+    const KEY = "tervezo-jelszo";
+    const $ = (id) => document.getElementById(id);
+    const svg = (p, cls = "") => `<svg${cls ? ` class="${cls}"` : ""} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+    const iconSvg = (name) => svg((ICONS[name] || ICONS.link).path);
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const slug = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "kategoria";
+    const ACT = {
+      edit: '<path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/>',
+      up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+      down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+      del: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>'
     };
-    const svg = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
-    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-    const navEl = document.getElementById("nav");
-    const listEl = document.getElementById("list");
-    const titleEl = document.getElementById("title");
-    const searchEl = document.getElementById("search");
+    let data = { categories: [] };
+    let editing = false;
+    let editRef = null; // { cat, index } of the link being edited; null for a new link
+    let catEditId = null;
 
-    navEl.innerHTML = CATEGORIES.map((c) =>
-      `<li><a href="#${c.id}" data-id="${c.id}">${svg(ICONS[c.icon])}${esc(c.name)}<span class="count">${c.links.length}</span></a></li>`
-    ).join("");
+    function storedPw() { try { return localStorage.getItem(KEY) || ""; } catch { return ""; } }
+    function storePw(pw) { try { pw ? localStorage.setItem(KEY, pw) : localStorage.removeItem(KEY); } catch {} }
 
+    async function api(route, options = {}) {
+      const res = await fetch(API + route, {
+        ...options,
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + storedPw() },
+        cache: "no-store"
+      });
+      if (res.status === 401) { storePw(""); showGate("Hibás jelszó."); throw new Error("401"); }
+      if (!res.ok) {
+        let msg = "Hiba történt (" + res.status + ").";
+        try { msg = (await res.json()).error || msg; } catch {}
+        throw new Error(msg);
+      }
+      return res.status === 204 ? null : res.json();
+    }
+
+    function toast(msg, bad = false) {
+      const t = $("toast");
+      t.textContent = msg; t.classList.toggle("bad", bad); t.hidden = false;
+      clearTimeout(toast.timer); toast.timer = setTimeout(() => { t.hidden = true; }, 2600);
+    }
+
+    // ---------- Belépés ----------
+    function showGate(error = "") {
+      document.querySelectorAll("dialog[open]").forEach((d) => d.close());
+      $("app").hidden = true; $("gate").hidden = false;
+      $("login-error").textContent = error;
+      $("pw").value = ""; $("pw").focus();
+    }
+
+    $("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      storePw($("pw").value);
+      $("login-error").textContent = "";
+      try { await openApp(); } catch (err) { if (err.message !== "401") $("login-error").textContent = err.message; }
+    });
+
+    async function openApp() {
+      data = await api("links");
+      $("gate").hidden = true; $("app").hidden = false;
+      renderAll();
+    }
+
+    $("logout").addEventListener("click", () => { storePw(""); setEditing(false); showGate(); });
+
+    // ---------- Megjelenítés ----------
     function current() {
       const id = location.hash.slice(1);
-      return CATEGORIES.find((c) => c.id === id) || CATEGORIES[0];
+      return data.categories.find((c) => c.id === id) || data.categories[0];
+    }
+
+    function renderNav() {
+      $("nav").innerHTML = data.categories.map((c) =>
+        `<li><a href="#${esc(c.id)}" data-id="${esc(c.id)}">${iconSvg(c.icon)}${esc(c.name)}<span class="count">${c.links.length}</span></a></li>`
+      ).join("");
     }
 
     function render() {
       const cat = current();
-      const q = searchEl.value.trim().toLowerCase();
-      // Kereséskor minden kategóriában keres, nem csak az aktuálisban.
-      const links = q
-        ? CATEGORIES.flatMap((c) => c.links).filter((l) => (l.name + " " + l.desc + " " + l.url).toLowerCase().includes(q))
-        : cat.links;
+      const q = $("search").value.trim().toLowerCase();
+      const rows = q
+        ? data.categories.flatMap((c) => c.links.map((l, i) => ({ l, c, i })))
+            .filter(({ l }) => (l.name + " " + l.desc + " " + l.url).toLowerCase().includes(q))
+        : cat ? cat.links.map((l, i) => ({ l, c: cat, i })) : [];
 
-      titleEl.textContent = q ? "Keresés" : cat.name;
-      document.title = (q ? "Keresés" : cat.name) + " · Tervező · Szikszai Zsu";
-      navEl.querySelectorAll("a").forEach((a) => {
-        if (!q && a.dataset.id === cat.id) a.setAttribute("aria-current", "page");
+      $("title").textContent = q ? "Keresés" : cat ? cat.name : "Tervező";
+      document.title = $("title").textContent + " · Tervező";
+      $("nav").querySelectorAll("a").forEach((a) => {
+        if (!q && cat && a.dataset.id === cat.id) a.setAttribute("aria-current", "page");
         else a.removeAttribute("aria-current");
       });
+      $("cat-tools").hidden = !editing || !!q || !cat;
 
-      if (!links.length) {
-        listEl.innerHTML = `<p class="empty">${q ? "Nincs találat." : "Ide hamarosan kerülnek linkek."}</p>`;
+      if (!rows.length) {
+        $("list").innerHTML = `<p class="empty">${q ? "Nincs találat." : editing ? "Még nincs link ebben a kategóriában. Adj hozzá egyet az „+ Új link” gombbal." : "Ebben a kategóriában még nincs link."}</p>`;
         return;
       }
-      listEl.innerHTML = links.map((l) => {
-        const host = new URL(l.url).hostname;
-        return `<a class="item" href="${esc(l.url)}" target="_blank" rel="noopener">
-          <span class="ico" data-letter="${esc(l.name[0])}"><img src="https://www.google.com/s2/favicons?domain=${host}&sz=64" alt="" loading="lazy"></span>
-          <span class="txt"><b>${esc(l.name)}</b><span>${esc(l.desc)}</span></span>
-          ${svg('<path d="M7 17L17 7M8 7h9v9"/>').replace("<svg", '<svg class="arrow"')}
-        </a>`;
+      $("list").innerHTML = rows.map(({ l, c, i }) => {
+        let host = "";
+        try { host = new URL(l.url).hostname; } catch {}
+        const ico = `<span class="ico" data-letter="${esc((l.name || "?")[0])}"><img src="https://www.google.com/s2/favicons?domain=${esc(host)}&sz=64" alt="" loading="lazy"></span>`;
+        const txt = `<span class="txt"><b>${esc(l.name)}</b><span>${esc(l.desc || host)}</span>${q ? `<small>${esc(c.name)}</small>` : ""}</span>`;
+        if (!editing) {
+          return `<a class="item" href="${esc(l.url)}" target="_blank" rel="noopener">${ico}${txt}${svg('<path d="M7 17L17 7M8 7h9v9"/>', "arrow")}</a>`;
+        }
+        const ref = `data-cat="${esc(c.id)}" data-i="${i}"`;
+        return `<div class="item">${ico}${txt}<span class="acts">
+          <button type="button" ${ref} data-act="edit" aria-label="Szerkesztés">${svg(ACT.edit)}</button>
+          <button type="button" ${ref} data-act="up" aria-label="Feljebb">${svg(ACT.up)}</button>
+          <button type="button" ${ref} data-act="down" aria-label="Lejjebb">${svg(ACT.down)}</button>
+          <button type="button" class="del" ${ref} data-act="del" aria-label="Törlés">${svg(ACT.del)}</button>
+        </span></div>`;
       }).join("");
-      listEl.querySelectorAll(".ico img").forEach((img) => {
+      $("list").querySelectorAll(".ico img").forEach((img) => {
         img.addEventListener("error", () => { img.parentElement.textContent = img.parentElement.dataset.letter; });
       });
     }
 
-    window.addEventListener("hashchange", () => { searchEl.value = ""; render(); });
-    searchEl.addEventListener("input", render);
-    render();
+    function renderAll() { renderNav(); render(); }
+
+    window.addEventListener("hashchange", () => { $("search").value = ""; render(); });
+    $("search").addEventListener("input", render);
+
+    // ---------- Szerkesztés ----------
+    function setEditing(on) {
+      editing = on;
+      $("toggle-edit").textContent = on ? "Kész" : "Szerkesztés";
+      document.querySelectorAll(".edit-only").forEach((el) => { el.hidden = !on; });
+      render();
+    }
+    $("toggle-edit").addEventListener("click", () => setEditing(!editing));
+
+    async function save(message) {
+      const backup = JSON.stringify(data);
+      try {
+        data = await api("links", { method: "PUT", body: JSON.stringify(data) });
+        renderAll();
+        toast(message || "Elmentve");
+        return true;
+      } catch (err) {
+        data = JSON.parse(backup);
+        if (err.message !== "401") toast(err.message, true);
+        return false;
+      }
+    }
+
+    const findCat = (id) => data.categories.find((c) => c.id === id);
+
+    $("list").addEventListener("click", async (e) => {
+      const b = e.target.closest("button[data-act]");
+      if (!b) return;
+      const cat = findCat(b.dataset.cat);
+      const i = Number(b.dataset.i);
+      if (b.dataset.act === "edit") return openLinkDialog(cat, i);
+      if (b.dataset.act === "del") {
+        if (!confirm(`Törlöd ezt a linket: ${cat.links[i].name}?`)) return;
+        const removed = cat.links.splice(i, 1);
+        if (!(await save("Törölve"))) cat.links.splice(i, 0, ...removed);
+        return;
+      }
+      const j = b.dataset.act === "up" ? i - 1 : i + 1;
+      if (j < 0 || j >= cat.links.length) return;
+      [cat.links[i], cat.links[j]] = [cat.links[j], cat.links[i]];
+      save("Sorrend elmentve");
+    });
+
+    function fillCatSelect(selected) {
+      $("f-cat").innerHTML = data.categories.map((c) => `<option value="${esc(c.id)}"${c.id === selected ? " selected" : ""}>${esc(c.name)}</option>`).join("");
+    }
+
+    function openLinkDialog(cat, index) {
+      editRef = cat ? { cat: cat.id, index } : null;
+      const link = editRef ? cat.links[index] : { url: "", name: "", desc: "" };
+      $("link-dlg-title").textContent = editRef ? "Link szerkesztése" : "Új link";
+      $("f-url").value = link.url; $("f-name").value = link.name; $("f-desc").value = link.desc;
+      fillCatSelect(editRef ? cat.id : (current() || {}).id);
+      $("link-error").textContent = "";
+      $("link-dlg").showModal();
+      (editRef ? $("f-name") : $("f-url")).focus();
+    }
+    $("add-link").addEventListener("click", () => {
+      if (!data.categories.length) return toast("Előbb hozz létre egy kategóriát.", true);
+      openLinkDialog(null, null);
+    });
+
+    function normalUrl(raw) {
+      const url = raw.trim();
+      return /^https?:\/\//i.test(url) ? url : "https://" + url;
+    }
+
+    // "www.unsplash.com" -> "Unsplash"
+    function siteName(url) {
+      try {
+        const parts = new URL(url).hostname.replace(/^www\./, "").split(".");
+        const base = parts.length > 1 ? parts[parts.length - 2] : parts[0];
+        return base.charAt(0).toUpperCase() + base.slice(1);
+      } catch { return ""; }
+    }
+
+    async function fillFromUrl() {
+      if (!$("f-url").value.trim()) return;
+      const url = normalUrl($("f-url").value);
+      $("f-url").value = url;
+      const btn = $("f-fill");
+      btn.disabled = true; btn.textContent = "…";
+      $("link-error").textContent = "";
+      try {
+        const meta = await api("meta", { method: "POST", body: JSON.stringify({ url }) });
+        if (!$("f-name").value) $("f-name").value = meta.title || siteName(url);
+        if (meta.desc && !$("f-desc").value) $("f-desc").value = meta.desc;
+        if (!meta.title && !meta.desc) $("link-error").textContent = "Ez az oldal nem engedi kiolvasni magát, a leírást írd be kézzel.";
+      } catch {}
+      btn.disabled = false; btn.textContent = "Kitöltés";
+    }
+    $("f-fill").addEventListener("click", fillFromUrl);
+    $("f-url").addEventListener("change", () => { if (!$("f-name").value) fillFromUrl(); });
+
+    $("link-form").addEventListener("submit", async (e) => {
+      if (e.submitter && e.submitter.value === "cancel") return;
+      e.preventDefault();
+      const url = normalUrl($("f-url").value);
+      try { new URL(url); } catch { $("link-error").textContent = "Ez nem érvényes link."; return; }
+      const link = { url, name: $("f-name").value.trim(), desc: $("f-desc").value.trim() };
+      const before = JSON.stringify(data);
+      const target = findCat($("f-cat").value);
+      if (editRef) {
+        const from = findCat(editRef.cat);
+        if (from === target) from.links[editRef.index] = link;
+        else { from.links.splice(editRef.index, 1); target.links.push(link); }
+      } else {
+        target.links.push(link);
+      }
+      if (await save(editRef ? "Link elmentve" : "Link hozzáadva")) {
+        $("link-dlg").close();
+        if (location.hash.slice(1) !== target.id) location.hash = target.id;
+      } else {
+        data = JSON.parse(before);
+      }
+    });
+
+    // Kategóriák
+    $("c-icons").innerHTML = Object.entries(ICONS).map(([k, v]) =>
+      `<label title="${esc(v.label)}"><input type="radio" name="c-icon" value="${k}"><span>${svg(v.path)}</span></label>`
+    ).join("");
+
+    function openCatDialog(cat) {
+      catEditId = cat ? cat.id : null;
+      $("cat-dlg-title").textContent = cat ? "Kategória szerkesztése" : "Új kategória";
+      $("c-name").value = cat ? cat.name : "";
+      const icon = cat ? cat.icon : "link";
+      document.querySelectorAll('input[name="c-icon"]').forEach((r) => { r.checked = r.value === icon; });
+      $("cat-dlg").showModal();
+      $("c-name").focus();
+    }
+    $("add-cat").addEventListener("click", () => openCatDialog(null));
+    $("cat-edit").addEventListener("click", () => openCatDialog(current()));
+
+    $("cat-form").addEventListener("submit", async (e) => {
+      if (e.submitter && e.submitter.value === "cancel") return;
+      e.preventDefault();
+      const name = $("c-name").value.trim();
+      if (!name) return;
+      const icon = (document.querySelector('input[name="c-icon"]:checked') || {}).value || "link";
+      let id;
+      if (catEditId) {
+        const cat = findCat(catEditId);
+        cat.name = name; cat.icon = icon; id = cat.id;
+      } else {
+        id = slug(name);
+        while (findCat(id)) id += "-2";
+        data.categories.push({ id, name, icon, links: [] });
+      }
+      if (await save("Kategória elmentve")) {
+        $("cat-dlg").close();
+        location.hash = id;
+      }
+    });
+
+    function moveCat(step) {
+      const cat = current();
+      const i = data.categories.indexOf(cat);
+      const j = i + step;
+      if (j < 0 || j >= data.categories.length) return;
+      [data.categories[i], data.categories[j]] = [data.categories[j], data.categories[i]];
+      save("Sorrend elmentve");
+    }
+    $("cat-up").addEventListener("click", () => moveCat(-1));
+    $("cat-down").addEventListener("click", () => moveCat(1));
+
+    $("cat-del").addEventListener("click", async () => {
+      const cat = current();
+      const n = cat.links.length;
+      if (!confirm(n ? `A(z) „${cat.name}” kategóriában ${n} link van, ezek is törlődnek. Biztos?` : `Törlöd a(z) „${cat.name}” kategóriát?`)) return;
+      data.categories.splice(data.categories.indexOf(cat), 1);
+      if (await save("Kategória törölve")) location.hash = data.categories[0] ? data.categories[0].id : "";
+    });
+
+    // ---------- Indítás ----------
+    if (storedPw()) openApp().catch((err) => { if (err.message !== "401") showGate(err.message); });
+    else showGate();
   </script>
 </body>
 </html>

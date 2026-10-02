@@ -6,10 +6,16 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/visits"]
+    "run_worker_first": ["/api/visits", "/tervezo/api/*"]
   },
   "durable_objects": {
-    "bindings": [{ "name": "VISITS", "class_name": "VisitCounter" }]
+    "bindings": [
+      { "name": "VISITS", "class_name": "VisitCounter" },
+      { "name": "LINKS", "class_name": "LinkStore" }
+    ]
   },
-  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["VisitCounter"] }]
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["VisitCounter"] },
+    { "tag": "v2", "new_sqlite_classes": ["LinkStore"] }
+  ]
 }

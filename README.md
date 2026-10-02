@@ -38,7 +38,12 @@ automatikusan kikerülnek az élő oldalra.
 - `public/demo-site-N/` – demó weboldalak (RO alap, `hu/`, `en/`)
   - `demo-site-1` Alinia (fogszabályozás), `demo-site-2` DentalTop (férfiaknak), `demo-site-3` Tihna Dental (félelem nélkül), `demo-site-4` Livada Dental (családi fogászat, mindoor.framer.website alapján)
   - A demók forrása (build.py, képek, AGENTS.md) a privát `github.com/szikszaizsu/droot-demo-sites` repóban van; ide csak a kész `site/` mappa kerül (`tools/deploy.sh`), a /weboldalak/ kártyát kézzel kell hozzáadni
-- `public/tervezo/` – „Tervező” linkgyűjtő (smartlink.framer.website mintájára, sötét, bal menü + link-kártyák), `noindex`; a főoldalról szándékosan NEM vezet rá link. Új link: a lap alján a `CATEGORIES` tömbbe `{ name, desc, url }`; az ikon a Google favicon-szolgáltatásból jön, hiba esetén kezdőbetű
+- `public/tervezo/` – „Tervező” privát linkgyűjtő (fehér, szürke pontrácsos háttér; belépőkártya a fodorvincent.com/weboldalak/ mintájára), `noindex`; a főoldalról szándékosan NEM vezet rá link
+  - jelszó: Cloudflare secret `TERVEZO_JELSZO` (Workers → art-design → Settings → Variables and Secrets); a böngésző localStorage-ben tartja (`tervezo-jelszo`), „Kilépés” törli
+  - adatok: `LinkStore` Durable Object (`worker.mjs`, migráció v2), egy JSON dokumentum; amíg nincs mentés, a `TERVEZO_SEED` kezdőlista látszik
+  - API (`/tervezo/api/*`, mind jelszavas): `GET links`, `PUT links`, `POST login`, `POST meta` (URL → név + leírás a „Kitöltés” gombhoz)
+  - szerkesztés az oldalon: „Szerkesztés” gomb → új link / kategória, átnevezés, ikon (`tervezo/icons.js`), sorrend, törlés
+  - helyi teszt: a `wrangler dev` Windowson nem indítja el a Durable Objecteket, ezért egy Node-os próbaszerver futtatja a `worker.mjs`-t memóriabeli tárolóval
 - `public/adatvedelem/` – adatvédelmi tájékoztató
 - `public/404.html` – hibaoldal
 - `public/styles.css` – megjelenés (alapszabályok + „Apple-style layer”)
