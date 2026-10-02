@@ -596,7 +596,6 @@
       try { incoming = JSON.parse(await file.text()).categories; if (!Array.isArray(incoming)) throw new Error(); }
       catch { return toast("Ez nem Tervező import fájl.", true); }
       const before = JSON.stringify(data);
-      const known = new Set(data.categories.flatMap((c) => c.links.map((l) => l.url.replace(/\/$/, ""))));
       let added = 0;
       for (const cat of incoming) {
         if (!cat || !cat.name || !Array.isArray(cat.links)) continue;
@@ -607,6 +606,8 @@
           target = { id, name: String(cat.name), icon: ICONS[cat.icon] ? cat.icon : "link", links: [] };
           data.categories.push(target);
         }
+        // Csak a célkategórián belül szűr: ugyanaz a link több kategóriában is lehet.
+        const known = new Set(target.links.map((l) => l.url.replace(/\/$/, "")));
         for (const l of cat.links) {
           const key = String(l.url || "").replace(/\/$/, "");
           if (!key || known.has(key)) continue;
