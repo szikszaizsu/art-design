@@ -45,6 +45,7 @@ automatikusan kikerülnek az élő oldalra.
   - háttér: interaktív pontrács canvas (`.dots`, fodorvincent.com/weboldalak/admin/ mintájára) – az egér körül a pontok kitérnek és szivárványszínben felvillannak, utána kb. 1 mp alatt elhalványulnak
   - jobb felső sarok: sötét/világos téma váltó (`tervezo-tema` a localStorage-ben, alap: világos; sötét = fodorvincent színek)
   - szerkesztés az oldalon: „Szerkesztés” gomb → új link / kategória, átnevezés, ikon (`tervezo/icons.js`), sorrend, törlés
+  - „Importálás” gomb: JSON fájl (`{ categories: [{ id, name, icon, links: [{ name, desc, url }] }] }`) összefésülése – azonos id/nevű kategóriába tölt, URL alapján nem duplikál
   - helyi teszt: a `wrangler dev` Windowson nem indítja el a Durable Objecteket, ezért egy Node-os próbaszerver futtatja a `worker.mjs`-t memóriabeli tárolóval
 - `public/adatvedelem/` – adatvédelmi tájékoztató
 - `public/404.html` – hibaoldal

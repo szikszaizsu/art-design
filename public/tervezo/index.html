@@ -229,6 +229,8 @@
       <div class="inner">
         <div class="toolbar">
           <button class="btn btn-primary edit-only" id="add-link" type="button" hidden>+ Új link</button>
+          <button class="btn btn-ghost edit-only" id="import" type="button" hidden>Importálás</button>
+          <input id="import-file" type="file" accept=".json,application/json" hidden>
           <button class="btn btn-ghost" id="toggle-edit" type="button">Szerkesztés</button>
           <button class="btn btn-ghost" id="logout" type="button">Kilépés</button>
         </div>
@@ -582,6 +584,39 @@
       if (!confirm(n ? `A(z) „${cat.name}” kategóriában ${n} link van, ezek is törlődnek. Biztos?` : `Törlöd a(z) „${cat.name}” kategóriát?`)) return;
       data.categories.splice(data.categories.indexOf(cat), 1);
       if (await save("Kategória törölve")) location.hash = data.categories[0] ? data.categories[0].id : "";
+    });
+
+    // ---------- Importálás (JSON: { categories: [{ id, name, icon, links: [{ name, desc, url }] }] }) ----------
+    $("import").addEventListener("click", () => $("import-file").click());
+    $("import-file").addEventListener("change", async () => {
+      const file = $("import-file").files[0];
+      $("import-file").value = "";
+      if (!file) return;
+      let incoming;
+      try { incoming = JSON.parse(await file.text()).categories; if (!Array.isArray(incoming)) throw new Error(); }
+      catch { return toast("Ez nem Tervező import fájl.", true); }
+      const before = JSON.stringify(data);
+      const known = new Set(data.categories.flatMap((c) => c.links.map((l) => l.url.replace(/\/$/, ""))));
+      let added = 0;
+      for (const cat of incoming) {
+        if (!cat || !cat.name || !Array.isArray(cat.links)) continue;
+        let target = data.categories.find((c) => c.id === cat.id || c.name.toLowerCase() === String(cat.name).toLowerCase());
+        if (!target) {
+          let id = slug(cat.id || cat.name);
+          while (findCat(id)) id += "-2";
+          target = { id, name: String(cat.name), icon: ICONS[cat.icon] ? cat.icon : "link", links: [] };
+          data.categories.push(target);
+        }
+        for (const l of cat.links) {
+          const key = String(l.url || "").replace(/\/$/, "");
+          if (!key || known.has(key)) continue;
+          known.add(key);
+          target.links.push({ name: l.name || siteName(l.url), desc: l.desc || "", url: l.url });
+          added++;
+        }
+      }
+      if (!added) { data = JSON.parse(before); return toast("Nincs új link a fájlban."); }
+      if (!(await save(`${added} új link importálva`))) data = JSON.parse(before);
     });
 
     // ---------- Téma ----------
