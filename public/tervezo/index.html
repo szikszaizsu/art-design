@@ -99,7 +99,7 @@
     /* App */
     .layout { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 100vh; }
     .layout > * { min-width: 0; }
-    @media (min-width: 860px) { .layout { grid-template-columns: 260px minmax(0, 1fr); } }
+    @media (min-width: 860px) { .layout { grid-template-columns: 290px minmax(0, 1fr); } }
 
     aside { background: var(--panel); border-bottom: 1px solid var(--line); padding: 20px 16px 12px; }
     @media (min-width: 860px) { aside { position: sticky; top: 0; height: 100vh; border-bottom: 0; border-right: 1px solid var(--line); padding: 28px 18px; display: flex; flex-direction: column; } }
@@ -116,7 +116,17 @@
     nav a:hover { color: var(--text); background: var(--tint); }
     nav a[aria-current="page"] { color: var(--text); background: rgba(143, 179, 232, .2); }
     nav svg { width: 16px; height: 16px; flex: none; opacity: .85; }
+    nav .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    @media (min-width: 860px) { nav a { white-space: normal; line-height: 1.3; } nav .count { flex: none; padding-left: 6px; } }
     nav .count { margin-left: auto; font-size: 12px; color: var(--muted); }
+    nav li.group { display: none; }
+    #nav-label[hidden] + nav { margin-top: 14px; }
+    @media (min-width: 860px) { #nav-label[hidden] + nav { margin-top: 0; } }
+    @media (min-width: 860px) {
+      nav li.group { display: block; margin: 18px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+      nav li.group:first-child { margin-top: 28px; }
+      aside { overflow-y: auto; overflow-x: hidden; }
+    }
     @media (max-width: 859px) { nav .count { display: none; } }
     .add-cat { margin-top: 8px; width: 100%; justify-content: flex-start; padding: 9px 12px; font-weight: 500; }
     @media (max-width: 859px) { .add-cat { width: auto; } }
@@ -170,6 +180,12 @@
     .acts button:hover { background: var(--tint); color: var(--text); }
     .acts button.del:hover { color: var(--danger); }
     .acts svg { width: 16px; height: 16px; }
+    /* Húzás szerkesztő módban: kártya → másik kártya (sorrend) vagy → menü kategória (áthelyezés) */
+    .item[draggable="true"] { cursor: grab; }
+    .item.dragging { opacity: .4; }
+    .item.drop-before { box-shadow: 0 -3px 0 var(--accent-strong), var(--shadow); }
+    .item.drop-after { box-shadow: 0 3px 0 var(--accent-strong), var(--shadow); }
+    nav a.drop-target { background: rgba(143, 179, 232, .3); color: var(--text); outline: 2px dashed var(--accent-strong); outline-offset: -2px; }
     @media (max-width: 520px) { .item { flex-wrap: wrap; } .acts { width: 100%; justify-content: flex-end; } }
     .empty { padding: 40px 0; color: var(--muted); text-align: center; }
 
@@ -219,7 +235,7 @@
         <img src="/assets/portrait-headshot.webp" alt="">
         <div><b>Szikszai Zsu</b><span>Tervező</span></div>
       </div>
-      <p class="label">Források</p>
+      <p class="label" id="nav-label">Források</p>
       <nav><ul id="nav"></ul></nav>
       <button class="btn btn-ghost add-cat edit-only" id="add-cat" type="button" hidden>+ Új kategória</button>
       <div class="side-foot"><a class="btn btn-ghost" href="/">szikszaizsu.com</a></div>
@@ -275,6 +291,8 @@
     <form method="dialog" id="cat-form">
       <h2 id="cat-dlg-title">Új kategória</h2>
       <label>Név <input id="c-name" type="text" maxlength="60" required></label>
+      <label>Csoport <input id="c-group" type="text" maxlength="40" list="c-groups" placeholder="pl. Ötletek"></label>
+      <datalist id="c-groups"></datalist>
       <div><p class="icon-title">Ikon</p><div class="icon-pick" id="c-icons"></div></div>
       <div class="dlg-actions">
         <button class="btn btn-ghost" value="cancel" formnovalidate type="submit">Mégse</button>
@@ -360,10 +378,16 @@
       return data.categories.find((c) => c.id === id) || data.categories[0];
     }
 
+    // A kategóriák "group" mezője szerint csoportcímeket tesz a menübe.
     function renderNav() {
-      $("nav").innerHTML = data.categories.map((c) =>
-        `<li><a href="#${esc(c.id)}" data-id="${esc(c.id)}">${iconSvg(c.icon)}${esc(c.name)}<span class="count">${c.links.length}</span></a></li>`
-      ).join("");
+      let group = null;
+      $("nav").innerHTML = data.categories.map((c) => {
+        const head = c.group && c.group !== group ? `<li class="group">${esc(c.group)}</li>` : "";
+        group = c.group || group;
+        return `${head}<li><a href="#${esc(c.id)}" data-id="${esc(c.id)}">${iconSvg(c.icon)}<span class="nm">${esc(c.name)}</span><span class="count">${c.links.length}</span></a></li>`;
+      }).join("");
+      $("nav-label").hidden = data.categories.some((c) => c.group);
+      $("c-groups").innerHTML = [...new Set(data.categories.map((c) => c.group).filter(Boolean))].map((g) => `<option value="${esc(g)}">`).join("");
     }
 
     function render() {
@@ -395,7 +419,7 @@
           return `<a class="item" href="${esc(l.url)}" target="_blank" rel="noopener">${ico}${txt}${svg('<path d="M7 17L17 7M8 7h9v9"/>', "arrow")}</a>`;
         }
         const ref = `data-cat="${esc(c.id)}" data-i="${i}"`;
-        return `<div class="item">${ico}${txt}<span class="acts">
+        return `<div class="item"${q ? "" : ` draggable="true" ${ref}`}>${ico}${txt}<span class="acts">
           <button type="button" ${ref} data-act="edit" aria-label="Szerkesztés">${svg(ACT.edit)}</button>
           <button type="button" ${ref} data-act="up" aria-label="Feljebb">${svg(ACT.up)}</button>
           <button type="button" ${ref} data-act="down" aria-label="Lejjebb">${svg(ACT.down)}</button>
@@ -436,6 +460,63 @@
     }
 
     const findCat = (id) => data.categories.find((c) => c.id === id);
+
+    // ---------- Húzás (drag & drop) ----------
+    let drag = null; // { cat, i }
+    const clearDropMarks = () => document.querySelectorAll(".drop-before, .drop-after, .drop-target").forEach((el) => el.classList.remove("drop-before", "drop-after", "drop-target"));
+
+    $("list").addEventListener("dragstart", (e) => {
+      const item = e.target.closest(".item[draggable]");
+      if (!item) return;
+      drag = { cat: item.dataset.cat, i: Number(item.dataset.i) };
+      item.classList.add("dragging");
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", "");
+    });
+    $("list").addEventListener("dragend", () => { drag = null; clearDropMarks(); document.querySelectorAll(".dragging").forEach((el) => el.classList.remove("dragging")); });
+
+    $("list").addEventListener("dragover", (e) => {
+      const item = e.target.closest(".item[draggable]");
+      if (!drag || !item || item.dataset.cat !== drag.cat) return;
+      e.preventDefault();
+      clearDropMarks();
+      const after = e.clientY > item.getBoundingClientRect().top + item.offsetHeight / 2;
+      item.classList.add(after ? "drop-after" : "drop-before");
+    });
+    $("list").addEventListener("drop", (e) => {
+      const item = e.target.closest(".item[draggable]");
+      if (!drag || !item || item.dataset.cat !== drag.cat) return;
+      e.preventDefault();
+      const cat = findCat(drag.cat);
+      const from = drag.i;
+      let to = Number(item.dataset.i) + (item.classList.contains("drop-after") ? 1 : 0);
+      clearDropMarks();
+      if (to > from) to--;
+      if (to === from) return;
+      const [link] = cat.links.splice(from, 1);
+      cat.links.splice(to, 0, link);
+      save("Sorrend elmentve");
+    });
+
+    $("nav").addEventListener("dragover", (e) => {
+      const a = e.target.closest("a[data-id]");
+      if (!drag || !a) return;
+      e.preventDefault();
+      clearDropMarks();
+      if (a.dataset.id !== drag.cat) a.classList.add("drop-target");
+    });
+    $("nav").addEventListener("dragleave", (e) => { const a = e.target.closest("a[data-id]"); if (a && !a.contains(e.relatedTarget)) a.classList.remove("drop-target"); });
+    $("nav").addEventListener("drop", async (e) => {
+      const a = e.target.closest("a[data-id]");
+      if (!drag || !a) return;
+      e.preventDefault();
+      clearDropMarks();
+      const from = findCat(drag.cat), to = findCat(a.dataset.id);
+      if (!to || from === to) return;
+      const snapshot = JSON.stringify(data);
+      to.links.push(...from.links.splice(drag.i, 1));
+      if (!(await save(`Áthelyezve ide: ${to.name}`))) { data = JSON.parse(snapshot); renderAll(); }
+    });
 
     $("list").addEventListener("click", async (e) => {
       const b = e.target.closest("button[data-act]");
@@ -538,6 +619,7 @@
       catEditId = cat ? cat.id : null;
       $("cat-dlg-title").textContent = cat ? "Kategória szerkesztése" : "Új kategória";
       $("c-name").value = cat ? cat.name : "";
+      $("c-group").value = cat ? (cat.group || "") : ((current() || {}).group || "");
       const icon = cat ? cat.icon : "link";
       document.querySelectorAll('input[name="c-icon"]').forEach((r) => { r.checked = r.value === icon; });
       $("cat-dlg").showModal();
@@ -552,14 +634,20 @@
       const name = $("c-name").value.trim();
       if (!name) return;
       const icon = (document.querySelector('input[name="c-icon"]:checked') || {}).value || "link";
+      const group = $("c-group").value.trim();
       let id;
       if (catEditId) {
         const cat = findCat(catEditId);
         cat.name = name; cat.icon = icon; id = cat.id;
+        if (group) cat.group = group; else delete cat.group;
       } else {
         id = slug(name);
         while (findCat(id)) id += "-2";
-        data.categories.push({ id, name, icon, links: [] });
+        const cat = { id, name, icon, links: [] };
+        if (group) cat.group = group;
+        // Új kategória a csoportja végére kerül, hogy a menüben együtt maradjon.
+        const lastInGroup = group ? data.categories.map((c) => c.group).lastIndexOf(group) : -1;
+        data.categories.splice(lastInGroup >= 0 ? lastInGroup + 1 : data.categories.length, 0, cat);
       }
       if (await save("Kategória elmentve")) {
         $("cat-dlg").close();
@@ -592,9 +680,10 @@
       const file = $("import-file").files[0];
       $("import-file").value = "";
       if (!file) return;
-      let incoming;
-      try { incoming = JSON.parse(await file.text()).categories; if (!Array.isArray(incoming)) throw new Error(); }
+      let doc, incoming;
+      try { doc = JSON.parse(await file.text()); incoming = doc.categories; if (!Array.isArray(incoming)) throw new Error(); }
       catch { return toast("Ez nem Tervező import fájl.", true); }
+      if (doc.mode === "reorganize" || doc.mode === "replace") return reorganize(doc);
       const before = JSON.stringify(data);
       let added = 0;
       for (const cat of incoming) {
@@ -603,7 +692,7 @@
         if (!target) {
           let id = slug(cat.id || cat.name);
           while (findCat(id)) id += "-2";
-          target = { id, name: String(cat.name), icon: ICONS[cat.icon] ? cat.icon : "link", links: [] };
+          target = { id, name: String(cat.name), icon: ICONS[cat.icon] ? cat.icon : "link", ...(cat.group && { group: String(cat.group) }), links: [] };
           data.categories.push(target);
         }
         // Csak a célkategórián belül szűr: ugyanaz a link több kategóriában is lehet.
@@ -619,6 +708,51 @@
       if (!added) { data = JSON.parse(before); return toast("Nincs új link a fájlban."); }
       if (!(await save(`${added} új link importálva`))) data = JSON.parse(before);
     });
+
+    // Biztonsági mentés letöltése; visszatöltve (Importálás) pontosan ezt az állapotot állítja vissza.
+    function downloadBackup() {
+      const stamp = new Date().toISOString().slice(0, 16).replace(/[T:]/g, "-");
+      const blob = new Blob([JSON.stringify({ mode: "replace", ...data }, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = `tervezo-mentes-${stamp}.json`;
+      document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+
+    const urlKey = (u) => { try { return new URL(u).href.replace(/\/$/, ""); } catch { return String(u).replace(/\/$/, ""); } };
+
+    // "replace": a fájl tartalma lesz az új állapot.
+    // "reorganize": a fájl kategóriái és sorrendje lesz az új rend; a jelenlegi linkek közül
+    // amit a fájl nem ismer, az "Egyéb" kategóriába kerül, így semmi nem vész el.
+    async function reorganize(doc) {
+      const replace = doc.mode === "replace";
+      const msg = replace
+        ? "Visszaállítod a Tervezőt ebből a mentésből? A jelenlegi állapotról előbb letöltök egy mentést."
+        : "Átrendezed a linkjeidet az új kategóriákba? Előbb letöltök egy mentést a mostani állapotról.";
+      if (!confirm(msg)) return;
+      downloadBackup();
+      const before = JSON.stringify(data);
+      const cats = doc.categories.filter((c) => c && c.name && Array.isArray(c.links)).map((c) => ({
+        id: slug(c.id || c.name), name: String(c.name), icon: ICONS[c.icon] ? c.icon : "link", ...(c.group && { group: String(c.group) }),
+        links: c.links.filter((l) => l && l.url).map((l) => ({ name: l.name || siteName(l.url), desc: l.desc || "", url: l.url }))
+      }));
+      if (!replace) {
+        const placed = new Set(cats.flatMap((c) => c.links.map((l) => urlKey(l.url))));
+        const extra = [];
+        for (const c of data.categories) for (const l of c.links) {
+          const k = urlKey(l.url);
+          if (!placed.has(k)) { placed.add(k); extra.push(l); }
+        }
+        if (extra.length) {
+          let other = cats.find((c) => c.id === "egyeb");
+          if (!other) cats.push(other = { id: "egyeb", name: "Egyéb", icon: "link", group: "Egyéb", links: [] });
+          other.links.push(...extra);
+        }
+      }
+      data = { categories: cats };
+      if (await save(replace ? "Visszaállítva" : "Átrendezve")) location.hash = cats[0] ? cats[0].id : "";
+      else data = JSON.parse(before);
+    }
 
     // ---------- Téma ----------
     function syncThemeLabel() {

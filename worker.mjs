@@ -37,9 +37,190 @@ const noStore = { 'Cache-Control': 'no-store' };
 const TERVEZO_SEED = {
   "categories": [
     {
-      "id": "hasznos-linkek",
-      "name": "Hasznos linkek",
-      "icon": "link",
+      "id": "weboldal-otlet",
+      "group": "Ötletek",
+      "name": "Weboldalhoz keresek ötletet",
+      "icon": "globe",
+      "links": [
+        {
+          "name": "Awwwards",
+          "desc": "Díjnyertes weboldalak, trendek",
+          "url": "https://www.awwwards.com/"
+        },
+        {
+          "name": "Godly",
+          "desc": "Válogatott, nagyon jó webdizájnok",
+          "url": "https://godly.website/"
+        },
+        {
+          "name": "Land-book",
+          "desc": "Landing page galéria",
+          "url": "https://land-book.com/"
+        },
+        {
+          "name": "Saaspo",
+          "desc": "SaaS weboldal inspiráció",
+          "url": "https://saaspo.com/"
+        },
+        {
+          "name": "Craftwork Curated",
+          "desc": "Válogatott weboldalak",
+          "url": "https://craftwork.design/curated/websites/"
+        },
+        {
+          "name": "Mobbin",
+          "desc": "Mobil- és webapp UI minták",
+          "url": "https://mobbin.com/"
+        },
+        {
+          "name": "CTA.gallery",
+          "desc": "Gomb- és CTA-blokk ötletek",
+          "url": "https://www.cta.gallery/"
+        },
+        {
+          "name": "Behance – Ivory Clinic",
+          "desc": "Fogászati landing page dizájn",
+          "url": "https://www.behance.net/gallery/237704709/Dental-Landing-Page-Web-Site-Design-Ivory-Clinic"
+        },
+        {
+          "name": "Pinterest – skincare weboldalak",
+          "desc": "Keresés: skin care website",
+          "url": "https://hu.pinterest.com/search/pins/?q=skin%20care%20website"
+        },
+        {
+          "name": "Pinterest – UI dizájn",
+          "desc": "UI minta",
+          "url": "https://hu.pinterest.com/pin/3307399722243853/"
+        },
+        {
+          "name": "Pinterest – termékoldal",
+          "desc": "Hidratáló gél termékoldal",
+          "url": "https://hu.pinterest.com/pin/143974519331822491/"
+        },
+        {
+          "name": "awesome-design-md",
+          "desc": "DESIGN.md gyűjtemény ismert oldalakról",
+          "url": "https://github.com/VoltAgent/awesome-design-md"
+        }
+      ]
+    },
+    {
+      "id": "hirdetes-otlet",
+      "group": "Ötletek",
+      "name": "Hirdetéshez keresek ötletet",
+      "icon": "megaphone",
+      "links": [
+        {
+          "name": "Pinterest – Serum tábla",
+          "desc": "Vince szérum táblája",
+          "url": "https://hu.pinterest.com/fodorvince/serum/"
+        },
+        {
+          "name": "Pinterest – szemkörnyékápoló",
+          "desc": "Szérum hirdetés ötlet",
+          "url": "https://hu.pinterest.com/pin/1096485840553560375/"
+        },
+        {
+          "name": "Pinterest – GLOSSYBOX",
+          "desc": "Szemkörnyékápoló termékfotó",
+          "url": "https://hu.pinterest.com/pin/764767580484354830/"
+        },
+        {
+          "name": "Pinterest – olajcsepp háttér",
+          "desc": "Csepegő olaj, átlátszó háttér",
+          "url": "https://hu.pinterest.com/pin/572449802649225925/"
+        },
+        {
+          "name": "Pinterest – tapéta 2025",
+          "desc": "Háttér ötlet",
+          "url": "https://hu.pinterest.com/pin/1149262398668406809/"
+        }
+      ]
+    },
+    {
+      "id": "logo-arculat",
+      "group": "Ötletek",
+      "name": "Logót, arculatot tervezek",
+      "icon": "pen",
+      "links": [
+        {
+          "name": "Dribbble – logók",
+          "desc": "Logó inspiráció",
+          "url": "https://dribbble.com/search/logo"
+        },
+        {
+          "name": "Rebrand Gallery",
+          "desc": "Arculatváltások, vizuális identitás",
+          "url": "https://www.rebrand.gallery/"
+        }
+      ]
+    },
+    {
+      "id": "sablon-mockup",
+      "group": "Ötletek",
+      "name": "Sablonból, mockupból indulok",
+      "icon": "box",
+      "links": [
+        {
+          "name": "Figma Community – mobil appok",
+          "desc": "14 000+ ingyenes app sablon",
+          "url": "https://www.figma.com/community/mobile-apps?resource_type=files&editor_type=figma"
+        },
+        {
+          "name": "Webflow Marketplace",
+          "desc": "Webflow sablonok",
+          "url": "https://webflow.com/marketplace"
+        },
+        {
+          "name": "Renance",
+          "desc": "SaaS sablon Framerre",
+          "url": "https://renance.framer.website/"
+        },
+        {
+          "name": "Divi – webshop",
+          "desc": "Webshop építés Divi témával",
+          "url": "https://www.elegantthemes.com/online-store-owners/"
+        },
+        {
+          "name": "Minimal Mockups",
+          "desc": "Sok jó, ingyenes mockup",
+          "url": "https://www.minimalmockups.com/"
+        }
+      ]
+    },
+    {
+      "id": "foto",
+      "group": "Alapanyagok",
+      "name": "Fotót keresek",
+      "icon": "image",
+      "links": [
+        {
+          "name": "Lummi – női bőr",
+          "desc": "Ingyenes HD AI-fotók",
+          "url": "https://www.lummi.ai/s/photo/woman-skin"
+        },
+        {
+          "name": "Vecteezy – ráncos bőr",
+          "desc": "Ingyenes stock fotók",
+          "url": "https://www.vecteezy.com/free-photos/wrinkled-skin"
+        },
+        {
+          "name": "StockCake",
+          "desc": "Ingyenes stock képek",
+          "url": "https://stockcake.com/"
+        },
+        {
+          "name": "Envato Elements",
+          "desc": "Alapanyag mindenhez",
+          "url": "https://elements.envato.com/"
+        }
+      ]
+    },
+    {
+      "id": "betu",
+      "group": "Alapanyagok",
+      "name": "Betűt választok",
+      "icon": "type",
       "links": [
         {
           "name": "Fontshare",
@@ -50,39 +231,33 @@ const TERVEZO_SEED = {
           "name": "Free Faces",
           "desc": "Szép, ingyenes betűtípusok gyűjteménye",
           "url": "https://www.freefaces.gallery/"
-        },
-        {
-          "name": "Radix Colors",
-          "desc": "Weboldal színpaletta tesztelő",
-          "url": "https://www.radix-ui.com/colors/custom"
-        },
-        {
-          "name": "Envato Elements",
-          "desc": "Alapanyag mindenhez",
-          "url": "https://elements.envato.com/"
-        },
+        }
+      ]
+    },
+    {
+      "id": "szin",
+      "group": "Alapanyagok",
+      "name": "Színt választok",
+      "icon": "color",
+      "links": [
         {
           "name": "Coolors",
           "desc": "Színpaletta generátor",
           "url": "https://coolors.co/"
         },
         {
-          "name": "Squoosh",
-          "desc": "Képtömörítés a böngészőben",
-          "url": "https://squoosh.app/"
+          "name": "Radix Colors",
+          "desc": "Weboldal színpaletta tesztelő",
+          "url": "https://www.radix-ui.com/colors/custom"
         }
       ]
     },
     {
-      "id": "grafika",
-      "name": "Grafika és ikonok",
-      "icon": "pen",
+      "id": "ikon",
+      "group": "Alapanyagok",
+      "name": "Ikont keresek",
+      "icon": "grid",
       "links": [
-        {
-          "name": "Minimal Mockups",
-          "desc": "Sok jó, ingyenes mockup",
-          "url": "https://www.minimalmockups.com/"
-        },
         {
           "name": "Tabler Icons",
           "desc": "5600+ vektor ikon",
@@ -107,9 +282,15 @@ const TERVEZO_SEED = {
     },
     {
       "id": "ai",
-      "name": "AI",
+      "group": "Eszközök",
+      "name": "AI-jal dolgozom",
       "icon": "spark",
       "links": [
+        {
+          "name": "Claude",
+          "desc": "Szöveg, kód, ötletelés",
+          "url": "https://claude.ai/"
+        },
         {
           "name": "Magnific",
           "desc": "Képnagyítás, nagy felbontás",
@@ -119,19 +300,203 @@ const TERVEZO_SEED = {
           "name": "ElevenLabs",
           "desc": "Narráció, hang",
           "url": "https://elevenlabs.io/"
-        },
-        {
-          "name": "Claude",
-          "desc": "Szöveg, kód, ötletelés",
-          "url": "https://claude.ai/"
         }
       ]
     },
     {
       "id": "promptok",
-      "name": "Promptok",
+      "group": "Eszközök",
+      "name": "Promptot írok",
       "icon": "note",
       "links": []
+    },
+    {
+      "id": "optimalizalas",
+      "group": "Eszközök",
+      "name": "Képet, oldalt optimalizálok",
+      "icon": "gauge",
+      "links": [
+        {
+          "name": "Squoosh",
+          "desc": "Képtömörítés a böngészőben",
+          "url": "https://squoosh.app/"
+        },
+        {
+          "name": "GTmetrix",
+          "desc": "Weboldal teljesítmény mérés",
+          "url": "https://gtmetrix.com/"
+        },
+        {
+          "name": "GTmetrix – Westhills",
+          "desc": "Teljesítmény jelentés",
+          "url": "https://gtmetrix.com/reports/westhills-site.fodorvincent.workers.dev/BqZkY9rU/"
+        }
+      ]
+    },
+    {
+      "id": "tanulas",
+      "group": "Eszközök",
+      "name": "Tanulok",
+      "icon": "book",
+      "links": [
+        {
+          "name": "Kole Jain (YouTube)",
+          "desc": "UI/UX dizájn videók",
+          "url": "https://www.youtube.com/@KoleJain"
+        },
+        {
+          "name": "UX/UI tippek webshopra",
+          "desc": "3,5× konverzió egy redesignnal (videó)",
+          "url": "https://www.youtube.com/watch?v=oYskl2ZBoBc"
+        }
+      ]
+    },
+    {
+      "id": "weboldalam",
+      "group": "Munka",
+      "name": "A weboldalamat kezelem",
+      "icon": "globe",
+      "links": [
+        {
+          "name": "szikszaizsu.com",
+          "desc": "Saját portfólió",
+          "url": "https://szikszaizsu.com/"
+        },
+        {
+          "name": "Weboldal demók – szikszaizsu.com",
+          "desc": "Saját demó gyűjtőoldal",
+          "url": "https://szikszaizsu.com/weboldalak/"
+        },
+        {
+          "name": "Weboldal demók – fodorvincent.com",
+          "desc": "Vince demó oldala",
+          "url": "https://fodorvincent.com/weboldalak/"
+        },
+        {
+          "name": "Cloudflare – Workers & Pages",
+          "desc": "A weboldal tárhelye",
+          "url": "https://dash.cloudflare.com/f20730e3f3c771f2675f676f79970a09/workers-and-pages"
+        },
+        {
+          "name": "Cloudflare – Workers for Platforms",
+          "desc": "Cloudflare fiók",
+          "url": "https://dash.cloudflare.com/f20730e3f3c771f2675f676f79970a09/workers-for-platforms/namespaces"
+        },
+        {
+          "name": "GitHub – art-design",
+          "desc": "A weboldal kódja",
+          "url": "https://github.com/szikszaizsu/art-design"
+        }
+      ]
+    },
+    {
+      "id": "munkafajlok",
+      "group": "Munka",
+      "name": "Munkafájlt nyitok meg",
+      "icon": "folder",
+      "links": [
+        {
+          "name": "dROOT képi promptok",
+          "desc": "Kész dizájnok és képi promptok",
+          "url": "https://king.advertiser.ro/tervezunk/droot-kepi-promptok.html"
+        },
+        {
+          "name": "Craft – saját dokumentumok",
+          "desc": "Minden jegyzet",
+          "url": "https://docs.craft.do/s/Szikszaizsu--23134869-46d8-52d4-b394-e5363e601f7d/all"
+        },
+        {
+          "name": "Craft – Vince küldte",
+          "desc": "Vince anyagai",
+          "url": "https://docs.craft.do/editor/d/e4bac22a-5647-4fc6-3a70-8c688a4410f7/2136D592-82D0-495E-8D5E-6371255E5BC9?s=WeN"
+        },
+        {
+          "name": "Craft – Untitled Page",
+          "desc": "Vince jegyzete",
+          "url": "https://docs.craft.do/editor/d/e4bac22a-5647-4fc6-3a70-8c688a4410f7/339D9CDE-F715-4DCA-818A-F285050CBF73?s=Ttg"
+        },
+        {
+          "name": "Retinol firming oil – landing szöveg",
+          "desc": "Google Dokumentum",
+          "url": "https://docs.google.com/document/d/1AR6wTQKq_Femo7k9zRxRo_M12X2yf7gMPH9uNsa0RZ4/edit"
+        },
+        {
+          "name": "Dropbox – LOGO",
+          "desc": "Logó fájlok",
+          "url": "https://www.dropbox.com/scl/fo/qyfo5m8vx9dazwz2liea7/AMMeUmEjmRZMe9KWNrdmRjI?rlkey=q4jmmtmp05s1tfejanwhm32xh"
+        },
+        {
+          "name": "Dropbox – WEBSITE",
+          "desc": "Weboldal anyagok",
+          "url": "https://www.dropbox.com/scl/fo/py6narhvipj4xe6asqyu7/AC73M0OziTS0LKgWVl9A7yA?rlkey=z5ihtygduuuasqmfna6osw6pl"
+        },
+        {
+          "name": "Dropbox – RAW",
+          "desc": "Nyers fotók",
+          "url": "https://www.dropbox.com/scl/fo/22addb8zxa8o163asum3x/APqKDq96JzLncmgImpN1nN4?rlkey=di2ouae0chgc2h8v71qir9ihz"
+        },
+        {
+          "name": "Dropbox – Exosome",
+          "desc": "LifeCell Exosome anyagok",
+          "url": "https://www.dropbox.com/scl/fo/ziedq9o3730n8qsaq80xq/ADb9fln_XZ_DvVOreczwaz4/Exosome?dl=0&rlkey=1plllm1yafk1sn"
+        }
+      ]
+    },
+    {
+      "id": "ugyfelek",
+      "group": "Munka",
+      "name": "Ügyfél oldalát nézem",
+      "icon": "megaphone",
+      "links": [
+        {
+          "name": "LifeCell",
+          "desc": "Hivatalos oldal",
+          "url": "https://www.lifecellskin.com/"
+        },
+        {
+          "name": "LifeCell – Shop",
+          "desc": "Termékek",
+          "url": "https://www.lifecellskin.com/shop/"
+        },
+        {
+          "name": "LifeCell – Exosomes",
+          "desc": "Exosome termékoldal",
+          "url": "https://blog.lifecellskin.com/skin/exosomes"
+        },
+        {
+          "name": "LifeCell – Anti Aging",
+          "desc": "Anti-aging tabletta oldal",
+          "url": "https://blog.lifecellskin.com/otherproduct/ag/ag-pill-woman"
+        }
+      ]
+    },
+    {
+      "id": "sajat",
+      "group": "Munka",
+      "name": "Saját dolgaim",
+      "icon": "heart",
+      "links": [
+        {
+          "name": "Eseménynaptár 2026/27",
+          "desc": "Claude artifact",
+          "url": "https://claude.ai/artifact/XD5EzxKvjt4AmvhEy1tCEq"
+        },
+        {
+          "name": "Komatál beosztás 2026/27",
+          "desc": "Claude artifact",
+          "url": "https://claude.ai/artifact/5upM1MXxdDUk6xJ9MNjSEf"
+        },
+        {
+          "name": "Komatál heti beosztás – táblázat",
+          "desc": "Google Táblázat",
+          "url": "https://docs.google.com/spreadsheets/d/1W_YYDjf1mQAwSNM6Qn-gnnC162ZXr65woeUUxV-tufg/edit"
+        },
+        {
+          "name": "Vincent-Mini",
+          "desc": "Vince médiaszervere",
+          "url": "http://fodorvincent.go.ro:8096/web/#/home"
+        }
+      ]
     }
   ]
 };
@@ -169,7 +534,8 @@ function cleanDoc(doc) {
       if (!['http:', 'https:'].includes(url.protocol)) return null;
       links.push({ name: cleanText(link.name, 80) || url.hostname, desc: cleanText(link.desc, 160), url: url.href });
     }
-    categories.push({ id, name, icon: cleanText(cat.icon, 20) || 'link', links });
+    const group = cleanText(cat.group, 40);
+    categories.push({ id, name, icon: cleanText(cat.icon, 20) || 'link', ...(group && { group }), links });
   }
   return { categories };
 }

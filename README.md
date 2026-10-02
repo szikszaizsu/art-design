@@ -45,6 +45,9 @@ automatikusan kikerülnek az élő oldalra.
   - háttér: interaktív pontrács canvas (`.dots`, fodorvincent.com/weboldalak/admin/ mintájára) – az egér körül a pontok kitérnek és szivárványszínben felvillannak, utána kb. 1 mp alatt elhalványulnak
   - jobb felső sarok: sötét/világos téma váltó (`tervezo-tema` a localStorage-ben, alap: világos; sötét = fodorvincent színek)
   - szerkesztés az oldalon: „Szerkesztés” gomb → új link / kategória, átnevezés, ikon (`tervezo/icons.js`), sorrend, törlés
+  - kategóriák „mit szeretnék csinálni” névvel, `group` mező szerint csoportosítva a menüben (Ötletek / Alapanyagok / Eszközök / Munka); a `TERVEZO_SEED` is ebben a rendben van
+  - húzás szerkesztő módban: kártya → másik kártya (sorrend), kártya → menü kategória (áthelyezés); mobilon a ceruza ikon
+  - import `mode: "reorganize"`: a fájl kategóriái lesznek az új rend, az ismeretlen meglévő linkek az „Egyéb”-be kerülnek; `mode: "replace"`: teljes visszaállítás (a gomb előtte mindig letölt egy `tervezo-mentes-*.json` mentést, ami `replace` módú)
   - „Importálás” gomb: JSON fájl (`{ categories: [{ id, name, icon, links: [{ name, desc, url }] }] }`) összefésülése – azonos id/nevű kategóriába tölt, kategórián belül URL alapján nem duplikál
   - helyi teszt: a `wrangler dev` Windowson nem indítja el a Durable Objecteket, ezért egy Node-os próbaszerver futtatja a `worker.mjs`-t memóriabeli tárolóval
 - `public/adatvedelem/` – adatvédelmi tájékoztató
