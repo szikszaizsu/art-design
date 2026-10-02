@@ -195,3 +195,36 @@ document.addEventListener('pointerover', (event) => {
   const base = new URL('assets/button-flash/', document.querySelector('link[href*="styles.css"]').href);
   for (let i = 1; i <= 8; i++) new Image().src = new URL(`flash-${i}.webp?v=2`, base).href;
 });
+
+// Light / dark theme toggle (choice kept in localStorage 'szs-tema'; applied early by an inline <head> script)
+(() => {
+  const root = document.documentElement;
+  const label = () => {
+    const dark = root.dataset.theme === 'dark';
+    const lang = root.lang || 'hu';
+    if (lang.startsWith('en')) return dark ? 'Light theme' : 'Dark theme';
+    if (lang.startsWith('ro')) return dark ? 'Temă luminoasă' : 'Temă întunecată';
+    return dark ? 'Világos téma' : 'Sötét téma';
+  };
+  const mount = () => {
+    const header = document.querySelector('.site-header');
+    if (!header || header.querySelector('.theme-toggle')) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'theme-toggle notranslate';
+    button.setAttribute('translate', 'no');
+    button.innerHTML = '<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+    const sync = () => { button.setAttribute('aria-label', label()); button.title = label(); };
+    button.addEventListener('click', () => {
+      const dark = root.dataset.theme !== 'dark';
+      if (dark) root.dataset.theme = 'dark'; else delete root.dataset.theme;
+      try { localStorage.setItem('szs-tema', dark ? 'dark' : 'light'); } catch (e) {}
+      sync();
+    });
+    new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['lang'] });
+    const switcher = header.querySelector('.language-switch');
+    if (switcher) switcher.after(button); else header.append(button);
+    sync();
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else setTimeout(mount, 0);
+})();
