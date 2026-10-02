@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex, nofollow, noimageindex, noarchive">
   <title>Tervező</title>
   <link rel="icon" href="/assets/favicon.png?v=sz-logo-1">
+  <script>try { if (localStorage.getItem("tervezo-tema") === "dark") document.documentElement.dataset.theme = "dark"; } catch {}</script>
   <style>
     @font-face { font-family: "Inter"; src: url("/assets/inter-variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
     @font-face { font-family: "Cormorant Garamond"; src: url("/assets/cormorant-garamond-latin.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
@@ -28,6 +29,35 @@
       --accent-ink: #0f1726;
       --danger: #c24848;
       --shadow: 0 1px 2px rgba(17, 20, 26, .04), 0 6px 18px rgba(17, 20, 26, .05);
+      --shadow-big: 0 20px 50px rgba(17, 20, 26, .08);
+      --ghost: #ffffff;
+      --ghost-hover: #f3f4f6;
+      --tint: rgba(17, 20, 26, .05);
+      --backdrop: rgba(17, 20, 26, .35);
+      color-scheme: light;
+    }
+    /* Sötét téma (a fodorvincent.com/weboldalak/ színei) */
+    :root[data-theme="dark"] {
+      --bg: #12151b;
+      --dot: rgba(255, 255, 255, .13);
+      --panel: rgba(22, 26, 33, .94);
+      --card: #191e26;
+      --card-hover: #1f2530;
+      --field: #14181e;
+      --line: rgba(255, 255, 255, .09);
+      --line-strong: rgba(255, 255, 255, .2);
+      --text: #e6ebf3;
+      --soft: rgba(230, 235, 243, .62);
+      --muted: rgba(230, 235, 243, .4);
+      --accent-strong: #8fb3e8;
+      --danger: #e88f8f;
+      --shadow: none;
+      --shadow-big: 0 20px 50px rgba(0, 0, 0, .35);
+      --ghost: transparent;
+      --ghost-hover: rgba(255, 255, 255, .06);
+      --tint: rgba(255, 255, 255, .06);
+      --backdrop: rgba(5, 7, 10, .7);
+      color-scheme: dark;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { min-height: 100%; }
@@ -55,14 +85,14 @@
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; transition: filter .2s, background .2s; }
     .btn-primary { background: var(--accent); color: var(--accent-ink); }
     .btn-primary:hover { filter: brightness(1.08); }
-    .btn-ghost { border: 1px solid var(--line-strong); color: var(--soft); background: #fff; }
-    .btn-ghost:hover { color: var(--text); background: #f3f4f6; }
-    .btn-danger { color: var(--danger); border: 1px solid rgba(194, 72, 72, .3); background: #fff; }
+    .btn-ghost { border: 1px solid var(--line-strong); color: var(--soft); background: var(--ghost); }
+    .btn-ghost:hover { color: var(--text); background: var(--ghost-hover); }
+    .btn-danger { color: var(--danger); border: 1px solid var(--danger); background: var(--ghost); }
     .btn:disabled { opacity: .5; cursor: default; }
 
     /* Login */
     .gate { min-height: 100vh; display: grid; place-items: center; padding: 16px; }
-    .gate form { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 32px 24px; display: grid; gap: 14px; box-shadow: 0 20px 50px rgba(17, 20, 26, .08); }
+    .gate form { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 32px 24px; display: grid; gap: 14px; box-shadow: var(--shadow-big); }
     .gate h1 { font: 500 34px/1 "Cormorant Garamond", Georgia, serif; }
     .gate p { color: var(--soft); font-size: 14px; }
     .gate .btn { padding: 12px; font-size: 16px; }
@@ -77,7 +107,7 @@
     aside { background: var(--panel); border-bottom: 1px solid var(--line); padding: 20px 16px 12px; }
     @media (min-width: 860px) { aside { position: sticky; top: 0; height: 100vh; border-bottom: 0; border-right: 1px solid var(--line); padding: 28px 18px; display: flex; flex-direction: column; } }
     .profile { display: flex; align-items: center; gap: 12px; }
-    .profile img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; background: #eef0f3; }
+    .profile img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; background: var(--tint); }
     .profile b { display: block; font-weight: 600; font-size: 15px; }
     .profile span { display: block; font-size: 13px; color: var(--soft); }
 
@@ -86,7 +116,7 @@
     nav ul::-webkit-scrollbar { display: none; }
     @media (min-width: 860px) { nav ul { flex-direction: column; gap: 2px; margin: 0; padding: 0; overflow: visible; } }
     nav a { display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 9px 12px; border-radius: 10px; font-size: 14px; color: var(--soft); transition: background .2s, color .2s; }
-    nav a:hover { color: var(--text); background: rgba(17, 20, 26, .04); }
+    nav a:hover { color: var(--text); background: var(--tint); }
     nav a[aria-current="page"] { color: var(--text); background: rgba(143, 179, 232, .2); }
     nav svg { width: 16px; height: 16px; flex: none; opacity: .85; }
     nav .count { margin-left: auto; font-size: 12px; color: var(--muted); }
@@ -101,7 +131,23 @@
     @media (min-width: 860px) { main { padding: 48px 48px 96px; } }
     .inner { max-width: 780px; margin: 0 auto; }
 
-    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-bottom: 20px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-bottom: 20px; padding-right: 52px; }
+    @media (max-width: 859px) { .toolbar { padding-right: 0; } }
+
+    .theme-toggle {
+      position: fixed; z-index: 5; top: 16px; right: 16px;
+      width: 42px; height: 42px; border-radius: 999px;
+      display: grid; place-items: center;
+      background: var(--card); border: 1px solid var(--line-strong); color: var(--soft);
+      box-shadow: var(--shadow); transition: color .2s, background .2s;
+    }
+    @media (max-width: 859px) { .theme-toggle { position: absolute; } }
+    @media (min-width: 860px) { .theme-toggle { top: 48px; right: 24px; } }
+    .theme-toggle:hover { color: var(--text); background: var(--card-hover); }
+    .theme-toggle svg { width: 19px; height: 19px; }
+    .theme-toggle .sun { display: none; }
+    :root[data-theme="dark"] .theme-toggle .sun { display: block; }
+    :root[data-theme="dark"] .theme-toggle .moon { display: none; }
     .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
     h1.title { font: 500 clamp(36px, 5vw, 52px)/1 "Cormorant Garamond", Georgia, serif; }
     .search { max-width: 260px; min-width: 0; }
@@ -120,15 +166,15 @@
     a.item:hover .arrow { color: var(--accent-strong); transform: translate(2px, -2px); }
     .acts { display: flex; gap: 4px; flex: none; }
     .acts button { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; color: var(--soft); }
-    .acts button:hover { background: rgba(17, 20, 26, .06); color: var(--text); }
+    .acts button:hover { background: var(--tint); color: var(--text); }
     .acts button.del:hover { color: var(--danger); }
     .acts svg { width: 16px; height: 16px; }
     @media (max-width: 520px) { .item { flex-wrap: wrap; } .acts { width: 100%; justify-content: flex-end; } }
     .empty { padding: 40px 0; color: var(--muted); text-align: center; }
 
     /* Dialog */
-    dialog { margin: auto; width: calc(100% - 32px); max-width: 460px; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 18px; padding: 0; box-shadow: 0 24px 60px rgba(17, 20, 26, .18); }
-    dialog::backdrop { background: rgba(17, 20, 26, .35); }
+    dialog { margin: auto; width: calc(100% - 32px); max-width: 460px; background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 18px; padding: 0; box-shadow: var(--shadow-big); }
+    dialog::backdrop { background: var(--backdrop); }
     dialog form { display: grid; gap: 12px; padding: 24px; }
     dialog h2 { font: 500 28px/1.1 "Cormorant Garamond", Georgia, serif; margin-bottom: 4px; }
     dialog label { display: grid; gap: 6px; font-size: 13px; color: var(--soft); }
@@ -148,6 +194,10 @@
   </style>
 </head>
 <body>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Sötét téma">
+    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+  </button>
   <!-- Belépés -->
   <div class="gate" id="gate" hidden>
     <form id="login-form">
@@ -531,6 +581,21 @@
       data.categories.splice(data.categories.indexOf(cat), 1);
       if (await save("Kategória törölve")) location.hash = data.categories[0] ? data.categories[0].id : "";
     });
+
+    // ---------- Téma ----------
+    function syncThemeLabel() {
+      const dark = document.documentElement.dataset.theme === "dark";
+      $("theme-toggle").setAttribute("aria-label", dark ? "Világos téma" : "Sötét téma");
+      $("theme-toggle").title = dark ? "Világos téma" : "Sötét téma";
+    }
+    $("theme-toggle").addEventListener("click", () => {
+      const dark = document.documentElement.dataset.theme !== "dark";
+      if (dark) document.documentElement.dataset.theme = "dark";
+      else delete document.documentElement.dataset.theme;
+      try { localStorage.setItem("tervezo-tema", dark ? "dark" : "light"); } catch {}
+      syncThemeLabel();
+    });
+    syncThemeLabel();
 
     // ---------- Indítás ----------
     if (storedPw()) openApp().catch((err) => { if (err.message !== "401") showGate(err.message); });
