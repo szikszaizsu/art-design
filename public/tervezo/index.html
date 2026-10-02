@@ -63,9 +63,6 @@
     html, body { min-height: 100%; }
     body {
       background-color: var(--bg);
-      background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
-      background-size: 22px 22px;
-      background-attachment: fixed;
       color: var(--text);
       font: 400 15px/1.5 Inter, -apple-system, "Segoe UI", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -134,6 +131,10 @@
     .toolbar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-bottom: 20px; padding-right: 52px; }
     @media (max-width: 859px) { .toolbar { padding-right: 0; } }
 
+    /* Interaktív pontrács: az egér körül a pontok kitérnek és szivárványszínben felvillannak. */
+    .dots { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .gate, .layout { position: relative; z-index: 1; }
+
     .theme-toggle {
       position: fixed; z-index: 5; top: 16px; right: 16px;
       width: 42px; height: 42px; border-radius: 999px;
@@ -194,6 +195,7 @@
   </style>
 </head>
 <body>
+  <canvas class="dots" aria-hidden="true"></canvas>
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Sötét téma">
     <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
     <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -596,6 +598,69 @@
       syncThemeLabel();
     });
     syncThemeLabel();
+
+    // ---------- Pontrács ----------
+    (() => {
+      const cv = document.querySelector(".dots"), ctx = cv.getContext("2d");
+      const GAP = 22, RADIUS = 150, PUSH = 7;
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let dpr, w, h, cols, rows, ox, oy, energy, base = "#c9cdd4", dark = false;
+      let mx = -1e4, my = -1e4, raf = 0, last = 0;
+
+      function readTheme() {
+        dark = document.documentElement.dataset.theme === "dark";
+        base = getComputedStyle(document.documentElement).getPropertyValue("--dot").trim() || base;
+      }
+      function size() {
+        dpr = Math.min(devicePixelRatio || 1, 2); w = innerWidth; h = innerHeight;
+        cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.ceil(w / GAP) + 1; rows = Math.ceil(h / GAP) + 1;
+        ox = (w - (cols - 1) * GAP) / 2; oy = (h - (rows - 1) * GAP) / 2;
+        energy = new Float32Array(cols * rows);
+        draw(0, 0);
+      }
+      // Minden pontnak "energiája" van: az egér közelében 1, utána kb. 1 mp alatt cseng le, így csík marad utána.
+      function draw(dt, t) {
+        ctx.clearRect(0, 0, w, h);
+        const decay = Math.pow(0.04, dt / 1000);
+        let busy = false;
+        for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+          const k = j * cols + i, x = ox + i * GAP, y = oy + j * GAP;
+          const dx = x - mx, dy = y - my, d = Math.hypot(dx, dy);
+          let near = d < RADIUS ? 1 - d / RADIUS : 0;
+          near = near * near * (3 - 2 * near);
+          const e = energy[k] = Math.max(near, energy[k] * decay);
+          let px = x, py = y;
+          if (near > 0 && d > .01) { px += dx / d * PUSH * near; py += dy / d * PUSH * near; }
+          if (e < .01) {
+            ctx.globalAlpha = 1; ctx.fillStyle = base;
+            ctx.fillRect(px - .9, py - .9, 1.8, 1.8);
+            continue;
+          }
+          busy = true;
+          const r = .9 + 1.4 * e;
+          const hue = (x * 1.1 + y * .7 + t * .08) % 360;
+          ctx.globalAlpha = .25 + .75 * e;
+          ctx.fillStyle = `hsl(${hue} ${dark ? 85 : 80}% ${dark ? 68 : 58}%)`;
+          ctx.fillRect(px - r, py - r, r * 2, r * 2);
+        }
+        ctx.globalAlpha = 1;
+        return busy;
+      }
+      function loop(t) {
+        const dt = last ? Math.min(t - last, 50) : 16; last = t;
+        raf = draw(dt, t) ? requestAnimationFrame(loop) : 0; // nyugalomban nem rajzol
+        if (!raf) last = 0;
+      }
+      function kick() { if (!raf && !still && !document.hidden) raf = requestAnimationFrame(loop); }
+      addEventListener("pointermove", (e) => { mx = e.clientX; my = e.clientY; kick(); }, { passive: true });
+      addEventListener("pointerdown", (e) => { mx = e.clientX; my = e.clientY; kick(); }, { passive: true });
+      document.documentElement.addEventListener("mouseleave", () => { mx = my = -1e4; kick(); });
+      addEventListener("blur", () => { mx = my = -1e4; kick(); });
+      addEventListener("resize", size);
+      new MutationObserver(() => { readTheme(); draw(0, performance.now()); }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      readTheme(); size();
+    })();
 
     // ---------- Indítás ----------
     if (storedPw()) openApp().catch((err) => { if (err.message !== "401") showGate(err.message); });

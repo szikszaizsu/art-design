@@ -42,6 +42,7 @@ automatikusan kikerülnek az élő oldalra.
   - jelszó: Cloudflare secret `TERVEZO_JELSZO` (Workers → art-design → Settings → Variables and Secrets); a böngésző localStorage-ben tartja (`tervezo-jelszo`), „Kilépés” törli
   - adatok: `LinkStore` Durable Object (`worker.mjs`, migráció v2), egy JSON dokumentum; amíg nincs mentés, a `TERVEZO_SEED` kezdőlista látszik
   - API (`/tervezo/api/*`, mind jelszavas): `GET links`, `PUT links`, `POST login`, `POST meta` (URL → név + leírás a „Kitöltés” gombhoz)
+  - háttér: interaktív pontrács canvas (`.dots`, fodorvincent.com/weboldalak/admin/ mintájára) – az egér körül a pontok kitérnek és szivárványszínben felvillannak, utána kb. 1 mp alatt elhalványulnak
   - jobb felső sarok: sötét/világos téma váltó (`tervezo-tema` a localStorage-ben, alap: világos; sötét = fodorvincent színek)
   - szerkesztés az oldalon: „Szerkesztés” gomb → új link / kategória, átnevezés, ikon (`tervezo/icons.js`), sorrend, törlés
   - helyi teszt: a `wrangler dev` Windowson nem indítja el a Durable Objecteket, ezért egy Node-os próbaszerver futtatja a `worker.mjs`-t memóriabeli tárolóval
