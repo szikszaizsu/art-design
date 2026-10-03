@@ -304,3 +304,11 @@ See the `components:` block above. Notes:
 - The Digital illustration gallery shows the same living-room image twice (files `The Silent (2)` and `STONE (5)` are identical).
 - Unused original PNGs are still in `public/assets/` next to their WebP versions.
 - The page URL of category 01 is still `/art-work/fragments-of-tomorrow/` (historic name).
+
+## Light / dark theme
+
+- Toggle: round 46px button (40px mobile) right after the language switch in the header; moon icon in light, sun in dark. Injected by `script.js` on every portfolio page; label HU/EN/RO.
+- Choice stored in `localStorage['szs-tema']` ('dark' | 'light'); an inline `<head>` script sets `data-theme="dark"` on `<html>` before paint (no flash). Default: light.
+- Dark tokens (`:root[data-theme="dark"]`): ink #f1ece6, muted #a99f96, surface #1f1b19, parchment #171412, tile-dark #0c0a09, page bg #110f0e, accent #d24c45 (brighter for contrast), hairlines rgba(255,255,255,.08–.16). Footer canvas uses `filter: invert(.9) hue-rotate(180deg)`; the forest tile stays white (no invert) in dark mode.
+- Any new hard-coded light colour (#fff, #3a332e, …) needs a matching `:root[data-theme="dark"]` override.
+- `/weboldalak/` now uses the full site header/footer and category-page layout (detail-hero + .work-cards like Grafika és arculat), shares `szs-tema`; still noindex. Not applied to `/tervezo/` (own toggle) or demo sites.
