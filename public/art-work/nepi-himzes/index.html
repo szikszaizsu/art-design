@@ -9,7 +9,7 @@
   <title>Népi hímzés — Szikszai Zsu</title>
   <link rel="icon" type="image/png" href="../../assets/favicon.png?v=sz-red-3"><link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=sz-red-3">
   <link rel="stylesheet" href="../../styles.css?v=theme-2">
-  <script src="/romanian.js?v=web-6" defer></script><script src="/language.js?v=web-6" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
+  <script src="/romanian.js?v=web-7" defer></script><script src="/language.js?v=web-7" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Szikszai Zsu — Art &amp; Design">
   <meta property="og:locale" content="hu_HU">
@@ -30,6 +30,7 @@
     .himzes-caption{margin:16px 0 0}
     .himzes-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 24px;margin:22px 0 56px}
     .himzes-actions .button{margin-top:0}
+    .print-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
     .himzes-hint{color:var(--muted);font-size:.9rem}
     .himzes-stage canvas{cursor:pointer}
     .himzes-stage.is-paused{outline:2px solid var(--accent);outline-offset:-2px}
@@ -58,13 +59,12 @@
     <section class="detail-copy">
       <p>A népi hímzés ugyanolyan régi, mint a népdal és a tánc. Eleinte csak a módosabbak engedhették meg maguknak – drága anyagra, ezüst- és aranyszállal hímeztek. Aztán a falusi lányok is kitanulták, és a saját ingüket, kötényüket, terítőiket díszítették vele: kender- és lenvászonra öltöttek, otthon festett fonallal.</p>
       <p>A gyári textil megjelenésével a hímzés sokáig háttérbe szorult, ma viszont újra visszatalál hozzánk. Én a lassúsága miatt szeretem: türelmes munka, amelyben minden öltés számít.</p>
-      <p>Ez a pávás minta milliméterpapírról való: két páva az életfa két oldalán, alattuk a szegély. Itt öltésről öltésre rajzolódik ki, ahogy a vásznon is.</p>
       <a class="button" href="../../hagyomanyos-munkak/">← Vissza a hagyományos technikákhoz</a>
     </section>
     <section class="detail-gallery section-shell" aria-label="Népi hímzés">
       <div class="himzes-stage"><canvas id="himzes" role="img" aria-label="Két páva és életfa keresztszemes hímzésmintája, kockánként kirajzolódva"></canvas></div>
-      <p class="gallery-caption himzes-caption">Minta típusa: pávás · 1930 · Kilyenfalva</p>
-      <div class="himzes-actions"><span class="himzes-hint">Kattints a mintára: megáll, újabb kattintásra továbbmegy.</span><button type="button" class="button button-secondary" id="himzes-print">Minta nyomtatása</button></div>
+      <p class="gallery-caption himzes-caption">Minta típusa: pávás · 1930 · Gyergyói Kilyenfalva minta</p>
+      <div class="himzes-actions"><span class="himzes-hint">Kattints a mintára: megáll, újabb kattintásra továbbmegy.</span><button type="button" class="button button-secondary" id="himzes-print"><svg class="print-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/><circle cx="17.5" cy="12" r=".6"/></svg>Minta nyomtatása</button></div>
     </section>
   </main>
   <footer class="portfolio-footer">
