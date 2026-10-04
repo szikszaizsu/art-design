@@ -176,7 +176,7 @@
   const resize = () => {
     const w = canvas.clientWidth;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    cell = Math.max(4, Math.floor(w / Math.max(128, W * 1.25)));
+    cell = Math.max(3, Math.floor(w / (W + 8)));
     cols = Math.ceil(w / cell) + 2;
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(rows * cell * dpr);
@@ -190,11 +190,8 @@
   let start = null, paused = false, pausedAt = 0, pausedTotal = 0, lastNow = 0;
 
   // kattintásra megáll / továbbmegy
-  const toggle = () => {
-    paused = !paused;
-    if (paused) pausedAt = lastNow; else pausedTotal += lastNow - pausedAt;
-    canvas.closest('.himzes-stage')?.classList.toggle('is-paused', paused);
-  };
+  // kattintásra újra kirajzolódik
+  const toggle = () => { start = null; pausedTotal = 0; };
   canvas.addEventListener('click', toggle);
   canvas.tabIndex = 0;
   canvas.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
@@ -236,7 +233,7 @@
 
     // eltolás: első minta középre, építés + várakozás után indul
     const first = Math.floor((cols - W) / 2);
-    const scroll = reduce ? 0 : Math.max(0, t - BUILD - HOLD) * SPEED; // oszlopban
+    const scroll = 0; // a minta egy helyben marad
     const offset = first - scroll;
     const shift = (offset % 1 + 1) % 1;
 
@@ -254,7 +251,7 @@
       const world = firstWorld + sc + 1;          // világ-oszlop
       const tile = Math.floor(world / PERIOD);
       const px = world - tile * PERIOD;           // oszlop a mintán belül
-      if (px >= W || world < 0) continue;
+      if (px >= W || world < 0 || tile !== 0) continue;
       const screenX = (world + offset) * cell;
       if (screenX < -cell || screenX > w) continue;
       for (let y = 0; y < H; y++) {
