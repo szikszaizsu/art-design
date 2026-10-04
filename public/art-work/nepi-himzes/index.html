@@ -9,7 +9,7 @@
   <title>Népi hímzés — Szikszai Zsu</title>
   <link rel="icon" type="image/png" href="../../assets/favicon.png?v=sz-red-3"><link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=sz-red-3">
   <link rel="stylesheet" href="../../styles.css?v=theme-2">
-  <script src="/romanian.js?v=web-5" defer></script><script src="/language.js?v=web-5" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
+  <script src="/romanian.js?v=web-6" defer></script><script src="/language.js?v=web-6" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Szikszai Zsu — Art &amp; Design">
   <meta property="og:locale" content="hu_HU">
@@ -27,7 +27,12 @@
   <link rel="alternate" hreflang="x-default" href="https://art-design.szikszaizsu.workers.dev/art-work/nepi-himzes/">
   <style>
     .himzes-stage{border:1px solid rgba(23,19,16,.1);border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 14px 36px rgba(42,24,13,.08)}
-    .himzes-caption{margin:16px 0 40px}
+    .himzes-caption{margin:16px 0 0}
+    .himzes-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 24px;margin:22px 0 56px}
+    .himzes-actions .button{margin-top:0}
+    .himzes-hint{color:var(--muted);font-size:.9rem}
+    .himzes-stage canvas{cursor:pointer}
+    .himzes-stage.is-paused{outline:2px solid var(--accent);outline-offset:-2px}
     .himzes-stage canvas{display:block;width:100%}
   </style>
 </head>
@@ -58,7 +63,8 @@
     </section>
     <section class="detail-gallery section-shell" aria-label="Népi hímzés">
       <div class="himzes-stage"><canvas id="himzes" role="img" aria-label="Két páva és életfa keresztszemes hímzésmintája, kockánként kirajzolódva"></canvas></div>
-      <p class="gallery-caption himzes-caption">Minta típusa: pávás · 1930</p>
+      <p class="gallery-caption himzes-caption">Minta típusa: pávás · 1930 · Kilyenfalva</p>
+      <div class="himzes-actions"><span class="himzes-hint">Kattints a mintára: megáll, újabb kattintásra továbbmegy.</span><button type="button" class="button button-secondary" id="himzes-print">Minta nyomtatása</button></div>
     </section>
   </main>
   <footer class="portfolio-footer">
@@ -87,7 +93,7 @@
     <div class="footer-scene" data-footer-scene aria-hidden="true"><canvas></canvas></div>
     <div class="footer-bottom section-shell"><p>© 2026 Szikszai Zsu. Minden jog fenntartva.</p><a href="../../adatvedelem/">Adatvédelem</a><a href="../../">Vissza a főoldalra ↑</a></div>
   </footer>
-  <script src="himzes.js?v=1" defer></script>
+  <script src="himzes.js?v=2" defer></script>
   <script src="../../script.js?v=theme-1"></script>
 </body>
 </html>

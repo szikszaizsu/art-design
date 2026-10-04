@@ -97,11 +97,49 @@
 
   const BUILD = 3.2, HOLD = 1.2, SPEED = 6; // mp, mp, oszlop/mp
   const POP = .28;
-  let start = null;
+  let start = null, paused = false, pausedAt = 0, pausedTotal = 0, lastNow = 0;
+
+  // kattintásra megáll / továbbmegy
+  const toggle = () => {
+    paused = !paused;
+    if (paused) pausedAt = lastNow; else pausedTotal += lastNow - pausedAt;
+    canvas.closest('.himzes-stage')?.classList.toggle('is-paused', paused);
+  };
+  canvas.addEventListener('click', toggle);
+  canvas.tabIndex = 0;
+  canvas.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
+
+  // nyomtatás: a teljes minta tisztán, rácson, külön lapon
+  const printBtn = document.getElementById('himzes-print');
+  if (printBtn) printBtn.addEventListener('click', () => {
+    const cs = 18, pad = 2, pc = document.createElement('canvas');
+    pc.width = (W + pad * 2) * cs; pc.height = (H + pad * 2) * cs;
+    const g = pc.getContext('2d');
+    g.fillStyle = '#fff'; g.fillRect(0, 0, pc.width, pc.height);
+    g.strokeStyle = '#d9d4cf'; g.lineWidth = 1; g.beginPath();
+    for (let x = 0; x <= W + pad * 2; x++) { g.moveTo(x * cs + .5, 0); g.lineTo(x * cs + .5, pc.height); }
+    for (let y = 0; y <= H + pad * 2; y++) { g.moveTo(0, y * cs + .5); g.lineTo(pc.width, y * cs + .5); }
+    g.stroke();
+    g.fillStyle = '#000';
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (grid[y][x]) g.fillRect((x + pad) * cs + 1, (y + pad) * cs + 1, cs - 1, cs - 1);
+    const title = (document.querySelector('.himzes-caption') || {}).textContent || '';
+    const frame = document.createElement('iframe');
+    frame.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0';
+    document.body.append(frame);
+    const d = frame.contentDocument;
+    d.open();
+    d.write('<!doctype html><html><head><meta charset="utf-8"><title>' + title + '</title><style>@page{size:landscape;margin:12mm}body{margin:0;font:12px Arial,sans-serif;text-align:center}img{width:100%;height:auto}p{margin:8px 0 0;letter-spacing:.1em;text-transform:uppercase}</style></head><body><img src="' + pc.toDataURL('image/png') + '" alt=""><p>' + title + ' · szikszaizsu.com</p></body></html>');
+    d.close();
+    const img = d.querySelector('img');
+    const go = () => { frame.contentWindow.focus(); frame.contentWindow.print(); setTimeout(() => frame.remove(), 1500); };
+    if (img.complete) setTimeout(go, 50); else img.onload = go;
+  });
 
   const draw = (now) => {
+    lastNow = now;
     if (start === null) start = now;
-    const t = (now - start) / 1000;
+    if (paused) { requestAnimationFrame(draw); return; }
+    const t = (now - start - pausedTotal) / 1000;
     const w = canvas.width / dpr, h = canvas.height / dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h);
