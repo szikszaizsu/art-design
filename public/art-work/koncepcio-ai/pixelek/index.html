@@ -1,14 +1,9 @@
 <!doctype html>
 <html lang="hu"><head><meta charset="utf-8">
-  <script>try{if(localStorage.getItem("szs-tema")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Pixelek: egy kép, ami négyzetekből áll. Mozgasd a csúszkát, és nézd meg, mikor lesz a foltokból táj."><title>Pixelek — Szikszai Zsu</title><link rel="icon" type="image/png" href="../../../assets/favicon.png?v=sz-red-3"><link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png?v=sz-red-3"><link rel="stylesheet" href="../../../styles.css?v=theme-2"><script src="/romanian.js?v=web-2" defer></script><script src="/language.js?v=web-2" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
+  <script>try{if(localStorage.getItem("szs-tema")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Pixelek: egy kép, ami négyzetekből áll. Mozgasd a csúszkát, és nézd meg, mikor lesz a foltokból táj."><title>Pixelek — Szikszai Zsu</title><link rel="icon" type="image/png" href="../../../assets/favicon.png?v=sz-red-3"><link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png?v=sz-red-3"><link rel="stylesheet" href="../../../styles.css?v=theme-2"><script src="/romanian.js?v=web-3" defer></script><script src="/language.js?v=web-3" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
 <style>
-.px-stage{position:relative;border:1px solid rgba(23,19,16,.12);border-radius:22px;overflow:hidden;background:#f6f1ea;box-shadow:0 14px 36px rgba(42,24,13,.08)}
-.px-stage canvas{display:block;width:100%;height:auto;aspect-ratio:16/10;image-rendering:pixelated}
-.px-controls{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:22px}
-.px-controls label{font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6f655e}
-.px-controls input[type=range]{flex:1 1 240px;min-width:180px;accent-color:#8f1f1f}
-.px-value{min-width:78px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#171310}
-.px-hint{margin:14px 0 40px;color:#6f655e;font-size:.9rem}
+.himzes-stage{border:1px solid rgba(23,19,16,.1);border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 14px 36px rgba(42,24,13,.08);margin-bottom:40px}
+.himzes-stage canvas{display:block;width:100%}
 </style>
 </head>
 <body>
@@ -22,11 +17,7 @@
       <a href="../../../#contact">Elérhetőség</a>
     </nav>
   </header>
-<main class="detail-main"><section class="detail-hero section-shell"><a class="back-link" href="../">← Vissza a koncepciókhoz</a><p class="eyebrow">Digitális munkák · Koncepció</p><h1>Pixelek</h1><div class="detail-meta"><span>Négyzetek</span><span>Rács</span><span>Felbontás</span></div></section><section class="detail-copy"><p>Minden digitális kép négyzetekből áll, csak általában olyan aprók, hogy nem látjuk őket. Itt nagyra húztam őket. Mozgasd a csúszkát, és nézd meg, mikor lesz a foltokból táj.</p></section><section class="section-shell" aria-label="Pixelek">
-<div class="px-stage"><canvas id="px" width="1280" height="800" role="img" aria-label="Hegyek és nap, pixelekre bontva"></canvas></div>
-<div class="px-controls"><label for="px-size">Pixelméret</label><input id="px-size" type="range" min="0" max="100" value="82" step="1"><span class="px-value" id="px-val">64 px</span></div>
-<p class="px-hint">Balra a négyzetek nagyok, jobbra egyre kisebbek, a végén már a kép marad.</p>
-</section></main><footer class="portfolio-footer">
+<main class="detail-main"><section class="detail-hero section-shell"><a class="back-link" href="../">← Vissza a koncepciókhoz</a><p class="eyebrow">Digitális munkák · Koncepció</p><h1>Pixelek</h1><div class="detail-meta"><span>Négyzetek</span><span>Rács</span><span>Felbontás</span></div></section><section class="detail-copy"><p>Minden digitális kép négyzetekből áll, csak általában olyan aprók, hogy nem látjuk őket.</p></section><section class="detail-gallery section-shell" aria-label="Pixelek"><div class="himzes-stage"><canvas id="himzes" role="img" aria-label="Két páva és életfa hímzésmintája, kockánként kirajzolódva"></canvas></div></section></main><footer class="portfolio-footer">
     <div class="portfolio-footer-grid section-shell">
       <div class="footer-intro">
         <a class="footer-brand" href="../../../">SZIKSZAI <span>ZSU</span></a>
@@ -56,45 +47,7 @@
     <div class="footer-scene" data-footer-scene aria-hidden="true"><canvas></canvas></div>
     <div class="footer-bottom section-shell"><p>&copy; 2026 Szikszai Zsu. Minden jog fenntartva.</p><a href="../../../adatvedelem/">Adatvédelem</a><a href="../../../">Vissza a f&#337;oldalra &uarr;</a></div>
   </footer>
+  <script src="himzes.js?v=1" defer></script>
   <script src="../../../script.js?v=theme-1"></script>
-<script>
-(() => {
-  const cv = document.getElementById("px"), ctx = cv.getContext("2d");
-  const W = cv.width, H = cv.height;
-  const src = document.createElement("canvas"); src.width = W; src.height = H;
-  const s = src.getContext("2d");
 
-  // the picture itself: sky, sun, three ridges, drawn once at full resolution
-  const sky = s.createLinearGradient(0, 0, 0, H);
-  sky.addColorStop(0, "#e9e2da"); sky.addColorStop(.55, "#f3d9cf"); sky.addColorStop(1, "#f7efe6");
-  s.fillStyle = sky; s.fillRect(0, 0, W, H);
-  const sun = s.createRadialGradient(W * .68, H * .36, 8, W * .68, H * .36, H * .3);
-  sun.addColorStop(0, "#8f1f1f"); sun.addColorStop(.38, "#b3392f"); sun.addColorStop(.4, "rgba(214,120,104,.55)"); sun.addColorStop(1, "rgba(247,239,230,0)");
-  s.fillStyle = sun; s.fillRect(0, 0, W, H);
-  const ridge = (base, amp, f1, f2, ph, color) => {
-    s.fillStyle = color; s.beginPath(); s.moveTo(0, H);
-    for (let x = 0; x <= W; x += 4) s.lineTo(x, base + amp * Math.sin(x / f1 + ph) + amp * .45 * Math.sin(x / f2 + ph * 2));
-    s.lineTo(W, H); s.closePath(); s.fill();
-  };
-  ridge(H * .52, 46, 150, 54, 0.6, "#cdbfb6");
-  ridge(H * .64, 38, 120, 41, 2.1, "#a89a93");
-  ridge(H * .78, 30, 95, 33, 4.0, "#3f3a37");
-
-  const slider = document.getElementById("px-size"), out = document.getElementById("px-val");
-  const sizes = [256, 192, 160, 128, 96, 80, 64, 48, 40, 32, 24, 20, 16, 12, 10, 8, 6, 5, 4, 3, 2, 1];
-  function render() {
-    const cell = sizes[Math.min(sizes.length - 1, Math.floor(slider.value / 100 * (sizes.length - 1) + .001))];
-    out.textContent = cell === 1 ? "1 px" : cell + " px";
-    const w = Math.max(1, Math.round(W / cell)), h = Math.max(1, Math.round(H / cell));
-    const t = document.createElement("canvas"); t.width = w; t.height = h;
-    const tc = t.getContext("2d"); tc.imageSmoothingEnabled = true; tc.imageSmoothingQuality = "high";
-    tc.drawImage(src, 0, 0, w, h);
-    ctx.imageSmoothingEnabled = false;
-    ctx.clearRect(0, 0, W, H);
-    ctx.drawImage(t, 0, 0, w, h, 0, 0, w * cell, h * cell);
-  }
-  slider.addEventListener("input", render);
-  render();
-})();
-</script>
 </body></html>

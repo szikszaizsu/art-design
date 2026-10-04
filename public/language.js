@@ -57,6 +57,7 @@
     'Prompttervezés': 'Prompt design',
     'Pixelek': 'Pixels', 'Négyzetek': 'Squares', 'Rács': 'Grid', 'Felbontás': 'Resolution',
     '← Vissza a koncepciókhoz': '← Back to concepts',
+    'Minden digitális kép négyzetekből áll, csak általában olyan aprók, hogy nem látjuk őket.': 'Every digital image is made of squares, they’re just usually too small to see.',
     'Minden digitális kép négyzetekből áll, csak általában olyan aprók, hogy nem látjuk őket. Itt nagyra húztam őket. Mozgasd a csúszkát, és nézd meg, mikor lesz a foltokból táj.': 'Every digital image is made of squares, they\'re just usually too small to see. Here I blew them up. Move the slider and watch when the blotches turn into a landscape.',
     'Pixelméret': 'Pixel size',
     'Balra a négyzetek nagyok, jobbra egyre kisebbek, a végén már a kép marad.': 'On the left the squares are big, to the right they get smaller, until only the picture is left.',

@@ -56,6 +56,7 @@ window.portfolioRomanian = {
   'Prompt design': 'Design de prompturi',
   'Pixels': 'Pixeli', 'Squares': 'Pătrățele', 'Grid': 'Grilă', 'Resolution': 'Rezoluție',
   '← Back to concepts': '← Înapoi la concepte',
+  'Every digital image is made of squares, they’re just usually too small to see.': 'Orice imagine digitală e făcută din pătrățele, doar că de obicei sunt prea mici ca să le vedem.',
   'Every digital image is made of squares, they\'re just usually too small to see. Here I blew them up. Move the slider and watch when the blotches turn into a landscape.': 'Orice imagine digitală e făcută din pătrățele, doar că de obicei sunt prea mici ca să le vedem. Aici le-am mărit. Mișcă cursorul și vezi când petele devin peisaj.',
   'Pixel size': 'Mărimea pixelilor',
   'On the left the squares are big, to the right they get smaller, until only the picture is left.': 'În stânga pătrățelele sunt mari, spre dreapta devin tot mai mici, până rămâne doar imaginea.',
