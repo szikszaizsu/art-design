@@ -670,3 +670,29 @@ body { line-height: 1.7; }
 .hv-ink > img { filter: url(#ink-flow); transform: translateY(var(--ink-shift, 0px)); }
 .hv-ink > canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .hv-ink > img { filter: none; } }
+/* Home v2 — text + small icons, no pictures */
+.hv-hero-solo { grid-template-columns: 1fr; text-align: center; justify-items: center; padding: 120px 0 130px; }
+.hv-hero-solo .hv-text { margin-left: auto; margin-right: auto; }
+.hv-hero-solo .hv-links { justify-content: center; }
+.hv-hero-solo h1 { font-size: clamp(3.4rem, 8vw, 7.4rem); }
+.hv-ico { width: 30px; height: 30px; flex-shrink: 0; fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.hv-list { margin-top: 64px; border-top: 1px solid var(--line); }
+.hv-row { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 28px; padding: 30px 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: padding .3s ease, background .3s ease; }
+.hv-row h3 { margin: 0; font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 2.3rem); font-weight: 500; line-height: 1.1; }
+.hv-row p { margin: 4px 0 0; color: var(--muted); font-size: .95rem; }
+.hv-arrow { color: var(--muted); font-size: 1.3rem; transition: transform .3s ease, color .3s ease; }
+.hv-row:hover { padding-left: 14px; }
+.hv-row:hover .hv-arrow { color: var(--accent); transform: translate(3px, -3px); }
+.hv-subhead { margin-top: 110px; }
+.hv-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.hv-chip { display: flex; align-items: center; gap: 14px; padding: 22px 20px; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); font-family: var(--serif); font-size: 1.25rem; font-weight: 500; line-height: 1.15; text-decoration: none; transition: border-color .25s, transform .25s; }
+.hv-chip:hover { border-color: var(--accent); transform: translateY(-2px); }
+.hv-chip .hv-ico { width: 26px; height: 26px; }
+.hv-svc .service-number { display: flex; align-items: center; gap: 12px; }
+.hv-svc .service-number b { font-weight: 600; }
+@media (max-width: 900px) {
+  .hv-hero-solo { padding: 72px 0 88px; }
+  .hv-row { gap: 18px; padding: 24px 2px; }
+  .hv-chips { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) { .hv-chips { grid-template-columns: 1fr; } }
