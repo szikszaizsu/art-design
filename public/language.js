@@ -181,7 +181,7 @@
   if (!header) {
     header = document.createElement('header');
     header.className = 'site-header';
-    header.innerHTML = '<a class="brand" href="/">SZIKSZAI <span>ZSU</span></a>';
+    header.innerHTML = '<a class="brand" href="/"><span class="notranslate" translate="no">SZI<span class="brand-k">K</span>SZAI ZSU</span></a>';
     document.body.prepend(header);
   }
   const switcher = document.createElement('div');
