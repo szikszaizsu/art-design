@@ -662,3 +662,11 @@ body { line-height: 1.7; }
 .hv-hero h1 { white-space: nowrap; font-size: clamp(3.2rem, 5.6vw, 5.8rem); }
 .hv-art > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
 :root[data-theme="dark"] .hv-art > img { border-radius: var(--radius); }
+.hv-hero { min-height: 0; padding: 56px 0 96px; gap: 48px; }
+.hv-art { aspect-ratio: 5 / 4; }
+@media (max-width: 900px) { .hv-hero { padding: 24px 0 64px; } }
+.hv-ink { overflow: hidden; }
+.hv-ink-svg { position: absolute; width: 0; height: 0; }
+.hv-ink > img { filter: url(#ink-flow); transform: translateY(var(--ink-shift, 0px)); }
+.hv-ink > canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .hv-ink > img { filter: none; } }
