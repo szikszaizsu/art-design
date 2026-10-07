@@ -659,3 +659,6 @@ body { line-height: 1.7; }
 .hv-varazs { position: relative; width: 100%; aspect-ratio: 4 / 3; background: #fff; }
 .hv-varazs canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
 :root[data-theme="dark"] .hv-varazs { background: transparent; }
+.hv-hero h1 { white-space: nowrap; font-size: clamp(3.2rem, 5.6vw, 5.8rem); }
+.hv-art > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+:root[data-theme="dark"] .hv-art > img { border-radius: var(--radius); }
