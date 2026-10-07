@@ -655,3 +655,7 @@ body { line-height: 1.7; }
 }
 @media (max-width: 520px) { .hv-svcs { grid-template-columns: 1fr; } }
 :root[data-theme="dark"] .hv-contact .contact-form .button { background: var(--accent); }
+.hv-art .forest-tile { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; }
+.hv-varazs { position: relative; width: 100%; aspect-ratio: 4 / 3; background: #fff; }
+.hv-varazs canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
+:root[data-theme="dark"] .hv-varazs { background: transparent; }
