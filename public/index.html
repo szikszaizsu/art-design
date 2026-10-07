@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#f8f2ed">
   <title>Szikszai Zsu — Vizuális alkotó · UX/UI tervező</title>
   <link rel="icon" type="image/png" href="assets/favicon.png?v=sz-red-3"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=sz-red-3">
-  <link rel="stylesheet" href="styles.css?v=theme-2">
-  <script src="script.js?v=theme-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=hv-1">
+  <script src="script.js?v=theme-1" defer></script><script src="assets/varazs.js?v=1" defer></script>
 <script src="/romanian.js?v=web-1" defer></script><script src="/language.js?v=web-1" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script><script src="/forest-tile.js?v=tile-3" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Szikszai Zsu — Art &amp; Design">
@@ -39,115 +39,76 @@
     </nav>
   </header>
 
-  <main id="top">
-    <section class="hero section-shell">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">Vizuális alkotó · UX/UI tervező</p>
-        <h1><span>Szikszai Zsu</span></h1>
-        <p class="hero-lead">Művészi szem. MI-jártasság. Egyetlen vízió.</p>
-        <p class="hero-text">A klasszikus vizuális gondolkodást digitális tapasztalattal kapcsolom össze, hogy karakteres képi világokat és átgondolt felhasználói élményeket alkossak.</p>
-        <div class="hero-actions">
-          <a class="button" href="#contact">Dolgozzunk együtt <span aria-hidden="true">↗</span></a>
-          <a class="button button-secondary" href="#work">Munkáim</a>
-        </div>
-        <blockquote class="hero-quote">„Az élet ott kezdődik, ahol a komfortzónád véget ér.”</blockquote>
+  <main id="top" class="hv">
+    <section class="hv-hero hv-shell">
+      <div class="hv-hero-copy">
+        <p class="hv-label">Vizuális alkotó · UX/UI tervező</p>
+        <h1>Szikszai Zsu</h1>
+        <p class="hv-lead">Művészi szem. MI-jártasság. Egyetlen vízió.</p>
+        <p class="hv-text">A klasszikus vizuális gondolkodást digitális tapasztalattal kapcsolom össze, hogy karakteres képi világokat és átgondolt felhasználói élményeket alkossak.</p>
+        <div class="hv-links"><a href="#contact">Dolgozzunk együtt <span aria-hidden="true">↗</span></a><a class="hv-muted" href="#work">Munkáim</a></div>
       </div>
-      <figure class="hero-image">
-        <img src="assets/portrait-headshot.webp" alt="Szikszai Zsu portréja" width="1200" height="1200">
-      </figure>
+      <div class="hv-art"><canvas id="varazs" role="img" aria-label="Pávás hímzésminta, amely apró kockákból áll össze; az egér szétszórja, majd újra összeáll"></canvas></div>
     </section>
 
-    <section class="quote-band" aria-label="Alkotói hitvallás">
-      <p><em>Ötletből kép. Képből élmény. Élményből emlék.</em></p>
+    <section class="hv-block hv-shell" id="work">
+      <p class="hv-label">Válogatott munkák</p>
+      <h2>Digitális munkák</h2>
+      <div class="hv-grid4">
+        <a class="hv-card" href="art-work/fragments-of-tomorrow/"><img src="assets/illusztracio-valogatas.webp" alt="Digitális illusztrációk: Together, Stone és piros sapkás profil" width="1024" height="1024" loading="lazy"><h3>Digitális illusztráció</h3><p><em>Történetek pixelekből</em></p></a>
+        <a class="hv-card" href="art-work/koncepcio-ai/"><div class="forest-tile" data-forest-tile aria-hidden="true"><canvas></canvas></div><h3>Koncepció és AI-kísérletek</h3><p><em>Ötlettől a promptig</em></p></a>
+        <a class="hv-card" href="art-work/grafika-arculat/"><img src="assets/grafika-mozaik.webp" alt="Logó-mozaik: Tihna, Alinia, DentalTop és Livada" width="1024" height="1024" loading="lazy"><h3>Grafika és arculat</h3><p><em>Vizuális identitások</em></p></a>
+        <a class="hv-card" href="weboldalak/"><img src="assets/webdesign-mozaik.webp" alt="Weboldal demók mozaikja" width="1024" height="1024" loading="lazy"><h3>Webdesign és digitális felületek</h3><p><em>Élmények a képernyőn</em></p></a>
+      </div>
+      <div class="hv-subhead"><h2>Hagyományos technikák</h2><a class="hv-label" href="hagyomanyos-munkak/">Belépés a kategóriákhoz ↗</a></div>
+      <div class="hv-grid-tr">
+        <a href="art-work/bead-weaving/"><img src="assets/bead-weaving.webp" alt="Hagyományos piros, fekete és fehér gyöngyékszer" width="1024" height="1024" loading="lazy"><h4>Gyöngyszövés</h4></a>
+        <a href="art-work/egg-decorating/"><img src="assets/egg-decorating.webp" alt="Kosár hagyományosan díszített tojásokkal" width="1024" height="1024" loading="lazy"><h4>Tojásírás viasztechnikával</h4></a>
+        <a href="art-work/nepi-himzes/"><img src="assets/nepi-himzes.webp" alt="Két páva és életfa keresztszemes hímzésmintája" width="1024" height="1024" loading="lazy"><h4>Népi hímzés</h4></a>
+        <a href="art-work/felting/"><div class="gallery-slot"><span>Hamarosan</span></div><h4>Nemezelés</h4></a>
+      </div>
     </section>
 
-    <section class="about section-shell" id="about">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Rólam</p>
-        <h2>Ahol a klasszikus művészi vízió találkozik a digitális dizájnnal.</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-portrait reveal">
-          <img src="assets/portrait-studio.webp" alt="Szikszai Zsu alkotás közben" width="1400" height="1400" loading="lazy">
-        </div>
-        <div class="about-copy reveal">
-          <article>
+    <section class="hv-block hv-shell" id="about">
+      <p class="hv-label">Rólam</p>
+      <h2>Ahol a klasszikus művészi vízió találkozik a digitális dizájnnal.</h2>
+      <div class="hv-about">
+        <article class="hv-about-item">
             <span>01</span><h3>A látomásom</h3>
             <p>Képzőművészként kezdtem, ma pedig UX/UI tervezőként dolgozom – a klasszikus vizuális gondolkodást a digitális design logikájával ötvözve. Célom olyan vizuális élmények létrehozása, amelyek nemcsak szépek, hanem maradandó benyomást is hagynak. Számomra a mesterséges intelligencia nem helyettesíti a művészi víziót – hanem kiterjeszti azt. Bármilyen eszközt is használok, a szívem mélyén mindig művész maradok.</p>
           </article>
-          <article>
+        <article class="hv-about-item">
             <span>02</span><h3>A küldetésem</h3>
             <p>Olyan vizuális kampányokat és felhasználói felületeket készítek, amelyek a klasszikus művészi víziót ötvözik a legújabb mesterséges intelligencia eszközökkel – mesterséges intelligencia által generált képeket, márkaidentitást és UX/UI designt egyaránt felölelve. Célom olyan vizuális élmények létrehozása, amelyek hitelesek, prémium minőségűek és könnyedén használhatóak.</p>
             <p>A technológia nem helyettesíti a művészi víziót – új eszközöket ad a kezébe, így a szépség és a funkcionalitás végre egymás mellett virágozhat.</p>
           </article>
-          <article>
+        <article class="hv-about-item">
             <span>03</span><h3>Filozófiám</h3>
             <p>Minden vonás egy döntés. Minden döntés egy vita. Nem hiszek a szerencsés véletlenekben – csak a több ezer órás munka során finomodott ösztönökben. A szakértelem az első. A koncepció következik. Az őszinteség tartja össze az egészet.</p>
             <p>Nem számít, milyen eszközökkel dolgozom, szívem mélyén mindig művész maradok – ez az alapja és hitelessége mindennek, amit alkotok.</p>
           </article>
-        </div>
       </div>
     </section>
 
-    <section class="work section-shell" id="work">
-      <div class="section-heading">
-        <p class="eyebrow">Válogatott munkák</p>
-        <h2><em>„Digitális tisztaság.<br>Kézzel alkotott lélek.”</em></h2>
+    <section class="hv-block hv-shell" id="services">
+      <p class="hv-label">Amit kínálok</p>
+      <h2>Miben segíthetek?</h2>
+      <div class="hv-svcs">
+        <article class="hv-svc"><span class="service-number">01</span><h3>Kampányvizuálok</h3><p>Közösségi média posztok és hirdetési képek, amelyek megállítják a görgetést – a márkád stílusában.</p></article>
+        <article class="hv-svc"><span class="service-number">02</span><h3>Arculat</h3><p>Logó, színvilág és tipográfia, hogy a márkád első ránézésre felismerhető legyen.</p></article>
+        <article class="hv-svc"><span class="service-number">03</span><h3>UX/UI tervezés</h3><p>Weboldalak és alkalmazások felülete, amelyet könnyű és jó érzés használni.</p></article>
+        <article class="hv-svc"><span class="service-number">04</span><h3>Egyedi kézműves darabok</h3><p>Gyöngyszövött ékszer vagy viaszos technikával díszített tojás – egyedi kérésre, ajándékba is.</p></article>
       </div>
-      <div class="work-digital">
-        <div class="work-digital-head reveal">
-          <div><span class="work-kicker">01 · Vizuális kommunikáció</span><h3>Digitális munkák</h3></div>
-          <p>Vizuális kampányok, digitális illusztrációk és felületek, ahol az ötlet élménnyé válik.</p>
-        </div>
-        <div class="work-cats">
-          <a class="work-cat reveal" href="art-work/fragments-of-tomorrow/">
-            <img src="assets/illusztracio-valogatas.webp" alt="Digitális illusztrációk: Together, Stone és piros sapkás profil" width="1024" height="1024" loading="lazy">
-            <span>01</span><h4>Digitális illusztráció</h4><p><em>Történetek pixelekből</em></p>
-          </a>
-          <a class="work-cat reveal" href="art-work/koncepcio-ai/">
-            <div class="forest-tile" data-forest-tile aria-hidden="true"><canvas></canvas></div>
-            <span>02</span><h4>Koncepció és AI-kísérletek</h4><p><em>Ötlettől a promptig</em></p>
-          </a>
-          <a class="work-cat reveal" href="art-work/grafika-arculat/">
-            <img src="assets/grafika-mozaik.webp" alt="Logó-mozaik: Tihna, Alinia, DentalTop és Livada" width="1024" height="1024" loading="lazy">
-            <span>03</span><h4>Grafika és arculat</h4><p><em>Vizuális identitások</em></p>
-          </a>
-          <a class="work-cat reveal" href="weboldalak/">
-            <img src="assets/webdesign-mozaik.webp" alt="Weboldal demók mozaikja" width="1024" height="1024" loading="lazy">
-            <span>04</span><h4>Webdesign és digitális felületek</h4><p><em>Élmények a képernyőn</em></p>
-          </a>
-        </div>
-      </div>
-      <a class="work-traditional reveal" href="hagyomanyos-munkak/">
-        <img src="assets/traditional-work-portfolio.webp" alt="Piros, fekete és fehér gyöngykarkötő" width="1024" height="1024" loading="lazy">
-        <div><span class="work-kicker">02 · Kézzel készült</span><h3>Hagyományos technikák</h3><p>Hagyományos technikák, amelyek türelemből, részletekből és személyes történetekből születnek.</p><strong>Belépés a kategóriákhoz ↗</strong></div>
-      </a>
+      <div class="hv-links"><a href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></div>
     </section>
 
-    <section class="services" id="services">
-      <div class="section-shell">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Amit kínálok</p>
-          <h2>Miben segíthetek?</h2>
-        </div>
-        <div class="services-grid">
-        <article class="service-card reveal"><span class="service-number">01</span><h3>Kampányvizuálok</h3><p>Közösségi média posztok és hirdetési képek, amelyek megállítják a görgetést – a márkád stílusában.</p><a class="service-link" href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></article>
-        <article class="service-card reveal"><span class="service-number">02</span><h3>Arculat</h3><p>Logó, színvilág és tipográfia, hogy a márkád első ránézésre felismerhető legyen.</p><a class="service-link" href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></article>
-        <article class="service-card reveal"><span class="service-number">03</span><h3>UX/UI tervezés</h3><p>Weboldalak és alkalmazások felülete, amelyet könnyű és jó érzés használni.</p><a class="service-link" href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></article>
-        <article class="service-card reveal"><span class="service-number">04</span><h3>Egyedi kézműves darabok</h3><p>Gyöngyszövött ékszer vagy viaszos technikával díszített tojás – egyedi kérésre, ajándékba is.</p><a class="service-link" href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></article>
-        </div>
-        <div class="services-cta"><a class="button" href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="section-shell contact-grid">
-        <div class="contact-copy reveal">
+    <section class="hv-block hv-shell hv-contact" id="contact">
+      <div class="contact-copy reveal">
           <p class="eyebrow">Elérhetőség</p>
           <h2>Van egy ötleted?<br>Alkossuk meg együtt.</h2>
           <p>Legyen szó karakteres hirdetésről, átgondolt felületről vagy egyedi műalkotásról, minden jó projekt egy beszélgetéssel kezdődik.</p>
         </div>
-        <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/szikszaizsu86@gmail.com" method="POST">
+      <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/szikszaizsu86@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="Portfolio website enquiry">
           <input type="hidden" name="_template" value="table">
           <label>Teljes név<input name="name" autocomplete="name" required></label>
@@ -156,7 +117,6 @@
           <button class="button" type="submit">Írj nekem <span aria-hidden="true">↗</span></button>
           <p class="form-note">Az üzenetet a FormSubmit továbbítja nekem. A küldéshez biztonsági ellenőrzésre lehet szükség.<br><a href="adatvedelem/">Adatvédelmi tájékoztató</a></p>
         </form>
-      </div>
     </section>
   </main>
 
