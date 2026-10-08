@@ -217,32 +217,7 @@ const exp=mi=>tot(i=>EXP.includes(i.group),mi);
 const bal=mi=>inc(mi)-exp(mi);
 const gsum=(g,mi)=>tot(i=>i.group===g,mi);
 const rowSum=i=>i.vals.reduce((a,b)=>a+(b||0),0);
-// Mentés: helyben és a szerveren is (így a telefon és a gép ugyanazt látja)
-let pendingPut=null;
-function save(){
-  try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}
-  clearTimeout(pendingPut);
-  pendingPut=setTimeout(pushRemote,400);
-}
-async function pushRemote(){
-  pendingPut=null;
-  try{await fetch('/payouts/api/state',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(st),cache:'no-store'});}catch(e){}
-}
-async function pullRemote(){
-  if(pendingPut)return;
-  try{
-    const r=await fetch('/payouts/api/state',{cache:'no-store'});
-    if(r.status===404){pushRemote();return;}
-    if(!r.ok)return;
-    const d=await r.json();
-    if(d&&d[2026]&&d[2027]){
-      st=d;ensureData();
-      try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}
-      render();
-    }
-  }catch(e){}
-}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)pullRemote();});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 
 const card=(l,v,signed)=>`<div class="card"><div class="l">${l}</div><div class="v ${signed?(v<0?'neg':'pos'):''}">${fmt(v)}</div></div>`;
 const inp=(i,mi)=>`<input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${mi}" value="${i.vals[mi]==null?'':i.vals[mi]}">`;
@@ -621,7 +596,6 @@ document.addEventListener('change',e=>{
 })();
 
 render();
-pullRemote();
 </script>
 </body>
 </html>
