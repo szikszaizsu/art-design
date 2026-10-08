@@ -531,6 +531,26 @@ async function isBasicAuthed(request, env) {
 const PAYOUTS_MANIFEST = { name: 'Havi pénzügyek', short_name: 'Pénzügyek', start_url: '/payouts/', scope: '/payouts/', display: 'standalone', background_color: '#14171d', theme_color: '#14171d', icons: [{ src: '/payouts/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }] };
 const PAYOUTS_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#111"/><text x="32" y="46" font-size="44" font-family="Arial,sans-serif" font-weight="700" text-anchor="middle" fill="#2ecc71">$</text></svg>';
 
+// Pénzügyi adatok szerveroldalon: ugyanaz a LinkStore dokumentum-tároló, külön azonosítóval
+async function handlePayoutsState(request, env, url) {
+  const store = env.LINKS.get(env.LINKS.idFromName('payouts'));
+  if (request.method === 'GET') {
+    const r = await store.fetch(new Request('https://store/'));
+    return new Response(r.body, { status: r.status, headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'application/json' } });
+  }
+  if (request.method === 'PUT') {
+    if (request.headers.get('Origin') !== url.origin) return new Response(null, { status: 403 });
+    const body = await request.text();
+    if (body.length > 2000000) return new Response(null, { status: 413 });
+    let data;
+    try { data = JSON.parse(body); } catch { return new Response(null, { status: 400 }); }
+    if (!data || !data[2026] || !data[2027]) return new Response(null, { status: 400 });
+    await store.fetch(new Request('https://store/', { method: 'PUT', body }));
+    return new Response(null, { status: 204, headers: PAYOUTS_HEADERS });
+  }
+  return new Response(null, { status: 405 });
+}
+
 async function handlePayouts(request, env, url) {
   if (!(await isBasicAuthed(request, env))) {
     return new Response('Jelszó szükséges.', {
@@ -538,6 +558,7 @@ async function handlePayouts(request, env, url) {
       headers: { ...PAYOUTS_HEADERS, 'WWW-Authenticate': 'Basic realm="payouts", charset="UTF-8"', 'Content-Type': 'text/plain; charset=utf-8' }
     });
   }
+  if (url.pathname === '/payouts/api/state') return handlePayoutsState(request, env, url);
   if (url.pathname === '/payouts/manifest.json') {
     return new Response(JSON.stringify(PAYOUTS_MANIFEST), { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'application/manifest+json' } });
   }
@@ -653,7 +674,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
-    if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg'].includes(url.pathname)) return handlePayouts(request, env, url);
+    if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg', '/payouts/api/state'].includes(url.pathname)) return handlePayouts(request, env, url);
     if (url.pathname !== '/api/visits') return env.ASSETS.fetch(request);
     if (!['GET', 'POST'].includes(request.method)) return new Response(null, { status: 405 });
     if (request.method === 'POST' && (request.headers.get('Origin') !== url.origin || request.headers.get('X-Visit-Counter') !== '1')) {
