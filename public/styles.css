@@ -787,3 +787,16 @@ body { line-height: 1.7; }
 .work-card h2 { color: var(--ink) !important; }
 .work-desc { color: var(--muted) !important; }
 .work-shot { background: var(--parchment) !important; }
+
+/* Social icons: one style everywhere — thin outlined circle, neutral icon */
+.social-link, .social-link.facebook, .social-link.instagram {
+  width: 46px !important; height: 46px !important; border-radius: 50% !important;
+  background: transparent !important; border: 1px solid rgba(23,19,16,.16) !important;
+  box-shadow: none !important; color: var(--ink) !important; display: grid !important; place-items: center;
+  transition: opacity .2s ease, border-color .2s ease !important; transform: none !important;
+}
+.social-link svg { width: 18px !important; height: 18px !important; fill: currentColor !important; stroke: currentColor !important; }
+.social-link:hover, .social-link:focus-visible, .social-link.facebook:hover, .social-link.instagram:hover {
+  background: transparent !important; color: var(--ink) !important; border-color: var(--ink) !important; opacity: 1 !important; transform: none !important; box-shadow: none !important; background-image: none !important;
+}
+:root[data-theme="dark"] .social-link, :root[data-theme="dark"] .social-link.facebook, :root[data-theme="dark"] .social-link.instagram { border-color: rgba(241,236,230,.22) !important; color: #f1ece6 !important; }
