@@ -800,3 +800,6 @@ body { line-height: 1.7; }
   background: transparent !important; color: var(--ink) !important; border-color: var(--ink) !important; opacity: 1 !important; transform: none !important; box-shadow: none !important; background-image: none !important;
 }
 :root[data-theme="dark"] .social-link, :root[data-theme="dark"] .social-link.facebook, :root[data-theme="dark"] .social-link.instagram { border-color: rgba(241,236,230,.22) !important; color: #f1ece6 !important; }
+
+/* "Hamarosan" placeholder slots hidden until real works are added (2026-10-08) */
+.gallery-slot { display: none !important; }

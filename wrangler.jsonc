@@ -6,8 +6,11 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/visits", "/tervezo/api/*"]
+    "run_worker_first": ["/api/visits", "/tervezo/api/*", "/payouts", "/payouts/"]
   },
+  "rules": [
+    { "type": "Text", "globs": ["private/**/*.html"], "fallthrough": true }
+  ],
   "durable_objects": {
     "bindings": [
       { "name": "VISITS", "class_name": "VisitCounter" },

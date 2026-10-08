@@ -1,3 +1,5 @@
+import payoutsPage from './private/payouts.html';
+
 export class VisitCounter {
   constructor(state) {
     this.sql = state.storage.sql;
@@ -505,6 +507,37 @@ async function sha256(text) {
   return new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
 }
 
+// /payouts/: pénzügyi oldal, HTTP Basic jelszó (bármilyen felhasználónév), ugyanaz a TERVEZO_JELSZO.
+// A HTML a private/ mappában van, nem a public/ mappában, így jelszó nélkül nem érhető el.
+const PAYOUTS_HEADERS = { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' };
+
+async function isBasicAuthed(request, env) {
+  if (!env.TERVEZO_JELSZO) return false;
+  const match = (request.headers.get('Authorization') || '').match(/^Basic\s+(.+)$/i);
+  if (!match) return false;
+  let password;
+  try {
+    const decoded = atob(match[1]);
+    password = decoded.slice(decoded.indexOf(':') + 1);
+  } catch {
+    return false;
+  }
+  const [a, b] = await Promise.all([sha256(password), sha256(env.TERVEZO_JELSZO)]);
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+  return diff === 0;
+}
+
+async function handlePayouts(request, env) {
+  if (!(await isBasicAuthed(request, env))) {
+    return new Response('Jelszó szükséges.', {
+      status: 401,
+      headers: { ...PAYOUTS_HEADERS, 'WWW-Authenticate': 'Basic realm="payouts", charset="UTF-8"', 'Content-Type': 'text/plain; charset=utf-8' }
+    });
+  }
+  return new Response(payoutsPage, { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'text/html; charset=utf-8' } });
+}
+
 // Constant-time compare of the Bearer token with the TERVEZO_JELSZO secret.
 async function isAdmin(request, env) {
   if (!env.TERVEZO_JELSZO) return false;
@@ -611,6 +644,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
+    if (url.pathname === '/payouts' || url.pathname === '/payouts/') return handlePayouts(request, env);
     if (url.pathname !== '/api/visits') return env.ASSETS.fetch(request);
     if (!['GET', 'POST'].includes(request.method)) return new Response(null, { status: 405 });
     if (request.method === 'POST' && (request.headers.get('Origin') !== url.origin || request.headers.get('X-Visit-Counter') !== '1')) {
