@@ -180,6 +180,11 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  if(!st.hideFix){
+    const names=['KAJABON','Fizetés 7','Fizetés 22','Zoltán','Szepesi','Szabadság','Ösztöndíj'];
+    for(const i of st[2026].items){if(names.includes(i.name)&&i.hideFrom==null){i.hideFrom=9;for(let k=9;k<12;k++)i.vals[k]=null;}}
+    st.hideFix=true;
+  }
   // Egyszeri visszaállítás: a 2026-os tételek eredeti sheet-értékei (október kivételével), a törölt tételek visszakerülnek
   if(!st.restore2026){
     const cur=st[2026].items;
@@ -235,9 +240,9 @@ const inp=(i,mi)=>`<input type="number" inputmode="decimal" step="any" data-id="
 // Havonkénti név: ha az adott hónapra van felülírás, azt használjuk, különben az alapnevet
 const nameOf=(i,mi)=>(i.names&&i.names[mi]!=null)?i.names[mi]:i.name;
 function rows(g){
-  const list=items().filter(i=>i.group===g);
+  const list=items().filter(i=>i.group===g&&!(i.hideFrom!=null&&m>=i.hideFrom));
   if(!list.length)return '<div class="muted">Nincs tétel.</div>';
-  return list.map(i=>`<div class="row"><input type="text" class="nm" data-name="${i.id}" data-nm="${m}" value="${esc(nameOf(i,m))}" aria-label="Tétel neve"><span>${inp(i,m)}</span><button class="danger" data-act="del" data-id="${i.id}" data-mo="1" title="Törlés ebből a hónapból">✕</button></div>`).join('');
+  return list.map(i=>`<div class="row"><input type="text" class="nm" data-name="${i.id}" data-nm="${m}" value="${esc(nameOf(i,m))}" aria-label="Tétel neve"><span>${inp(i,m)}</span><button class="danger" data-act="del" data-id="${i.id}" data-mo="1" title="Törlés ebből a hónapból">✕</button><button class="danger" data-act="delfrom" data-id="${i.id}" title="Törlés ettől a hónaptól" style="font-size:12px">innentől</button></div>`).join('');
 }
 
 function chart(){
@@ -274,7 +279,7 @@ function tableView(){
     h+=`<tr class="gh"><td colspan="14">${label}</td></tr>`;
     for(const i of items().filter(x=>x.group===g)){
       h+=`<tr><td><input type="text" data-name="${i.id}" data-nm="${m}" value="${esc(nameOf(i,m))}" style="width:190px" aria-label="Tétel neve" title="Név: ${MON[m]}"> <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
-      for(let k=0;k<12;k++)h+=`<td><input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${k}" value="${i.vals[k]==null?'':i.vals[k]}"></td>`;
+      for(let k=0;k<12;k++)h+=(i.hideFrom!=null&&k>=i.hideFrom)?'<td class="num">–</td>':`<td><input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${k}" value="${i.vals[k]==null?'':i.vals[k]}"></td>`;
       h+=`<td class="num">${fmtN(rowSum(i))}</td></tr>`;
     }
     if(g!=='info')h+=`<tr class="tot"><td>Összesen – ${label}</td>${cells(i=>gsum(g,i))}</tr>`;
@@ -455,6 +460,13 @@ document.addEventListener('click',e=>{
       if(!confirm(`Törlöd ezt a tételt az egész évből: ${i.name}?`))return;
       st[year].items=items().filter(x=>x!==i);
     }
+  }
+  else if(a==='delfrom'){
+    const i=items().find(x=>x.id===b.dataset.id);
+    if(!i)return;
+    i.hideFrom=m;
+    st.keepEmpty=st.keepEmpty||{};
+    for(let k=m;k<12;k++){i.vals[k]=null;if(i.names)i.names[k]=null;st.keepEmpty[i.id+':'+k]=true;}
   }
   else if(a==='laciReset'){
     st.laciFrom={y:year,m:m};
