@@ -246,6 +246,7 @@ function hoView(){
   const parts={bevetel:block('Bevétel','bevetel',gsum('bevetel',m)).slice(0,-6)+`<div class="sub" style="border-top:1px solid var(--line);margin-top:6px;padding-top:6px;color:var(--ink)"><span>Összes bevétel (Laci-val)</span><span>${fmt(inc(m))}</span></div></div>`,laci:block('Laci','laci',gsum('laci',m)),info:block('Követés','info',null,'(nem számít bele)')};
   EXP.forEach(g=>parts[g]=block(GLABEL[g],g,gsum(g,m)));
   h+=`<div class="muted" style="margin:0 0 8px">A kártyákat a ☰ jelnél megfogva át tudod rendezni.</div><div class="grid">${st.order.map(k=>parts[k]).join('')}</div>`;
+  h+=`<div class="panel"><h2>Havi részlet csökkenése</h2><div class="row"><span class="n">Csökkenés havonta (októbertől, lei)</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${resztLep()}" style="width:110px"></div></div>`;
   return h;
 }
 
@@ -303,7 +304,23 @@ function syncBank(){
     prev=b.vals[k];
   }
 }
+// Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
+const resztLep=()=>(st.resztLep??44);
+function syncInstallment(){
+  const seq=[];
+  for(let k=9;k<12;k++)seq.push([2026,k]);
+  for(let k=0;k<12;k++)seq.push([2027,k]);
+  let prev=st[2026].items.find(x=>x.id==='havireszlet')?.vals[8];
+  if(prev==null)return;
+  for(const [y,k] of seq){
+    const h=st[y].items.find(x=>x.id==='havireszlet');
+    if(!h)continue;
+    h.vals[k]=prev-resztLep();
+    prev=h.vals[k];
+  }
+}
 function render(){
+  syncInstallment();
   syncHitel();
   syncBank();
   document.getElementById('year').value=year;
@@ -489,6 +506,11 @@ document.addEventListener('change',e=>{
   if(t.dataset.lpay!==undefined){
     const v=t.value.trim()===''?null:Number(t.value.replace(',','.'));
     st[year].laciPay[+t.dataset.lpay]=(v===null||isNaN(v))?null:v;
+    save();render();return;
+  }
+  if(t.id==='resztLep'){
+    const v=Number(t.value.replace(',','.'));
+    st.resztLep=isNaN(v)?0:v;
     save();render();return;
   }
   if(t.id==='laciOpen'){
