@@ -750,3 +750,4 @@ body { line-height: 1.7; }
 @keyframes hvWordIn { to { opacity: 1; filter: none; transform: none; } }
 @keyframes hvFadeIn { to { opacity: 1; } }
 .hv-hero-solo .hv-lead { color: var(--accent); }
+:root[data-theme="dark"] .hv-contact .contact-form { background: transparent; }
