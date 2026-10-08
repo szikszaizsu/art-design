@@ -253,6 +253,7 @@ async function pushRemote(){
 }
 async function pullRemote(){
   if(pendingPut)return;
+  if(document.activeElement&&document.activeElement.tagName==='INPUT')return;
   try{
     const r=await fetch('/payouts/api/state',{cache:'no-store'});
     if(r.status===404){pushRemote();return;}
@@ -267,6 +268,7 @@ async function pullRemote(){
   }catch(e){}
 }
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)pullRemote();});
+setInterval(()=>{if(!document.hidden)pullRemote();},15000);
 
 const card=(l,v,signed)=>`<div class="card"><div class="l">${l}</div><div class="v ${signed?(v<0?'neg':'pos'):''}">${fmt(v)}</div></div>`;
 const inp=(i,mi)=>`<input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${mi}" value="${i.vals[mi]==null?'':i.vals[mi]}">`;
