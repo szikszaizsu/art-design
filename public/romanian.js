@@ -22,7 +22,7 @@ window.portfolioRomanian = {
   'Explore categories ↗': 'Explorează categoriile ↗', 'Explore category ↗': 'Explorează categoria ↗',
   'Have an idea?': 'Ai o idee?', 'Let’s bring it to life.': 'Să-i dăm viață împreună.',
   'Whether it is a striking advertisement, a thoughtful interface or a unique artwork, every great project starts with a conversation.': 'Fie că este vorba despre o reclamă expresivă, o interfață bine gândită sau o operă de artă unică, orice proiect reușit începe cu o conversație.',
-  'Full name': 'Nume complet', 'Email address': 'Adresă de e-mail', 'Message': 'Mesaj', 'Get in touch': 'Contactează-mă', 'Move your mouse · click for the next painting': 'Mișcă mouse-ul · dă clic pentru următoarea pictură',
+  'Full name': 'Nume complet', 'Email address': 'Adresă de e-mail', 'Message': 'Mesaj', 'Get in touch': 'Contactează-mă',
   'FormSubmit delivers your message to me. A security check may be required before sending.': 'FormSubmit îmi transmite mesajul tău. Înainte de trimitere poate fi necesară o verificare de securitate.',
   'Digital and traditional creations in a personal portfolio.': 'Creații digitale și tradiționale într-un portofoliu personal.',
   'Explore': 'Pagini', 'Home': 'Acasă', 'Follow me': 'Urmărește-mă',

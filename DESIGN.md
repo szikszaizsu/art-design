@@ -313,8 +313,6 @@ See the `components:` block above. Notes:
 - Any new hard-coded light colour (#fff, #3a332e, …) needs a matching `:root[data-theme="dark"]` override.
 - `/weboldalak/` now uses the full site header/footer and category-page layout (detail-hero + .work-cards like Grafika és arculat), shares `szs-tema`; still noindex. Not applied to `/tervezo/` (own toggle) or demo sites.
 
-## Home hero: Lencse (2026-10-08)
-- `public/hero-lencse.js` (`?v=lens-1`) with the markup `<div class="hv-lens" data-hero-lens>` inside `.hv-hero-solo`. The CSS block is at the end of `styles.css`.
-- Under the white page there is a painting from `/assets/digital-gallery`, starting with together-6. Nine paintings cycle on click. A burgundy ring lens follows the cursor and reveals the painting, and the revealed trail heals in about 1–2 s.
-- When the cursor is idle, the lens orbits around the text by itself. Behind the hero text the painting only shows faintly, so the text stays readable.
-- The hint text is hidden on touch devices. With reduced motion there is no autopilot. The animation runs only while the hero is visible on screen.
+
+## Home hero: Lencse (2026-10-08) – removed
+A cursor lens that revealed paintings under the white hero went live (08b5f7c, eb67584) and was removed the same day at the owner's request. The hero is text-only again.
