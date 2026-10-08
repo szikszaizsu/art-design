@@ -532,6 +532,10 @@ const PAYOUTS_MANIFEST = { name: 'Havi pénzügyek', short_name: 'Pénzügyek', 
 const PAYOUTS_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#111"/><text x="32" y="46" font-size="44" font-family="Arial,sans-serif" font-weight="700" text-anchor="middle" fill="#2ecc71">$</text></svg>';
 
 async function handlePayouts(request, env, url) {
+  // A manifest csak nevet és ikont tartalmaz, így nyilvános (az APK ezt olvassa)
+  if (url.pathname === '/payouts/manifest.json') {
+    return new Response(JSON.stringify(PAYOUTS_MANIFEST), { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'application/manifest+json' } });
+  }
   if (!(await isBasicAuthed(request, env))) {
     return new Response('Jelszó szükséges.', {
       status: 401,
