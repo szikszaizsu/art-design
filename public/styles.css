@@ -778,3 +778,12 @@ body { line-height: 1.7; }
 .hv-chip { border: 0 !important; padding: 0 !important; font-family: inherit !important; font-size: 1rem !important; text-decoration: underline; }
 .hv-links a.hv-muted { color: var(--accent) !important; }
 :root[data-theme="dark"] .button, :root[data-theme="dark"] .button-secondary, :root[data-theme="dark"] .hv-links a { color: #d8564f !important; }
+
+/* Work cards (Koncepció / Webdesign): neutral, no green/red/white accents */
+.work-card { border-top: 1px solid var(--line) !important; background: var(--surface) !important; box-shadow: none !important; }
+.work-card:hover { box-shadow: none !important; }
+.work-num { color: var(--muted) !important; }
+.work-go { background: var(--ink) !important; color: var(--paper) !important; }
+.work-card h2 { color: var(--ink) !important; }
+.work-desc { color: var(--muted) !important; }
+.work-shot { background: var(--parchment) !important; }
