@@ -42,6 +42,7 @@ input[type=number]{width:110px;text-align:right}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
 .row:last-child{border-bottom:0}
 .row .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.nm{flex:1;min-width:0;width:auto}
 .sub{display:flex;justify-content:space-between;font-weight:600;padding:8px 0 2px;color:var(--mut);font-variant-numeric:tabular-nums}
 .grp{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 2px}
 .add{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -212,7 +213,7 @@ const inp=(i,mi)=>`<input type="number" inputmode="decimal" step="any" data-id="
 function rows(g){
   const list=items().filter(i=>i.group===g);
   if(!list.length)return '<div class="muted">Nincs tétel.</div>';
-  return list.map(i=>`<div class="row"><span class="n">${esc(i.name)}</span><span>${inp(i,m)}</span><button class="danger" data-act="del" data-id="${i.id}" title="Törlés">✕</button></div>`).join('');
+  return list.map(i=>`<div class="row"><input type="text" class="nm" data-name="${i.id}" value="${esc(i.name)}" aria-label="Tétel neve"><span>${inp(i,m)}</span><button class="danger" data-act="del" data-id="${i.id}" title="Törlés">✕</button></div>`).join('');
 }
 
 function chart(){
@@ -233,7 +234,7 @@ function hoView(){
   h+=`<div class="cards">${card('Bevétel – '+MON[m],inc(m))}${card('Kiadás – '+MON[m],exp(m))}${card('Egyenleg – '+MON[m],bal(m),true)}${card('Év egyenleg ('+year+')',bal(null),true)}</div>`;
   h+=chart();
   const block=(title,g,total,note)=>`<div class="panel" data-panel="${g}"><h2><span class="handle" draggable="true" title="Húzd át a sorrendhez">☰</span>${title}${note?` <span class="muted">${note}</span>`:''}</h2>${rows(g)}${total==null?'':`<div class="sub"><span>Összesen</span><span>${fmt(total)}</span></div>`}</div>`;
-  const parts={bevetel:block('Bevétel','bevetel',gsum('bevetel',m)).replace(/</div>$/,`<div class="sub" style="border-top:1px solid var(--line);margin-top:6px;padding-top:6px;color:var(--ink)"><span>Összes bevétel (Laci-val)</span><span>${fmt(inc(m))}</span></div></div>`),laci:block('Laci','laci',gsum('laci',m)),info:block('Követés','info',null,'(nem számít bele)')};
+  const parts={bevetel:block('Bevétel','bevetel',gsum('bevetel',m)).slice(0,-6)+`<div class="sub" style="border-top:1px solid var(--line);margin-top:6px;padding-top:6px;color:var(--ink)"><span>Összes bevétel (Laci-val)</span><span>${fmt(inc(m))}</span></div></div>`,laci:block('Laci','laci',gsum('laci',m)),info:block('Követés','info',null,'(nem számít bele)')};
   EXP.forEach(g=>parts[g]=block(GLABEL[g],g,gsum(g,m)));
   h+=`<div class="muted" style="margin:0 0 8px">A kártyákat a ☰ jelnél megfogva át tudod rendezni.</div><div class="grid">${st.order.map(k=>parts[k]).join('')}</div>`;
   return h;
@@ -247,7 +248,7 @@ function tableView(){
   for(const [g,label] of GROUPS){
     h+=`<tr class="gh"><td colspan="14">${label}</td></tr>`;
     for(const i of items().filter(x=>x.group===g)){
-      h+=`<tr><td>${esc(i.name)} <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
+      h+=`<tr><td><input type="text" data-name="${i.id}" value="${esc(i.name)}" style="width:190px" aria-label="Tétel neve"> <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
       for(let k=0;k<12;k++)h+=`<td><input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${k}" value="${i.vals[k]==null?'':i.vals[k]}"></td>`;
       h+=`<td class="num">${fmtN(rowSum(i))}</td></tr>`;
     }
@@ -424,6 +425,12 @@ document.addEventListener('change',e=>{
     const s=t.value.replace(',','.').trim();
     const v=s===''?null:Number(s);
     if(i)i.vals[+t.dataset.m]=(v===null||isNaN(v))?null:v;
+    save();render();return;
+  }
+  if(t.dataset.name!==undefined){
+    const i=items().find(x=>x.id===t.dataset.name);
+    const v=t.value.trim();
+    if(i&&v)i.name=v;
     save();render();return;
   }
   if(t.dataset.lpay!==undefined){
