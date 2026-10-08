@@ -762,3 +762,19 @@ body { line-height: 1.7; }
 .contact-form .button, .hv-contact .contact-form .button { width: auto; background: none !important; color: var(--ink) !important; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; padding: 0 0 5px; box-shadow: none; font-size: 1rem; letter-spacing: 0; cursor: pointer; }
 .contact-form .button:hover { color: var(--accent) !important; border-bottom-color: var(--accent); }
 :root[data-theme="dark"] .contact-form .button { color: var(--ink) !important; }
+
+/* Buttons everywhere: plain red text link, no pill */
+.button, .button-secondary, .hv-links a, .hv-chip, .work-open, .services-cta .button {
+  width: auto !important; min-height: 0 !important; height: auto !important;
+  padding: 0 0 4px !important; margin-top: 0 !important; margin-inline: 0 !important;
+  background: none !important; box-shadow: none !important; border: 0 !important; border-radius: 0 !important;
+  color: var(--accent) !important; font-size: 1rem !important; font-weight: 500 !important;
+  letter-spacing: 0 !important; text-transform: none !important;
+  text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px;
+  display: inline-flex !important; gap: 6px !important; transition: opacity .2s ease;
+}
+.button:hover, .button-secondary:hover, .hv-links a:hover { opacity: .65; transform: none !important; background: none !important; color: var(--accent) !important; }
+.button::before { display: none !important; }
+.hv-chip { border: 0 !important; padding: 0 !important; font-family: inherit !important; font-size: 1rem !important; text-decoration: underline; }
+.hv-links a.hv-muted { color: var(--accent) !important; }
+:root[data-theme="dark"] .button, :root[data-theme="dark"] .button-secondary, :root[data-theme="dark"] .hv-links a { color: #d8564f !important; }
