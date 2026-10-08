@@ -227,10 +227,10 @@ function hoView(){
   let h=`<div class="bar" style="margin-bottom:12px"><button data-act="prev" aria-label="Előző hónap">‹</button><select data-role="month" aria-label="Hónap">${MON.map((n,i)=>`<option value="${i}" ${i===m?'selected':''}>${n}</option>`).join('')}</select><button data-act="next" aria-label="Következő hónap">›</button></div>`;
   h+=`<div class="cards">${card('Bevétel – '+MON[m],inc(m))}${card('Kiadás – '+MON[m],exp(m))}${card('Egyenleg – '+MON[m],bal(m),true)}${card('Év egyenleg ('+year+')',bal(null),true)}</div>`;
   h+=chart();
-  const block=(title,g,total,note)=>`<div class="panel" data-panel="${g}"><h2><span class="handle" draggable="true" title="Húzd át a sorrendhez">⠿</span>${title}${note?` <span class="muted">${note}</span>`:''}</h2>${rows(g)}${total==null?'':`<div class="sub"><span>Összesen</span><span>${fmt(total)}</span></div>`}</div>`;
+  const block=(title,g,total,note)=>`<div class="panel" data-panel="${g}"><h2><span class="handle" draggable="true" title="Húzd át a sorrendhez">☰</span>${title}${note?` <span class="muted">${note}</span>`:''}</h2>${rows(g)}${total==null?'':`<div class="sub"><span>Összesen</span><span>${fmt(total)}</span></div>`}</div>`;
   const parts={bevetel:block('Bevétel','bevetel',gsum('bevetel',m)),laci:block('Laci','laci',gsum('laci',m)),info:block('Követés','info',null,'(nem számít bele)')};
   EXP.forEach(g=>parts[g]=block(GLABEL[g],g,gsum(g,m)));
-  h+=`<div class="grid">${st.order.map(k=>parts[k]).join('')}</div>`;
+  h+=`<div class="muted" style="margin:0 0 8px">A kártyákat a ☰ jelnél megfogva át tudod rendezni.</div><div class="grid">${st.order.map(k=>parts[k]).join('')}</div>`;
   return h;
 }
 
