@@ -136,7 +136,6 @@ const SEED={
     it('kazan','Kazán','egyeb',V({8:400})),
     it('itp','ITP','egyeb',V({7:250})),
 
-    it('laciel','Laci - elmaradás','info',V({0:550,1:910,2:1325,3:1607,4:1807,5:2157,6:2657,7:1200,8:1200,9:95})),
     it('bank','Bank egyenleg','info',V({6:151045,7:135879,8:130879,9:125879,10:120879,11:115879})),
     it('csokentes','Csökkentés (CSOKENTES)','info',V({7:15000,8:5000,9:5000,10:5000,11:5000})),
     it('havireszlet','Havi részlet (bank)','info',V({6:1300,7:1211,8:1166,9:1122,10:1078,11:1034}))
@@ -151,7 +150,6 @@ const SEED={
     it('telefon','Telefon','rezsi',V({0:250})),
     it('internet','Internet/TV (RDS)','rezsi',V({0:50})),
 
-    it('laciel','Laci - elmaradás','info',V({0:550})),
     it('bank','Bank egyenleg','info',A(110879,105879,100879,95879,90879,85879,80879,75879,70879,65879,60879,55879)),
     it('csokentes','Csökkentés (CSOKENTES)','info',A(5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000)),
     it('havireszlet','Havi részlet (bank)','info',A(990,946,902,858,814,770,726,682,638,594,550,506))
@@ -167,6 +165,8 @@ if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
   for(const y of [2026,2027]){
+    // A kézi „Laci – elmaradás” sor helyett a Laci-elszámolás számol
+    st[y].items=st[y].items.filter(i=>i.id!=="laciel");
     for(const i of st[y].items){
       const s=SEED[y].items.find(x=>x.id===i.id);
       if(s)i.group=s.group;else if(i.group==='gyerek')i.group='gerda';
