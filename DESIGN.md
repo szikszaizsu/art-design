@@ -316,3 +316,8 @@ See the `components:` block above. Notes:
 
 ## Home hero: Lencse (2026-10-08) – removed
 A cursor lens that revealed paintings under the white hero went live (08b5f7c, eb67584) and was removed the same day at the owner's request. The hero is text-only again.
+
+## Home: grey dot grid + word intro (2026-10-08)
+- `public/oldal-pontok.js` (`?v=dots-2`): the dot grid from the /tervezo/ page, but faint grey and no colours. It is a fixed full-viewport canvas behind the whole home page (`<body class="dots-page">`, `.page-dots`). `main` and the footer sit above it, and the footer background is transparent there. Near the cursor the dots push aside slightly and darken to grey; the trail fades in about 1 s. It draws nothing at rest. In the dark theme the dots are faint white.
+- `public/hero-intro.js` (`?v=intro-1`): the hero lead sentence is split into words after translation runs. The words rise in one by one from a slight blur, then the label, text and links fade in. It is skipped with reduced motion.
+- The CSS block is at the end of `styles.css` (`?v=dots-2`). Home page only.

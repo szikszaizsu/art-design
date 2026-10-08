@@ -740,3 +740,12 @@ body { line-height: 1.7; }
 .detail-image img { max-height: 420px; border-radius: 12px; box-shadow: none; }
 .gallery-item { border-radius: 10px; }
 
+/* ===== Home: halvány szürke pontrács az egész oldal mögött + beúszó főmondat (2026-10-08) ===== */
+.page-dots { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.page-dots canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.dots-page main, .dots-page .portfolio-footer { position: relative; z-index: 1; }
+.dots-page .portfolio-footer, :root[data-theme="dark"] .dots-page .portfolio-footer { background: transparent; }
+.hv-intro .hv-w { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(.35em); animation: hvWordIn .9s cubic-bezier(.2, .8, .2, 1) forwards; animation-delay: calc(var(--i) * .12s + .2s); }
+.hv-intro .hv-label, .hv-intro .hv-text, .hv-intro .hv-links { opacity: 0; animation: hvFadeIn 1s ease 1.1s forwards; }
+@keyframes hvWordIn { to { opacity: 1; filter: none; transform: none; } }
+@keyframes hvFadeIn { to { opacity: 1; } }
