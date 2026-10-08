@@ -739,3 +739,15 @@ body { line-height: 1.7; }
 .detail-image { width: min(560px, calc(100% - 48px)); }
 .detail-image img { max-height: 420px; border-radius: 12px; box-shadow: none; }
 .gallery-item { border-radius: 10px; }
+
+/* ===== Home hero: Lencse – festmény a lencse alatt (2026-10-08) ===== */
+.hv-hero-solo { position: relative; isolation: isolate; }
+.hv-lens { position: absolute; z-index: 0; top: 0; bottom: 0; left: calc((100% - 100vw) / 2); width: 100vw; overflow: hidden; }
+.hv-lens canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; }
+.hv-lens-ring { --d: 260px; position: absolute; left: 0; top: 0; width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); border: 1px solid var(--accent); border-radius: 50%; opacity: 0; transition: opacity .4s; pointer-events: none; }
+.hv-lens-ring::after { content: ""; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--accent); }
+.hv-hero-solo .hv-hero-copy { position: relative; z-index: 1; pointer-events: none; text-shadow: 0 0 18px var(--paper), 0 0 32px var(--paper), 0 0 4px var(--paper); }
+.hv-hero-solo .hv-hero-copy a { pointer-events: auto; }
+.hv-lens-hint { margin: 34px 0 0; color: #a39a93; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
+@media (hover: none) { .hv-lens-hint { display: none; } }
+@media (hover: hover) { .hv-hero-solo { cursor: none; } .hv-hero-solo a { cursor: pointer; } }

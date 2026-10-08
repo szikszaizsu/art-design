@@ -312,3 +312,9 @@ See the `components:` block above. Notes:
 - Dark tokens (`:root[data-theme="dark"]`): ink #f1ece6, muted #a99f96, surface #1f1b19, parchment #171412, tile-dark #0c0a09, page bg #110f0e, accent #d24c45 (brighter for contrast), hairlines rgba(255,255,255,.08–.16). Footer canvas uses `filter: invert(.9) hue-rotate(180deg)`; the forest tile stays white (no invert) in dark mode.
 - Any new hard-coded light colour (#fff, #3a332e, …) needs a matching `:root[data-theme="dark"]` override.
 - `/weboldalak/` now uses the full site header/footer and category-page layout (detail-hero + .work-cards like Grafika és arculat), shares `szs-tema`; still noindex. Not applied to `/tervezo/` (own toggle) or demo sites.
+
+## Home hero: Lencse (2026-10-08)
+- `public/hero-lencse.js` (`?v=lens-1`) with the markup `<div class="hv-lens" data-hero-lens>` inside `.hv-hero-solo`. The CSS block is at the end of `styles.css`.
+- Under the white page there is a painting from `/assets/digital-gallery`, starting with together-6. Nine paintings cycle on click. A burgundy ring lens follows the cursor and reveals the painting, and the revealed trail heals in about 1–2 s.
+- When the cursor is idle, the lens orbits around the text by itself. Behind the hero text the painting only shows faintly, so the text stays readable.
+- The hint text is hidden on touch devices. With reduced motion there is no autopilot. The animation runs only while the hero is visible on screen.
