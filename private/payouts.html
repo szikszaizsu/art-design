@@ -301,7 +301,7 @@ function syncHitel(){
     const r=st[y].items.find(x=>x.id==='reszlet');
     const h=st[y].items.find(x=>x.id==='havireszlet');
     if(!r||!h)continue;
-    for(let k=0;k<12;k++)if(h.vals[k]!=null)r.vals[k]=h.vals[k];
+    for(let k=0;k<12;k++)if(h.vals[k]!=null&&!(st.keepEmpty&&st.keepEmpty[r.id+':'+k]))r.vals[k]=h.vals[k];
   }
 }
 // Bank egyenleg: a nyitóegyenlegtől (2026 július) minden hónapban levonja a csökkentés összegét
@@ -315,8 +315,9 @@ function syncBank(){
     const c=st[y].items.find(x=>x.id==='csokentes');
     if(!b||!c)continue;
     if(prev===null){prev=b.vals[k];continue;}
-    b.vals[k]=prev-(c.vals[k]||0);
-    prev=b.vals[k];
+    const nv=prev-(c.vals[k]||0);
+    if(!(st.keepEmpty&&st.keepEmpty[b.id+':'+k]))b.vals[k]=nv;
+    prev=nv;
   }
 }
 // Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
@@ -330,8 +331,9 @@ function syncInstallment(){
   for(const [y,k] of seq){
     const h=st[y].items.find(x=>x.id==='havireszlet');
     if(!h)continue;
-    h.vals[k]=prev-resztLep();
-    prev=h.vals[k];
+    const nv=prev-resztLep();
+    if(!(st.keepEmpty&&st.keepEmpty[h.id+':'+k]))h.vals[k]=nv;
+    prev=nv;
   }
 }
 function render(){
@@ -447,6 +449,7 @@ document.addEventListener('click',e=>{
       // havi nézet: csak ebből a hónapból veszi ki, az éves nézetben megmarad
       i.vals[m]=null;
       if(i.names)i.names[m]=null;
+      st.keepEmpty=st.keepEmpty||{};st.keepEmpty[i.id+':'+m]=true;
     }else{
       // éves tábla: a teljes tételt törli
       if(!confirm(`Törlöd ezt a tételt az egész évből: ${i.name}?`))return;
@@ -511,6 +514,7 @@ document.addEventListener('change',e=>{
     const s=t.value.replace(',','.').trim();
     const v=s===''?null:Number(s);
     if(i)i.vals[+t.dataset.m]=(v===null||isNaN(v))?null:v;
+    if(i&&st.keepEmpty&&v!==null&&!isNaN(v))delete st.keepEmpty[i.id+':'+t.dataset.m];
     save();render();return;
   }
   if(t.dataset.subname!==undefined){
