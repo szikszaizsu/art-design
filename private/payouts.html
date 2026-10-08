@@ -283,12 +283,15 @@ function render(){
 const sumG=(y,g,mi)=>st[y].items.filter(i=>i.group===g).reduce((a,i)=>a+(i.vals[mi]||0),0);
 const laciOwed=(y,mi)=>sumG(y,'gerda',mi)+sumG(y,'zente',mi)/2;
 function laciBal(y,mi){
-  let b=st[2026].laciOpen||0;
+  const from=st.laciFrom; // {y,m}: ettől a hónaptól indul újra az elszámolás
+  let bal=from?0:(st[2026].laciOpen||0);
+  let started=!from;
   for(const yy of [2026,2027])for(let k=0;k<12;k++){
-    if(yy===y&&k>mi)return b;
-    b+=laciOwed(yy,k)-(st[yy].laciPay[k]||0);
+    if(yy===y&&k>mi)return bal;
+    if(!started){if(yy===from.y&&k===from.m)started=true;else continue;}
+    bal+=laciOwed(yy,k)-(st[yy].laciPay[k]||0);
   }
-  return b;
+  return bal;
 }
 function laciPanel(){
   const rows=MON.map((n,k)=>{
@@ -298,6 +301,7 @@ function laciPanel(){
   }).join('');
   return `<div class="panel"><h2>Laci elszámolás <span class="muted">(Gerda + Zente fele = Laci részesedése)</span></h2>
     <div class="cards" style="margin-bottom:10px"><div class="card"><div class="l">Laci elmaradás · ${MON[m]} végén</div><div class="v ${laciBal(year,m)>0?'neg':'pos'}">${fmt(laciBal(year,m))}</div></div><div class="card"><div class="l">Kezdő elmaradás (2026 január előtt)</div><div style="margin-top:6px"><input type="number" inputmode="decimal" step="any" id="laciOpen" value="${st[2026].laciOpen||0}" style="width:130px"> lei</div></div></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px"><button data-act="laciReset">Újrakezdés innen (${MON[m]} ${year})</button>${st.laciFrom?`<span class="muted">Elszámolás ${MON[st.laciFrom.m]} ${st.laciFrom.y}-tól</span><button data-act="laciRestore">Teljes előzmény</button>`:""}</div>
     <div class="tablewrap"><table style="min-width:620px"><thead><tr><th>Hó</th><th>Gerda</th><th>Zente</th><th>Zente fele</th><th>Laci részesedés</th><th>Laci befizetés</th><th>Elmaradás</th></tr></thead><tbody>${rows}</tbody></table></div>
     <div class="muted">A befizetést havonta írd be. Az elmaradás a következő hónapba is átvitelre kerül, a 2027-es év a 2026-os végösszegből indul.</div></div>`;
 }
@@ -373,6 +377,11 @@ document.addEventListener('click',e=>{
     if(!i||!confirm(`Törlöd ezt a tételt: ${i.name}?`))return;
     st[year].items=items().filter(x=>x!==i);
   }
+  else if(a==='laciReset'){
+    if(!confirm(`Laci elszámolás újrakezdése innen: ${MON[m]} ${year}? A korábbi elmaradás nem számít bele.`))return;
+    st.laciFrom={y:year,m:m};
+  }
+  else if(a==='laciRestore'){st.laciFrom=null;}
   else if(a==='quick'){
     const group=document.getElementById('qGroup').value;
     const name=document.getElementById('qName').value.trim();
