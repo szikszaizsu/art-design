@@ -272,7 +272,17 @@ function subsPanel(){
   return `<div class="panel"><h2>Előfizetések</h2>${list}<div class="sub"><span>Összesen</span><span>${total} €</span></div><div class="add"><input type="text" id="sName" placeholder="Név" aria-label="Előfizetés neve"><input type="number" inputmode="decimal" id="sAmt" placeholder="€" style="width:90px" aria-label="Összeg €"><button data-act="subadd">Hozzáadás</button></div></div>`;
 }
 
+// Hitel (Részlet) automatikusan követi a bank „Havi részlet” sorát, ahol van ott érték
+function syncHitel(){
+  for(const y of [2026,2027]){
+    const r=st[y].items.find(x=>x.id==='reszlet');
+    const h=st[y].items.find(x=>x.id==='havireszlet');
+    if(!r||!h)continue;
+    for(let k=0;k<12;k++)if(h.vals[k]!=null)r.vals[k]=h.vals[k];
+  }
+}
 function render(){
+  syncHitel();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
   app.innerHTML=(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
