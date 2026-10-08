@@ -38,8 +38,13 @@ input[type=number]{width:110px;text-align:right}
 .pos{color:var(--green)}.neg{color:var(--red)}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
 .panel h2{font-size:15px;margin:0 0 8px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start;margin-bottom:12px}
-.grid .panel{margin-bottom:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:stretch;margin-bottom:12px}
+.grid .panel{margin-bottom:0;display:flex;flex-direction:column}
+.grid .panel .sub:last-child{margin-top:auto}
+.grid .panel .row{gap:6px}
+.grid .panel .row input[type=number]{width:96px;padding:6px 6px}
+.grid .panel .row button{padding:4px 8px;font-size:12px;white-space:nowrap}
+.grid .panel .nm{min-width:120px}
 .handle{cursor:grab;color:var(--mut);padding:0 6px 0 0;user-select:none;font-size:16px;line-height:1}
 .handle:active{cursor:grabbing}
 .panel.dragging{opacity:.45}
