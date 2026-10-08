@@ -1,8 +1,21 @@
 // Pontrács a főoldal teljes háttereként (rögzített, görgetéskor is végig ott van): halvány szürke pontok, az egér körül kicsit félrehúzódnak és
 // besötétednek, a nyom kb. 1 mp alatt cseng le. Nyugalomban nem rajzol. (A Tervező pontrácsa, színek nélkül.)
 (() => {
-  const box = document.querySelector('[data-page-dots]');
-  if (!box) return;
+  // Ha a lap nincs felkészítve (nincs benne a div), a szkript maga hozza létre a rácsot a háttérbe.
+  let box = document.querySelector('[data-page-dots]');
+  if (!box) {
+    box = document.createElement('div');
+    box.className = 'page-dots'; box.setAttribute('data-page-dots', ''); box.setAttribute('aria-hidden', 'true');
+    box.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none';
+    box.innerHTML = '<canvas style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>';
+    document.body.prepend(box);
+    document.body.classList.add('dots-page');
+    if (!document.querySelector('style[data-dots]')) {
+      const st = document.createElement('style'); st.dataset.dots = '';
+      st.textContent = '.dots-page main, .dots-page .portfolio-footer, .dots-page header, .dots-page .site-header { position: relative; z-index: 1; } .dots-page .portfolio-footer { background: transparent; }';
+      document.head.append(st);
+    }
+  }
   const cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
   const GAP = 22, RADIUS = 140, PUSH = 6;
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
