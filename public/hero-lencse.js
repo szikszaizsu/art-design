@@ -33,7 +33,7 @@
     dpr = Math.min(devicePixelRatio || 1, 2);
     W = box.clientWidth; H = box.clientHeight;
     cv.width = mask.width = Math.round(W * dpr); cv.height = mask.height = Math.round(H * dpr);
-    R = Math.max(80, Math.min(160, W * .11));
+    R = Math.max(40, Math.min(80, W * .055));
     ring.style.setProperty('--d', R * 2 + 'px');
     lx = W * .9; ly = H / 2;
   }
