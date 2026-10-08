@@ -210,10 +210,12 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 const card=(l,v,signed)=>`<div class="card"><div class="l">${l}</div><div class="v ${signed?(v<0?'neg':'pos'):''}">${fmt(v)}</div></div>`;
 const inp=(i,mi)=>`<input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${mi}" value="${i.vals[mi]==null?'':i.vals[mi]}">`;
 
+// Havonkénti név: ha az adott hónapra van felülírás, azt használjuk, különben az alapnevet
+const nameOf=(i,mi)=>(i.names&&i.names[mi]!=null)?i.names[mi]:i.name;
 function rows(g){
   const list=items().filter(i=>i.group===g);
   if(!list.length)return '<div class="muted">Nincs tétel.</div>';
-  return list.map(i=>`<div class="row"><input type="text" class="nm" data-name="${i.id}" value="${esc(i.name)}" aria-label="Tétel neve"><span>${inp(i,m)}</span><button class="danger" data-act="del" data-id="${i.id}" title="Törlés">✕</button></div>`).join('');
+  return list.map(i=>`<div class="row"><input type="text" class="nm" data-name="${i.id}" data-nm="${m}" value="${esc(nameOf(i,m))}" aria-label="Tétel neve"><span>${inp(i,m)}</span><button class="danger" data-act="del" data-id="${i.id}" title="Törlés">✕</button></div>`).join('');
 }
 
 function chart(){
@@ -248,7 +250,7 @@ function tableView(){
   for(const [g,label] of GROUPS){
     h+=`<tr class="gh"><td colspan="14">${label}</td></tr>`;
     for(const i of items().filter(x=>x.group===g)){
-      h+=`<tr><td><input type="text" data-name="${i.id}" value="${esc(i.name)}" style="width:190px" aria-label="Tétel neve"> <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
+      h+=`<tr><td>${esc(i.name)} <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
       for(let k=0;k<12;k++)h+=`<td><input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${k}" value="${i.vals[k]==null?'':i.vals[k]}"></td>`;
       h+=`<td class="num">${fmtN(rowSum(i))}</td></tr>`;
     }
@@ -430,7 +432,7 @@ document.addEventListener('change',e=>{
   if(t.dataset.name!==undefined){
     const i=items().find(x=>x.id===t.dataset.name);
     const v=t.value.trim();
-    if(i&&v)i.name=v;
+    if(i&&v){i.names=i.names||Array(12).fill(null);i.names[+t.dataset.nm]=v;}
     save();render();return;
   }
   if(t.dataset.lpay!==undefined){
