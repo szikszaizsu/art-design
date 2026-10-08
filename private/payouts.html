@@ -253,7 +253,7 @@ async function pushRemote(){
 }
 async function pullRemote(){
   if(pendingPut)return;
-  if(document.activeElement&&document.activeElement.tagName==='INPUT')return;
+  if(document.activeElement&&['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName))return;
   try{
     const r=await fetch('/payouts/api/state',{cache:'no-store'});
     if(r.status===404){pushRemote();return;}
