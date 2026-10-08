@@ -180,6 +180,16 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  // Egyszeri visszaállítás: a 2026-os tételek eredeti sheet-értékei (október kivételével), a törölt tételek visszakerülnek
+  if(!st.restore2026){
+    const cur=st[2026].items;
+    for(const s0 of SEED[2026].items){
+      const i=cur.find(x=>x.id===s0.id);
+      if(!i){const n=clone(s0);n.vals[9]=null;cur.push(n);}
+      else{for(let k=0;k<12;k++)if(k!==9)i.vals[k]=clone(s0.vals[k]);}
+    }
+    st.restore2026=true;
+  }
   if(!st.sheetBankFix){
     const c=st[2026].items.find(x=>x.id==='csokentes');
     if(c)c.vals=clone(SEED[2026].items.find(x=>x.id==='csokentes').vals);
