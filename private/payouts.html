@@ -255,7 +255,13 @@ function subsPanel(){
 function render(){
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
-  app.innerHTML=(mode==='ho'?hoView():tableView())+addForm()+subsPanel();
+  app.innerHTML=(mode==='ho'?hoView()+quickForm():tableView())+addForm()+subsPanel();
+}
+
+// Gyors rögzítés: a kiválasztott hónapra írja az összeget, meglévő tételt frissít
+function quickForm(){
+  const names=[...new Set(items().map(i=>i.name))];
+  return `<div class="panel"><h2>Gyors rögzítés · ${MON[m]} ${year}</h2><div class="add"><select id="qGroup" aria-label="Csoport">${GROUPS.filter(([k])=>k!=='info').map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select><input type="text" id="qName" list="qNames" placeholder="Név" aria-label="Név"><datalist id="qNames">${names.map(n=>`<option value="${esc(n)}">`).join('')}</datalist><input type="number" inputmode="decimal" step="any" id="qAmt" placeholder="Összeg (lei)" style="width:140px" aria-label="Összeg"><button data-act="quick">Rögzítés</button></div><div class="muted">Ha ugyanilyen nevű tétel már van ebben a csoportban, annak a hónapos értékét írja felül.</div></div>`;
 }
 
 function download(name,type,content){
@@ -294,6 +300,16 @@ document.addEventListener('click',e=>{
     const i=items().find(x=>x.id===b.dataset.id);
     if(!i||!confirm(`Törlöd ezt a tételt: ${i.name}?`))return;
     st[year].items=items().filter(x=>x!==i);
+  }
+  else if(a==='quick'){
+    const group=document.getElementById('qGroup').value;
+    const name=document.getElementById('qName').value.trim();
+    const raw=document.getElementById('qAmt').value.trim();
+    const amt=Number(raw.replace(',','.'));
+    if(!name||raw===''||isNaN(amt))return;
+    const ex=items().find(x=>x.group===group&&x.name.toLowerCase()===name.toLowerCase());
+    if(ex){ex.vals[m]=amt;}
+    else{const n=it('i'+Date.now(),name,group,Array(12).fill(null));n.vals[m]=amt;items().push(n);}
   }
   else if(a==='add'){
     const name=document.getElementById('nName').value.trim();
