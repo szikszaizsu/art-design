@@ -281,8 +281,24 @@ function syncHitel(){
     for(let k=0;k<12;k++)if(h.vals[k]!=null)r.vals[k]=h.vals[k];
   }
 }
+// Bank egyenleg: a nyitóegyenlegtől (2026 július) minden hónapban levonja a csökkentés összegét
+function syncBank(){
+  const seq=[];
+  for(let k=6;k<12;k++)seq.push([2026,k]);
+  for(let k=0;k<12;k++)seq.push([2027,k]);
+  let prev=null;
+  for(const [y,k] of seq){
+    const b=st[y].items.find(x=>x.id==='bank');
+    const c=st[y].items.find(x=>x.id==='csokentes');
+    if(!b||!c)continue;
+    if(prev===null){prev=b.vals[k];continue;}
+    b.vals[k]=prev-(c.vals[k]||0);
+    prev=b.vals[k];
+  }
+}
 function render(){
   syncHitel();
+  syncBank();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
   app.innerHTML=(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
