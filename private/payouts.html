@@ -281,7 +281,7 @@ function render(){
 // Laci elszámolás: Gerda teljes + Zente fele = Laci havi részesedése.
 // Az elmaradás havonta halmozódik, a Laci extra befizetéseit (laciPay) levonja.
 const sumG=(y,g,mi)=>st[y].items.filter(i=>i.group===g).reduce((a,i)=>a+(i.vals[mi]||0),0);
-const laciOwed=(y,mi)=>sumG(y,'gerda',mi)+sumG(y,'zente',mi)/2;
+const laciOwed=(y,mi)=>(sumG(y,'gerda',mi)+sumG(y,'zente',mi))/2;
 function laciBal(y,mi){
   const from=st.laciFrom; // {y,m}: ettől a hónaptól indul újra az elszámolás
   let bal=from?0:(st[2026].laciOpen||0);
@@ -297,12 +297,12 @@ function laciPanel(){
   const rows=MON.map((n,k)=>{
     const g=sumG(year,'gerda',k), z=sumG(year,'zente',k);
     const cur=k===m?'font-weight:700':'';
-    return `<tr style="${cur}"><td>${n}</td><td class="num">${fmtN(g)}</td><td class="num">${fmtN(z)}</td><td class="num">${fmtN(z/2)}</td><td class="num">${fmtN(laciOwed(year,k))}</td><td><input type="number" inputmode="decimal" step="any" data-lpay="${k}" value="${st[year].laciPay[k]==null?'':st[year].laciPay[k]}"></td><td class="num ${laciBal(year,k)>0?'neg':'pos'}">${fmt(laciBal(year,k))}</td></tr>`;
+    return `<tr style="${cur}"><td>${n}</td><td class="num">${fmtN(g)}</td><td class="num">${fmtN(z)}</td><td class="num">${fmtN(g+z)}</td><td class="num">${fmtN(laciOwed(year,k))}</td><td><input type="number" inputmode="decimal" step="any" data-lpay="${k}" value="${st[year].laciPay[k]==null?'':st[year].laciPay[k]}"></td><td class="num ${laciBal(year,k)>0?'neg':'pos'}">${fmt(laciBal(year,k))}</td></tr>`;
   }).join('');
-  return `<div class="panel"><h2>Laci elszámolás <span class="muted">(Gerda + Zente fele = Laci részesedése)</span></h2>
+  return `<div class="panel"><h2>Laci elszámolás <span class="muted">(Gerda + Zente összege, kettéosztva: a fele a tiéd, a fele Laci-é)</span></h2>
     <div class="cards" style="margin-bottom:10px"><div class="card"><div class="l">Laci elmaradás · ${MON[m]} végén</div><div class="v ${laciBal(year,m)>0?'neg':'pos'}">${fmt(laciBal(year,m))}</div></div><div class="card"><div class="l">Kezdő elmaradás (2026 január előtt)</div><div style="margin-top:6px"><input type="number" inputmode="decimal" step="any" id="laciOpen" value="${st[2026].laciOpen||0}" style="width:130px"> lei</div></div></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px"><button data-act="laciReset">Újrakezdés innen (${MON[m]} ${year})</button>${st.laciFrom?`<span class="muted">Elszámolás ${MON[st.laciFrom.m]} ${st.laciFrom.y}-tól</span><button data-act="laciRestore">Teljes előzmény</button>`:""}</div>
-    <div class="tablewrap"><table style="min-width:620px"><thead><tr><th>Hó</th><th>Gerda</th><th>Zente</th><th>Zente fele</th><th>Laci részesedés</th><th>Laci befizetés</th><th>Elmaradás</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="tablewrap"><table style="min-width:620px"><thead><tr><th>Hó</th><th>Gerda</th><th>Zente</th><th>Gerda + Zente</th><th>Laci fele</th><th>Laci befizetés</th><th>Elmaradás</th></tr></thead><tbody>${rows}</tbody></table></div>
     <div class="muted">A befizetést havonta írd be. Az elmaradás a következő hónapba is átvitelre kerül, a 2027-es év a 2026-os végösszegből indul.</div></div>`;
 }
 
