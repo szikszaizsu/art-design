@@ -148,7 +148,7 @@ const SEED={
     it('itp','ITP','egyeb',V({7:250})),
 
     it('bank','Bank egyenleg','info',V({6:151045,7:135879,8:130879,9:125879,10:120879,11:115879})),
-    it('csokentes','Csökkentés (CSOKENTES)','info',V({7:15000,8:5000,9:5000,10:5000,11:5000})),
+    it('csokentes','Csökkentés (CSOKENTES)','info',V({7:15000,8:0,9:10000,10:5000,11:5000})),
     it('havireszlet','Havi részlet (bank)','info',V({6:1300,7:1211,8:1166,9:1122,10:1078,11:1034}))
   ],laciPay:V({5:550,6:2400,8:1200}),laciOpen:0},
   2027:{laciPay:Array(12).fill(null),laciOpen:0,items:[
@@ -175,6 +175,13 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  if(!st.sheetBankFix){
+    const c=st[2026].items.find(x=>x.id==='csokentes');
+    if(c)c.vals=clone(SEED[2026].items.find(x=>x.id==='csokentes').vals);
+    const b=st[2026].items.find(x=>x.id==='bank');
+    if(b)b.vals=clone(SEED[2026].items.find(x=>x.id==='bank').vals);
+    st.sheetBankFix=true;
+  }
   // Kártyák sorrendje (húzással módosítható), hiányzó kulcsok a végére kerülnek
   const cur=Array.isArray(st.order)?st.order.filter(k=>PANEL_KEYS.includes(k)):[];
   st.order=[...cur,...PANEL_KEYS.filter(k=>!cur.includes(k))];
@@ -284,7 +291,7 @@ function syncHitel(){
 // Bank egyenleg: a nyitóegyenlegtől (2026 július) minden hónapban levonja a csökkentés összegét
 function syncBank(){
   const seq=[];
-  for(let k=6;k<12;k++)seq.push([2026,k]);
+  for(let k=7;k<12;k++)seq.push([2026,k]);
   for(let k=0;k<12;k++)seq.push([2027,k]);
   let prev=null;
   for(const [y,k] of seq){
