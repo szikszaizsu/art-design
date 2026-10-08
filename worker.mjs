@@ -528,7 +528,7 @@ async function isBasicAuthed(request, env) {
   return diff === 0;
 }
 
-const PAYOUTS_MANIFEST = { name: 'Havi pénzügyek', short_name: 'Pénzügyek', start_url: '/payouts/', scope: '/payouts/', display: 'standalone', background_color: '#14171d', theme_color: '#14171d', icons: [{ src: '/payouts/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }] };
+const PAYOUTS_MANIFEST = { name: 'Havi pénzügyek', short_name: 'Pénzügyek', start_url: '/payouts/', scope: '/payouts/', display: 'standalone', background_color: '#14171d', theme_color: '#14171d', icons: [{ src: '/payouts/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/payouts/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/payouts/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }] };
 const PAYOUTS_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#111"/><text x="32" y="46" font-size="44" font-family="Arial,sans-serif" font-weight="700" text-anchor="middle" fill="#2ecc71">$</text></svg>';
 
 async function handlePayouts(request, env, url) {
