@@ -81,6 +81,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       <button data-act="exp">Mentés (JSON)</button>
       <button data-act="imp">Betöltés</button>
       <input type="file" id="file" accept="application/json" hidden>
+      <button data-act="phone" title="Telefonra telepítés">📱 Telefonra</button>
       <button class="danger" data-act="reset">Eredeti adatok</button>
     </div>
   </header>
@@ -341,13 +342,18 @@ function syncInstallment(){
     prev=nv;
   }
 }
+let showPhone=false;
+function phonePanel(){
+  const url=location.protocol.startsWith('http')?location.origin+'/payouts/':'a feltöltött oldal címe';
+  return `<div class="panel"><h2>Telefonra (appként)</h2><div class="muted" style="margin-bottom:8px">Nyisd meg a telefon böngészőjében: <b>${url}</b>, és a Tervező jelszavával lépj be.</div><div><b>Android (Chrome, Samsung Internet):</b> menü (⋮ vagy ≡) → „Telepítés”, „Oldal hozzáadása” vagy „Hozzáadás a főképernyőhöz”.</div><div style="margin-top:6px"><b>iPhone (Safari):</b> megosztás gomb (négyzet nyíllal) → „Főképernyőhöz adás”.</div><div class="muted" style="margin-top:8px">Az adatok a telefonon külön tárolódnak, a gépen rögzített változtatások nem látszanak itt.</div></div>`;
+}
 function render(){
   syncInstallment();
   syncHitel();
   syncBank();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
-  app.innerHTML=(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
+  app.innerHTML=(showPhone?phonePanel():'')+(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
 }
 
 // Laci elszámolás: Gerda teljes + Zente fele = Laci havi részesedése.
@@ -468,6 +474,7 @@ document.addEventListener('click',e=>{
     st.keepEmpty=st.keepEmpty||{};
     for(let k=m;k<12;k++){i.vals[k]=null;if(i.names)i.names[k]=null;st.keepEmpty[i.id+':'+k]=true;}
   }
+  else if(a==='phone'){showPhone=!showPhone;}
   else if(a==='laciReset'){
     st.laciFrom={y:year,m:m};
   }
