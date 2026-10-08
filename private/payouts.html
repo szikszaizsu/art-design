@@ -246,11 +246,11 @@ function tableView(){
   const cells=fn=>{let r='';for(let i=0;i<12;i++)r+=`<td class="num">${fmtN(fn(i))}</td>`;return r+`<td class="num">${fmtN(fn(null))}</td>`;};
   let h=`<div class="cards">${card('Bevétel ('+year+')',inc(null))}${card('Kiadás ('+year+')',exp(null))}${card('Egyenleg ('+year+')',bal(null),true)}</div>`;
   h+=chart();
-  h+=`<div class="tablewrap"><table><thead><tr><th>Tétel</th>${MS.map(x=>`<th>${x}</th>`).join('')}<th>Össz</th></tr></thead><tbody>`;
+  h+=`<div class="muted" style="margin:0 0 6px">A tételnevek a kiválasztott hónapra ({MON[m]}) vonatkoznak, a többi hónap neve nem változik.</div><div class="tablewrap"><table><thead><tr><th>Tétel</th>${MS.map(x=>`<th>${x}</th>`).join('')}<th>Össz</th></tr></thead><tbody>`;
   for(const [g,label] of GROUPS){
     h+=`<tr class="gh"><td colspan="14">${label}</td></tr>`;
     for(const i of items().filter(x=>x.group===g)){
-      h+=`<tr><td>${esc(i.name)} <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
+      h+=`<tr><td><input type="text" data-name="${i.id}" data-nm="${m}" value="${esc(nameOf(i,m))}" style="width:190px" aria-label="Tétel neve" title="Név: ${MON[m]}"> <button class="danger" data-act="del" data-id="${i.id}" title="Törlés" style="padding:0 5px">✕</button></td>`;
       for(let k=0;k<12;k++)h+=`<td><input type="number" inputmode="decimal" step="any" data-id="${i.id}" data-m="${k}" value="${i.vals[k]==null?'':i.vals[k]}"></td>`;
       h+=`<td class="num">${fmtN(rowSum(i))}</td></tr>`;
     }
@@ -267,7 +267,7 @@ function addForm(){
 }
 
 function subsPanel(){
-  const list=st.subs.map((s,i)=>`<div class="row"><span class="n">${esc(s.n)}</span><span><input type="number" inputmode="decimal" step="any" data-sub="${i}" value="${s.e}" style="width:90px"> €</span><button class="danger" data-act="subdel" data-i="${i}" title="Törlés">✕</button></div>`).join('');
+  const list=st.subs.map((s,i)=>`<div class="row"><input type="text" class="nm" data-subname="${i}" value="${esc(s.n)}" aria-label="Előfizetés neve"><span><input type="number" inputmode="decimal" step="any" data-sub="${i}" value="${s.e}" style="width:90px"> €</span><button class="danger" data-act="subdel" data-i="${i}" title="Törlés">✕</button></div>`).join('');
   const total=st.subs.reduce((a,s)=>a+(+s.e||0),0);
   return `<div class="panel"><h2>Előfizetések</h2>${list}<div class="sub"><span>Összesen</span><span>${total} €</span></div><div class="add"><input type="text" id="sName" placeholder="Név" aria-label="Előfizetés neve"><input type="number" inputmode="decimal" id="sAmt" placeholder="€" style="width:90px" aria-label="Összeg €"><button data-act="subadd">Hozzáadás</button></div></div>`;
 }
@@ -436,6 +436,12 @@ document.addEventListener('change',e=>{
     const s=t.value.replace(',','.').trim();
     const v=s===''?null:Number(s);
     if(i)i.vals[+t.dataset.m]=(v===null||isNaN(v))?null:v;
+    save();render();return;
+  }
+  if(t.dataset.subname!==undefined){
+    const sub=st.subs[+t.dataset.subname];
+    const v=t.value.trim();
+    if(sub&&v)sub.n=v;
     save();render();return;
   }
   if(t.dataset.name!==undefined){
