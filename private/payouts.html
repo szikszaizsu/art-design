@@ -186,6 +186,11 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  // Törlesztés tétel a Követésből a Hitelbe (így beleszámít a kiadásokba), egyszer
+  if(!st.torlFix){
+    for(const y of [2026,2027])for(const i of st[y].items)if(i.name==='Törlesztés'&&i.group==='info')i.group='hitel';
+    st.torlFix=true;
+  }
   if(!st.hideFix){
     const names=['KAJABON','Fizetés 7','Fizetés 22','Zoltán','Szepesi','Szabadság','Ösztöndíj'];
     for(const i of st[2026].items){if(names.includes(i.name)&&i.hideFrom==null){i.hideFrom=9;for(let k=9;k<12;k++)i.vals[k]=null;}}
