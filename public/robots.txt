@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://art-design.szikszaizsu.workers.dev/sitemap.xml
+Sitemap: https://szikszaizsu.com/sitemap.xml
