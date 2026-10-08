@@ -436,7 +436,6 @@ document.addEventListener('click',e=>{
     st[year].items=items().filter(x=>x!==i);
   }
   else if(a==='laciReset'){
-    if(!confirm(`Laci elszámolás újrakezdése innen: ${MON[m]} ${year}? A korábbi elmaradás nem számít bele.`))return;
     st.laciFrom={y:year,m:m};
   }
   else if(a==='laciRestore'){st.laciFrom=null;}
