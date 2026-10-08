@@ -758,3 +758,7 @@ body { line-height: 1.7; }
 :root[data-theme="dark"] .hv-hero-solo .hv-links a:first-child { background: var(--accent); }
 .hv-hero-solo .hv-links a:first-child { white-space: nowrap; }
 @media (max-width: 520px) { .hv-hero-solo .hv-links a:first-child { letter-spacing: .12em; padding: 13px 22px; } }
+/* Contact form submit: plain text link, no pill */
+.contact-form .button, .hv-contact .contact-form .button { width: auto; background: none !important; color: var(--ink) !important; border: 0; border-bottom: 1px solid currentColor; border-radius: 0; padding: 0 0 5px; box-shadow: none; font-size: 1rem; letter-spacing: 0; cursor: pointer; }
+.contact-form .button:hover { color: var(--accent) !important; border-bottom-color: var(--accent); }
+:root[data-theme="dark"] .contact-form .button { color: var(--ink) !important; }
