@@ -415,7 +415,17 @@ function laciBal(y,mi){
   }
   return bal;
 }
+// WhatsApp-üzenet: a kiválasztott hónap végéig az elmaradás és a havi bontás
+function laciMsg(){
+  const lines=[`Laci elszámolás – ${MON[m]} ${year}`,`${laciBal(year,m)>=0?'Elmaradás':'Túlfizetés'}: ${Math.abs(Math.round(laciBal(year,m)))} lei`,''];
+  for(let k=0;k<=m;k++){
+    const o=laciOwed(year,k),p=laciPaid(year,k);
+    if(o||p)lines.push(`${MON[k]}: részesedés ${Math.round(o)} lei, befizetés ${Math.round(p)} lei, egyenleg ${Math.round(laciBal(year,k))} lei`);
+  }
+  return lines.join('\n');
+}
 function laciPanel(){
+
   const rows=MON.map((n,k)=>{
     const g=sumG(year,'gerda',k), z=sumG(year,'zente',k);
     const cur=k===m?'font-weight:700':'';
@@ -423,7 +433,7 @@ function laciPanel(){
   }).join('');
   return `<div class="panel"><h2>Laci elszámolás <span class="muted">(Gerda + Zente összege, kettéosztva: a fele a tiéd, a fele Laci-é)</span></h2>
     <div class="cards" style="margin-bottom:10px"><div class="card"><div class="l">Laci elmaradás · ${MON[m]} végén</div><div class="v ${laciBal(year,m)>0?'neg':'pos'}">${fmt(laciBal(year,m))}</div></div><div class="card"><div class="l">Kezdő elmaradás (2026 január előtt)</div><div style="margin-top:6px"><input type="number" inputmode="decimal" step="any" id="laciOpen" value="${st[2026].laciOpen||0}" style="width:130px"> lei</div></div></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px"><button data-act="laciReset">Újrakezdés innen (${MON[m]} ${year})</button>${st.laciFrom?`<span class="muted">Elszámolás ${MON[st.laciFrom.m]} ${st.laciFrom.y}-tól</span><button data-act="laciRestore">Teljes előzmény</button>`:""}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px"><a href="https://wa.me/?text=${encodeURIComponent(laciMsg())}" target="_blank" rel="noopener" style="background:var(--chip);border:1px solid var(--line);border-radius:8px;padding:6px 10px;text-decoration:none;color:var(--ink)">📲 WhatsApp</a><button data-act="laciReset">Újrakezdés innen (${MON[m]} ${year})</button>${st.laciFrom?`<span class="muted">Elszámolás ${MON[st.laciFrom.m]} ${st.laciFrom.y}-tól</span><button data-act="laciRestore">Teljes előzmény</button>`:""}</div>
     <div class="tablewrap"><table style="min-width:620px"><thead><tr><th>Hó</th><th>Gerda</th><th>Zente</th><th>Gerda + Zente</th><th>Laci fele</th><th>Tartásdíj (nem számít bele)</th><th>Extra befizetés</th><th>Elmaradás</th></tr></thead><tbody>${rows}</tbody></table></div>
     <div class="muted">A tartásdíj nem számít bele az elmaradásba, az extra befizetést havonta írd be. Az elmaradás a következő hónapba is átvitelre kerül, a 2027-es év a 2026-os végösszegből indul.</div></div>`;
 }
