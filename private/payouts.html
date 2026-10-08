@@ -31,6 +31,10 @@ input[type=number]{width:110px;text-align:right}
 .panel h2{font-size:15px;margin:0 0 8px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start;margin-bottom:12px}
 .grid .panel{margin-bottom:0}
+.handle{cursor:grab;color:var(--mut);padding:0 6px 0 0;user-select:none;font-size:16px;line-height:1}
+.handle:active{cursor:grabbing}
+.panel.dragging{opacity:.45}
+.panel.drop-target{outline:2px dashed var(--blue);outline-offset:3px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
 .row:last-child{border-bottom:0}
 .row .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -76,6 +80,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 <script>
 const MON=['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
 const MS=['Jan','Feb','Már','Ápr','Máj','Jún','Júl','Aug','Szep','Okt','Nov','Dec'];
+const PANEL_KEYS=['bevetel','laci','hitel','rezsi','gerda','zente','egyeb','info'];
 const GROUPS=[['bevetel','Bevétel'],['laci','Laci'],['hitel','Hitel'],['rezsi','Rezsi'],['gerda','Gerda kiadás'],['zente','Zente kiadás'],['egyeb','Egyéb kiadás'],['info','Követés (nem számít bele)']];
 const EXP=['hitel','rezsi','gerda','zente','egyeb'];
 const INC=['bevetel','laci'];
@@ -164,6 +169,9 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  // Kártyák sorrendje (húzással módosítható), hiányzó kulcsok a végére kerülnek
+  const cur=Array.isArray(st.order)?st.order.filter(k=>PANEL_KEYS.includes(k)):[];
+  st.order=[...cur,...PANEL_KEYS.filter(k=>!cur.includes(k))];
   for(const y of [2026,2027]){
     // A kézi „Laci – elmaradás” sor helyett a Laci-elszámolás számol
     st[y].items=st[y].items.filter(i=>i.id!=="laciel");
@@ -219,13 +227,10 @@ function hoView(){
   let h=`<div class="bar" style="margin-bottom:12px"><button data-act="prev" aria-label="Előző hónap">‹</button><select data-role="month" aria-label="Hónap">${MON.map((n,i)=>`<option value="${i}" ${i===m?'selected':''}>${n}</option>`).join('')}</select><button data-act="next" aria-label="Következő hónap">›</button></div>`;
   h+=`<div class="cards">${card('Bevétel – '+MON[m],inc(m))}${card('Kiadás – '+MON[m],exp(m))}${card('Egyenleg – '+MON[m],bal(m),true)}${card('Év egyenleg ('+year+')',bal(null),true)}</div>`;
   h+=chart();
-  const block=(title,g,total,note)=>`<div class="panel"><h2>${title}${note?` <span class="muted">${note}</span>`:''}</h2>${rows(g)}${total==null?'':`<div class="sub"><span>Összesen</span><span>${fmt(total)}</span></div>`}</div>`;
-  h+=`<div class="grid">`;
-  h+=block('Bevétel','bevetel',gsum('bevetel',m));
-  h+=block('Laci','laci',gsum('laci',m));
-  h+=EXP.map(g=>block(GLABEL[g],g,gsum(g,m))).join('');
-  h+=block('Követés','info',null,'(nem számít bele)');
-  h+=`</div>`;
+  const block=(title,g,total,note)=>`<div class="panel" data-panel="${g}"><h2><span class="handle" draggable="true" title="Húzd át a sorrendhez">⠿</span>${title}${note?` <span class="muted">${note}</span>`:''}</h2>${rows(g)}${total==null?'':`<div class="sub"><span>Összesen</span><span>${fmt(total)}</span></div>`}</div>`;
+  const parts={bevetel:block('Bevétel','bevetel',gsum('bevetel',m)),laci:block('Laci','laci',gsum('laci',m)),info:block('Követés','info',null,'(nem számít bele)')};
+  EXP.forEach(g=>parts[g]=block(GLABEL[g],g,gsum(g,m)));
+  h+=`<div class="grid">${st.order.map(k=>parts[k]).join('')}</div>`;
   return h;
 }
 
@@ -294,6 +299,34 @@ function quickForm(){
   const names=[...new Set(items().map(i=>i.name))];
   return `<div class="panel"><h2>Gyors rögzítés · ${MON[m]} ${year}</h2><div class="add"><select id="qGroup" aria-label="Csoport">${GROUPS.filter(([k])=>k!=='info').map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select><input type="text" id="qName" list="qNames" placeholder="Név" aria-label="Név"><datalist id="qNames">${names.map(n=>`<option value="${esc(n)}">`).join('')}</datalist><input type="number" inputmode="decimal" step="any" id="qAmt" placeholder="Összeg (lei)" style="width:140px" aria-label="Összeg"><button data-act="quick">Rögzítés</button></div><div class="muted">Ha ugyanilyen nevű tétel már van ebben a csoportban, annak a hónapos értékét írja felül.</div></div>`;
 }
+
+// Kártyák húzása: a fogantyút (⠿) megfogva a kártyát egy másik kártya elé lehet tenni
+let dragKey=null;
+app.addEventListener('dragstart',e=>{
+  const h=e.target.closest('.handle');if(!h)return;
+  const p=h.closest('[data-panel]');dragKey=p.dataset.panel;
+  e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragKey);
+  p.classList.add('dragging');
+});
+app.addEventListener('dragover',e=>{
+  if(!dragKey)return;
+  const p=e.target.closest('[data-panel]');if(!p)return;
+  e.preventDefault();e.dataTransfer.dropEffect='move';
+  document.querySelectorAll('.drop-target').forEach(x=>x.classList.remove('drop-target'));
+  if(p.dataset.panel!==dragKey)p.classList.add('drop-target');
+});
+app.addEventListener('drop',e=>{
+  if(!dragKey)return;
+  e.preventDefault();
+  const p=e.target.closest('[data-panel]');
+  if(p&&p.dataset.panel!==dragKey){
+    const order=st.order.filter(k=>k!==dragKey);
+    order.splice(order.indexOf(p.dataset.panel),0,dragKey);
+    st.order=order;save();
+  }
+  dragKey=null;render();
+});
+app.addEventListener('dragend',()=>{dragKey=null;render();});
 
 function download(name,type,content){
   const a=document.createElement('a');
