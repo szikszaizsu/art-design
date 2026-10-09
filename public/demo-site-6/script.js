@@ -55,14 +55,14 @@
     add('.intro, .stats, .listen .album, .listen .player, .shead, .clist, .packs, .rep > div, .pqs, .rvs, .mems, .posts, .faqw > div, .close-in h2, .foot-in .fbrand', 24);
     add('.close-in p, .close-in .cta', 16);
     var heroIn = $('.hero-in'), nextc = $('.nextc');
-    function ease(t) { return t * t; }
+    function ease(t) { return 1 - (1 - t) * (1 - t); }
     var ticking = false;
     function frame() {
       ticking = false;
       var vh = innerHeight, y = scrollY;
       items.forEach(function (it) {
         var top = it.el.getBoundingClientRect().top;
-        var lin = Math.min(1, Math.max(0, (vh + 80 - top) / (vh * 0.88 + 80)));
+        var lin = Math.min(1, Math.max(0, (vh + 40 - top) / (vh * 0.28 + 40)));
         var p = ease(lin);
         if (p >= 0.999) { it.el.style.opacity = ''; it.el.style.transform = ''; }
         else { it.el.style.opacity = p.toFixed(3); it.el.style.transform = 'translateY(' + ((1 - p) * it.amt).toFixed(1) + 'px)'; }
