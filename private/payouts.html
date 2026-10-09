@@ -186,6 +186,11 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  // 2027 rezsi: havonta kézzel rögzítjük, a Sheetből érkező januári értékek ne maradjanak
+  if(!st.rezsi27Fix){
+    for(const i of st[2027].items)if(i.group==='rezsi'){for(let k=0;k<12;k++)i.vals[k]=null;}
+    st.rezsi27Fix=true;
+  }
   // Törlesztés tétel a Követésből a Hitelbe (így beleszámít a kiadásokba), egyszer
   if(!st.torlFix){
     for(const y of [2026,2027])for(const i of st[y].items)if(i.name==='Törlesztés'&&i.group==='info')i.group='hitel';
