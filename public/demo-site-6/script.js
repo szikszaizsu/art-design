@@ -45,4 +45,36 @@
     }, { threshold: .6 });
     $$('.stat b').forEach(function (b) { b.textContent = '0' + (b.getAttribute('data-s') || ''); io.observe(b); });
   }
+
+  // scroll-linked reveal (as on the reference site): blocks fade in and rise 24px (sheet 60px), hero text fades out upward
+  var still2 = /[?&]static/.test(location.search) || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still2) {
+    var items = [];
+    function add(sel, amt) { $$(sel).forEach(function (el) { el.classList.add('rv'); items.push({ el: el, amt: amt }); }); }
+    add('.sheet', 60);
+    add('.intro, .stats, .listen .album, .listen .player, .shead, .clist, .packs, .rep > div, .pqs, .rvs, .mems, .posts, .faqw > div, .close-in h2, .foot-in .fbrand', 24);
+    add('.close-in p, .close-in .cta', 16);
+    var heroIn = $('.hero-in'), nextc = $('.nextc');
+    function ease(t) { return 1 - (1 - t) * (1 - t); }
+    var ticking = false;
+    function frame() {
+      ticking = false;
+      var vh = innerHeight, y = scrollY;
+      items.forEach(function (it) {
+        var top = it.el.getBoundingClientRect().top;
+        var lin = Math.min(1, Math.max(0, (vh + 40 - top) / (vh * 0.28 + 40)));
+        var p = ease(lin);
+        if (p >= 0.999) { it.el.style.opacity = ''; it.el.style.transform = ''; }
+        else { it.el.style.opacity = p.toFixed(3); it.el.style.transform = 'translateY(' + ((1 - p) * it.amt).toFixed(1) + 'px)'; }
+      });
+      var h = Math.min(1, y / 420);
+      heroIn.style.opacity = (1 - h).toFixed(3);
+      heroIn.style.transform = 'translateY(' + (-40 * h).toFixed(1) + 'px)';
+      if (nextc) nextc.style.opacity = (1 - Math.min(1, y / 520)).toFixed(3);
+    }
+    function req() { frame(); }
+    addEventListener('scroll', req, { passive: true });
+    addEventListener('resize', req);
+    frame();
+  }
 })();
