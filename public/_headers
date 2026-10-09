@@ -6,8 +6,3 @@
 # Demo index page (/weboldalak/) is internal: never indexed.
 /weboldalak/*
   X-Robots-Tag: noindex, nofollow, noimageindex, noarchive
-
-# Whole site stays out of search engines for now (owner's request, 2026-09-30).
-# Delete this block when the site should be indexed.
-/*
-  X-Robots-Tag: noindex, nofollow
