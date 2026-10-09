@@ -52,6 +52,9 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(20px,6.4vw,86px);lin
 .nextc>a{font-size:12.5px;font-weight:500;display:inline-flex;gap:6px;align-items:center;color:var(--gold)}.nextc>a svg{width:13px}
 
 .sec{padding:110px 0}
+.rise{background:var(--ink)}
+.sheet{border-radius:20px 20px 0 0}
+.rv{will-change:transform,opacity}
 .cream{background:var(--cream)}.dark{background:var(--ink);color:var(--cream)}
 .op{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);font-weight:500;margin-bottom:26px;display:flex;gap:14px;align-items:center}
 .op::before{content:"";width:34px;height:1px;background:currentColor}
