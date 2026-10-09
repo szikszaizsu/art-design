@@ -9,9 +9,6 @@ ul,ol{list-style:none}
 svg{width:1em;height:1em}
 .wrap{width:min(1240px,100% - 48px);margin-inline:auto}
 
-.bar{background:var(--burg);color:var(--cream);font-size:12.5px;display:flex;justify-content:center;gap:22px;align-items:center;padding:9px 16px;text-align:center}
-.bar a{display:inline-flex;gap:6px;align-items:center;font-weight:500}
-.bar svg{width:13px}
 
 .top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px max(24px,calc((100% - 1240px)/2));background:rgba(23,19,15,.82);backdrop-filter:blur(14px);color:var(--cream);border-bottom:1px solid var(--line)}
 .brand{display:flex;flex-direction:column;line-height:1}
@@ -208,7 +205,6 @@ details p{padding:0 40px 24px 0;color:var(--mute2);max-width:620px}
   .pieces{grid-template-columns:1fr}
   .hero::after{background:linear-gradient(0deg,rgba(23,19,15,.95) 20%,rgba(23,19,15,.35))}
   .hero-img{object-position:70% 20%}
-  .bar{font-size:11.5px;gap:12px}
   .fcols{gap:40px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
