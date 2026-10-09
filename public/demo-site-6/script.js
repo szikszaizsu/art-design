@@ -55,14 +55,17 @@
     add('.intro, .stats, .listen .album, .listen .player, .shead, .clist, .packs, .rep > div, .pqs, .rvs, .mems, .posts, .faqw > div, .close-in h2, .foot-in .fbrand', 24);
     add('.close-in p, .close-in .cta', 16);
     var heroIn = $('.hero-in'), nextc = $('.nextc');
-    function ease(t) { return 1 - (1 - t) * (1 - t); }
+    function ease(t) { return Math.pow(t, 1.5); }
     var ticking = false;
     function frame() {
       ticking = false;
       var vh = innerHeight, y = scrollY;
       items.forEach(function (it) {
         var top = it.el.getBoundingClientRect().top;
-        var lin = Math.min(1, Math.max(0, (vh + 40 - top) / (vh * 0.28 + 40)));
+        var docTop = it.el.getBoundingClientRect().top + y;
+        var topAtEnd = docTop - Math.max(0, document.documentElement.scrollHeight - vh);
+        var end = Math.max(vh * 0.28, topAtEnd + 12);
+        var lin = Math.min(1, Math.max(0, (vh - top) / (vh - end)));
         var p = ease(lin);
         if (p >= 0.999) { it.el.style.opacity = ''; it.el.style.transform = ''; }
         else { it.el.style.opacity = p.toFixed(3); it.el.style.transform = 'translateY(' + ((1 - p) * it.amt).toFixed(1) + 'px)'; }
