@@ -51,7 +51,6 @@
   if (!still2) {
     var items = [];
     function add(sel, amt) { $$(sel).forEach(function (el) { el.classList.add('rv'); items.push({ el: el, amt: amt }); }); }
-    add('.sheet', 60);
     add('.intro, .stats, .listen .album, .listen .player, .shead, .clist, .packs, .rep > div, .pqs, .rvs, .mems, .posts, .faqw > div, .close-in h2, .foot-in .fbrand', 24);
     add('.close-in p, .close-in .cta', 16);
     var heroIn = $('.hero-in'), nextc = $('.nextc');
