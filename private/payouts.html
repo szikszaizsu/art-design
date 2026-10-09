@@ -186,6 +186,16 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  // 2026-os tételek megjelennek 2027-ben is (üres értékekkel), ha ott még nincsenek
+  if(!st.items27Fix){
+    for(const s0 of st[2026].items){
+      if(!st[2027].items.some(x=>x.id===s0.id)){
+        const n=clone(s0);delete n.hideFrom;delete n.names;n.vals=Array(12).fill(null);
+        st[2027].items.push(n);
+      }
+    }
+    st.items27Fix=true;
+  }
   // 2027 rezsi: havonta kézzel rögzítjük, a Sheetből érkező januári értékek ne maradjanak
   if(!st.rezsi27Fix){
     for(const i of st[2027].items)if(i.group==='rezsi'){for(let k=0;k<12;k++)i.vals[k]=null;}
