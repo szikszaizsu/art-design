@@ -676,6 +676,9 @@ async function handleTervezo(request, env, url) {
 
 export default {
   async fetch(request, env) {
+    // A régi workers.dev cím 301-gyel a saját domainre megy (ne legyen ugyanaz a tartalom két címen)
+    const reqUrl = new URL(request.url);
+    if (reqUrl.hostname === 'art-design.szikszaizsu.workers.dev') return Response.redirect('https://szikszaizsu.com' + reqUrl.pathname + reqUrl.search, 301);
     const url = new URL(request.url);
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
     if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg', '/payouts/api/state'].includes(url.pathname)) return handlePayouts(request, env, url);
