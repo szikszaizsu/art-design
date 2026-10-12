@@ -692,6 +692,18 @@ export default {
     const reqUrl = new URL(request.url);
     if (reqUrl.hostname === 'art-design.szikszaizsu.workers.dev') return Response.redirect('https://szikszaizsu.com' + reqUrl.pathname + reqUrl.search, 301);
     const url = new URL(request.url);
+    // /demo-site-7/: jelszavas (HTTP Basic, ugyanaz a TERVEZO_JELSZO mint a /tervezo/ és /payouts/ oldalon)
+    if (url.pathname === '/demo-site-7' || url.pathname.startsWith('/demo-site-7/')) {
+      if (!(await isBasicAuthed(request, env))) {
+        return new Response('Jelszó szükséges.', {
+          status: 401,
+          headers: { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', 'WWW-Authenticate': 'Basic realm="demo-7", charset="UTF-8"', 'Content-Type': 'text/plain; charset=utf-8' }
+        });
+      }
+      const r = await env.ASSETS.fetch(request);
+      const h = new Headers(r.headers); h.set('Cache-Control', 'private, max-age=600'); h.set('X-Robots-Tag', 'noindex, nofollow, noimageindex, noarchive');
+      return new Response(r.body, { status: r.status, statusText: r.statusText, headers: h });
+    }
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
     if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg', '/payouts/api/state', '/payouts/api/fx'].includes(url.pathname)) return handlePayouts(request, env, url);
     if (url.pathname !== '/api/visits') return env.ASSETS.fetch(request);
