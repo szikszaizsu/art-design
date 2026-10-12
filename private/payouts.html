@@ -387,17 +387,18 @@ function syncHitel(){
   }
 }
 // Bank egyenleg: a nyitóegyenlegtől (2026 július) minden hónapban levonja a csökkentés összegét
+// Bank egyenleg: a kézzel megadott hónap (kiinduló pont) után a csökkentés szerint számol
 function syncBank(){
+  const a=st.bankAnchor||{y:2026,m:7,v:null};
   const seq=[];
-  for(let k=7;k<12;k++)seq.push([2026,k]);
-  for(let k=0;k<12;k++)seq.push([2027,k]);
-  for(let k=0;k<12;k++)seq.push([2028,k]);
-  let prev=null;
+  for(const y of [2026,2027,2028])for(let k=0;k<12;k++)seq.push([y,k]);
+  let prev=null, started=false;
   for(const [y,k] of seq){
     const b=st[y].items.find(x=>x.id==='bank');
     const c=st[y].items.find(x=>x.id==='csokentes');
     if(!b||!c)continue;
-    if(prev===null){prev=b.vals[k];continue;}
+    if(y===a.y&&k===a.m){if(a.v!=null)b.vals[k]=a.v;prev=b.vals[k];started=true;continue;}
+    if(!started)continue;
     const nv=prev-(c.vals[k]||0);
     if(!(st.keepEmpty&&st.keepEmpty[b.id+':'+k]))b.vals[k]=nv;
     prev=nv;
@@ -645,6 +646,7 @@ document.addEventListener('change',e=>{
     const s=t.value.replace(',','.').trim();
     const v=s===''?null:Number(s);
     if(i)i.vals[+t.dataset.m]=(v===null||isNaN(v))?null:v;
+    if(i&&i.id==='bank'&&v!==null&&!isNaN(v))st.bankAnchor={y:year,m:+t.dataset.m,v:v};
     if(i&&st.keepEmpty&&v!==null&&!isNaN(v))delete st.keepEmpty[i.id+':'+t.dataset.m];
     save();render();return;
   }
