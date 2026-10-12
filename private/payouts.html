@@ -409,7 +409,7 @@ function render(){
   syncBank();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
-  app.innerHTML=(showPhone?phonePanel():'')+(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
+  app.innerHTML=(showPhone?phonePanel():'')+fxPanel()+(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
 }
 
 // Laci elszámolás: Gerda teljes + Zente fele = Laci havi részesedése.
@@ -438,6 +438,18 @@ function laciMsg(){
     if(o||p)lines.push(`${MON[k]}: részesedés ${Math.round(o)} lei, befizetés ${Math.round(p)} lei, egyenleg ${Math.round(laciBal(year,k))} lei`);
   }
   return lines.join('\n');
+}
+// Valutaváltó (BNR középárfolyam)
+let fxRate=null, fxDate='', fxAmt='', fxDir='ron';
+async function loadFx(){
+  try{const r=await fetch('/payouts/api/fx',{cache:'no-store'});if(!r.ok)return;const d=await r.json();if(d.eur){fxRate=d.eur;fxDate=d.date;render();}}catch(e){}
+}
+function fxPanel(){
+  const amt=Number(String(fxAmt).replace(',','.'));
+  let out='–';
+  if(fxRate&&amt){out=fxDir==='ron'?(amt/fxRate).toFixed(2)+' €':(amt*fxRate).toFixed(2)+' lei';}
+  const rateTxt=fxRate?('1 € = '+fxRate.toFixed(4)+' lei (BNR, '+fxDate+')'):'Az árfolyam most nem elérhető';
+  return '<div class="panel"><h2>Valutaváltó <span class="muted">(BNR)</span></h2><div class="add" style="margin-top:0"><input type="number" inputmode="decimal" step="any" data-fx="amt" value="'+fxAmt+'" placeholder="Összeg" style="width:140px" aria-label="Összeg"><select data-fx="dir" aria-label="Irány"><option value="ron"'+(fxDir==='ron'?' selected':'')+'>lei → €</option><option value="eur"'+(fxDir==='eur'?' selected':'')+'>€ → lei</option></select><span><b>'+out+'</b></span></div><div class="muted" style="margin-top:8px">'+rateTxt+'</div></div>';
 }
 function laciPanel(){
 
@@ -602,6 +614,11 @@ document.addEventListener('change',e=>{
     if(i&&st.keepEmpty&&v!==null&&!isNaN(v))delete st.keepEmpty[i.id+':'+t.dataset.m];
     save();render();return;
   }
+  if(t.dataset.fx!==undefined){
+    if(t.dataset.fx==='amt')fxAmt=t.value;
+    if(t.dataset.fx==='dir')fxDir=t.value;
+    render();return;
+  }
   if(t.dataset.subname!==undefined){
     const sub=st.subs[+t.dataset.subname];
     const v=t.value.trim();
@@ -703,6 +720,7 @@ document.addEventListener('change',e=>{
 
 render();
 pullRemote();
+loadFx();
 </script>
 </body>
 </html>

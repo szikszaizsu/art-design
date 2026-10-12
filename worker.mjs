@@ -551,6 +551,17 @@ async function handlePayoutsState(request, env, url) {
   return new Response(null, { status: 405 });
 }
 
+// BNR hivatalos EUR árfolyam (a Worker 1 órára gyorsítótárazza)
+async function handlePayoutsFx() {
+  const r = await fetch('https://www.bnr.ro/nbrfxrates.xml', { cf: { cacheTtl: 3600, cacheEverything: true } });
+  if (!r.ok) return Response.json({ error: 'BNR nem elérhető' }, { status: 502, headers: PAYOUTS_HEADERS });
+  const xml = await r.text();
+  const date = (xml.match(/<Cube date="([^"]+)"/) || [])[1];
+  const m = xml.match(/<Rate currency="EUR">([\d.]+)<\/Rate>/);
+  if (!date || !m) return Response.json({ error: 'Hibás BNR válasz' }, { status: 502, headers: PAYOUTS_HEADERS });
+  return Response.json({ date, eur: Number(m[1]) }, { headers: PAYOUTS_HEADERS });
+}
+
 async function handlePayouts(request, env, url) {
   // A manifest csak nevet és ikont tartalmaz, így nyilvános (az APK ezt olvassa)
   if (url.pathname === '/payouts/manifest.json') {
@@ -566,6 +577,7 @@ async function handlePayouts(request, env, url) {
   if (url.pathname === '/payouts/manifest.json') {
     return new Response(JSON.stringify(PAYOUTS_MANIFEST), { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'application/manifest+json' } });
   }
+  if (url.pathname === '/payouts/api/fx') return handlePayoutsFx();
   if (url.pathname === '/payouts/icon.svg') {
     return new Response(PAYOUTS_ICON, { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'image/svg+xml' } });
   }
@@ -681,7 +693,7 @@ export default {
     if (reqUrl.hostname === 'art-design.szikszaizsu.workers.dev') return Response.redirect('https://szikszaizsu.com' + reqUrl.pathname + reqUrl.search, 301);
     const url = new URL(request.url);
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
-    if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg', '/payouts/api/state'].includes(url.pathname)) return handlePayouts(request, env, url);
+    if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg', '/payouts/api/state', '/payouts/api/fx'].includes(url.pathname)) return handlePayouts(request, env, url);
     if (url.pathname !== '/api/visits') return env.ASSETS.fetch(request);
     if (!['GET', 'POST'].includes(request.method)) return new Response(null, { status: 405 });
     if (request.method === 'POST' && (request.headers.get('Origin') !== url.origin || request.headers.get('X-Visit-Counter') !== '1')) {
