@@ -186,6 +186,9 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  // Előfizetések havonként: a régi egy listából az alap lesz
+  if(!st.subsM){st.subsM={'0000-00':clone(st.subs||SEED.subs)};}
+
   // 2026-os tételek megjelennek 2027-ben is (üres értékekkel), ha ott még nincsenek
   if(!st.items27Fix){
     for(const s0 of st[2026].items){
@@ -352,7 +355,7 @@ function addForm(){
 function subsPanel(){
   const list=st.subs.map((s,i)=>`<div class="row"><input type="text" class="nm" data-subname="${i}" value="${esc(s.n)}" aria-label="Előfizetés neve"><span><input type="number" inputmode="decimal" step="any" data-sub="${i}" value="${s.e}" style="width:90px"> €</span><button class="danger" data-act="subdel" data-i="${i}" title="Törlés">✕</button></div>`).join('');
   const total=st.subs.reduce((a,s)=>a+(+s.e||0),0);
-  return `<div class="panel"><h2>Előfizetések</h2>${list}<div class="sub"><span>Összesen</span><span>${total} €</span></div><div class="add"><input type="text" id="sName" placeholder="Név" aria-label="Előfizetés neve"><input type="number" inputmode="decimal" id="sAmt" placeholder="€" style="width:90px" aria-label="Összeg €"><button data-act="subadd">Hozzáadás</button></div></div>`;
+  return `<div class="panel"><h2>Előfizetések · ${MON[m]} ${year}</h2>${list}<div class="sub"><span>Összesen</span><span>${total} €</span></div><div class="add"><input type="text" id="sName" placeholder="Név" aria-label="Előfizetés neve"><input type="number" inputmode="decimal" id="sAmt" placeholder="€" style="width:90px" aria-label="Összeg €"><button data-act="subadd">Hozzáadás</button></div></div>`;
 }
 
 // Hitel (Részlet) automatikusan követi a bank „Havi részlet” sorát, ahol van ott érték
@@ -403,7 +406,17 @@ function phonePanel(){
   const url=location.protocol.startsWith('http')?location.origin+'/payouts/':'a feltöltött oldal címe';
   return `<div class="panel"><h2>Telefonra (appként)</h2><div class="muted" style="margin-bottom:8px">Nyisd meg a telefon böngészőjében: <b>${url}</b>, és a Tervező jelszavával lépj be.</div><div><b>Android (Chrome, Samsung Internet):</b> menü (⋮ vagy ≡) → „Telepítés”, „Oldal hozzáadása” vagy „Hozzáadás a főképernyőhöz”.</div><div style="margin-top:6px"><b>iPhone (Safari):</b> megosztás gomb (négyzet nyíllal) → „Főképernyőhöz adás”.</div><div class="muted" style="margin-top:8px">Az adatok a telefonon külön tárolódnak, a gépen rögzített változtatások nem látszanak itt.</div></div>`;
 }
+// Az aktuális hónap előfizetési listája (ha nincs külön, az előző hónapé)
+function activateSubs(){
+  const key=year+'-'+String(m+1).padStart(2,'0');
+  if(!st.subsM[key]){
+    const prev=Object.keys(st.subsM).filter(k=>k<=key).sort().pop();
+    st.subsM[key]=clone(st.subsM[prev||'0000-00']);
+  }
+  st.subs=st.subsM[key];
+}
 function render(){
+  activateSubs();
   syncInstallment();
   syncHitel();
   syncBank();
