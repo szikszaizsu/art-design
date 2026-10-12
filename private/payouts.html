@@ -444,7 +444,7 @@ function render(){
   syncBank();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
-  app.innerHTML=(showPhone?phonePanel():'')+fxPanel()+(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+addForm()+subsPanel();
+  app.innerHTML=(showPhone?phonePanel():'')+fxPanel()+(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+bankPanel()+addForm()+subsPanel();
 }
 
 // Laci elszámolás: Gerda teljes + Zente fele = Laci havi részesedése.
@@ -485,6 +485,19 @@ function fxPanel(){
   if(fxRate&&amt){out=fxDir==='ron'?(amt/fxRate).toFixed(2)+' €':(amt*fxRate).toFixed(2)+' lei';}
   const rateTxt=fxRate?('1 € = '+fxRate.toFixed(4)+' lei (BNR, '+fxDate+')'):'Az árfolyam most nem elérhető';
   return '<div class="panel"><h2>Valutaváltó <span class="muted">(BNR)</span></h2><div class="add" style="margin-top:0"><input type="number" inputmode="decimal" step="any" data-fx="amt" value="'+fxAmt+'" placeholder="Összeg" style="width:140px" aria-label="Összeg"><select data-fx="dir" aria-label="Irány"><option value="ron"'+(fxDir==='ron'?' selected':'')+'>lei → €</option><option value="eur"'+(fxDir==='eur'?' selected':'')+'>€ → lei</option></select><span><b>'+out+'</b></span></div><div class="muted" style="margin-top:8px">'+rateTxt+'</div></div>';
+}
+// Bank – éves kimutatás (havonként: egyenleg, csökkentés, havi részlet)
+function bankPanel(){
+  const b=st[year].items.find(x=>x.id==='bank'), c=st[year].items.find(x=>x.id==='csokentes'), h=st[year].items.find(x=>x.id==='havireszlet');
+  const cell=(v)=>v==null?'–':fmtN(v);
+  const rows=MON.map((n,k)=>`<tr${k===m?' style="font-weight:700"':''}><td>${n}</td><td class="num">${cell(b.vals[k])}</td><td class="num">${cell(c.vals[k])}</td><td class="num">${cell(h.vals[k])}</td></tr>`).join('');
+  const known=b.vals.map((v,k)=>[v,k]).filter(([v])=>v!=null);
+  const first=known.length?known[0][0]:0, last=known.length?known[known.length-1][0]:0;
+  const sumC=c.vals.reduce((a,v)=>a+(v||0),0), sumH=h.vals.reduce((a,v)=>a+(v||0),0);
+  return `<div class="panel"><h2>Bank – éves kimutatás (${year})</h2>
+    <div class="cards" style="margin-bottom:12px">${card('Év eleje',first)}${card('Év vége',last)}${card('Csökkentés összesen',sumC)}${card('Havi részlet összesen',sumH)}</div>
+    <div class="tablewrap"><table style="min-width:420px"><thead><tr><th>Hó</th><th>Bank egyenleg</th><th>Csökkentés</th><th>Havi részlet</th></tr></thead><tbody>${rows}
+    <tr class="tot"><td>Összesen / év vége</td><td class="num">${cell(last)}</td><td class="num">${cell(sumC)}</td><td class="num">${cell(sumH)}</td></tr></tbody></table></div></div>`;
 }
 function laciPanel(){
 
