@@ -5,6 +5,8 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Reklám Trendfigyelő</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Crect x='14' y='15' width='36' height='10' rx='2' fill='%232f6bff'/%3E%3Crect x='27' y='15' width='10' height='36' rx='2' fill='%232f6bff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0b'/%3E%3Crect x='14' y='15' width='36' height='10' rx='2' fill='%232f6bff'/%3E%3Crect x='27' y='15' width='10' height='36' rx='2' fill='%232f6bff'/%3E%3C/svg%3E">
 <script>try{var t=localStorage.getItem("trendfigyelo_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
 :root{
@@ -29,6 +31,7 @@
 .theme button{border:0;background:transparent;color:#fff;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:600;opacity:.8}
 .theme button.on{background:#fff;color:#2b2470;opacity:1}
 .hero .in{padding-top:2px}
+.logo{display:block;margin-bottom:14px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .ver{margin-top:16px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;border-radius:99px;padding:6px 14px;font-size:13px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
 .ver:hover{background:rgba(255,255,255,.25)}
 .vdot{width:8px;height:8px;border-radius:50%;background:#ffd166;display:none}
@@ -167,6 +170,7 @@ dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd)
   <div class="theme" id="theme" role="group" aria-label="Megjelenés">
     <button data-t="auto">Auto</button><button data-t="light">Világos</button><button data-t="dark">Sötét</button>
   </div>
+  <svg class="logo" viewBox="0 0 64 64" width="44" height="44" role="img" aria-label="Trendfigyelő logó"><rect width="64" height="64" rx="14" fill="#0b0b0b"/><rect x="14" y="15" width="36" height="10" rx="2" fill="#2f6bff"/><rect x="27" y="15" width="10" height="36" rx="2" fill="#2f6bff"/></svg>
   <span class="eyebrow"><i class="pulse"></i><span id="todayLbl"></span></span>
   <h1>AI Reklám Trendfigyelő</h1>
   <p>Mi a trendi a reklámban, a videóban, a weboldalakban és a designban, és mi működik, mi nem, mi pozitív, mi negatív. Napi idővonal a platformok, az AI-modellek, a promptok és az ügynökségek változásairól.</p>
@@ -663,8 +667,9 @@ const DATA=[
 /*DATA:END*/
 
 /* Verzió és változásnapló: minden publikálásnál emeld a VERSION értékét, és írj egy új sort a CHANGELOG elejére. */
-const VERSION="3.0";
+const VERSION="3.1";
 const CHANGELOG=[
+ {v:"3.1",d:"2026-10-12",t:["Új logó: kék T betű fekete alapon (böngészőfül, telefon-ikon és fejléc)"]},
  {v:"3.0",d:"2026-10-12",t:["Új fő rész: 'Mi számít most jónak' reklámnál, weboldalnál és designnál, szabályonként bizonyítékkal és az alátámasztás erősségével","'Ami nem jó' lista mindhárom területen","Új rész: 'Melyik AI-modell a jobb, melyik az új' (kép, videó, nyelvi), dátumozott rangsor-pillanatképekkel"]},
  {v:"2.3",d:"2026-10-12",t:["Új téma: AI a tervezőgrafikában (használat, eszközök, jog, munkaerőpiac, tervezői vélemények)","Logó és arculat jogi helyzete: védjegy igen, szerzői jog csak az emberi résznek","Gyakorlati munkafolyamat-javaslat"]},
  {v:"2.2",d:"2026-10-12",t:["Új témák: Reklámtrendek és formátumok, Weboldalak és landing, Design és arculat","Hangulat-szűrő: pozitív, negatív, vegyes","Negatív oldal: AI-szemét, bizalomvesztés, Z generáció","Verziószám és 'Mi új' lista"]},
