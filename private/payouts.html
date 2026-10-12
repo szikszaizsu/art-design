@@ -388,6 +388,8 @@ function syncHitel(){
 }
 // Bank egyenleg: a nyitóegyenlegtől (2026 július) minden hónapban levonja a csökkentés összegét
 // Bank egyenleg: a kézzel megadott hónap (kiinduló pont) után a csökkentés szerint számol
+// Bank egyenleg: kiinduló hónap után csökkentés + részlet vonódik le.
+// Ha a maradék kisebb, mint egy rendes csökkentés, az utolsó hónapban egyszerre fizetjük ki, utána nincs több csökkentés/részlet.
 function syncBank(){
   const a=st.bankAnchor||{y:2026,m:7,v:null};
   const seq=[];
@@ -402,18 +404,30 @@ function syncBank(){
     const key=y+':'+k;
     if(y===a.y&&k===a.m){if(a.v!=null)bk.vals[k]=a.v;prev=bk.vals[k];started=true;ended=prev<=0;continue;}
     if(!started)continue;
+    // a korábban módosított csökkentés visszaáll az eredetire, majd újraszámoljuk
+    if(!ended&&(key in st.csokOrig)){c.vals[k]=st.csokOrig[key];delete st.csokOrig[key];}
+    const keepB=st.keepEmpty&&st.keepEmpty[bk.id+':'+k];
     if(ended){
-      // lejárt a kölcsön: nincs csökkentés és nincs havi részlet
-      if(c.vals[k]!=null){st.csokOrig[key]=c.vals[k];c.vals[k]=null;}
+      if(!(key in st.csokOrig))st.csokOrig[key]=c.vals[k];
+      c.vals[k]=null;
       if(hr)hr.vals[k]=null;
-      if(!(st.keepEmpty&&st.keepEmpty[bk.id+':'+k]))bk.vals[k]=0;
+      if(!keepB)bk.vals[k]=0;
       continue;
     }
-    if(c.vals[k]==null&&st.csokOrig[key]!=null)c.vals[k]=st.csokOrig[key];
-    const nv=Math.max(0,prev-(c.vals[k]||0)-((hr&&hr.vals[k])||0));
-    if(!(st.keepEmpty&&st.keepEmpty[bk.id+':'+k]))bk.vals[k]=nv;
-    prev=nv;
-    if(prev<=0)ended=true;
+    const red=c.vals[k]||0, inst=(hr&&hr.vals[k])||0;
+    const normal=prev-red-inst;
+    if(normal<=0||normal<red){
+      // utolsó hónap: a maradékot egyszerre fizetjük
+      const instF=Math.min(inst,prev), redF=prev-instF;
+      st.csokOrig[key]=c.vals[k];
+      c.vals[k]=redF>0?redF:null;
+      if(hr)hr.vals[k]=instF>0?instF:null;
+      if(!keepB)bk.vals[k]=0;
+      prev=0;ended=true;
+      continue;
+    }
+    if(!keepB)bk.vals[k]=normal;
+    prev=normal;
   }
 }
 // Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
