@@ -68,13 +68,14 @@ tr.gh td{font-size:12px;text-transform:uppercase;color:var(--mut);padding-top:12
 td.num{text-align:right;font-variant-numeric:tabular-nums}
 .chart{width:100%;max-width:460px;height:auto;display:block;margin:0 auto}
 .muted{color:var(--mut);font-size:13px}
-.fxrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.fxfield,.fxres{display:flex;align-items:center;gap:10px;background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:170px;flex:1}
-.fxfield input[type=number]{border:0;background:transparent;font-size:22px;font-weight:600;width:100%;min-width:0;text-align:right;padding:0;outline:none}
-.fxcur{color:var(--mut);font-weight:600;font-size:15px}
-.fxnum{flex:1;text-align:right;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
-.fxswap{width:42px;height:42px;border-radius:50%;font-size:18px;padding:0;flex:none;display:inline-flex;align-items:center;justify-content:center}
-.fxinfo{margin-top:10px;font-size:13px;color:var(--mut)}
+.fxrow{display:flex;align-items:center;gap:8px;flex-wrap:nowrap}
+.fxfield,.fxres{display:flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:5px 10px;min-width:0;flex:1}
+.fxfield input[type=number]{border:0;background:transparent;font-size:16px;font-weight:600;width:100%;min-width:0;text-align:right;padding:0;outline:none}
+.fxcur{color:var(--mut);font-weight:600;font-size:13px}
+.fxnum{flex:1;text-align:right;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.fxswap{width:30px;height:30px;border-radius:50%;font-size:14px;padding:0;flex:none;display:inline-flex;align-items:center;justify-content:center}
+.fxinfo{margin-top:6px;font-size:12px;color:var(--mut)}
+.fxpanel{max-width:440px;padding:12px 14px!important}.fxpanel h2{font-size:13px;margin:0 0 8px}
 </style>
 </head>
 <body>
@@ -520,7 +521,7 @@ function fxPanel(){
   let out='–';
   if(fxRate&&amt){const v=fxDir==='ron'?amt/fxRate:amt*fxRate;out=v.toLocaleString('hu-HU',{minimumFractionDigits:2,maximumFractionDigits:2});}
   const info=fxRate?('1 € = '+fxRate.toFixed(4)+' lei · BNR, '+fxDate):'Az árfolyam most nem elérhető';
-  return '<div class="panel"><h2>Valutaváltó <span class="muted">(BNR napi árfolyam)</span></h2>'
+  return '<div class="panel fxpanel"><h2>Valutaváltó <span class="muted">(BNR)</span></h2>'
     +'<div class="fxrow"><div class="fxfield"><input type="number" inputmode="decimal" step="any" data-fx="amt" value="'+fxAmt+'" placeholder="0" aria-label="Összeg"><span class="fxcur">'+from+'</span></div>'
     +'<button class="fxswap" data-act="fxswap" title="Irány váltása" aria-label="Irány váltása">⇄</button>'
     +'<div class="fxres"><span class="fxnum">'+out+'</span><span class="fxcur">'+to+'</span></div></div>'
