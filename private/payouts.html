@@ -406,21 +406,17 @@ function syncBank(){
 }
 // Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
 const resztLep=()=>(st.resztLep??44);
-function stepRow(){return `<div class="grp">Havi részlet</div><div class="row"><span class="n">Csökkenés havonta (októbertől, lei)</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${resztLep()}" style="width:110px"></div>`;}
+function stepRow(){return `<div class="grp">Havi részlet</div><div class="row"><span class="n">Részlet az egyenleg %-a</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${st.resztPct??0.8914}" style="width:110px"></div>`;}
 
+// Havi részlet: az egyenleg adott %-a (októbertől), így az egyenleggel együtt csökken
 function syncInstallment(){
-  const seq=[];
-  for(let k=9;k<12;k++)seq.push([2026,k]);
-  for(let k=0;k<12;k++)seq.push([2027,k]);
-  for(let k=0;k<12;k++)seq.push([2028,k]);
-  let prev=st[2026].items.find(x=>x.id==='havireszlet')?.vals[8];
-  if(prev==null)return;
-  for(const [y,k] of seq){
-    const h=st[y].items.find(x=>x.id==='havireszlet');
-    if(!h)continue;
-    const nv=prev-resztLep();
-    if(!(st.keepEmpty&&st.keepEmpty[h.id+':'+k]))h.vals[k]=nv;
-    prev=nv;
+  const pct=st.resztPct??0.8914;
+  for(const y of [2026,2027,2028])for(let k=0;k<12;k++){
+    if(y===2026&&k<9)continue;
+    const bk=st[y].items.find(x=>x.id==='bank'), h=st[y].items.find(x=>x.id==='havireszlet');
+    if(!bk||!h||bk.vals[k]==null)continue;
+    if(st.keepEmpty&&st.keepEmpty[h.id+':'+k])continue;
+    h.vals[k]=Math.round(bk.vals[k]*pct/100);
   }
 }
 let showPhone=false;
@@ -687,7 +683,7 @@ document.addEventListener('change',e=>{
   }
   if(t.id==='resztLep'){
     const v=Number(t.value.replace(',','.'));
-    st.resztLep=isNaN(v)?0:v;
+    st.resztPct=isNaN(v)?0:v;
     save();render();return;
   }
   if(t.id==='laciOpen'){
