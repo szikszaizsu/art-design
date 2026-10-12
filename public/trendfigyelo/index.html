@@ -5,182 +5,492 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Reklám Trendfigyelő</title>
+<script>try{var t=localStorage.getItem("trendfigyelo_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--tx:#1b1f24;--mut:#6a7380;--bd:#e2e5ea;--ok:#1a8f4c;--mix:#c27a00;--hype:#c93a3a;--acc:#3b5bdb}
-@media (prefers-color-scheme:dark){:root{--bg:#14171b;--card:#1d2127;--tx:#e8eaed;--mut:#9aa3af;--bd:#2c323a;--ok:#4cc27f;--mix:#e5a93d;--hype:#ef6b6b;--acc:#7b93ff}}
+:root{
+  --bg:#f3f4f8;--card:#fff;--tx:#161a22;--mut:#667085;--bd:#e4e7ee;--soft:#f6f7fb;
+  --ok:#12a150;--mix:#d98a00;--hype:#d9423e;--acc:#4f46e5;--acc2:#06b6d4;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px rgba(16,24,40,.06);
+  --hero:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#06b6d4 100%);
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0d1017;--card:#161b24;--tx:#eaedf3;--mut:#98a2b3;--bd:#252c38;--soft:#1b212c;
+  --ok:#3ecf84;--mix:#f0b13f;--hype:#f0716d;--acc:#8b87ff;--acc2:#22d3ee;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="dark"]){
+  color-scheme:dark;
+  --bg:#0d1017;--card:#161b24;--tx:#eaedf3;--mut:#98a2b3;--bd:#252c38;--soft:#1b212c;
+  --ok:#3ecf84;--mix:#f0b13f;--hype:#f0716d;--acc:#8b87ff;--acc2:#22d3ee;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}}
+.theme{position:absolute;top:0;right:0;display:inline-flex;gap:2px;background:rgba(255,255,255,.18);border-radius:99px;padding:3px;backdrop-filter:blur(6px)}
+.theme button{border:0;background:transparent;color:#fff;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:600;opacity:.8}
+.theme button.on{background:#fff;color:#2b2470;opacity:1}
+.hero .in{padding-top:2px}
+@media (max-width:560px){.theme{position:static;margin-bottom:12px;display:flex;width:max-content}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,Segoe UI,sans-serif}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
-h1{margin:0 0 4px;font-size:24px}
-.sub{color:var(--mut);margin:0 0 18px}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-input,select,textarea,button{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:8px 10px}
-input[type=search]{flex:1;min-width:180px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px 70px}
+button,input,select,textarea{font:inherit;color:var(--tx)}
 button{cursor:pointer}
-button.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.chip{padding:4px 12px;border-radius:99px;font-size:13px}
-.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.stat{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;font-size:13px;color:var(--mut)}
-.stat b{display:block;font-size:20px;color:var(--tx)}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px}
-.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.card h3{margin:0;font-size:17px}
-.badge{font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap;border:1px solid currentColor}
-.v-ok{color:var(--ok)}.v-mix{color:var(--mix)}.v-hype{color:var(--hype)}
-.meta{color:var(--mut);font-size:13px;margin:2px 0 8px}
-.card p{margin:6px 0}
-.do{font-size:14px;background:var(--bg);border-radius:8px;padding:8px 10px;margin-top:8px}
-.card a{color:var(--acc)}
-.del{font-size:12px;padding:2px 8px;color:var(--mut)}
-dialog{border:1px solid var(--bd);border-radius:12px;background:var(--card);color:var(--tx);max-width:520px;width:92%}
-dialog label{display:block;margin:8px 0 2px;font-size:13px;color:var(--mut)}
-dialog input,dialog select,dialog textarea{width:100%}
-.empty{color:var(--mut);text-align:center;padding:30px}
-.note{font-size:12px;color:var(--mut);margin-top:24px}
+
+/* HERO */
+.hero{background:var(--hero);color:#fff;border-radius:0 0 28px 28px;padding:34px 16px 90px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.1)}
+.hero:before{width:340px;height:340px;right:-90px;top:-130px}
+.hero:after{width:220px;height:220px;left:-60px;bottom:-110px}
+.hero .in{max-width:1040px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:99px;backdrop-filter:blur(6px)}
+.pulse{width:8px;height:8px;border-radius:50%;background:#7CFFB2;box-shadow:0 0 0 0 rgba(124,255,178,.8);animation:p 2s infinite}
+@keyframes p{70%{box-shadow:0 0 0 9px rgba(124,255,178,0)}100%{box-shadow:0 0 0 0 rgba(124,255,178,0)}}
+.hero h1{margin:14px 0 6px;font-size:clamp(28px,5vw,44px);line-height:1.1;letter-spacing:-.02em}
+.hero p{margin:0;max-width:620px;opacity:.92;font-size:16px}
+
+/* STAT STRIP (overlaps hero) */
+.strip{margin-top:-60px;position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tile{background:var(--card);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);border:1px solid var(--bd)}
+.tile small{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.tile b{display:block;font-size:30px;line-height:1.1;margin-top:4px;letter-spacing:-.02em}
+.tile .sub{font-size:12px;color:var(--mut)}
+.c-ok{color:var(--ok)}.c-mix{color:var(--mix)}.c-hype{color:var(--hype)}
+
+/* SECTIONS */
+section{margin-top:34px}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.sh h2{margin:0;font-size:20px;letter-spacing:-.01em}
+.sh span{color:var(--mut);font-size:13px}
+
+/* TODAY */
+.today{background:var(--card);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+.today .head{display:flex;gap:14px;align-items:center;padding:16px 18px;background:linear-gradient(90deg,color-mix(in srgb,var(--acc) 12%,transparent),transparent);border-bottom:1px solid var(--bd)}
+.cal{width:54px;text-align:center;border-radius:12px;border:1px solid var(--bd);overflow:hidden;flex:none;background:var(--card)}
+.cal i{display:block;background:var(--acc);color:#fff;font-style:normal;font-size:11px;font-weight:700;padding:2px 0;text-transform:uppercase}
+.cal b{display:block;font-size:22px;line-height:1.5}
+.today .head h3{margin:0;font-size:17px}
+.today .head p{margin:0;color:var(--mut);font-size:13px}
+.hl{padding:6px 18px 14px}
+.hl a,.hl div.row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--bd);color:inherit;text-decoration:none}
+.hl .row:last-child{border-bottom:0}
+.hl .t{font-weight:600}
+.hl .d{color:var(--mut);font-size:13px}
+
+/* FILTERS */
+.filters{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);padding:10px 0;margin-top:26px;display:flex;flex-direction:column;gap:8px}
+.frow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{border:1px solid var(--bd);background:var(--card);border-radius:99px;padding:5px 12px;font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.pill:hover{border-color:var(--acc)}
+.pill.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.search{flex:1;min-width:160px;border:1px solid var(--bd);background:var(--card);border-radius:99px;padding:7px 14px}
+.add{background:var(--tx);color:var(--bg);border:0;border-radius:99px;padding:7px 16px;font-weight:600}
+
+/* TIMELINE */
+.tl{position:relative;margin-left:8px;padding-left:22px;border-left:2px solid var(--bd)}
+.day{margin:22px 0 10px -33px;display:flex;align-items:center;gap:10px}
+.day:first-child{margin-top:4px}
+.day .node{width:20px;height:20px;border-radius:50%;background:var(--acc);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--acc);flex:none}
+.day b{font-size:15px}
+.day span{font-size:12px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px 16px 14px 18px;margin-bottom:12px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--vc)}
+.v-ok{--vc:var(--ok)}.v-mix{--vc:var(--mix)}.v-hype{--vc:var(--hype)}
+.ctop{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.plat{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--mut)}
+.plat .dot{width:18px;height:18px;border-radius:6px;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.card h3{margin:6px 0 4px;font-size:16.5px;line-height:1.3}
+.card p{margin:4px 0;color:color-mix(in srgb,var(--tx) 85%,var(--mut))}
+.badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;white-space:nowrap;color:var(--vc);background:color-mix(in srgb,var(--vc) 14%,transparent)}
+.new{font-size:10px;font-weight:800;letter-spacing:.06em;background:var(--acc2);color:#00323a;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:middle}
+.meters{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:8px;align-items:center}
+.imp{letter-spacing:2px;color:var(--vc)}
+.imp s{text-decoration:none;opacity:.25}
+.up{color:var(--ok)}.flat{color:var(--mut)}.down{color:var(--hype)}
+.brand{margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--vc)}
+.brand+h3{margin-top:2px}
+.todo{margin-top:10px;background:var(--soft);border-radius:10px;padding:8px 12px;font-size:14px;display:flex;gap:8px}
+.todo:before{content:"→";color:var(--acc);font-weight:800}
+.src{font-size:13px;color:var(--acc);text-decoration:none;font-weight:600}
+.src:hover{text-decoration:underline}
+.del{border:0;background:transparent;color:var(--mut);font-size:12px;margin-left:8px}
+
+/* INSIGHTS GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.grid .card{margin:0}
+
+/* verdict bar */
+.vbar{display:flex;height:10px;border-radius:99px;overflow:hidden;margin-top:10px;background:var(--soft)}
+.vbar i{display:block;height:100%}
+
+.empty{text-align:center;color:var(--mut);padding:30px}
+.note{font-size:12px;color:var(--mut);margin-top:30px;line-height:1.6}
+
+dialog{border:1px solid var(--bd);border-radius:18px;background:var(--card);color:var(--tx);max-width:540px;width:92%;box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(10,12,18,.55);backdrop-filter:blur(3px)}
+dialog label{display:block;margin:10px 0 3px;font-size:12px;color:var(--mut);font-weight:600}
+dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd);background:var(--soft);border-radius:10px;padding:8px 10px}
+.btn{border:1px solid var(--bd);background:var(--card);border-radius:10px;padding:8px 16px}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+
+@media (max-width:720px){.strip{grid-template-columns:repeat(2,1fr)}.tile b{font-size:26px}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>AI Reklám Trendfigyelő</h1>
-  <p class="sub">Mi működik, mi vegyes, és mi csak hype az AI-alapú reklámozásban. Utolsó frissítés: <span id="upd"></span></p>
 
-  <div class="stats" id="stats"></div>
-
-  <div class="bar">
-    <input type="search" id="q" placeholder="Keresés...">
-    <select id="sort">
-      <option value="date">Legújabb elöl</option>
-      <option value="verdict">Verdikt szerint</option>
-    </select>
-    <button class="pri" id="add">+ Új bejegyzés</button>
+<header class="hero"><div class="in">
+  <div class="theme" id="theme" role="group" aria-label="Megjelenés">
+    <button data-t="auto">Auto</button><button data-t="light">Világos</button><button data-t="dark">Sötét</button>
   </div>
-  <div class="chips" id="vchips"></div>
-  <div class="chips" id="cchips"></div>
+  <span class="eyebrow"><i class="pulse"></i><span id="todayLbl"></span></span>
+  <h1>AI Reklám Trendfigyelő</h1>
+  <p>Mi működik, mi vegyes és mi csak hype az AI-alapú hirdetésekben. Napi bontású idővonal a Meta, Google, TikTok és Amazon változásaival.</p>
+</div></header>
 
-  <div id="list"></div>
-  <p class="note">A kezdő bejegyzések 2026. októberi webes kutatásból származnak. A számok nagy része gyártói vagy ügynökségi állítás, ezért élesben saját teszttel ellenőrizd őket. A saját bejegyzéseid csak ebben a böngészőben tárolódnak.</p>
+<div class="wrap">
+  <div class="strip" id="strip"></div>
+
+  <section id="todaySec"></section>
+
+  <div class="filters">
+    <div class="frow">
+      <input class="search" type="search" id="q" placeholder="Keresés a trendek között...">
+      <button class="add" id="add">+ Új bejegyzés</button>
+    </div>
+    <div class="frow" id="pf"></div>
+    <div class="frow" id="vf"></div>
+  </div>
+
+  <section style="margin-top:14px">
+    <div class="sh"><h2>Napi változások</h2><span id="tlCount"></span></div>
+    <div class="tl" id="tl"></div>
+  </section>
+
+  <section id="exSec">
+    <div class="sh"><h2>Példák: mit érdemes követni</h2><span>Konkrét kampányok és kutatások, a tanulsággal</span></div>
+    <div class="grid" id="ex"></div>
+  </section>
+
+  <section>
+    <div class="sh"><h2>Állandó tanulságok</h2><span>Nem napi hírek: ezek a kutatásból maradó megállapítások</span></div>
+    <div class="grid" id="ins"></div>
+  </section>
+
+  <p class="note">A bejegyzések webes kutatásból valók, a forrás mindegyiknél látszik. A teljesítményszámok többsége gyártói vagy ügynökségi állítás, ezért élesben saját teszttel ellenőrizd. A "Hatás" az én becslésem a hirdetőre gyakorolt hatásról (1-5), nem mért adat. Hónapra pontos dátum azt jelzi, hogy a napot a forrás nem adta meg. A saját bejegyzéseid csak ebben a böngészőben tárolódnak.</p>
 </div>
 
 <dialog id="dlg">
   <form method="dialog" id="form">
     <h3 style="margin-top:0">Új bejegyzés</h3>
     <label>Cím</label><input name="title" required>
-    <label>Kategória</label>
-    <select name="cat"></select>
+    <label>Platform</label><select name="plat"></select>
+    <label>Típus</label>
+    <select name="kind"><option value="event">Napi hír / változás</option><option value="insight">Állandó tanulság</option></select>
+    <label>Dátum (napi hírnél)</label><input name="date" type="date">
     <label>Verdikt</label>
-    <select name="verdict">
-      <option value="ok">Működik</option>
-      <option value="mix">Vegyes</option>
-      <option value="hype">Hype / nem bizonyított</option>
-    </select>
-    <label>Mit látsz? (összefoglaló)</label><textarea name="sum" rows="3" required></textarea>
+    <select name="verdict"><option value="ok">Működik</option><option value="mix">Vegyes</option><option value="hype">Hype / nem bizonyított</option></select>
+    <label>Hatás (1-5)</label><input name="impact" type="number" min="1" max="5" value="3">
+    <label>Összefoglaló</label><textarea name="sum" rows="3" required></textarea>
     <label>Mit tegyek vele? (opcionális)</label><textarea name="act" rows="2"></textarea>
     <label>Forrás link (opcionális)</label><input name="url" type="url">
-    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
-      <button value="cancel" formnovalidate>Mégse</button>
-      <button class="pri" value="ok">Mentés</button>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+      <button class="btn" value="cancel" formnovalidate>Mégse</button>
+      <button class="btn pri" value="ok">Mentés</button>
     </div>
   </form>
 </dialog>
 
 <script>
-const CATS=["Kreatív","Platform","Mérés","Szabályozás","Közönség"];
-const V={ok:"Működik",mix:"Vegyes",hype:"Hype / nem bizonyított"};
-const SEED=[
- {id:"s1",date:"2026-10-06",cat:"Platform",verdict:"ok",title:"Meta Advantage+ Creative videógenerálás: általánosan elérhető",
-  sum:"A Meta az Advertising Week 2026-on (okt. 6.) kivezette a korlátozott hozzáférésből a statikus képből videóhirdetést csináló eszközt. Az Ads Creative Studio is szélesebb körben elérhető. Az üzleti asszisztens már emlékszik a korábbi kampányokra és szezonalitásra, a márka hangja is feltölthető.",
-  act:"Próbáld ki a meglévő LifeCell/dROOT képekből készült rövid videókkal, és tesztelj egy kézi kontroll ellen.",
-  url:"https://www.marketing-interactive.com/meta-doubles-down-on-creative-automation-in-latest-ai-push"},
- {id:"s2",date:"2026-10-01",cat:"Kreatív",verdict:"ok",title:"Kép → videó variánsok (4–8 mp, Reels/TikTok/Shorts)",
-  sum:"Több 2026-os összefoglaló szerint ez a legmegbízhatóbb AI kreatív munkafolyamat. A bemeneti kép rögzíti a terméket és a kompozíciót, az AI csak a mozgást adja hozzá, így kisebb a márkahiba kockázata.",
-  act:"Egy erős termékképből generálj 3–5 mozgásvariánst, és futtasd A/B-ben.",
-  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
- {id:"s3",date:"2026-10-01",cat:"Kreatív",verdict:"ok",title:"Hook- és szögtesztelés AI-val",
-  sum:"Az AI valódi értéke a mennyiség: 50 hook-variáns percek alatt. Egy ügynökségi becslés szerint a variánsoknak csak kb. 6–7%-a lesz igazi skálázható nyertes, tehát a tesztelési volumen a lényeg, nem egy-egy kreatív.",
-  act:"Minden kampányhoz kérj 20+ nyitómondatot, szűrd 5-re kézzel, tesztelj.",
-  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
- {id:"s4",date:"2026-09-15",cat:"Mérés",verdict:"ok",title:"Zárt kör: teljesítményadat visszacsatolása a generálásba",
-  sum:"Azok a csapatok érnek el valódi javulást, akik elemzik, mely kreatív elemek nyernek, és ezt használják a következő generáláshoz. Elemzés nélkül a volumen csak zaj.",
-  act:"Vezess táblát: kreatív elem → eredmény (CTR, CPA). Ezt add vissza a promptokhoz.",
-  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
- {id:"s5",date:"2026-09-15",cat:"Mérés",verdict:"mix",title:"Gyártói lift-számok (+20–50% ROAS, 2,1× konverzió)",
-  sum:"A legtöbb látványos szám az eszközgyártóktól származik, függetlenül nem ellenőrzött. A leghitelesebbnek tűnő adat Meta-jelentés: AI-képes kampányoknál +11% CTR, +7,6% konverzió (AppsFlyer, 2025).",
-  act:"Ne higgy el semmit saját holdout teszt nélkül.",
-  url:"https://omneky.com/blog/ai-advertising-statistics-2026"},
- {id:"s6",date:"2026-10-01",cat:"Közönség",verdict:"mix",title:"Fogyasztói fogadtatás: hogyan látják az AI-hirdetéseket",
-  sum:"A NielsenIQ szerint a nézők unalmasabbnak, zavaróbbnak találják az AI-hirdetéseket. Az Ipsos tesztjében az emberi hirdetések kb. 14%-kal erősebbek rövid távon és 17%-kal a márkaépítésben, pedig a nézők többsége nem ismerte fel az AI-t. Más tanulmányok (MediaScience) nem találtak jelentős büntetést a címkézésre.",
-  act:"Brandépítő kampányhoz inkább emberi/hibrid kreatív, teljesítménykampányhoz mehet az AI. A minőség legyen kifogástalan.",
-  url:"https://www.emarketer.com/content/ai-ads-isn-t-problem-most-consumers-lack-of-disclosure"},
- {id:"s7",date:"2026-08-01",cat:"Szabályozás",verdict:"mix",title:"AI-jelölési kötelezettség (EU AI Act, kaliforniai törvény)",
-  sum:"Egy forrás szerint 2026 augusztusában lépett életbe mindkét átláthatósági szabály. Ezt hivatalos forrásból nem tudtam megerősíteni.",
-  act:"Ellenőrizd a hivatalos szövegben, mielőtt EU-s célzású AI-hirdetést futtatsz.",
-  url:"https://www.emarketer.com/content/ai-ads-isn-t-problem-most-consumers-lack-of-disclosure"},
- {id:"s8",date:"2026-07-01",cat:"Platform",verdict:"mix",title:"Google Ads ÁSZF: a feltöltött kreatívok AI-tanításra használhatók",
-  sum:"A 2026. július 1-jei ÁSZF-módosítás tisztázza, hogyan használhatja a Google a hirdetők által feltöltött anyagokat a generatív AI modelljei tanítására. Harmadik fél követőből származik, nem Google-forrásból.",
+/* ===== ADATOK: napi frissítésnél csak ezt a blokkot kell bővíteni =====
+   kind: event = napi hír (date: ÉÉÉÉ-HH-NN, vagy ÉÉÉÉ-HH ha a nap ismeretlen), insight = állandó tanulság
+   verdict: ok | mix | hype   impact: 1-5   mom: up | flat | down */
+/*DATA:START*/
+const PLATS={
+  meta:{n:"Meta",c:"#1877f2",l:"M"},
+  google:{n:"Google",c:"#f29900",l:"G"},
+  tiktok:{n:"TikTok",c:"#e11d74",l:"T"},
+  amazon:{n:"Amazon",c:"#ef7b00",l:"A"},
+  ltalaban:{n:"Általános",c:"#6b7280",l:"•"}
+};
+const DATA=[
+ /* --- 2026. október 6., Meta (Advertising Week New York) --- */
+ {id:"e1",kind:"event",date:"2026-10-06",plat:"meta",verdict:"ok",impact:5,mom:"up",
+  title:"Meta: képből videóhirdetés mindenkinek (Advantage+ Creative)",
+  sum:"A statikus képből videóhirdetést készítő eszköz kikerült a korlátozott hozzáférésből, és általánosan elérhető. Az Ads Creative Studio is több hirdetőhöz jut el a nyári tesztek után.",
+  act:"Tedd próbára a meglévő LifeCell/dROOT termékképeiden, és mérd egy kézi kontroll ellen.",
+  url:"https://www.relevantaudience.com/meta/meta-advertising-week-new-york-2026-ad-tools/"},
+ {id:"e2",kind:"event",date:"2026-10-06",plat:"meta",verdict:"ok",impact:4,mom:"up",
+  title:"Meta AI üzleti asszisztens: memória és márkahang",
+  sum:"Az asszisztens hozzáfér a korábbi kampányadatokhoz, a szezonalitáshoz és a kimondott célokhoz. Márkahang-leírás és stratégiai dokumentum is feltölthető neki.",
+  act:"Töltsd fel a LifeCell/dROOT hangnemi szabályaidat, és nézd meg, mennyire tartja őket.",
+  url:"https://www.relevantaudience.com/meta/meta-advertising-week-new-york-2026-ad-tools/"},
+ {id:"e3",kind:"event",date:"2026-10-06",plat:"meta",verdict:"mix",impact:3,mom:"flat",
+  title:"Meta: ügynöki funkciók (kampánybeállítás, ütemezett riport) még tesztben",
+  sum:"A kampánybeállítást, célzást és költségkeretet módosító ügynöki műveletek, valamint az ütemezett feladatok csak most kezdenek tesztelődni. A források eltérően írják le, mennyire kész ez. A Meta 5% több konverziót állít azonos költségen, módszertan nélkül.",
+  act:"Még ne építs rá. Figyeld, mikor lesz általánosan elérhető.",
+  url:"https://www.relevantaudience.com/meta/meta-advertising-week-new-york-2026-ad-tools/"},
+ {id:"e4",kind:"event",date:"2026-10-06",plat:"meta",verdict:"ok",impact:3,mom:"up",
+  title:"Meta Ads MCP-szerver: külső AI-eszközből piszkozat az Ads Managerbe",
+  sum:"A külső AI-eszközök által előkészített munka piszkozatként érkezhet az Ads Managerbe. Tíz partner, köztük a Kochava, a Snowflake és a Triple Whale már integrálta.",
+  act:"Ha dolgozol AI-ügynökkel (pl. Claude), a hirdetéskészítés ide csatlakozhat.",
+  url:"https://www.relevantaudience.com/meta/meta-advertising-week-new-york-2026-ad-tools/"},
+ {id:"e5",kind:"event",date:"2026-10-06",plat:"meta",verdict:"mix",impact:3,mom:"up",
+  title:"Meta: AI közönségfelfedezés jön a Részletes célzásba (év végéig)",
+  sum:"A Meta az év végére ígéri az AI-alapú közönségfelfedezést a Részletes célzásban. Egyelőre bejelentés, nem elérhető funkció.",
+  act:"Jegyezd fel, és év végén nézd meg újra.",
+  url:"https://www.relevantaudience.com/meta/meta-advertising-week-new-york-2026-ad-tools/"},
+ /* --- Nyár 2026 --- */
+ {id:"e6",kind:"event",date:"2026-07-01",plat:"google",verdict:"mix",impact:3,mom:"flat",
+  title:"Google Ads ÁSZF: a feltöltött kreatívok AI-tanításra használhatók",
+  sum:"A júliusi módosítás tisztázza, hogyan használhatja a Google a hirdetők által feltöltött anyagokat a generatív AI modelljei tanítására. Harmadik fél követőből származik, nem Google-forrásból.",
   act:"Érzékeny kreatívnál nézd meg a Google hivatalos kiadási jegyzeteit.",
   url:"https://nutechdigital.com/?p=277678"},
- {id:"s9",date:"2026-06-15",cat:"Platform",verdict:"mix",title:"Google Signals hozzájárulás-kényszerítés, PMax egységes riport",
-  sum:"Június 15-től a Google kikényszeríti a hozzájárulást a Signals adatoknál, ami korlátozza a közönségépítést és az attribúciót a nem megfelelő fiókoknál. Egyidejűleg a PMax termékszintű riport egységesült.",
+ {id:"e7",kind:"event",date:"2026-06-15",plat:"google",verdict:"mix",impact:3,mom:"flat",
+  title:"Google: Signals-hozzájárulás kényszerítése és egységes PMax-riport",
+  sum:"Június 15-től a Google kikényszeríti a hozzájárulást a Signals adatoknál, ez korlátozza a közönségépítést és az attribúciót a nem megfelelő fiókoknál. A PMax termékszintű riport egységesült.",
   act:"Ellenőrizd a hozzájárulási beállításokat a fiókokban.",
   url:"https://nutechdigital.com/?p=277678"},
- {id:"s10",date:"2026-10-01",cat:"Kreatív",verdict:"hype",title:"Kreatív egyformaság: 'mindenki ugyanazt generálja'",
-  sum:"Több forrás szerint a legnagyobb kockázat, hogy az AI-kreatívok egymásra hasonlítanak. A megkülönböztető kimenethez erős brief és valódi kreatív irányítás kell.",
-  act:"Ne a gyári prompttal dolgozz: add meg a saját stílusszabályaidat, referenciaképeket.",
-  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
- {id:"s11",date:"2026-01-15",cat:"Platform",verdict:"mix",title:"Advantage+ az e-commerce költés ~62%-a",
-  sum:"Harmadik fél adata szerint az Advantage+ kampányok teszik ki az e-kereskedelmi költés 62%-át. A Meta saját mérése +22% ROAS-t mutat a kézi kampányokhoz képest, ez gyártói állítás.",
+ {id:"e8",kind:"event",date:"2026-06",plat:"tiktok",verdict:"ok",impact:4,mom:"up",
+  title:"TikTok Symphony Agent: célból és trendből generált videóhirdetés",
+  sum:"A Cannes Lions 2026-on bemutatott ügynök chat-felületen készít hirdetést, kreátorokat javasol és kreátor-briefet ír. AI-címke, láthatatlan vízjel és moderációs szűrők vannak benne.",
+  act:"Nézd meg, elérhető-e a hirdetői fiókodban, és próbálj ki egy rövid kampányt.",
+  url:"https://www.mediapost.com/publications/article/415987/"},
+ {id:"e9",kind:"event",date:"2026-06",plat:"tiktok",verdict:"ok",impact:3,mom:"up",
+  title:"TikTok Symphony: Seedance 2.0 és 'Reference to Video'",
+  sum:"A ByteDance új videómodellje bekerült a Symphonyba. A Reference to Video funkcióval konkrét képet vagy terméket lehet megadni az AI-videóhoz.",
+  act:"Ez a termékhű videókhoz hasznos: add meg a termékképet referenciának.",
+  url:"https://www.mediapost.com/publications/article/415987/"},
+ {id:"e10",kind:"event",date:"2026-04",plat:"google",verdict:"ok",impact:4,mom:"up",
+  title:"Google AI Max for Search: kikerült a bétából",
+  sum:"A Performance Max-szerű bővítést (széles egyezés, kulcsszó nélküli párosítás, szövegtestreszabás, végső URL bővítés) a keresési kampányokra teszi, megtartva a kulcsszószintű irányítást. Másodlagos forrás szerint 2026 áprilisában lett éles.",
+  act:"Tesztelj egy AI Max kampányt a meglévő keresési kampányod mellett.",
+  url:"https://hawky.ai/blog/google-ads-updates-2026"},
+ {id:"e11",kind:"event",date:"2026-01",plat:"meta",verdict:"mix",impact:3,mom:"flat",
+  title:"Advantage+ az e-commerce költés ~62%-a",
+  sum:"Harmadik fél adata szerint az Advantage+ kampányok teszik ki a költés 62%-át az e-kereskedelemben. A Meta saját mérése +22% ROAS a kézi kampányokhoz képest, ez gyártói állítás.",
   act:"Ha az eredményeid romlanak, nézd meg a kreatív-fáradást és a beállításokat.",
-  url:"https://playad.ai/pages/guide/meta-advantage-plus-results-worse"}
-];
+  url:"https://playad.ai/pages/guide/meta-advantage-plus-results-worse"},
 
-const KEY="trendfigyelo_custom_v1";
+ /* --- Állandó tanulságok --- */
+ {id:"i1",kind:"insight",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
+  title:"Kép → videó variánsok (4–8 mp)",
+  sum:"Több 2026-os összefoglaló szerint ez a legmegbízhatóbb AI kreatív munkafolyamat. A kép rögzíti a terméket és a kompozíciót, az AI csak a mozgást adja, így kisebb a márkahiba kockázata.",
+  act:"Egy erős termékképből generálj 3–5 mozgásvariánst, és futtasd A/B-ben.",
+  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
+ {id:"i2",kind:"insight",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"Hook- és szögtesztelés AI-val",
+  sum:"Az AI valódi értéke a mennyiség: 50 hook-variáns percek alatt. Egy ügynökségi becslés szerint a variánsoknak csak kb. 6–7%-a lesz igazi skálázható nyertes, tehát a tesztelési volumen számít.",
+  act:"Kampányonként kérj 20+ nyitómondatot, szűrd 5-re kézzel, tesztelj.",
+  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
+ {id:"i3",kind:"insight",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"Zárt kör: teljesítményadat vissza a generálásba",
+  sum:"Valódi javulást azok érnek el, akik elemzik, mely kreatív elemek nyernek, és ezt használják a következő generáláshoz. Elemzés nélkül a volumen csak zaj.",
+  act:"Vezess táblát: kreatív elem → eredmény (CTR, CPA), és add vissza a promptokhoz.",
+  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
+ {id:"i4",kind:"insight",plat:"ltalaban",verdict:"mix",impact:4,mom:"flat",
+  title:"Gyártói lift-számok (+20–50% ROAS, 2,1× konverzió)",
+  sum:"A látványos számok többsége az eszközgyártóktól származik, függetlenül nem ellenőrzött. A hitelesebbnek tűnő adat: AI-képes kampányoknál +11% CTR és +7,6% konverzió (Meta-jelentés, AppsFlyer 2025). Az Amazon +30% CTR-t állít a videógenerátorára, ez is gyártói adat.",
+  act:"Ne higgy el semmit saját holdout teszt nélkül.",
+  url:"https://omneky.com/blog/ai-advertising-statistics-2026"},
+ {id:"i5",kind:"insight",plat:"ltalaban",verdict:"mix",impact:4,mom:"flat",
+  title:"Fogyasztói fogadtatás: megoszlanak a kutatások",
+  sum:"NielsenIQ szerint az AI-hirdetések unalmasabbak és zavaróbbak. Az Ipsos tesztjében az emberi hirdetések kb. 14%-kal erősebbek rövid, 17%-kal hosszú távon, pedig a nézők nagy része nem ismerte fel az AI-t. A MediaScience nem talált jelentős büntetést a címkézésre.",
+  act:"Márkaépítéshez inkább emberi vagy hibrid kreatív, teljesítménykampányhoz mehet az AI.",
+  url:"https://www.emarketer.com/content/ai-ads-isn-t-problem-most-consumers-lack-of-disclosure"},
+ {id:"i6",kind:"insight",plat:"ltalaban",verdict:"mix",impact:3,mom:"up",
+  title:"AI-jelölési kötelezettség (EU AI Act, kaliforniai törvény)",
+  sum:"Egy forrás szerint 2026 augusztusában életbe lépett mindkét átláthatósági szabály. Ezt hivatalos forrásból nem tudtam megerősíteni.",
+  act:"Ellenőrizd a hivatalos szöveget, mielőtt EU-s célzású AI-hirdetést futtatsz.",
+  url:"https://www.emarketer.com/content/ai-ads-isn-t-problem-most-consumers-lack-of-disclosure"},
+ {id:"i7",kind:"insight",plat:"ltalaban",verdict:"hype",impact:3,mom:"flat",
+  title:"Kreatív egyformaság: mindenki ugyanazt generálja",
+  sum:"Több forrás szerint a legnagyobb kockázat, hogy az AI-kreatívok egymásra hasonlítanak. A megkülönböztető kimenethez erős brief és valódi kreatív irányítás kell.",
+  act:"Add meg a saját stílusszabályaidat és referenciaképeidet, ne a gyári promptot használd.",
+  url:"https://segwise.ai/blog/ai-performance-creative-working-hype-2026"},
+ {id:"i8",kind:"insight",plat:"amazon",verdict:"mix",impact:3,mom:"flat",
+  title:"Amazon: AI videógenerátor és hirdetésenként 6 változat",
+  sum:"Beszámolók szerint az amerikai hirdetőknek elérhető a videógenerátor, hirdetésenként hat változatot ad, és hangalapú hirdetést is készít (Amazon Music, Alexa). A dátum nem biztos, az adatok részben régebbiek.",
+  act:"Csak akkor releváns, ha Amazonon hirdetsz.",
+  url:"https://www.emarketer.com/content/amazon-ai-creative-studio-launches-audio-ads"},
+ {id:"i9",kind:"insight",plat:"ltalaban",verdict:"hype",impact:2,mom:"down",
+  title:"Sora hirdetésekhez: egy teszt szerint használhatatlan kimenet",
+  sum:"Egy Amazon-eladói teszt szerint a Sora kimenetei hibásak (torzulások, nem valósághű mozgás), és hiányzik belőlük az eladásorientáltság. Ez egyetlen, nem reprezentatív beszámoló.",
+  act:"Termékhű videóhoz inkább képből induló generálást használj.",
+  url:"https://adlabs.app/can-sora-ai-create-sponsored-brands-video-creatives-for-amazon-ppc/"},
+
+ /* --- Példák: milyen hirdetést érdemes követni --- */
+ {id:"x1",kind:"example",brand:"Claude (Anthropic) · Super Bowl LX",year:"2026",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
+  title:"Az emberi ötlet nyert: a Super Bowl-kampány az AI-hirdetéseket csúfolta",
+  sum:"A Mother London kampánya a chatbotokban megjelenő reklámokat parodizálta, és megnyerte a Cannes Lions 2026 Film Grand Prix-jét (plusz arany és ezüst Lions). Nem AI-generált hirdetés volt, hanem erős emberi ötlet egy AI-témáról.",
+  act:"Tanulság: a nyerő hirdetés az ötleten múlik, az AI csak a kivitelezésben segít.",
+  url:"https://www.exchange4media.com/marketing-news/cannes-lions-2026-was-loud-about-ai-the-best-work-was-quietly-human-155808.html"},
+ {id:"x2",kind:"example",brand:"Google · Project Genie",year:"2026",plat:"google",verdict:"ok",impact:3,mom:"up",
+  title:"Digital Craft Grand Prix: a technológia új lehetőséget nyitott, nem csak látványos volt",
+  sum:"A zsűri azt jutalmazta, hogy a fejlett modell új kreatív teret nyit, nem azt, hogy fejlett modellt használtak. Hasonló okból nyert az Adidas Supernova Adaptive az Innovation Grand Prix-n.",
+  act:"Kérdezd meg magadtól: az AI mit tesz lehetővé, ami korábban nem ment?",
+  url:"https://www.exchange4media.com/marketing-news/cannes-lions-2026-was-loud-about-ai-the-best-work-was-quietly-human-155808.html"},
+ {id:"x3",kind:"example",brand:"NYU és Emory terepkísérlet · Google Display",year:"2026",plat:"google",verdict:"ok",impact:4,mom:"up",
+  title:"A nulláról AI-val készült hirdetés +19% CTR, a csak átszerkesztett nem hozott semmit",
+  sum:"A kísérlet szerint az AI nulláról készített hirdetései 19%-kal nagyobb átkattintást adtak, mint az emberiek. Ott, ahol az AI csak meglévő emberi terveket szerkesztett, nem volt javulás. A módszer számít, nem az, hogy használsz-e AI-t. Egy összefoglaló alapján, az eredeti tanulmányt nem néztem meg.",
+  act:"Teszteld külön: teljesen AI-s variáns kontra emberi kontra átszerkesztett.",
+  url:"https://letsdatascience.com/news/ai-generated-ads-achieve-parity-but-lack-emotional-pull-be3b5a19"},
+ {id:"x4",kind:"example",brand:"Ipsos és Syracuse University · 20 hirdetés, 10 márka",year:"2026",plat:"ltalaban",verdict:"mix",impact:4,mom:"flat",
+  title:"A nézők nem ismerik fel az AI-videót, de az emberi hirdetés üzletileg erősebb",
+  sum:"2026 májusi kutatás: a legtöbb néző nem tudja megkülönböztetni az AI-videót az emberitől, mégis az emberi hirdetések egyöntetűen jobbak az üzleti mutatókban. A legjobb eredményt az emberi irányítású AI adja (Cadbury, Heinz esettanulmány).",
+  act:"Márkaépítő videónál ne hagyd ki az emberi kreatív irányítást.",
+  url:"https://letsdatascience.com/news/ai-generated-ads-achieve-parity-but-lack-emotional-pull-be3b5a19"},
+ {id:"x5",kind:"example",brand:"Coca-Cola · AI-s karácsonyi hirdetések",year:"2024–25",plat:"ltalaban",verdict:"hype",impact:3,mom:"down",
+  title:"Hangos AI-ünnepi hirdetés, sok bírálattal: a kockázat a hangulat, nem a technika",
+  sum:"A Coca-Cola újrakészítette a klasszikus 'Holidays Are Coming' spotot generatív AI-val, majd kijött a második AI-s karácsonyi hirdetéssel is, miközben a közönség egy része bírálta. A 2026-os Cannes-nyerteseik között nincs bizonyítottan AI-s munka.",
+  act:"Érzelmes, hagyományos témánál a nézők érzékenyebbek az AI-ra. Óvatosan.",
+  url:"https://www.emarketer.com/content/coca-cola-releases-second-ai-holiday-ad-ai-becomes-norm"},
+ {id:"x6",kind:"example",brand:"Meta · saját béta-adat (videógenerátor)",year:"2026",plat:"meta",verdict:"ok",impact:4,mom:"up",
+  title:"AI-videógenerálás a kampányhirdetések többségében: átlag +10% CTR, +8% konverzió",
+  sum:"A Meta saját bétájának adata szerint azok a hirdetők, akik az AI-videógenerálót a hirdetések többségénél használták, átlagosan 10%-kal nagyobb CTR-t és 8%-kal nagyobb konverziót kaptak. Gyártói adat, de a legkevésbé szélsőséges a kínálatból.",
+  act:"Reális elvárás: néhány százalék, nem kétszeres szorzó.",
+  url:"https://www.emarketer.com/content/meta-ramps-up-genai-powered-ad-creation-marketers-weigh-consumer-trust"},
+ {id:"x7",kind:"example",brand:"Egészség / étrend-kiegészítő márkák · Meta",year:"2026",plat:"meta",verdict:"mix",impact:5,mom:"up",
+  title:"Neked releváns: AI-UGC a tesztben, emberi kreátor a skálázásban, és a szabályzat az első",
+  sum:"Ügynökségi tanács: AI-UGC-vel 20–50 változatot lehet tesztelni 48 óra alatt, a nyerteseket emberi kreátorral érdemes skálázni. Egészségügyi állításoknál a Meta szabályzata a fő korlát: az elutasítás visszaveti a tanulási fázist. Egy publikált ROAS-adatos támogatói eset nem volt, a számok eszközgyártói vagy ügynökségi állítások.",
+  act:"Előbb vesd össze a kreatívot a Meta egészségügyi szabályaival, utána tesztelj sok AI-variánst.",
+  url:"https://segwise.ai/blog/ai-ugc-vs-human-ugc-meta-ads-roas-2026.md"},
+ {id:"x8",kind:"example",brand:"Nike · 'Never Done Evolving' (Serena Williams)",year:"2022",plat:"ltalaban",verdict:"ok",impact:3,mom:"flat",
+  title:"Régebbi, de tanulságos: a gépi tanulással készült virtuális meccs",
+  sum:"Serena és fiatalabb önmaga virtuális meccse, évtizedes felvételeken tanított modellel. Egy összefoglaló szerint 4,2 millió megtekintés 48 óra alatt és több Cannes-díj. Ezek a számok egyetlen útmutatóból jönnek, nem ellenőriztem őket.",
+  act:"A technika a történetet szolgálta, nem fordítva.",
+  url:"https://improvado.io/blog/ai-marketing-campaigns"},
+ {id:"x9",kind:"example",brand:"Kalshi · Veo 3 hirdetés (NBA döntő)",year:"2025",plat:"google",verdict:"mix",impact:2,mom:"flat",
+  title:"AI-videó a nagy adásban: olcsó előállítás, de nincs publikált eredmény",
+  sum:"Egy alkotó a Google Veo 3-mal készítette a prediktív piac-app hirdetését, ami az NBA-döntő harmadik meccsén ment. Teljesítményadatot nem találtam.",
+  act:"Inspirációnak jó, bizonyítéknak kevés.",
+  url:"https://shhots.ai/blog/best-ai-commercials/"}
+];
+/*DATA:END*/
+
+const VL={ok:"Működik",mix:"Vegyes",hype:"Hype"};
+const MOM={up:["↗","Erősödik","up"],flat:["→","Stabil","flat"],down:["↘","Gyengül","down"]};
+const KEY="trendfigyelo_custom_v2";
 let custom=[];try{custom=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(custom))}catch(e){}};
-const st={q:"",v:"",c:"",sort:"date"};
+const st={q:"",p:"",v:""};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const all=()=>[...custom,...SEED];
+const all=()=>[...custom,...DATA];
+const MONTHS=["január","február","március","április","május","június","július","augusztus","szeptember","október","november","december"];
+const DAYS=["vasárnap","hétfő","kedd","szerda","csütörtök","péntek","szombat"];
+const todayStr=(()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")})();
+const parse=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d||1)};
+const fmtDay=s=>{const d=parse(s);return `${d.getFullYear()}. ${MONTHS[d.getMonth()]} ${d.getDate()}.`};
+const dayName=s=>DAYS[parse(s).getDay()];
+const fmtMonth=s=>{const d=parse(s);return `${d.getFullYear()}. ${MONTHS[d.getMonth()]}`};
+const isDay=s=>s&&s.length===10;
+const ageDays=s=>Math.floor((parse(todayStr)-parse(s))/86400000);
 
-function chips(){
-  $("#vchips").innerHTML=["",...Object.keys(V)].map(k=>`<button class="chip ${st.v===k?"on":""}" data-v="${k}">${k?V[k]:"Minden verdikt"}</button>`).join("");
-  $("#cchips").innerHTML=["",...CATS].map(k=>`<button class="chip ${st.c===k?"on":""}" data-c="${k}">${k||"Minden kategória"}</button>`).join("");
-}
-function render(){
-  const a=all();
-  const n=k=>a.filter(x=>x.verdict===k).length;
-  $("#stats").innerHTML=`<div class="stat"><b>${a.length}</b>bejegyzés</div><div class="stat"><b class="v-ok">${n("ok")}</b>működik</div><div class="stat"><b class="v-mix">${n("mix")}</b>vegyes</div><div class="stat"><b class="v-hype">${n("hype")}</b>hype</div>`;
-  const q=st.q.toLowerCase();
-  let r=a.filter(x=>(!st.v||x.verdict===st.v)&&(!st.c||x.cat===st.c)&&(!q||(x.title+" "+x.sum+" "+(x.act||"")).toLowerCase().includes(q)));
-  const ord={ok:0,mix:1,hype:2};
-  r.sort((x,y)=>st.sort==="verdict"?ord[x.verdict]-ord[y.verdict]||y.date.localeCompare(x.date):y.date.localeCompare(x.date));
-  $("#list").innerHTML=r.length?r.map(x=>`
-   <div class="card"><div class="top"><h3>${esc(x.title)}</h3><span class="badge v-${x.verdict}">${V[x.verdict]}</span></div>
-   <div class="meta">${esc(x.cat)} · ${esc(x.date)}${x.custom?" · saját":""}</div>
+function plat(k){const p=PLATS[k]||PLATS.ltalaban;return `<span class="plat"><span class="dot" style="background:${p.c}">${p.l}</span>${p.n}</span>`}
+function card(x){
+  const [ar,al,ac]=MOM[x.mom]||MOM.flat;
+  const imp="●".repeat(x.impact)+"<s>"+"●".repeat(5-x.impact)+"</s>";
+  const isNew=x.kind==="event"&&isDay(x.date)&&ageDays(x.date)<=7&&ageDays(x.date)>=0;
+  return `<article class="card v-${x.verdict}">
+   <div class="ctop">${plat(x.plat)}<span class="badge">${x.kind==="example"?{ok:"Érdemes követni",mix:"Tanulj belőle",hype:"Óvatosan"}[x.verdict]:VL[x.verdict]}</span></div>
+   ${x._brand?`<div class="brand">${esc(x._brand)} · ${esc(x._year)}</div>`:""}
+   <h3>${esc(x.title)}${isNew?'<span class="new">ÚJ</span>':""}</h3>
    <p>${esc(x.sum)}</p>
-   ${x.act?`<div class="do"><b>Teendő:</b> ${esc(x.act)}</div>`:""}
-   <p style="margin-bottom:0">${x.url&&/^https?:\/\//.test(x.url)?`<a href="${esc(x.url)}" target="_blank" rel="noopener">Forrás</a>`:""}
-   ${x.custom?` <button class="del" data-del="${x.id}">Törlés</button>`:""}</p></div>`).join(""):`<div class="empty">Nincs találat.</div>`;
-  chips();
+   ${x.act?`<div class="todo">${esc(x.act)}</div>`:""}
+   <div class="meters"><span>Hatás <span class="imp">${imp}</span></span><span class="${ac}">${ar} ${al}</span>
+   ${x.url&&/^https?:\/\//.test(x.url)?`<a class="src" href="${esc(x.url)}" target="_blank" rel="noopener">Forrás ↗</a>`:""}
+   ${x.custom?`<button class="del" data-del="${x.id}">Törlés</button>`:""}</div>
+  </article>`;
 }
+function filtered(list){
+  const q=st.q.toLowerCase();
+  return list.filter(x=>(!st.p||x.plat===st.p)&&(!st.v||x.verdict===st.v)&&(!q||(x.title+" "+x.sum+" "+(x.act||"")).toLowerCase().includes(q)));
+}
+function renderStrip(){
+  const a=all(),n=k=>a.filter(x=>x.verdict===k).length,t=a.length||1;
+  const ev=a.filter(x=>x.kind==="event"&&isDay(x.date));
+  const last=ev.map(x=>x.date).sort().pop();
+  $("#strip").innerHTML=`
+   <div class="tile"><small>Bejegyzés</small><b>${a.length}</b><div class="sub">${a.filter(x=>x.kind==="event").length} hír · ${a.filter(x=>x.kind==="example").length} példa · ${a.filter(x=>x.kind==="insight").length} tanulság</div>
+     <div class="vbar"><i style="width:${n("ok")/t*100}%;background:var(--ok)"></i><i style="width:${n("mix")/t*100}%;background:var(--mix)"></i><i style="width:${n("hype")/t*100}%;background:var(--hype)"></i></div></div>
+   <div class="tile"><small>Működik</small><b class="c-ok">${n("ok")}</b><div class="sub">bevált, érdemes használni</div></div>
+   <div class="tile"><small>Vegyes</small><b class="c-mix">${n("mix")}</b><div class="sub">függ a helyzettől</div></div>
+   <div class="tile"><small>Hype</small><b class="c-hype">${n("hype")}</b><div class="sub">nem bizonyított</div></div>`;
+  return last;
+}
+function renderToday(last){
+  const a=all().filter(x=>x.kind==="event"&&isDay(x.date));
+  const newest=a.filter(x=>x.date===last);
+  const d=last?parse(last):null;
+  const same=last===todayStr;
+  $("#todaySec").innerHTML=`
+   <div class="sh"><h2>${same?"Mai trend":"Legfrissebb nap"}</h2><span>${same?"":`Ma (${fmtDay(todayStr)}) még nincs új bejegyzés`}</span></div>
+   <div class="today"><div class="head">
+     <div class="cal"><i>${d?MONTHS[d.getMonth()].slice(0,3):"–"}</i><b>${d?d.getDate():"–"}</b></div>
+     <div><h3>${d?fmtDay(last)+", "+dayName(last):"Nincs adat"}</h3><p>${newest.length} változás ezen a napon</p></div></div>
+     <div class="hl">${newest.map(x=>`<a class="row" href="#${x.id}">
+        <span class="dot" style="background:${(PLATS[x.plat]||PLATS.ltalaban).c};width:12px;height:12px;margin-top:6px;flex:none"></span>
+        <div><div class="t">${esc(x.title)}</div><div class="d">${esc((PLATS[x.plat]||PLATS.ltalaban).n)} · ${VL[x.verdict]}</div></div></a>`).join("")||'<div class="empty">Nincs bejegyzés.</div>'}</div></div>`;
+}
+function renderFilters(){
+  const keys=[...new Set(all().map(x=>x.plat))];
+  $("#pf").innerHTML=`<button class="pill ${!st.p?"on":""}" data-p="">Minden platform</button>`+keys.map(k=>{const p=PLATS[k]||PLATS.ltalaban;return `<button class="pill ${st.p===k?"on":""}" data-p="${k}"><span class="dot" style="background:${p.c}"></span>${p.n}</button>`}).join("");
+  $("#vf").innerHTML=`<button class="pill ${!st.v?"on":""}" data-v="">Minden verdikt</button>`+Object.keys(VL).map(k=>`<button class="pill ${st.v===k?"on":""}" data-v="${k}"><span class="dot" style="background:var(--${k})"></span>${VL[k]}</button>`).join("");
+}
+function renderTl(){
+  const ev=filtered(all().filter(x=>x.kind==="event")).sort((a,b)=>b.date.localeCompare(a.date));
+  $("#tlCount").textContent=ev.length+" változás";
+  if(!ev.length){$("#tl").innerHTML='<div class="empty">Nincs találat.</div>';return}
+  let html="",cur="";
+  ev.forEach(x=>{
+    const key=x.date;
+    if(key!==cur){cur=key;
+      const n=ev.filter(y=>y.date===key).length;
+      html+=isDay(key)
+        ?`<div class="day"><span class="node"></span><b>${fmtDay(key)}</b><span>${dayName(key)} · ${n} hír</span></div>`
+        :`<div class="day"><span class="node" style="background:var(--mut);box-shadow:0 0 0 2px var(--mut)"></span><b>${fmtMonth(key)}</b><span>pontos nap nincs megadva · ${n} hír</span></div>`;
+    }
+    html+=`<div id="${x.id}">${card(x)}</div>`;
+  });
+  $("#tl").innerHTML=html;
+}
+function renderIns(){
+  const r=filtered(all().filter(x=>x.kind==="insight")).sort((a,b)=>({ok:0,mix:1,hype:2}[a.verdict]-{ok:0,mix:1,hype:2}[b.verdict])||b.impact-a.impact);
+  $("#ins").innerHTML=r.length?r.map(card).join(""):'<div class="empty">Nincs találat.</div>';
+}
+function renderEx(){
+  const r=filtered(all().filter(x=>x.kind==="example")).sort((a,b)=>({ok:0,mix:1,hype:2}[a.verdict]-{ok:0,mix:1,hype:2}[b.verdict])||b.impact-a.impact);
+  $("#ex").innerHTML=r.length?r.map(x=>card({...x,title:x.title,_brand:x.brand,_year:x.year})).join(""):'<div class="empty">Nincs találat.</div>';
+}
+function render(){const last=renderStrip();renderToday(last);renderFilters();renderTl();renderEx();renderIns()}
+
 document.addEventListener("click",e=>{
-  const t=e.target;
-  if(t.dataset.v!==undefined){st.v=t.dataset.v;render()}
-  if(t.dataset.c!==undefined){st.c=t.dataset.c;render()}
-  if(t.dataset.del){custom=custom.filter(x=>x.id!==t.dataset.del);save();render()}
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.p!==undefined){st.p=b.dataset.p;render()}
+  else if(b.dataset.v!==undefined){st.v=b.dataset.v;render()}
+  else if(b.dataset.del){custom=custom.filter(x=>x.id!==b.dataset.del);save();render()}
 });
-$("#q").addEventListener("input",e=>{st.q=e.target.value;render()});
-$("#sort").addEventListener("change",e=>{st.sort=e.target.value;render()});
-$("#add").onclick=()=>$("#dlg").showModal();
-$("select[name=cat]").innerHTML=CATS.map(c=>`<option>${c}</option>`).join("");
+$("#q").addEventListener("input",e=>{st.q=e.target.value;renderTl();renderEx();renderIns()});
+$("#add").onclick=()=>{$("input[name=date]").value=todayStr;$("#dlg").showModal()};
+$("select[name=plat]").innerHTML=Object.entries(PLATS).map(([k,p])=>`<option value="${k}">${p.n}</option>`).join("");
 $("#form").addEventListener("submit",e=>{
   if(e.submitter&&e.submitter.value!=="ok")return;
-  const f=new FormData(e.target);
-  custom.unshift({id:"c"+Date.now(),date:new Date().toISOString().slice(0,10),cat:f.get("cat"),verdict:f.get("verdict"),title:f.get("title"),sum:f.get("sum"),act:f.get("act"),url:f.get("url"),custom:true});
+  const f=new FormData(e.target),kind=f.get("kind");
+  custom.unshift({id:"c"+Date.now(),kind,date:kind==="event"?(f.get("date")||todayStr):undefined,plat:f.get("plat"),verdict:f.get("verdict"),
+    impact:Math.min(5,Math.max(1,+f.get("impact")||3)),mom:"flat",title:f.get("title"),sum:f.get("sum"),act:f.get("act"),url:f.get("url"),custom:true});
   save();e.target.reset();render();
 });
-$("#upd").textContent=SEED.reduce((m,x)=>x.date>m?x.date:m,"");
+function setTheme(t){
+  const r=document.documentElement;
+  if(t==="light"||t==="dark")r.setAttribute("data-theme",t);else r.removeAttribute("data-theme");
+  try{t==="auto"?localStorage.removeItem("trendfigyelo_theme"):localStorage.setItem("trendfigyelo_theme",t)}catch(e){}
+  document.querySelectorAll("#theme button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+}
+document.querySelectorAll("#theme button").forEach(b=>b.onclick=()=>setTheme(b.dataset.t));
+(()=>{let t="auto";try{const s=localStorage.getItem("trendfigyelo_theme");if(s==="light"||s==="dark")t=s}catch(e){}setTheme(t)})();
+$("#todayLbl").textContent="Ma: "+fmtDay(todayStr)+", "+dayName(todayStr);
 render();
 </script>
 </body>
