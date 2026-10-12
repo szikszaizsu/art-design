@@ -79,6 +79,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       <select id="year" aria-label="Év">
         <option value="2026">2026</option>
         <option value="2027">2027</option>
+        <option value="2028">2028</option>
       </select>
       <button data-act="mode" data-v="ho">Havi nézet</button>
       <button data-act="mode" data-v="tabla">Éves tábla</button>
@@ -176,6 +177,7 @@ const SEED={
     it('csokentes','Csökkentés (CSOKENTES)','info',A(5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000,5000)),
     it('havireszlet','Havi részlet (bank)','info',A(990,946,902,858,814,770,726,682,638,594,550,506))
   ]},
+  2028:{laciPay:Array(12).fill(null),laciOpen:0,items:[]},
   subs:[{n:'cgdp',e:20},{n:'Midjourney',e:30},{n:'Claude',e:22},{n:'Magnific',e:44},{n:'Figma',e:20}]
 };
 
@@ -186,6 +188,18 @@ try{st=JSON.parse(localStorage.getItem(KEY));}catch(e){st=null;}
 if(!st||!st[2026]||!st[2027])st=clone(SEED);
 // Régi mentés átállítása: az azonos id-jú tételek a SEED szerinti csoportot kapják, hiányzó Laci-mezők pótlása
 function ensureData(){
+  if(!st[2028])st[2028]=clone(SEED[2028]);
+  if(!st.year28Fix){
+    for(const s0 of st[2027].items){
+      if(!st[2028].items.some(x=>x.id===s0.id)){
+        const n=clone(s0);delete n.hideFrom;delete n.names;n.vals=Array(12).fill(null);
+        if(s0.id==='csokentes')n.vals=clone(s0.vals);
+        st[2028].items.push(n);
+      }
+    }
+    st.year28Fix=true;
+  }
+
   // Előfizetések havonként: a régi egy listából az alap lesz
   if(!st.subsM){st.subsM={'0000-00':clone(st.subs||SEED.subs)};}
 
@@ -206,7 +220,7 @@ function ensureData(){
   }
   // Törlesztés tétel a Követésből a Hitelbe (így beleszámít a kiadásokba), egyszer
   if(!st.torlFix){
-    for(const y of [2026,2027])for(const i of st[y].items)if(i.name==='Törlesztés'&&i.group==='info')i.group='hitel';
+    for(const y of [2026,2027,2028])for(const i of st[y].items)if(i.name==='Törlesztés'&&i.group==='info')i.group='hitel';
     st.torlFix=true;
   }
   if(!st.hideFix){
@@ -234,7 +248,7 @@ function ensureData(){
   // Kártyák sorrendje (húzással módosítható), hiányzó kulcsok a végére kerülnek
   const cur=Array.isArray(st.order)?st.order.filter(k=>PANEL_KEYS.includes(k)):[];
   st.order=[...cur,...PANEL_KEYS.filter(k=>!cur.includes(k))];
-  for(const y of [2026,2027]){
+  for(const y of [2026,2027,2028]){
     // A kézi „Laci – elmaradás” sor helyett a Laci-elszámolás számol
     st[y].items=st[y].items.filter(i=>i.id!=="laciel");
     for(const i of st[y].items){
@@ -360,7 +374,7 @@ function subsPanel(){
 
 // Hitel (Részlet) automatikusan követi a bank „Havi részlet” sorát, ahol van ott érték
 function syncHitel(){
-  for(const y of [2026,2027]){
+  for(const y of [2026,2027,2028]){
     const r=st[y].items.find(x=>x.id==='reszlet');
     const h=st[y].items.find(x=>x.id==='havireszlet');
     if(!r||!h)continue;
@@ -372,6 +386,7 @@ function syncBank(){
   const seq=[];
   for(let k=7;k<12;k++)seq.push([2026,k]);
   for(let k=0;k<12;k++)seq.push([2027,k]);
+  for(let k=0;k<12;k++)seq.push([2028,k]);
   let prev=null;
   for(const [y,k] of seq){
     const b=st[y].items.find(x=>x.id==='bank');
@@ -391,6 +406,7 @@ function syncInstallment(){
   const seq=[];
   for(let k=9;k<12;k++)seq.push([2026,k]);
   for(let k=0;k<12;k++)seq.push([2027,k]);
+  for(let k=0;k<12;k++)seq.push([2028,k]);
   let prev=st[2026].items.find(x=>x.id==='havireszlet')?.vals[8];
   if(prev==null)return;
   for(const [y,k] of seq){
@@ -436,7 +452,7 @@ function laciBal(y,mi){
   const from=st.laciFrom; // {y,m}: ettől a hónaptól indul újra az elszámolás
   let bal=from?0:(st[2026].laciOpen||0);
   let started=!from;
-  for(const yy of [2026,2027])for(let k=0;k<12;k++){
+  for(const yy of [2026,2027,2028])for(let k=0;k<12;k++){
     if(yy===y&&k>mi)return bal;
     if(!started){if(yy===from.y&&k===from.m)started=true;else continue;}
     bal+=laciOwed(yy,k)-laciPaid(yy,k);
