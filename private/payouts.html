@@ -399,29 +399,30 @@ function syncBank(){
     if(!b||!c)continue;
     if(y===a.y&&k===a.m){if(a.v!=null)b.vals[k]=a.v;prev=b.vals[k];started=true;continue;}
     if(!started)continue;
-    const nv=prev-(c.vals[k]||0);
+    const hr=st[y].items.find(x=>x.id==='havireszlet');
+    const nv=prev-(c.vals[k]||0)-((hr&&hr.vals[k])||0);
     if(!(st.keepEmpty&&st.keepEmpty[b.id+':'+k]))b.vals[k]=nv;
     prev=nv;
   }
 }
 // Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
 const resztLep=()=>(st.resztLep??44);
-function stepRow(){return `<div class="grp">Havi részlet</div><div class="row"><span class="n">Összeg (lei), kiválasztott hónap</span><input type="number" inputmode="decimal" step="any" id="resztAnc" value="${(st.resztAnchor||{v:1211}).v}" style="width:110px"></div><div class="row"><span class="n">Csökkenés havonta (lei)</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${st.resztLep??44}" style="width:110px"></div>`;}
+function stepRow(){return `<div class="grp">Havi részlet</div><div class="row"><span class="n">Összeg (lei), kiválasztott hónap</span><input type="number" inputmode="decimal" step="any" id="resztAnc" value="${(st.resztAnchor||{v:1211}).v}" style="width:110px"></div><div class="row"><span class="n">Csökkenés havonta (lei)</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${st.resztLep??44}" style="width:110px"></div><div class="row"><span class="n">Hitel összege (lei)</span><input type="number" inputmode="decimal" step="any" id="loanAmt" value="${st.loanAmt??131621}" style="width:110px"></div><div class="row"><span class="n">Kamat (%/év)</span><input type="number" inputmode="decimal" step="any" id="loanRate" value="${st.loanRate??8.17}" style="width:110px"></div>`;}
 
 // Havi részlet: az egyenleg adott %-a (októbertől), így az egyenleggel együtt csökken
 // Havi részlet: a kézzel megadott hónap a kiinduló (lei), a többi hónap ugyanebből az arányból az egyenleggel együtt csökken
 // Havi részlet: a kiválasztott hónap összege (1211), utána havonta a beállított lépéssel (44 lei) csökken
+// Hitel és részlet: a részlet a hitel arányában csökken; a hitel a kamat és a részlet tőkerésze szerint fogy
 function syncInstallment(){
   const an=st.resztAnchor||{y:2026,m:9,v:1211};
-  const step=st.resztLep??44;
-  let idx=0;
+  const L0=st.loanAmt??131621, r=(st.loanRate??8.17)/100/12;
+  let L=L0;
   for(const y of [2026,2027,2028])for(let k=0;k<12;k++){
     if(y<an.y||(y===an.y&&k<an.m))continue;
+    const inst=an.v*L/L0;
     const h=st[y].items.find(x=>x.id==='havireszlet');
-    if(!h)continue;
-    const val=an.v-step*idx;idx++;
-    if(st.keepEmpty&&st.keepEmpty[h.id+':'+k])continue;
-    h.vals[k]=val;
+    if(h&&!(st.keepEmpty&&st.keepEmpty[h.id+':'+k]))h.vals[k]=Math.round(inst);
+    L=Math.max(0,L-(inst-L*r));
   }
 }
 let showPhone=false;
@@ -440,8 +441,8 @@ function activateSubs(){
 }
 function render(){
   activateSubs();
-  syncBank();
   syncInstallment();
+  syncBank();
   syncHitel();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
@@ -689,6 +690,11 @@ document.addEventListener('change',e=>{
   if(t.id==='resztAnc'){
     const v=Number(t.value.replace(',','.'));
     st.resztAnchor={y:year,m:m,v:isNaN(v)?0:v};
+    save();render();return;
+  }
+  if(t.id==='loanAmt'||t.id==='loanRate'){
+    const v=Number(t.value.replace(',','.'));
+    if(t.id==='loanAmt')st.loanAmt=isNaN(v)?0:v;else st.loanRate=isNaN(v)?0:v;
     save();render();return;
   }
   if(t.id==='resztLep'){
