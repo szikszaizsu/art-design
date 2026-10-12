@@ -553,7 +553,7 @@ async function handlePayoutsState(request, env, url) {
 
 // BNR hivatalos EUR árfolyam (a Worker 1 órára gyorsítótárazza)
 async function handlePayoutsFx() {
-  const r = await fetch('https://www.bnr.ro/nbrfxrates.xml', { cf: { cacheTtl: 3600, cacheEverything: true } });
+  const r = await fetch('https://curs.bnr.ro/nbrfxrates.xml', { cf: { cacheTtl: 3600, cacheEverything: true } });
   if (!r.ok) return Response.json({ error: 'BNR nem elérhető' }, { status: 502, headers: PAYOUTS_HEADERS });
   const xml = await r.text();
   const date = (xml.match(/<Cube date="([^"]+)"/) || [])[1];
