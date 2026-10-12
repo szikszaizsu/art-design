@@ -1,5 +1,4 @@
 import payoutsPage from './private/payouts.html';
-import trendfigyeloPage from './private/trendfigyelo.html';
 
 export class VisitCounter {
   constructor(state) {
@@ -585,18 +584,6 @@ async function handlePayouts(request, env, url) {
   return new Response(payoutsPage, { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'text/html; charset=utf-8' } });
 }
 
-// /trendfigyelo/: AI reklám trendfigyelő, ugyanaz a HTTP Basic jelszó, mint a /payouts/-nál.
-// A HTML a private/ mappában van, jelszó nélkül nem érhető el.
-async function handleTrendfigyelo(request, env) {
-  if (!(await isBasicAuthed(request, env))) {
-    return new Response('Jelszó szükséges.', {
-      status: 401,
-      headers: { ...PAYOUTS_HEADERS, 'WWW-Authenticate': 'Basic realm="trendfigyelo", charset="UTF-8"', 'Content-Type': 'text/plain; charset=utf-8' }
-    });
-  }
-  return new Response(trendfigyeloPage, { headers: { ...PAYOUTS_HEADERS, 'Content-Type': 'text/html; charset=utf-8' } });
-}
-
 // Constant-time compare of the Bearer token with the TERVEZO_JELSZO secret.
 async function isAdmin(request, env) {
   if (!env.TERVEZO_JELSZO) return false;
@@ -707,7 +694,6 @@ export default {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
     if (['/payouts', '/payouts/', '/payouts/manifest.json', '/payouts/icon.svg', '/payouts/api/state', '/payouts/api/fx'].includes(url.pathname)) return handlePayouts(request, env, url);
-    if (url.pathname === '/trendfigyelo' || url.pathname === '/trendfigyelo/') return handleTrendfigyelo(request, env);
     if (url.pathname !== '/api/visits') return env.ASSETS.fetch(request);
     if (!['GET', 'POST'].includes(request.method)) return new Response(null, { status: 405 });
     if (request.method === 'POST' && (request.headers.get('Origin') !== url.origin || request.headers.get('X-Visit-Counter') !== '1')) {
