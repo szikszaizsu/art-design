@@ -406,17 +406,22 @@ function syncBank(){
 }
 // Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
 const resztLep=()=>(st.resztLep??44);
-function stepRow(){return `<div class="grp">Havi részlet</div><div class="row"><span class="n">Részlet az egyenleg %-a</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${st.resztPct??0.8914}" style="width:110px"></div>`;}
+function stepRow(){return `<div class="grp">Havi részlet</div><div class="row"><span class="n">Havi részlet (lei), kiválasztott hónap</span><input type="number" inputmode="decimal" step="any" id="resztLep" value="${(st.resztAnchor||{v:1211}).v}" style="width:110px"></div>`;}
 
 // Havi részlet: az egyenleg adott %-a (októbertől), így az egyenleggel együtt csökken
+// Havi részlet: a kézzel megadott hónap a kiinduló (lei), a többi hónap ugyanebből az arányból az egyenleggel együtt csökken
 function syncInstallment(){
-  const pct=st.resztPct??0.8914;
+  const an=st.resztAnchor||{y:2026,m:9,v:1211};
+  const bankAt=(y,k)=>{const bk=st[y].items.find(x=>x.id==='bank');return bk?bk.vals[k]:null;};
+  const ab=bankAt(an.y,an.m);
+  if(!ab)return;
+  const ratio=an.v/ab;
   for(const y of [2026,2027,2028])for(let k=0;k<12;k++){
-    if(y===2026&&k<9)continue;
+    if(y<an.y||(y===an.y&&k<an.m))continue;
     const bk=st[y].items.find(x=>x.id==='bank'), h=st[y].items.find(x=>x.id==='havireszlet');
     if(!bk||!h||bk.vals[k]==null)continue;
     if(st.keepEmpty&&st.keepEmpty[h.id+':'+k])continue;
-    h.vals[k]=Math.round(bk.vals[k]*pct/100);
+    h.vals[k]=(y===an.y&&k===an.m)?an.v:Math.round(bk.vals[k]*ratio);
   }
 }
 let showPhone=false;
@@ -435,9 +440,9 @@ function activateSubs(){
 }
 function render(){
   activateSubs();
+  syncBank();
   syncInstallment();
   syncHitel();
-  syncBank();
   document.getElementById('year').value=year;
   document.querySelectorAll('[data-act="mode"]').forEach(b=>b.classList.toggle('on',b.dataset.v===mode));
   app.innerHTML=(showPhone?phonePanel():'')+fxPanel()+(mode==='ho'?hoView()+quickForm():tableView())+laciPanel()+bankPanel()+addForm()+subsPanel();
@@ -683,7 +688,7 @@ document.addEventListener('change',e=>{
   }
   if(t.id==='resztLep'){
     const v=Number(t.value.replace(',','.'));
-    st.resztPct=isNaN(v)?0:v;
+    st.resztAnchor={y:year,m:m,v:isNaN(v)?0:v};
     save();render();return;
   }
   if(t.id==='laciOpen'){
