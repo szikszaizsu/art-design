@@ -412,14 +412,15 @@ function stepRow(){return `<div class="grp">Havi részlet</div><div class="row">
 // Havi részlet: az egyenleg adott %-a (októbertől), így az egyenleggel együtt csökken
 // Havi részlet: a kézzel megadott hónap a kiinduló (lei), a többi hónap ugyanebből az arányból az egyenleggel együtt csökken
 // Havi részlet: a kiválasztott hónap összege (1211), utána havonta a beállított lépéssel (44 lei) csökken
-// Hitel és részlet: a részlet a hitel arányában csökken; a hitel a kamat és a részlet tőkerésze szerint fogy
+// Hitel és részlet: a részlet havonta a beállított lépéssel (44 lei) csökken; a hitel a kamat és a részlet tőkerésze szerint fogy
 function syncInstallment(){
   const an=st.resztAnchor||{y:2026,m:9,v:1211};
   const L0=st.loanAmt??131621, r=(st.loanRate??8.17)/100/12;
-  let L=L0;
+  let L=L0, idx=0;
+  const step=st.resztLep??44;
   for(const y of [2026,2027,2028])for(let k=0;k<12;k++){
     if(y<an.y||(y===an.y&&k<an.m))continue;
-    const inst=an.v*L/L0;
+    const inst=Math.max(0,an.v-step*idx);idx++;
     const h=st[y].items.find(x=>x.id==='havireszlet');
     if(h&&!(st.keepEmpty&&st.keepEmpty[h.id+':'+k]))h.vals[k]=Math.round(inst);
     L=Math.max(0,L-(inst-L*r));
