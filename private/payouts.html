@@ -392,17 +392,28 @@ function syncBank(){
   const a=st.bankAnchor||{y:2026,m:7,v:null};
   const seq=[];
   for(const y of [2026,2027,2028])for(let k=0;k<12;k++)seq.push([y,k]);
-  let prev=null, started=false;
+  if(!st.csokOrig)st.csokOrig={};
+  let prev=null, started=false, ended=false;
   for(const [y,k] of seq){
-    const b=st[y].items.find(x=>x.id==='bank');
+    const bk=st[y].items.find(x=>x.id==='bank');
     const c=st[y].items.find(x=>x.id==='csokentes');
-    if(!b||!c)continue;
-    if(y===a.y&&k===a.m){if(a.v!=null)b.vals[k]=a.v;prev=b.vals[k];started=true;continue;}
-    if(!started)continue;
     const hr=st[y].items.find(x=>x.id==='havireszlet');
+    if(!bk||!c)continue;
+    const key=y+':'+k;
+    if(y===a.y&&k===a.m){if(a.v!=null)bk.vals[k]=a.v;prev=bk.vals[k];started=true;ended=prev<=0;continue;}
+    if(!started)continue;
+    if(ended){
+      // lejárt a kölcsön: nincs csökkentés és nincs havi részlet
+      if(c.vals[k]!=null){st.csokOrig[key]=c.vals[k];c.vals[k]=null;}
+      if(hr)hr.vals[k]=null;
+      if(!(st.keepEmpty&&st.keepEmpty[bk.id+':'+k]))bk.vals[k]=0;
+      continue;
+    }
+    if(c.vals[k]==null&&st.csokOrig[key]!=null)c.vals[k]=st.csokOrig[key];
     const nv=Math.max(0,prev-(c.vals[k]||0)-((hr&&hr.vals[k])||0));
-    if(!(st.keepEmpty&&st.keepEmpty[b.id+':'+k]))b.vals[k]=nv;
+    if(!(st.keepEmpty&&st.keepEmpty[bk.id+':'+k]))bk.vals[k]=nv;
     prev=nv;
+    if(prev<=0)ended=true;
   }
 }
 // Havi részlet (bank): 2026 októbertől havonta 44 lei csökken (szeptemberi értéktől indul)
