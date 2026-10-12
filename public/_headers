@@ -6,3 +6,7 @@
 # Demo index page (/weboldalak/) is internal: never indexed.
 /weboldalak/*
   X-Robots-Tag: noindex, nofollow, noimageindex, noarchive
+
+# Trendfigyelo: privat eszkoz, nem indexelhető.
+/trendfigyelo/*
+  X-Robots-Tag: noindex, nofollow, noimageindex, noarchive
