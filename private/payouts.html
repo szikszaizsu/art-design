@@ -400,7 +400,7 @@ function syncBank(){
     if(y===a.y&&k===a.m){if(a.v!=null)b.vals[k]=a.v;prev=b.vals[k];started=true;continue;}
     if(!started)continue;
     const hr=st[y].items.find(x=>x.id==='havireszlet');
-    const nv=prev-(c.vals[k]||0)-((hr&&hr.vals[k])||0);
+    const nv=Math.max(0,prev-(c.vals[k]||0)-((hr&&hr.vals[k])||0));
     if(!(st.keepEmpty&&st.keepEmpty[b.id+':'+k]))b.vals[k]=nv;
     prev=nv;
   }
