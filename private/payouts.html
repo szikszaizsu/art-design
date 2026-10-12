@@ -68,6 +68,13 @@ tr.gh td{font-size:12px;text-transform:uppercase;color:var(--mut);padding-top:12
 td.num{text-align:right;font-variant-numeric:tabular-nums}
 .chart{width:100%;max-width:460px;height:auto;display:block;margin:0 auto}
 .muted{color:var(--mut);font-size:13px}
+.fxrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.fxfield,.fxres{display:flex;align-items:center;gap:10px;background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:170px;flex:1}
+.fxfield input[type=number]{border:0;background:transparent;font-size:22px;font-weight:600;width:100%;min-width:0;text-align:right;padding:0;outline:none}
+.fxcur{color:var(--mut);font-weight:600;font-size:15px}
+.fxnum{flex:1;text-align:right;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.fxswap{width:42px;height:42px;border-radius:50%;font-size:18px;padding:0;flex:none;display:inline-flex;align-items:center;justify-content:center}
+.fxinfo{margin-top:10px;font-size:13px;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -509,10 +516,15 @@ async function loadFx(){
 }
 function fxPanel(){
   const amt=Number(String(fxAmt).replace(',','.'));
+  const from=fxDir==='ron'?'lei':'€', to=fxDir==='ron'?'€':'lei';
   let out='–';
-  if(fxRate&&amt){out=fxDir==='ron'?(amt/fxRate).toFixed(2)+' €':(amt*fxRate).toFixed(2)+' lei';}
-  const rateTxt=fxRate?('1 € = '+fxRate.toFixed(4)+' lei (BNR, '+fxDate+')'):'Az árfolyam most nem elérhető';
-  return '<div class="panel"><h2>Valutaváltó <span class="muted">(BNR)</span></h2><div class="add" style="margin-top:0"><input type="number" inputmode="decimal" step="any" data-fx="amt" value="'+fxAmt+'" placeholder="Összeg" style="width:140px" aria-label="Összeg"><select data-fx="dir" aria-label="Irány"><option value="ron"'+(fxDir==='ron'?' selected':'')+'>lei → €</option><option value="eur"'+(fxDir==='eur'?' selected':'')+'>€ → lei</option></select><span><b>'+out+'</b></span></div><div class="muted" style="margin-top:8px">'+rateTxt+'</div></div>';
+  if(fxRate&&amt){const v=fxDir==='ron'?amt/fxRate:amt*fxRate;out=v.toLocaleString('hu-HU',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  const info=fxRate?('1 € = '+fxRate.toFixed(4)+' lei · BNR, '+fxDate):'Az árfolyam most nem elérhető';
+  return '<div class="panel"><h2>Valutaváltó <span class="muted">(BNR napi árfolyam)</span></h2>'
+    +'<div class="fxrow"><div class="fxfield"><input type="number" inputmode="decimal" step="any" data-fx="amt" value="'+fxAmt+'" placeholder="0" aria-label="Összeg"><span class="fxcur">'+from+'</span></div>'
+    +'<button class="fxswap" data-act="fxswap" title="Irány váltása" aria-label="Irány váltása">⇄</button>'
+    +'<div class="fxres"><span class="fxnum">'+out+'</span><span class="fxcur">'+to+'</span></div></div>'
+    +'<div class="fxinfo">'+info+'</div></div>';
 }
 // Bank – éves kimutatás (havonként: egyenleg, csökkentés, havi részlet)
 function bankPanel(){
@@ -628,6 +640,7 @@ document.addEventListener('click',e=>{
     st.keepEmpty=st.keepEmpty||{};
     for(let k=m;k<12;k++){i.vals[k]=null;if(i.names)i.names[k]=null;st.keepEmpty[i.id+':'+k]=true;}
   }
+  else if(a==='fxswap'){fxDir=fxDir==='ron'?'eur':'ron';}
   else if(a==='phone'){showPhone=!showPhone;}
   else if(a==='laciReset'){
     st.laciFrom={y:year,m:m};
