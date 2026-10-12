@@ -29,6 +29,11 @@
 .theme button{border:0;background:transparent;color:#fff;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:600;opacity:.8}
 .theme button.on{background:#fff;color:#2b2470;opacity:1}
 .hero .in{padding-top:2px}
+.ver{margin-top:16px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;border-radius:99px;padding:6px 14px;font-size:13px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+.ver:hover{background:rgba(255,255,255,.25)}
+.vdot{width:8px;height:8px;border-radius:50%;background:#ffd166;display:none}
+.vdot.on{display:inline-block}
+.cl{margin:0 0 14px}.cl b{font-size:15px}.cl small{color:var(--mut);margin-left:6px}.cl ul{margin:6px 0 0;padding-left:20px}.cl li{margin:2px 0}
 @media (max-width:560px){.theme{position:static;margin-bottom:12px;display:flex;width:max-content}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -108,6 +113,24 @@ section{margin-top:34px}
 .imp{letter-spacing:2px;color:var(--vc)}
 .imp s{text-decoration:none;opacity:.25}
 .up{color:var(--ok)}.flat{color:var(--mut)}.down{color:var(--hype)}
+.rule{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 16px;margin-top:10px;box-shadow:var(--shadow)}
+.rule h4{margin:0 0 4px;font-size:16px;line-height:1.3}
+.rule p{margin:4px 0;color:color-mix(in srgb,var(--tx) 85%,var(--mut))}
+.rule .why b{color:var(--tx)}
+.ev{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 9px;border-radius:99px;color:var(--ec);background:color-mix(in srgb,var(--ec) 14%,transparent);margin-right:8px;vertical-align:middle}
+.ev.s{--ec:var(--ok)}.ev.m{--ec:var(--mix)}.ev.w{--ec:var(--hype)}
+.rtop{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.badbox{margin-top:12px;border:1px dashed var(--hype);border-radius:14px;padding:12px 16px;background:color-mix(in srgb,var(--hype) 7%,transparent)}
+.badbox h4{margin:0 0 6px;color:var(--hype);font-size:14px}
+.badbox ul{margin:0;padding-left:18px}.badbox li{margin:3px 0}
+.gnote{font-size:13px;color:var(--mut);margin-top:10px}
+.mtab{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+.mtab td{padding:6px 4px;border-bottom:1px solid var(--bd);vertical-align:top}
+.mtab td:first-child{width:26px;color:var(--mut);font-weight:700}
+.mtab td:last-child{text-align:right;color:var(--mut);white-space:nowrap}
+.mcard h3{margin:0 0 2px}
+.mcard .snap{font-size:12px;color:var(--mut);margin-bottom:4px}
+.mcard .cav{font-size:13px;color:var(--mut);margin-top:8px}
 .brand{margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--vc)}
 .brand+h3{margin-top:2px}
 .todo{margin-top:10px;background:var(--soft);border-radius:10px;padding:8px 12px;font-size:14px;display:flex;gap:8px}
@@ -146,11 +169,23 @@ dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd)
   </div>
   <span class="eyebrow"><i class="pulse"></i><span id="todayLbl"></span></span>
   <h1>AI Reklám Trendfigyelő</h1>
-  <p>Mi működik, mi vegyes és mi csak hype az AI-alapú hirdetésekben. Napi bontású idővonal a Meta, Google, TikTok és Amazon változásaival.</p>
+  <p>Mi a trendi a reklámban, a videóban, a weboldalakban és a designban, és mi működik, mi nem, mi pozitív, mi negatív. Napi idővonal a platformok, az AI-modellek, a promptok és az ügynökségek változásairól.</p>
+  <button class="ver" id="ver" aria-label="Mi új ebben a verzióban">v<span id="verNo"></span> · Mi új <i class="vdot" id="vdot"></i></button>
 </div></header>
 
 <div class="wrap">
   <div class="strip" id="strip"></div>
+
+  <section id="goodSec">
+    <div class="sh"><h2>Mi számít most jónak, és mi támasztja alá</h2><span>Mérce, bizonyítékkal. Minden szabálynál látszik, mennyire erős az alátámasztás.</span></div>
+    <div class="frow" id="gtabs"></div>
+    <div id="gbody"></div>
+  </section>
+
+  <section id="modSec">
+    <div class="sh"><h2>Melyik AI-modell a jobb, melyik az új</h2><span>Rangsor-pillanatképek, a dátumukkal. Élesben mindig a követett ranglistát nézd.</span></div>
+    <div class="grid" id="mods"></div>
+  </section>
 
   <section id="todaySec"></section>
 
@@ -159,6 +194,8 @@ dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd)
       <input class="search" type="search" id="q" placeholder="Keresés a trendek között...">
       <button class="add" id="add">+ Új bejegyzés</button>
     </div>
+    <div class="frow" id="sf"></div>
+    <div class="frow" id="tf"></div>
     <div class="frow" id="pf"></div>
     <div class="frow" id="vf"></div>
   </div>
@@ -181,11 +218,22 @@ dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd)
   <p class="note">A bejegyzések webes kutatásból valók, a forrás mindegyiknél látszik. A teljesítményszámok többsége gyártói vagy ügynökségi állítás, ezért élesben saját teszttel ellenőrizd. A "Hatás" az én becslésem a hirdetőre gyakorolt hatásról (1-5), nem mért adat. Hónapra pontos dátum azt jelzi, hogy a napot a forrás nem adta meg. A saját bejegyzéseid csak ebben a böngészőben tárolódnak.</p>
 </div>
 
+<dialog id="clDlg">
+  <form method="dialog">
+    <h3 style="margin-top:0">Mi új</h3>
+    <div id="clBody"></div>
+    <div style="text-align:right;margin-top:12px"><button class="btn pri">Rendben</button></div>
+  </form>
+</dialog>
+
 <dialog id="dlg">
   <form method="dialog" id="form">
     <h3 style="margin-top:0">Új bejegyzés</h3>
     <label>Cím</label><input name="title" required>
     <label>Platform</label><select name="plat"></select>
+    <label>Téma</label><select name="topic"></select>
+    <label>Hangulat</label>
+    <select name="sent"><option value="">Automatikus (a verdiktből)</option><option value="pos">Pozitív</option><option value="neg">Negatív</option><option value="neu">Vegyes</option></select>
     <label>Típus</label>
     <select name="kind"><option value="event">Napi hír / változás</option><option value="insight">Állandó tanulság</option></select>
     <label>Dátum (napi hírnél)</label><input name="date" type="date">
@@ -212,8 +260,15 @@ const PLATS={
   google:{n:"Google",c:"#f29900",l:"G"},
   tiktok:{n:"TikTok",c:"#e11d74",l:"T"},
   amazon:{n:"Amazon",c:"#ef7b00",l:"A"},
+  openai:{n:"OpenAI",c:"#10a37f",l:"O"},
+  anthropic:{n:"Anthropic",c:"#d97757",l:"C"},
+  bytedance:{n:"ByteDance",c:"#0ea5e9",l:"B"},
+  ugynokseg:{n:"Ügynökségek",c:"#7c3aed",l:"Ü"},
   ltalaban:{n:"Általános",c:"#6b7280",l:"•"}
 };
+const TOPICS={platform:"Platformok és kreatív",reklam:"Reklámtrendek és formátumok",web:"Weboldalak és landing",design:"Design és arculat",grafika:"AI a tervezőgrafikában",modell:"Modellek és motorok",prompt:"Promptok",ugynokseg:"Ügynökségek",it:"AI és IT világ"};
+const SENT={pos:["Pozitív","▲","ok"],neg:["Negatív","▼","hype"],neu:["Vegyes","●","mix"]};
+const sentOf=x=>x.sent||{ok:"pos",mix:"neu",hype:"neg"}[x.verdict]||"neu";
 const DATA=[
  /* --- 2026. október 6., Meta (Advertising Week New York) --- */
  {id:"e1",kind:"event",date:"2026-10-06",plat:"meta",verdict:"ok",impact:5,mom:"up",
@@ -316,9 +371,247 @@ const DATA=[
   url:"https://www.emarketer.com/content/amazon-ai-creative-studio-launches-audio-ads"},
  {id:"i9",kind:"insight",plat:"ltalaban",verdict:"hype",impact:2,mom:"down",
   title:"Sora hirdetésekhez: egy teszt szerint használhatatlan kimenet",
-  sum:"Egy Amazon-eladói teszt szerint a Sora kimenetei hibásak (torzulások, nem valósághű mozgás), és hiányzik belőlük az eladásorientáltság. Ez egyetlen, nem reprezentatív beszámoló.",
+  sum:"Egy Amazon-eladói teszt szerint a Sora kimenetei hibásak (torzulások, nem valósághű mozgás), és hiányzik belőlük az eladásorientáltság. Ez egyetlen, nem reprezentatív beszámoló. Ráadásul egy forrás szerint az OpenAI 2026 márciusában bejelentette a Sora leállítását (lásd a modellek között).",
   act:"Termékhű videóhoz inkább képből induló generálást használj.",
   url:"https://adlabs.app/can-sora-ai-create-sponsored-brands-video-creatives-for-amazon-ppc/"},
+
+ /* --- Reklámtrendek és formátumok --- */
+ {id:"r1",kind:"insight",topic:"reklam",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
+  title:"Függőleges, kreátor-stílusú videó az alapformátum",
+  sum:"A 2026-os összefoglalók egyetlen irányba mutatnak: a függőleges videó az alap (egy forrás szerint a videófogyasztás 75%-a mobilon történik), és a natívnak ható, kreátor-stílusú klipek rendre erősebbek a hagyományos reklámformátumoknál. Az első másodpercben kell a hook, a hang nélkül is érthetőnek kell lennie, és középre komponálj. A legtöbb forrás ügynökség vagy eszközgyártó, a számok irányt mutatnak.",
+  act:"Minden hirdetés induljon függőleges vágással, hook az első 1–2 másodpercben, felirattal.",
+  url:"https://tigerpistol.com/vertical-video-marketing-2026/"},
+ {id:"r2",kind:"insight",topic:"reklam",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"Őszinte, natív klip a túlcsiszolt reklám helyett",
+  sum:"A túlságosan márkázott, eladásközpontú hirdetést a közönség már felismeri, és kikapcsol. Működik: alapító vagy valódi ember a kamera előtt, felirat, éles hook, videónként egy ötlet. A széles körű általánosítás viszont túlzás: szabályozott kategóriáknál (pl. egészségügy) kontrolláltabb kreatív kell.",
+  act:"Tesztelj egy 15–20 mp-es, kézből forgatott 'szakértő beszél' klipet a kész, csiszolt hirdetésed mellett.",
+  url:"https://strikesocial.com/blog/social-media-marketing-trends-2026/"},
+ {id:"r3",kind:"event",topic:"reklam",date:"2026-06",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"Cannes Lions 2026: négy téma, és a kreátor-gazdaság a legnagyobb",
+  sum:"A fesztivál a munkákat és az előadásokat négy témába sűrítette: ember és gép szakadéka, kreátorok mint márkaépítők, a súrlódás visszatérése, kiút a hatékonysági csapdából. Scott Galloway szerint a kreátor-gazdaság volt a legnagyobb trend (kb. 500 kreátor a helyszínen, tavaly 400). A pontos napot nem adták meg, a teljes írás tagoknak szól.",
+  act:"Fontold meg kreátorokkal való együttműködést: ők a márkaépítés új csatornája.",
+  url:"https://marketingsociety.com/think-piece/insight-coming-out-cannes-2026"},
+ {id:"r4",kind:"event",topic:"reklam",date:"2026-06",plat:"ltalaban",verdict:"ok",impact:3,mom:"up",
+  title:"Cannes: a részvétel lett az ötlet, a humor visszatért",
+  sum:"Egy zsűritag szerint a Grand Prix-t nyerő KitKat Heist azért működött, mert a közönség a megvalósítás részévé vált. Kedvenc volt a Columbia Sportswear 'Expedition Impossible' kampánya, ami szinte azonnal megnevettette. A munkák az időzítésre, a viselkedésre, a kulturális feszültségre és a hitelességre épültek.",
+  act:"Gondolkodj abban, mit tehet a néző a hirdetéssel, ne csak nézze.",
+  url:"https://canada.mslgroup.com/pr-lessons-from-cannes-lions-2026-winners/"},
+ {id:"r5",kind:"insight",topic:"reklam",plat:"ltalaban",verdict:"mix",impact:2,mom:"up",
+  title:"Mikrodráma-formátum: téma, de kevés adat",
+  sum:"Az Ad Age Cannes-összefoglalója a mikrodrámákat új hirdetési formátumként említi, de a részleteket nem láttam. Egyelőre figyelendő jelzés, nem bizonyított módszer.",
+  act:"Figyeld, ne építs rá.",
+  url:"https://podcastaddict.com/ad-age-insider/episode/227013877"},
+
+ /* --- Negatív oldal --- */
+ {id:"n1",kind:"event",topic:"reklam",date:"2026-08-06",plat:"ltalaban",verdict:"hype",sent:"neg",impact:5,mom:"up",
+  title:"Az AI-szemét (slop) rontja a márkabizalmat, a minőség a választóvonal",
+  sum:"A DoubleVerify EMEA-kutatása szerint a fogyasztók 42%-a negatívan érez egy márka iránt, ha a hirdetését igénytelen, spamszerű AI-tartalom mellett látja, és csak 24% pozitívan. Ha az AI-hirdetés profinak látszik, csak 29% reagál negatívan (UK). Nem az AI a baj, hanem az igénytelen kivitel.",
+  act:"Ne tegyél ki gyenge AI-képet: inkább kevesebb, de kézzel javított kreatív.",
+  url:"https://www.advanced-television.com/2026/08/06/study-ai-slop-poses-growing-risk-to-brand-trust/"},
+ {id:"n2",kind:"insight",topic:"reklam",plat:"ltalaban",verdict:"hype",sent:"neg",impact:4,mom:"up",
+  title:"A fogyasztók felismerik az AI-hirdetést, és félnek az 'AI-szemét tengertől'",
+  sum:"A Canva 2026-os felmérése (a MarTech idézi) szerint a fogyasztók 70%-a szerint általában felismeri az AI-hirdetést, 69% pedig aggódik, hogy a reklám 'AI-generált szeméttengerré' válik. Az IAB 2026-os kutatása szerint a Z generáció negatívabb (39% vs 20% a Millennialoknál).",
+  act:"Ha a célközönség fiatal, különösen fontos az emberi hang és a valódi arc.",
+  url:"https://martech.org/consumers-want-ai-ads-with-a-human-touch/"},
+ {id:"n3",kind:"event",topic:"reklam",date:"2026-02",plat:"ltalaban",verdict:"hype",sent:"neg",impact:3,mom:"flat",
+  title:"Super Bowl 2026: sok AI-hirdetés lehangoló volt, az anti-AI hirdetés divat",
+  sum:"Egy kritika szerint az AI-s reklámok áradata sok nézőt zavarba ejtett. Másodlagos forrás szerint az Aerie, az Equinox és az Almond Breeze is nyíltan az AI-szemét ellen kampányolt. Ellenőrizd az eredeti forrást.",
+  act:"Az 'emberi kéz' önmagában kampányüzenet lehet.",
+  url:"https://www.hellowarrant.com/blog/super-bowl-2026-ai-ads-backlash"},
+ {id:"n4",kind:"insight",topic:"reklam",plat:"ltalaban",verdict:"hype",sent:"neg",impact:3,mom:"up",
+  title:"Gartner-idézet: 32% hagyta abba a vásárlást AI-gyanú miatt (nem ellenőrzött)",
+  sum:"Egy vállalati blog a Gartnerre hivatkozva azt írja, hogy 2026-ban a fogyasztók 32%-a hagyott fel egy márka vásárlásával, mert AI-tartalomra gyanakodott (egy évvel korábban 11%). Az eredeti forrást nem ellenőriztem, ezért óvatosan kezeld.",
+  act:"Ne idézd ezt a számot az eredeti felmérés megnézése nélkül.",
+  url:"https://www.rewarx.com/blogs/trust-slop-backlash-ecommerce-2026"},
+ {id:"n5",kind:"insight",topic:"reklam",plat:"ltalaban",verdict:"ok",sent:"pos",impact:3,mom:"up",
+  title:"Pozitív ellenpélda: a Dove vállalta, hogy nem helyettesít embert AI-val",
+  sum:"A Dove 2025-ben kötelezettséget vállalt, hogy a reklámjaiban nem cseréli le az embereket AI-ra. Bizalomépítő márkaállásfoglalás egy olyan időszakban, amikor az AI-bizalom gyenge.",
+  act:"Fontold meg, mit vállalnál a saját márkádnál az AI használatáról.",
+  url:"https://www.girlswithimpact.org/blog/ai-marketing-backlash"},
+
+ /* --- Weboldalak és landing --- */
+ {id:"w1",kind:"insight",topic:"web",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
+  title:"Konverziós landing: egy cél, egy CTA, mobil-első, gyors",
+  sum:"2026-ban a letisztult, egycélú oldal a bevált megoldás: sok fehér tér, kevés szín, egyetlen CTA, mobil-első, gyors betöltés (a Core Web Vitals a szerves és a fizetett minőségi pontot is befolyásolja). Gyártói számok: 3 mp alatti betöltés +32%, rendszeres A/B-teszt kb. +30% konverzió. Ezeket ne vedd tényként.",
+  act:"Minden hirdetéshez külön, egy ajánlatos oldal; mérd a sebességet, és tesztelj A/B-ben.",
+  url:"https://www.moburst.com/blog/landing-page-design-trends-2026/"},
+ {id:"w2",kind:"insight",topic:"web",plat:"ltalaban",verdict:"mix",impact:3,mom:"flat",
+  title:"Scrollytelling: márkatörténetre jó, fizetett landingen tesztelni kell",
+  sum:"A görgetésre kibomló történetmesélés (scroll-reveal, rögzített szekciók, görgetéshez kötött animáció) bemutatóoldalaknak, portfólióknak és termékindításoknak való. Konverziós célú, fizetett forgalmú oldalon a sebességet és az elrendezés-stabilitást ronthatja. Ez az én következtetésem a forrásokból.",
+  act:"Egy rögzített szekció vagy hero-reveal elég, és mindig egy egyszerű kontrolloldal ellen tesztelj.",
+  url:"https://reallygooddesigns.com/scrollytelling-website-examples/"},
+ {id:"w3",kind:"insight",topic:"web",plat:"ltalaban",verdict:"ok",impact:3,mom:"up",
+  title:"Bento-rács és sötét mód: még mindig erős",
+  sum:"Egy 2026 közepi visszatekintés szerint a bento-rács és a sötét mód nyertes maradt. Az Apple által népszerűsített elrendezés a SaaS-oldalaktól a szerkesztőségi oldalakig mindenhol megjelenik. Az ellenmozgalom az anti-grid brutalizmus és a kézzel rajzolt, szándékosan tökéletlen stílus.",
+  act:"Kínálj sötét módot, és használj bentót az ajánlatok és funkciók bemutatására.",
+  url:"https://studiomeyer.io/en/blog/webdesign-trends-2026-reality-check"},
+ {id:"w4",kind:"insight",topic:"web",plat:"ltalaban",verdict:"hype",impact:3,mom:"down",
+  title:"Túlígért trendek: kinetikus tipó, erős glassmorphism, 3D/WebGL, AI-személyre szabás",
+  sum:"A visszatekintés szerint a kinetikus tipográfia inkább csillogás volt, mint érték (akadálymentesség, teljesítmény, elrendezés-ugrálás), ezért csak a hero-ban javasolt. A túlzott glassmorphism 15–30%-os FPS-esést okozott valódi eszközökön, a 3D/WebGL és az AI-személyre szabás nem hozta az ígéretet (az utóbbi GDPR-ba ütközött).",
+  act:"Csak mértékkel: egy látványos elem az oldalon, ne tíz.",
+  url:"https://studiomeyer.io/en/blog/webdesign-trends-2026-reality-check"},
+ {id:"w5",kind:"insight",topic:"web",plat:"ltalaban",verdict:"hype",impact:4,mom:"up",
+  title:"A 'vibe-coded' oldalak egyformasága: a webes AI-szemét",
+  sum:"A kritikusok szerint az AI statisztikai átlagot gyárt: kék-lila színátmenet, ugyanaz az ikonkészlet, íztelen hero. Az eredmény csiszoltnak látszik, de nem ismeri az ügyfelet, a piacot vagy az értékesítési folyamatot. Vélemény-cikkek, nem mért kutatás.",
+  act:"Add meg a saját arculatodat, képeidet és szövegedet: az AI csak a kivitelezésben segítsen.",
+  url:"https://webdesignerdepot.com/the-vibe-coding-crisis-is-web-design-becoming-a-commodity/"},
+ {id:"w6",kind:"insight",topic:"web",plat:"ltalaban",verdict:"mix",sent:"pos",impact:3,mom:"up",
+  title:"Új irány: AI-olvashatósági réteg (llms.txt, agents.json, schema)",
+  sum:"Az AI-ügynökök számára készült strukturált fájlok és jelölések (llms.txt, agents.json, schema markup) új trendként jelennek meg, hogy az oldalad kereshető legyen az AI-asszisztensekben is. Új, kevés bizonyított eredménnyel.",
+  act:"Add hozzá a schema markupot, és figyeld, kinek van tényleges hatása.",
+  url:"https://studiomeyer.io/en/blog/webdesign-trends-2026-reality-check"},
+
+ /* --- Design és arculat --- */
+ {id:"d1",kind:"insight",topic:"design",plat:"ltalaban",verdict:"ok",impact:3,mom:"up",
+  title:"Tipográfia: visszatérő vintage serif, és egy merész display betű",
+  sum:"A talpas betűk a hagyományt és hitelességet jelzik, ezért luxus- és hagyományos márkáknál erősödnek. Egy tipp: nem kell mindent újratervezni, elég egy bátor display betű. Ezek előrejelzések és tervezői vélemények.",
+  act:"Tesztelj egy serif főcímet a meglévő arculat mellett.",
+  url:"https://www.blendnow.com/blog/design-trends-2026-you-need-to-know"},
+ {id:"d2",kind:"insight",topic:"design",plat:"ltalaban",verdict:"ok",impact:3,mom:"up",
+  title:"Színek: meleg, földes paletták, és hangulat-alapú színrendszer",
+  sum:"Melegbarnák, drapp, lágy sárga, füstös zöld, mély szilva és borvörös, valamint a fix hex-kód helyett rugalmas színrendszer ('hangulat'). Előrejelzés, nem mért hatás.",
+  act:"Definiálj főszínt és 3–4 kísérő árnyalatot, ne csak egyetlen kódot.",
+  url:"https://weandthecolor.com/?p=205925"},
+ {id:"d3",kind:"insight",topic:"design",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"Mozgásra kész arculat: a statikus logó helyett rugalmas rendszer",
+  sum:"A logók egyre inkább mozgásra kész, rugalmas rendszerek, ezért érdemes próbálni, hogyan néznek ki mozgásban. A márkák valós időben fejlődő tervezési rendszerekbe és egyre személyesebb vizuálokba fektetnek.",
+  act:"Ellenőrizd, hogy a LifeCell és dROOT logó jól mozog és kicsiben is olvasható.",
+  url:"https://www.blendnow.com/blog/design-trends-2026-you-need-to-know"},
+ {id:"d4",kind:"insight",topic:"design",plat:"ltalaban",verdict:"mix",impact:3,mom:"up",
+  title:"AI-s tervezőeszközök: Canva Magic Studio, Adobe Firefly, Figma AI",
+  sum:"Az összefoglalók szerint ezek az eszközök a Photoshop-os, órákig tartó munkát másodpercekre rövidítik. Friss termékbejelentést nem találtam, és az egyik forrás 2025 szeptemberi.",
+  act:"Használd a unalmas feladatokra (méretezés, háttér), a koncepciót tartsd magadnál.",
+  url:"https://learn.g2.com/graphic-design-trends"},
+
+ /* --- AI a tervezőgrafikában --- */
+ {id:"g1",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"A tervezők döntő többsége már használ AI-t, de a százalékok forrásonként eltérnek",
+  sum:"Egy 400+ amerikai grafikust kérdező felmérés szerint 98% állítja, hogy a napi munkafolyamata megváltozott, 91% pozitív megtérülést lát, és 93% képzésen is részt vett. Használat: 67% kép- és videógenerátort, 51% szöveget, 45% AI-s tervezőszoftvert használ. Más források 75% (AIGA, másodkézből) és 91% (heti használat) között mozognak, az utóbbi módszertanát nem ellenőriztem.",
+  act:"Ne a százalékot nézd: a lényeg, hogy az AI a mindennapi eszköztár része lett.",
+  url:"https://photofocus.com/news/survey-says-designers-embrace-ai-with-caution-resulting-in-positive-roi/"},
+ {id:"g2",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"ok",impact:4,mom:"up",
+  title:"Eszközök: Firefly a jogbiztos, Midjourney a látványos, Figma AI az együttműködés",
+  sum:"Egy 2026-os eszköz-összehasonlító szerint az Adobe Firefly erőssége a kereskedelmi biztonság (licencelt tanítóadat, IP-kártalanítás, Creative Cloud-integráció), a Midjourney a művészi minőség, a Figma AI a közös munka. Emellett a Canva Magic Studio is gyakran szerepel. Az összehasonlítás gyártóhoz köthető, ezért az állításokat vedd fenntartással.",
+  act:"Üzleti arculathoz a jogi garanciát adó eszközt válaszd, a hangulatképekhez bármelyiket.",
+  url:"https://dreamina.capcut.com/ai-image/ai-design-tools-for-graphic-designers-2026-workflow-picks"},
+ {id:"g3",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"mix",sent:"neg",impact:5,mom:"up",
+  title:"Jog: az AI-logó védjegyezhető, de szerzői jogi védelem csak az emberi résznek jár",
+  sum:"Az amerikai szabályok szerint a kizárólag AI-val készült logó védjegyként használható és regisztrálható, ha megkülönböztető és nem téveszthető össze mással. A szerzői jogot viszont a prompt önmagában nem alapozza meg, csak az ember által megalkotott elemek védettek. A generátor felhasználási feltételei is számítanak. Ez az USA helyzete, az EU, Románia és Magyarország szabályait nem néztem meg. A fő forrás 2025 júniusi, hivatalos 2026-os változást nem találtam.",
+  act:"Ellenőrizd a hasonló védjegyeket indulás előtt, őrizd meg az emberi szerkesztés bizonyítékát, és nagy tétnél kérdezz ügyvédet.",
+  url:"https://news.bloomberglaw.com/us-law-week/ai-generated-logos-require-careful-steps-to-protect-ip-rights"},
+ {id:"g4",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"mix",sent:"neg",impact:4,mom:"up",
+  title:"Munkaerőpiac: a gyártás szűkül, az irányítás nő",
+  sum:"A WEF 2025-ös jelentése a grafikust a 2030-ig leggyorsabban fogyó szakmák közé sorolja (11. hely), míg 2023-ban még mérsékelten növekvőnek vette. A BLS 2%-os növekedést vár 2024–2034-re. Egy Clutch-felmérés (nem ellenőrzött) szerint csak 18% lát kisebb tervezői igényt, 25% szerint nőtt. A váltás: a kivitelezés kevésbé, a kreatív irányítás egyre inkább kell.",
+  act:"Erősítsd az ötletet, a márkaismeretet és a döntést, ne a kézi gyártást.",
+  url:"https://www.hireinsouth.com/post/is-ai-replacing-graphic-designers"},
+ {id:"g5",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"hype",sent:"neg",impact:3,mom:"flat",
+  title:"A tervezők a legszkeptikusabbak, és az új eszközök plusz terhet is adnak",
+  sum:"Egy brit felmérés (Exeter DIGIT Lab) szerint a tervezők 81%-a szerint az AI tompítja a kreativitást, ez magasabb, mint az írók 63%-a. Dátuma nem egyértelmű. Egy 400 szakemberes felmérés (CHILI, gyártói) szerint 49% a kézi gyártás elavulását várja 5 éven belül, 48% pedig azt mondja, az új eszközök több kötelezettséget adtak.",
+  act:"Ha tervezőkkel dolgozol, kérdezd meg, mit szeretnének AI-ra bízni és mit nem.",
+  url:"https://feedbagel.com/post/uk-designers-most-skeptical-of-ais-impact-on-creativity-survey-finds"},
+ {id:"g6",kind:"event",topic:"grafika",date:"2026-07-09",plat:"ltalaban",verdict:"mix",impact:3,mom:"flat",
+  title:"Ügyfelek AI-vázlatot hoznak a tervezőhöz, az olcsó AI-logók gyengébbek",
+  sum:"Helyi beszámolók szerint az ügyfelek gyakran kész AI-flyert küldenek, és azt kérik, hogy a tervező 'csinálja meg valódira'. A közösségi oldalakon olcsó AI-hirdetések és logók terjednek, a helyi tervezők szerint gyengébb minőségben. Anekdotikus, helyi cikkek.",
+  act:"Az 'AI-vázlat → ember kidolgozza' munkamenet valós igény, érdemes árazni.",
+  url:"https://www.kxii.com/2026/07/09/texomans-weigh-ai-design-tools-against-human-touch/"},
+ {id:"g7",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"hype",sent:"neg",impact:3,mom:"flat",
+  title:"Backlash: a Pentagram Midjourney-s kormányzati weboldala heves vitát váltott ki",
+  sum:"A Pentagram a Midjourney-t használta a Performance.gov oldalhoz, és a bírálók szerint ezzel művészeket szorít ki, és olyan eszközt támogat, amit az alkotók munkáin tanítottak. Egy példa arra, hogy egy ismert stúdiónak is ára van az AI nyílt használatának.",
+  act:"Ha AI-t használsz, légy átlátható, és döntsd el, mit mondasz erről a közönségnek.",
+  url:"https://octet.design/journal/pentagrams-controversial-new-website"},
+ {id:"g8",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"mix",impact:2,mom:"flat",
+  title:"Kutatási irány: a tervező és az AI közötti alku (hatékonyság, kontroll, szakmai identitás)",
+  sum:"Egy 2026 júniusában bemutatott tanulmány azt vizsgálja, hogyan egyeztetik a tervezők a hatékonyságot, a kreatív kontrollt és a szakmai identitást az AI-s eszközökkel. Egy olasz interjús kutatás (14 tervező, 2025) szerint a gyakorlati használat és a bizonytalanság egyszerre jelen van.",
+  act:"Háttér, nem teendő.",
+  url:"https://pcah.iafor.org/presentation/submission106475/"},
+ {id:"g9",kind:"insight",topic:"grafika",plat:"ltalaban",verdict:"ok",sent:"pos",impact:5,mom:"up",
+  title:"Gyakorlati munkamenet (saját következtetés): AI-vázlat, emberi döntés és kidolgozás",
+  sum:"A forrásokból ez rajzolódik ki: az AI a tervezést gyorsítja (hangulatkép, változatok, háttér, méretezés), de a koncepciót, a végső választást és a kidolgozást az embernek kell végeznie. A logót és a szöveget kézzel, a termékképeket az eredeti fotóból érdemes építeni, a munkafolyamat lépéseit pedig dokumentálni a jogi védelem miatt. Ez az én összegzésem, nem külső kutatás.",
+  act:"1) Vázlat AI-val, 2) válaszd ki kézzel, 3) dolgozd át és add hozzá a márka elemeit, 4) mentsd a lépéseket.",
+  url:""},
+
+ /* --- Modellek és motorok --- */
+ {id:"m1",kind:"event",topic:"modell",date:"2026-09",plat:"anthropic",verdict:"mix",impact:4,mom:"up",
+  title:"Új nyelvi modellek: a források ellentmondanak a nevekben és dátumokban",
+  sum:"Egy forrás szerint az Anthropic szeptember 22-én kiadta a Claude Opus 5.5-öt, és az AWS a Bedrockon elérhetővé tett OpenAI-modelleket (GPT-6 néven). Egy másik idővonal szerint a Claude Opus 5 július 24-én, a GPT-5.6 változatai július 9-én, a Gemini 3.6 Flash július 21-én jelent meg. Ellenőrizd a gyártók hivatalos blogján.",
+  act:"Modellválasztás előtt mindig a gyártó saját közleményét nézd, ne az összesítőt.",
+  url:"https://llmgateway.io/timeline/2026"},
+ {id:"m2",kind:"event",topic:"modell",date:"2026-08",plat:"bytedance",verdict:"ok",impact:4,mom:"up",
+  title:"ByteDance Seedance 2.5: 30 másodperces videó egyetlen promptból",
+  sum:"Egy modellkatalógus szerint a Seedance 2.5 2026 augusztusában jelent meg, egy másik jelentés szerint 'a héten' indulhat. A pontos nap nem ismert, a két forrás nem egyezik. A Seedance 2.0 már része a TikTok Symphonynak.",
+  act:"Termékvideónál kérd a 'referencia → videó' módot, és hasonlítsd össze a Veo-val.",
+  url:"https://for.you.com/agents/media-ai"},
+ {id:"m3",kind:"event",topic:"modell",date:"2026-04-07",plat:"google",verdict:"ok",impact:3,mom:"up",
+  title:"Google Veo 3.1: álló videó, Ingredients to Video, 4K, és olcsóbb Fast változat",
+  sum:"A Veo 3.1 natív függőleges (Reels/Shorts) formátumot, jobb 'Ingredients to Video' promptokat és 1080p/4K felskálázást kapott. Egy forrás szerint április 7-én a Veo 3.1 Fast ára csökkent. Másodlagos források.",
+  act:"Függőleges hirdetésekhez ez a leglogikusabb választás, ha képből indulsz.",
+  url:"https://ai.icai.org/articles_details.php?id=320"},
+ {id:"m4",kind:"event",topic:"modell",date:"2026-03-24",plat:"openai",verdict:"hype",impact:4,mom:"down",
+  title:"OpenAI bejelentette a Sora leállítását (egy forrás szerint)",
+  sum:"Egy forrás szerint március 24-én az OpenAI kivezeti a Sorát: az alkalmazást, az API-t és a ChatGPT videóképességeit is, az app április 26-án zár. Egyetlen forrásból, nem erősítettem meg.",
+  act:"Ne építs folyamatot a Sorára. Ellenőrizd az OpenAI hivatalos közleményét.",
+  url:"https://llmgateway.io/timeline/2026"},
+ {id:"m5",kind:"event",topic:"modell",date:"2026-04",plat:"openai",verdict:"mix",impact:3,mom:"flat",
+  title:"OpenAI új képmodellje: 'a következő hetekben' (Bloomberg, április)",
+  sum:"A beszámoló szerint az új modell lényegesen jobb összetett képek és diagramok generálásában. Hogy megjelent-e, nem találtam megerősítést.",
+  act:"Nézd meg a ChatGPT/API modelllistát, és ha megvan, próbáld ki a szöveges (feliratos) hirdetésképeken.",
+  url:"https://news.bgov.com/artificial-intelligence/openai-to-release-new-image-model-in-coming-weeks-information"},
+ {id:"m6",kind:"event",topic:"modell",date:"2026-10",plat:"google",verdict:"mix",impact:4,mom:"up",
+  title:"Gemini 4: a posztbetanítás fázisában, év vége előtt várható",
+  sum:"Egy előzetes szerint a Google DeepMind Gemini 4 modellje a betanítás utáni szakaszban van, és 2026 vége előtt érkezhet. Konkrét októberi dátumot a Google nem közölt.",
+  act:"Egyelőre bejelentés, nincs mit tesztelni. Figyeld a Google DeepMind blogját.",
+  url:"https://www.thehansindia.com/tech/upcoming-ai-updates-in-october-2026-major-developments-to-watch-1127036"},
+ {id:"m7",kind:"insight",topic:"modell",plat:"ltalaban",verdict:"mix",impact:3,mom:"flat",
+  title:"Képmodellek egy helyen: Nano Banana, Grok Imagine Image 2.0",
+  sum:"A Google Nano Banana képmodellje a hirdetési képek egyik leggyakrabban emlegetett motorja, az xAI Grok Imagine Image 2.0-t is jelzik egy katalógusban, dátum nélkül. A Kling és Midjourney legfrissebb kiadásairól nem találtam adatot.",
+  act:"Egyetlen eszközre ne építs: ugyanazt a promptot futtasd 2–3 motoron, és a nyertest tartsd meg.",
+  url:"https://llmgateway.io/timeline/2026"},
+
+ /* --- Promptok --- */
+ {id:"p1",kind:"insight",topic:"prompt",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
+  title:"Strukturált képprompt: alany, stílus, fény, színpaletta, kompozíció",
+  sum:"A Luma 2026-os útmutatója ötrészes felosztást ajánl. A Magicshot hatrészes keretében az alany a legfontosabb, mert a homályos alany a leggyakoribb hiba. Az AdCreative a hirdetésnél a célt és a közönséget is beveszi.",
+  act:"Készíts sablont: alany · stílus · fény · színek · kompozíció · közönség · cél. Minden hirdetéshez töltsd ki.",
+  url:"https://lumalabs.ai/news/ai-image-prompting-guide"},
+ {id:"p2",kind:"insight",topic:"prompt",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
+  title:"Termékhűség: referenciakép, és előre rögzítsd, mit változtathat az AI",
+  sum:"Eldöntendő előre, mit módosíthat a generátor, a termékadatokat pedig rögzíteni kell, és minden változatot össze kell vetni az eredeti fotóval (példa: a bögre színe és fedele képkockánként változik). A referenciaképek szerepét is érdemes megnevezni (pozíció egyikből, fény másikból).",
+  act:"Mindig add meg a hivatalos termékfotót, és ellenőrizd a csomagolás feliratát minden kimeneten.",
+  url:"https://ecommercefastlane.com/how-to-create-consistent-ai-ecommerce-ad-images/"},
+ {id:"p3",kind:"insight",topic:"prompt",plat:"ltalaban",verdict:"mix",impact:3,mom:"flat",
+  title:"JSON/márkaadat promptban: ígéretes, de nincs független teszt",
+  sum:"Egy gyakorlati példa (Demand Curve) referenciahirdetést, termékképeket és márka-JSON fájlt adott be, ez sokat javított, de maradtak elírt szövegek, pontatlan betűtípusok és térközök. Független összehasonlítás JSON és sima szöveg között nem létezik.",
+  act:"A feliratot ne az AI-val generáltasd: tedd rá utólag a képre.",
+  url:"https://gp.demandcurve.com/newsletters/growth-newsletter-254"},
+
+ /* --- Ügynökségek --- */
+ {id:"u1",kind:"event",topic:"ugynokseg",date:"2025-11-26",plat:"ugynokseg",verdict:"mix",impact:5,mom:"up",
+  title:"Omnicom lezárta az IPG felvásárlását: a legnagyobb ügynökségi csoport",
+  sum:"A fúzió 1,5 milliárd dolláros költségmegtakarítási célt hozott 30 hónapra elosztva. Egy 2026. márciusi Omnicom-jelentésben feltűnően kevés szó esett az emberekről és a leépítésekről, a hangsúly az AI-ra tolódott.",
+  act:"Az ügynökségek AI-ra állnak át: ez az árazásban és a versenytársak sebességében lesz érezhető.",
+  url:"https://www.emarketer.com/topics/category/omnicom"},
+ {id:"u2",kind:"event",topic:"ugynokseg",date:"2026-03",plat:"ugynokseg",verdict:"ok",impact:3,mom:"up",
+  title:"Publicis megvette az AdgeAI mérőcéget (valós idejű kreatívelemzés)",
+  sum:"A Publicis a mérést és a kreatív teljesítmény valós idejű elemzését vásárolta meg. Illik ahhoz, hogy a nyertes kreatív elemek visszacsatolása a legfontosabb.",
+  act:"Ugyanez kisebben is megoldható: kreatív elem → eredmény táblázat.",
+  url:"https://www.emarketer.com/topics/category/publicis"},
+ {id:"u3",kind:"event",topic:"ugynokseg",date:"2026-06",plat:"ugynokseg",verdict:"ok",impact:3,mom:"up",
+  title:"TikTok Symphony a Dentsu Zoyumi AI-platformjában",
+  sum:"A Dentsu ügyfelei közvetlenül elérik a Symphonyt, benne a kép→videó készítéssel. Felirat-eltávolítás, szinkron és digitális avatárok később jönnek.",
+  act:"Ha ügynökséggel dolgozol, kérdezd meg, melyik AI-eszközöket használják.",
+  url:"https://www.mediapost.com/publications/article/415987/"},
+ {id:"u4",kind:"insight",topic:"ugynokseg",plat:"ugynokseg",verdict:"mix",impact:4,mom:"flat",
+  title:"Ügynökségi helyzetkép 2026: alkalmazkodnak, nem tűnnek el",
+  sum:"A 2026 első félévi eredmények alapján (Japán nélkül) csak a Publicis és a Havas nőtt organikusan a nagy tőzsdei csoportok közül. A Campaign elemzői szerint az AI megnövelte az igényt az ügynökségi bevezetési segítségre. A WPP bevételcsökkenést várt, és önkiszolgáló AI-kampányeszközt (WPP Open Pro) indított kisvállalkozásoknak, a Dentsu a nemzetközi üzlet eladását mérlegelte.",
+  act:"Kisvállalkozásként is érhetsz el ügynökségi szintű AI-eszközöket.",
+  url:"https://campaignlive.com/article/the-agency-industry-not-dying-its-adapting-analysts-react-h1-holdco-results/1967841"},
+
+ /* --- AI és IT világ --- */
+ {id:"t1",kind:"event",topic:"it",date:"2026-10",plat:"ltalaban",verdict:"mix",impact:2,mom:"up",
+  title:"Apple Siri AI új nyelvekre (iOS 27.2) várható",
+  sum:"Az októberi előzetes szerint a Siri AI francia, japán, koreai, portugál és spanyol nyelven is megjelenhet. Ez az AI-asszisztens hirdetési fogyasztói felületek terjedéséről szól. Terv, nem megerősített kiadás.",
+  act:"Csak figyelni: az AI-keresés és asszisztensek új hirdetési helyeket jelenthetnek.",
+  url:"https://www.thehansindia.com/tech/upcoming-ai-updates-in-october-2026-major-developments-to-watch-1127036"},
 
  /* --- Példák: milyen hirdetést érdemes követni --- */
  {id:"x1",kind:"example",brand:"Claude (Anthropic) · Super Bowl LX",year:"2026",plat:"ltalaban",verdict:"ok",impact:5,mom:"up",
@@ -369,12 +662,22 @@ const DATA=[
 ];
 /*DATA:END*/
 
-const VL={ok:"Működik",mix:"Vegyes",hype:"Hype"};
+/* Verzió és változásnapló: minden publikálásnál emeld a VERSION értékét, és írj egy új sort a CHANGELOG elejére. */
+const VERSION="3.0";
+const CHANGELOG=[
+ {v:"3.0",d:"2026-10-12",t:["Új fő rész: 'Mi számít most jónak' reklámnál, weboldalnál és designnál, szabályonként bizonyítékkal és az alátámasztás erősségével","'Ami nem jó' lista mindhárom területen","Új rész: 'Melyik AI-modell a jobb, melyik az új' (kép, videó, nyelvi), dátumozott rangsor-pillanatképekkel"]},
+ {v:"2.3",d:"2026-10-12",t:["Új téma: AI a tervezőgrafikában (használat, eszközök, jog, munkaerőpiac, tervezői vélemények)","Logó és arculat jogi helyzete: védjegy igen, szerzői jog csak az emberi résznek","Gyakorlati munkafolyamat-javaslat"]},
+ {v:"2.2",d:"2026-10-12",t:["Új témák: Reklámtrendek és formátumok, Weboldalak és landing, Design és arculat","Hangulat-szűrő: pozitív, negatív, vegyes","Negatív oldal: AI-szemét, bizalomvesztés, Z generáció","Verziószám és 'Mi új' lista"]},
+ {v:"2.1",d:"2026-10-12",t:["Új témák: Modellek és motorok, Promptok, Ügynökségek, AI és IT világ","Téma-szűrő a platform- és verdiktszűrő mellett"]},
+ {v:"2.0",d:"2026-10-12",t:["Új dizájn, napi idővonal, 'Mai trend' kártya","Példák, amit érdemes követni","Világos és sötét téma"]},
+ {v:"1.0",d:"2026-10-12",t:["Első változat: 11 bejegyzés, szűrők, saját bejegyzés felvétele"]}
+];
+const VL={ok:"Működik",mix:"Vegyes",hype:"Hype / kockázat"};
 const MOM={up:["↗","Erősödik","up"],flat:["→","Stabil","flat"],down:["↘","Gyengül","down"]};
 const KEY="trendfigyelo_custom_v2";
 let custom=[];try{custom=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(custom))}catch(e){}};
-const st={q:"",p:"",v:""};
+const st={q:"",p:"",v:"",t:"",s:""};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const all=()=>[...custom,...DATA];
@@ -394,19 +697,19 @@ function card(x){
   const imp="●".repeat(x.impact)+"<s>"+"●".repeat(5-x.impact)+"</s>";
   const isNew=x.kind==="event"&&isDay(x.date)&&ageDays(x.date)<=7&&ageDays(x.date)>=0;
   return `<article class="card v-${x.verdict}">
-   <div class="ctop">${plat(x.plat)}<span class="badge">${x.kind==="example"?{ok:"Érdemes követni",mix:"Tanulj belőle",hype:"Óvatosan"}[x.verdict]:VL[x.verdict]}</span></div>
+   <div class="ctop"><span>${plat(x.plat)}${x.topic&&x.topic!=="platform"?`<span class="plat" style="margin-left:8px;opacity:.85">· ${TOPICS[x.topic]}</span>`:""}</span><span class="badge">${x.kind==="example"?{ok:"Érdemes követni",mix:"Tanulj belőle",hype:"Óvatosan"}[x.verdict]:VL[x.verdict]}</span></div>
    ${x._brand?`<div class="brand">${esc(x._brand)} · ${esc(x._year)}</div>`:""}
    <h3>${esc(x.title)}${isNew?'<span class="new">ÚJ</span>':""}</h3>
    <p>${esc(x.sum)}</p>
    ${x.act?`<div class="todo">${esc(x.act)}</div>`:""}
-   <div class="meters"><span>Hatás <span class="imp">${imp}</span></span><span class="${ac}">${ar} ${al}</span>
+   <div class="meters"><span style="color:var(--${SENT[sentOf(x)][2]});font-weight:600">${SENT[sentOf(x)][1]} ${SENT[sentOf(x)][0]}</span><span>Hatás <span class="imp">${imp}</span></span><span class="${ac}">${ar} ${al}</span>
    ${x.url&&/^https?:\/\//.test(x.url)?`<a class="src" href="${esc(x.url)}" target="_blank" rel="noopener">Forrás ↗</a>`:""}
    ${x.custom?`<button class="del" data-del="${x.id}">Törlés</button>`:""}</div>
   </article>`;
 }
 function filtered(list){
   const q=st.q.toLowerCase();
-  return list.filter(x=>(!st.p||x.plat===st.p)&&(!st.v||x.verdict===st.v)&&(!q||(x.title+" "+x.sum+" "+(x.act||"")).toLowerCase().includes(q)));
+  return list.filter(x=>(!st.s||sentOf(x)===st.s)&&(!st.t||(x.topic||"platform")===st.t)&&(!st.p||x.plat===st.p)&&(!st.v||x.verdict===st.v)&&(!q||(x.title+" "+x.sum+" "+(x.act||"")).toLowerCase().includes(q)));
 }
 function renderStrip(){
   const a=all(),n=k=>a.filter(x=>x.verdict===k).length,t=a.length||1;
@@ -417,7 +720,7 @@ function renderStrip(){
      <div class="vbar"><i style="width:${n("ok")/t*100}%;background:var(--ok)"></i><i style="width:${n("mix")/t*100}%;background:var(--mix)"></i><i style="width:${n("hype")/t*100}%;background:var(--hype)"></i></div></div>
    <div class="tile"><small>Működik</small><b class="c-ok">${n("ok")}</b><div class="sub">bevált, érdemes használni</div></div>
    <div class="tile"><small>Vegyes</small><b class="c-mix">${n("mix")}</b><div class="sub">függ a helyzettől</div></div>
-   <div class="tile"><small>Hype</small><b class="c-hype">${n("hype")}</b><div class="sub">nem bizonyított</div></div>`;
+   <div class="tile"><small>Hype / kockázat</small><b class="c-hype">${n("hype")}</b><div class="sub">nem bizonyított vagy káros</div></div>`;
   return last;
 }
 function renderToday(last){
@@ -435,6 +738,10 @@ function renderToday(last){
         <div><div class="t">${esc(x.title)}</div><div class="d">${esc((PLATS[x.plat]||PLATS.ltalaban).n)} · ${VL[x.verdict]}</div></div></a>`).join("")||'<div class="empty">Nincs bejegyzés.</div>'}</div></div>`;
 }
 function renderFilters(){
+  const cnt=k=>all().filter(x=>(x.topic||"platform")===k).length;
+  const sc=k=>all().filter(x=>sentOf(x)===k).length;
+  $("#sf").innerHTML=`<button class="pill ${!st.s?"on":""}" data-sn="">Minden hangulat</button>`+Object.entries(SENT).map(([k,[n,ic,c]])=>`<button class="pill ${st.s===k?"on":""}" data-sn="${k}"><span style="color:var(--${c})">${ic}</span> ${n} <small style="opacity:.7">${sc(k)}</small></button>`).join("");
+  $("#tf").innerHTML=`<button class="pill ${!st.t?"on":""}" data-tp="">Minden téma</button>`+Object.entries(TOPICS).map(([k,n])=>`<button class="pill ${st.t===k?"on":""}" data-tp="${k}">${n} <small style="opacity:.7">${cnt(k)}</small></button>`).join("");
   const keys=[...new Set(all().map(x=>x.plat))];
   $("#pf").innerHTML=`<button class="pill ${!st.p?"on":""}" data-p="">Minden platform</button>`+keys.map(k=>{const p=PLATS[k]||PLATS.ltalaban;return `<button class="pill ${st.p===k?"on":""}" data-p="${k}"><span class="dot" style="background:${p.c}"></span>${p.n}</button>`}).join("");
   $("#vf").innerHTML=`<button class="pill ${!st.v?"on":""}" data-v="">Minden verdikt</button>`+Object.keys(VL).map(k=>`<button class="pill ${st.v===k?"on":""}" data-v="${k}"><span class="dot" style="background:var(--${k})"></span>${VL[k]}</button>`).join("");
@@ -460,25 +767,120 @@ function renderIns(){
   const r=filtered(all().filter(x=>x.kind==="insight")).sort((a,b)=>({ok:0,mix:1,hype:2}[a.verdict]-{ok:0,mix:1,hype:2}[b.verdict])||b.impact-a.impact);
   $("#ins").innerHTML=r.length?r.map(card).join(""):'<div class="empty">Nincs találat.</div>';
 }
+/* ===== "Mi számít jónak": szabály + bizonyíték. ev: s=erős, m=közepes, w=gyenge/vélemény ===== */
+const EV={s:"Erős alátámasztás",m:"Közepes",w:"Gyenge / vélemény"};
+const GOOD={
+ reklam:{n:"Jó reklám",
+  rules:[
+  {r:"Az érzelem erősebb a racionális üzenetnél, ha márkát építesz",
+   why:"A Binet és Field-féle IPA-adatbázis szerint minél inkább az érzelem felé mozdult a hirdetés, annál hatékonyabb volt. Az érzelmi kampányok az összes mért márkamutatón jobbak voltak (átlagosan 1,7 versus 1,0 márkahatás). Az érzelmi hatás tovább is tart.",
+   ev:"s",note:"Díjnyertes esetekből készült adatbázis, ami torzíthat a sikeres munkák felé.",src:"Marketing Week: Binet és Field",url:"https://www.marketingweek.com/this-much-i-learned-les-binet-peter-field/"},
+  {r:"Közvetlen eladásnál (teljesítménykampány) az egyszerű, racionális ajánlat a jó",
+   why:"Ugyanez a kutatás kivételt mond: rövid távú, közvetlen válaszra épülő marketingben a racionális üzenet működött a legjobban. Tehát más a jó hirdetés a márkaépítéshez és más az azonnali eladáshoz.",
+   ev:"s",note:"Ugyanazon adatbázis, ugyanazzal a torzítási kockázattal.",src:"Marketing Week: Binet és Field",url:"https://www.marketingweek.com/this-much-i-learned-les-binet-peter-field/"},
+  {r:"A márka jelenjen meg korán, és a figyelmet az első másodpercekben kell megnyerni",
+   why:"A Kantar elemzése szerint a figyelem rövid és feed-formátumokban gyorsan csökken, ezért a márka egyértelmű megjelenítése az első másodpercekben fontos. Egy Apple Pay-hirdetés másodpercenkénti elemzésében a figyelem az első pillanatoktól esett, a márka csak a végén derült ki.",
+   ev:"m",note:"A Kantar teszteket árul, ezért a saját módszerét mutatja.",src:"Kantar: a figyelem szerepe",url:"https://www.kantar.com/Inspiration/Agile-market-research/The-role-of-attention-in-creative-effectiveness"},
+  {r:"Az érzelem márkajegyek nélkül kevés: legyen megkülönböztethető, hogy kié",
+   why:"A System1 szerint az érzelmi és megkülönböztető kreatív mérhetően jobban teljesít, és figyelmeztet, hogy egyre több hirdetés elfelejti a márkát. Az elemzők szerint az érzelem márkázás nélkül haszontalan.",
+   ev:"m",note:"A System1 és a Drum-cikk véleményes és gyártói, a márkajegyekre külön bizonyítékot nem találtam.",src:"The Drum: érzelem és márkázás",url:"https://www.thedrum.com/opinion/2025/06/24/cannes-you-tell-who-it-yet-why-emotion-useless-without-branding"},
+  {r:"Függőleges, natív hatású, emberi arcú videó, erős hookkal",
+   why:"A 2026-os összefoglalók egyetlen irányba mutatnak: a függőleges videó az alap, a túlcsiszolt, eladásközpontú hirdetést a közönség felismeri és kikapcsol, az őszinte, egy ötletes, feliratos klip jobban működik.",
+   ev:"w",note:"Ügynökségi és eszközgyártói blogok. Iránymutatás, nem bizonyíték. Szabályozott kategóriában (pl. egészség) óvatosabb kreatív kell.",src:"Tiger Pistol: függőleges videó",url:"https://tigerpistol.com/vertical-video-marketing-2026/"},
+  {r:"Ha AI-t használsz, a kivitel minősége a döntő, nem maga az AI",
+   why:"A DoubleVerify EMEA szerint a fogyasztók 42%-a negatívan érez a márka iránt, ha a hirdetését igénytelen AI-tartalom mellett látja (24% pozitívan). Ha az AI-hirdetés profi, csak 29% reagál negatívan (UK). Az Ipsos szerint viszont az emberi hirdetések üzletileg továbbra is erősebbek.",
+   ev:"m",note:"Iparági mérések, de a minta és a módszer részletét nem láttam.",src:"Advanced Television: DoubleVerify",url:"https://www.advanced-television.com/2026/08/06/study-ai-slop-poses-growing-risk-to-brand-trust/"}],
+  bad:["A márka csak a hirdetés végén derül ki","Igénytelen, 'AI-szemét' megjelenésű kép vagy videó","Túl márkázott, eladásközpontú klip, amit a néző azonnal átugrik","Hosszú bevezető hook nélkül függőleges formátumban"]},
+ web:{n:"Jó weboldal",
+  rules:[
+  {r:"Gyors betöltés: a fő tartalom 2,5 másodpercen belül jelenjen meg (LCP)",
+   why:"A Farfetch saját elemzése szerint az LCP minden további 100 ms-ánál kb. 1,3%-kal csökkent a konverzió. A Yottaa mérése szerint a konverzió 2,05%-ról 1,59%-ra esik, ha a betöltés 2 mp-ről 3 mp-re nő. A Google 11 millió mobilos hirdetési landing oldalt vizsgálva a legtöbbet túl lassúnak találta.",
+   ev:"m",note:"Egyetlen kereskedő korrelációja, nem kísérlet. A Yottaa gyártói adat. A hatás metrikánként és lépésenként eltér.",src:"web.dev: Farfetch esettanulmány",url:"https://web.dev/farfetch/"},
+  {r:"Stabil elrendezés: ne ugráljon az oldal betöltés közben (CLS)",
+   why:"A Farfetch-esettanulmány szerint a CLS 0,01-es javulása 3,1%-kal csökkentette a kilépési arányt.",
+   ev:"m",note:"Szintén egyetlen cég adata.",src:"web.dev: Farfetch esettanulmány",url:"https://web.dev/farfetch/"},
+  {r:"Gyors reagálás a kattintásra (INP)",
+   why:"A Yottaa szerint 200 ms-os INP mellett a konverzió átlagosan 3,91%, 50 ms-nál 4,44%.",
+   ev:"w",note:"Gyártói adat, kontroll nélkül.",src:"Yottaa",url:"https://www.yottaa.com/passing-core-web-vitals-is-just-the-start-how-faster-sites-win-more-conversions/"},
+  {r:"Egy cél, egy ajánlat, egy fő gomb, mobil-első elrendezés",
+   why:"A 2026-os landing-trendek letisztult, egycélú oldalt javasolnak: sok fehér tér, kevés szín, egyetlen CTA, ujjal kényelmesen használható gombok. A magyarázat a kisebb kognitív terhelés.",
+   ev:"w",note:"Ügynökségi és eszközgyártói blogok. Az elv ésszerű, de erős mérésem erre nincs.",src:"Moburst: landing page trendek",url:"https://www.moburst.com/blog/landing-page-design-trends-2026/"},
+  {r:"A saját A/B-teszted a legjobb bizonyíték",
+   why:"A forrásokban szereplő számok (+30% rendszeres tesztelésből, +202% személyre szabásból) gyártói állítások, amelyeket nem sikerült eredeti forrásig követni. Ezért a hirdetésenkénti, külön tesztelt oldal a megbízható út.",
+   ev:"w",note:"Az idézett számokat ne használd tényként.",src:"Involve.me: landing trendek",url:"https://involve.me/blog/landing-page-design-trends"}],
+  bad:["Lassú oldal (3 mp feletti betöltés)","Ugráló elrendezés betöltés közben","Túl sok animáció: a kinetikus tipó és az erős glassmorphism a visszatekintések szerint rontott a teljesítményen és az akadálymentességen","Sablonos, 'vibe-coded' egyforma oldal (kék-lila színátmenet, íztelen hero)"],
+  gap:"A Baymard (fizetés/checkout) és az NN/g (használhatóság) kutatásait a keresés nem hozta fel, ezek nincsenek benne."},
+ design:{n:"Jó design",
+  rules:[
+  {r:"A design folyamata számít, nem a díszítés",
+   why:"A McKinsey Design Index szerint a legjobb design-kvartilis cégek 32 százalékponttal nőttek gyorsabban bevételben és 56 ponttal jobb részvényesi hozamot hoztak. Az index viszont a design folyamatba építettségét mérte (felhasználói betekintés a döntésekben), nem a vizuális szépséget.",
+   ev:"m",note:"Másodkézből idézett, 2018-as adat. A korreláció nem bizonyítja az ok-okozatot.",src:"Design Council és Forrester áttekintés",url:"https://www.uxpin.com/studio/blog/design-roi-calculations/"},
+  {r:"A kutatásra és tesztelésre épülő design megtérül",
+   why:"Az IBM Design Thinkingről készült Forrester-elemzés 301%-os megtérülést mutatott három év alatt. Az érték nagy része (kb. 43%) a gyorsabb tervezésből és fejlesztésből jött, nem a megjelenésből.",
+   ev:"m",note:"Az IBM maga is népszerűsítette a tanulmányt, egy összetett modellcégen alapul.",src:"UXPin: design ROI",url:"https://www.uxpin.com/studio/blog/design-roi-calculations/"},
+  {r:"Jó kontraszt, egyértelmű hierarchia, egységes arculat",
+   why:"Ez ésszerű és szabály-alapú (akadálymentesség, olvashatóság), de a találataim nem tartalmaztak megbízható mérést arról, mennyit hoz bevételben.",
+   ev:"w",note:"A 'következetes márka +23–33% bevétel' szám forrás nélküli oldalról jön, ne használd.",src:"UXPin: design ROI",url:"https://www.uxpin.com/studio/blog/design-roi-calculations/"},
+  {r:"Egyedi, emberi kézzel kidolgozott arculat, nem sablon",
+   why:"A kritikák szerint az AI statisztikai átlagot gyárt, és az egyforma oldalak gyengítik a megkülönböztethetőséget. Az emberi kidolgozás a megkülönböztethetőség forrása. Jogilag is számít: AI-logónál a szerzői jogi védelem csak az emberi résznek jár.",
+   ev:"w",note:"Vélemény-cikkek és jogi áttekintés, nem mért kutatás.",src:"Web Designer Depot: vibe coding",url:"https://webdesignerdepot.com/the-vibe-coding-crisis-is-web-design-becoming-a-commodity/"},
+  {r:"Divatirányok (tipó, szín, mozgás), amik csak előrejelzések",
+   why:"Visszatérő talpas betű, meleg földes színek, rugalmas, mozgásra kész logó. Ezek tervezői és ügynökségi előrejelzések, nem mért hatások.",
+   ev:"w",note:"Kezeld ízlésként, ne bizonyítékként.",src:"Blendnow: design trendek 2026",url:"https://www.blendnow.com/blog/design-trends-2026-you-need-to-know"}],
+  bad:["Sablonos, bárkire hasonlító arculat","Rosszul olvasható szöveg (gyenge kontraszt)","Divat követése méréssel alá nem támasztva","Az AI-kimenet átdolgozás nélkül a márka arculataként"]}
+};
+/* ===== Modell-pillanatképek (dátummal; a ranglista gyorsan változik) ===== */
+const MODELS=[
+ {t:"Képmodellek",snap:"Arena text-to-image, 2026. augusztus",
+  rows:[["1.","GPT Image 2 Medium (OpenAI)","1381"],["2.","MAI-Image-2.6 (Microsoft), előzetes","1336"],["3.","Grok Imagine Image 2.0 (xAI)","1316"],["4–5.","Meta Muse Image, Nano Banana Pro (Google)","–"],["~5–13.","Flux modellek (Black Forest Labs)","~1150–1170"]],
+  cav:"Az OpenAI GPT Image modelljei minden pillanatképen elöl voltak. A MAI-Image-2.6 pontszáma előzetes (kb. 3500 szavazat). Midjourney nem szerepelt az eredményekben.",
+  url:"https://arena.ai/leaderboard/text-to-image"},
+ {t:"Videómodellek",snap:"Artificial Analysis, 2026. április–május",
+  rows:[["1.","Seedance 2.0 (ByteDance), kép→videó élen","1274"],["2.","SkyReels V4","1245"],["3.","Kling 3.0 (Kuaishou)","1241"],["–","HappyHorse-1.0 (Alibaba), május végén vezetett, API nélkül","–"],["–","Veo 3.1 (Google): legjobb mindenes, hanggal és 4K-val","–"]],
+  cav:"A Runway kiesett a legjobb tízből. A Sora egy forrás szerint leállt, az API vége szeptember 24. (a források eltérnek). Az adatok 4–6 hónaposak, élesben nézd meg az Artificial Analysis Video Arena-t.",
+  url:"https://artificialanalysis.ai/video/leaderboard/text-to-video"},
+ {t:"Nyelvi modellek",snap:"Artificial Analysis és BenchLM, 2026. augusztus vége–szeptember",
+  rows:[["1.","Claude Opus 5 (Anthropic), Intelligence Index","63"],["1.","Claude Fable 5.1 (Anthropic), BenchLM összpontszám","82,95"],["–","Gemini 3.8 Flash (Google): a vezető pontszám 95%-a, kb. 93%-kal olcsóbban","–"],["–","GPT-5.5/5.6 (OpenAI), Grok 4.6 (xAI) a közvetlen mezőnyben","–"]],
+  cav:"Figyelem: én is az Anthropic modellje vagyok, és a források szerint az Anthropic modelljei vezetnek, ezért ellenőrizd független ranglistákon is (arena.ai, artificialanalysis.ai). A források modellneveket és pontszámokat is ellentmondóan közölnek.",
+  url:"https://benchlm.ai/md/index.md"}
+];
+st.g="reklam";
+function renderGood(){
+  $("#gtabs").innerHTML=Object.entries(GOOD).map(([k,g])=>`<button class="pill ${st.g===k?"on":""}" data-g="${k}">${g.n}</button>`).join("");
+  const g=GOOD[st.g];
+  $("#gbody").innerHTML=g.rules.map(x=>`<div class="rule"><div class="rtop"><span class="ev ${x.ev}">${EV[x.ev]}</span></div>
+    <h4>${esc(x.r)}</h4><p class="why"><b>Miért:</b> ${esc(x.why)}</p><p style="font-size:13px;color:var(--mut)">${esc(x.note)} <a class="src" href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.src)} ↗</a></p></div>`).join("")
+   +`<div class="badbox"><h4>Ami nem jó</h4><ul>${g.bad.map(b=>`<li>${esc(b)}</li>`).join("")}</ul></div>`
+   +(g.gap?`<p class="gnote">${esc(g.gap)}</p>`:"");
+}
+function renderModels(){
+  $("#mods").innerHTML=MODELS.map(m=>`<article class="card mcard v-ok"><h3>${esc(m.t)}</h3><div class="snap">${esc(m.snap)}</div>
+   <table class="mtab"><tbody>${m.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("")}</tbody></table>
+   <div class="cav">${esc(m.cav)}</div><div class="meters"><a class="src" href="${esc(m.url)}" target="_blank" rel="noopener">Élő ranglista ↗</a></div></article>`).join("");
+}
 function renderEx(){
   const r=filtered(all().filter(x=>x.kind==="example")).sort((a,b)=>({ok:0,mix:1,hype:2}[a.verdict]-{ok:0,mix:1,hype:2}[b.verdict])||b.impact-a.impact);
   $("#ex").innerHTML=r.length?r.map(x=>card({...x,title:x.title,_brand:x.brand,_year:x.year})).join(""):'<div class="empty">Nincs találat.</div>';
 }
-function render(){const last=renderStrip();renderToday(last);renderFilters();renderTl();renderEx();renderIns()}
+function render(){const last=renderStrip();renderGood();renderModels();renderToday(last);renderFilters();renderTl();renderEx();renderIns()}
 
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
-  if(b.dataset.p!==undefined){st.p=b.dataset.p;render()}
+  if(b.dataset.g!==undefined){st.g=b.dataset.g;renderGood()}
+  else if(b.dataset.sn!==undefined){st.s=b.dataset.sn;render()}
+  else if(b.dataset.tp!==undefined){st.t=b.dataset.tp;render()}
+  else if(b.dataset.p!==undefined){st.p=b.dataset.p;render()}
   else if(b.dataset.v!==undefined){st.v=b.dataset.v;render()}
   else if(b.dataset.del){custom=custom.filter(x=>x.id!==b.dataset.del);save();render()}
 });
 $("#q").addEventListener("input",e=>{st.q=e.target.value;renderTl();renderEx();renderIns()});
 $("#add").onclick=()=>{$("input[name=date]").value=todayStr;$("#dlg").showModal()};
+$("select[name=topic]").innerHTML=Object.entries(TOPICS).map(([k,n])=>`<option value="${k}">${n}</option>`).join("");
 $("select[name=plat]").innerHTML=Object.entries(PLATS).map(([k,p])=>`<option value="${k}">${p.n}</option>`).join("");
 $("#form").addEventListener("submit",e=>{
   if(e.submitter&&e.submitter.value!=="ok")return;
   const f=new FormData(e.target),kind=f.get("kind");
-  custom.unshift({id:"c"+Date.now(),kind,date:kind==="event"?(f.get("date")||todayStr):undefined,plat:f.get("plat"),verdict:f.get("verdict"),
+  custom.unshift({id:"c"+Date.now(),kind,topic:f.get("topic"),sent:f.get("sent")||undefined,date:kind==="event"?(f.get("date")||todayStr):undefined,plat:f.get("plat"),verdict:f.get("verdict"),
     impact:Math.min(5,Math.max(1,+f.get("impact")||3)),mom:"flat",title:f.get("title"),sum:f.get("sum"),act:f.get("act"),url:f.get("url"),custom:true});
   save();e.target.reset();render();
 });
@@ -490,6 +892,10 @@ function setTheme(t){
 }
 document.querySelectorAll("#theme button").forEach(b=>b.onclick=()=>setTheme(b.dataset.t));
 (()=>{let t="auto";try{const s=localStorage.getItem("trendfigyelo_theme");if(s==="light"||s==="dark")t=s}catch(e){}setTheme(t)})();
+$("#verNo").textContent=VERSION;
+$("#clBody").innerHTML=CHANGELOG.map(c=>`<div class="cl"><b>v${esc(c.v)}</b><small>${fmtDay(c.d)}</small><ul>${c.t.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`).join("");
+try{if(localStorage.getItem("trendfigyelo_seen")!==VERSION)$("#vdot").classList.add("on")}catch(e){$("#vdot").classList.add("on")}
+$("#ver").onclick=()=>{$("#clDlg").showModal();$("#vdot").classList.remove("on");try{localStorage.setItem("trendfigyelo_seen",VERSION)}catch(e){}};
 $("#todayLbl").textContent="Ma: "+fmtDay(todayStr)+", "+dayName(todayStr);
 render();
 </script>
