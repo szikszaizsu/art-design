@@ -701,7 +701,7 @@ export default {
         });
       }
       const r = await env.ASSETS.fetch(request);
-      const h = new Headers(r.headers); h.set('Cache-Control', /\.[A-Za-z0-9]+$/.test(url.pathname) && !url.pathname.endsWith('.html') ? 'private, max-age=300' : 'no-store'); h.set('X-Robots-Tag', 'noindex, nofollow, noimageindex, noarchive');
+      const h = new Headers(r.headers); h.set('Cache-Control', 'private, no-cache'); h.set('X-Robots-Tag', 'noindex, nofollow, noimageindex, noarchive');
       return new Response(r.body, { status: r.status, statusText: r.statusText, headers: h });
     }
     if (url.pathname.startsWith('/tervezo/api/')) return handleTervezo(request, env, url);
