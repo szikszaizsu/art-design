@@ -26,3 +26,4 @@
 :root[data-theme="dark"] .portfolio-footer-grid, :root[data-theme="dark"] .footer-bottom { background: rgba(10, 10, 10, .6); }
 :root[data-theme="dark"] .lp-tag, :root[data-theme="dark"] .lp-list li::before { color: #f1f1f2; }
 :root[data-theme="dark"] .lp-card, :root[data-theme="dark"] .lp-buy { background: #141414; }
+:root:not([data-theme="dark"]) .portfolio-footer-grid, :root:not([data-theme="dark"]) .footer-bottom { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
