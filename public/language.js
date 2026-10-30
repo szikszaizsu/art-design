@@ -144,11 +144,11 @@
   };
   const translate = (text) => {
     if (translations[text]) return translations[text];
-    if (text.endsWith(' — Szikszai Zsu')) {
-      const title = text.replace(' — Szikszai Zsu', '');
-      return (title === 'Az oldal nem található' ? 'Page not found' : translations[title] || title) + ' — Szikszai Zsu';
+    if (text.endsWith(' — Pixelpin')) {
+      const title = text.replace(' — Pixelpin', '');
+      return (title === 'Az oldal nem található' ? 'Page not found' : translations[title] || title) + ' — Pixelpin';
     }
-    if (text === 'Szikszai Zsu — Vizuális alkotó · UX/UI tervező') return 'Szikszai Zsu — Visual artist · UX/UI designer';
+    if (text === 'Pixelpin — Vizuális alkotó · UX/UI tervező') return 'Pixelpin — Visual artist · UX/UI designer';
     return text;
   };
   const texts = [];
@@ -171,18 +171,18 @@
     if (text === 'munkák') return location.pathname.includes('hagyomanyos') ? 'tradiționale' : 'digitale';
     const ro = window.portfolioRomanian || {};
     if (ro[english]) return ro[english];
-    if (english.endsWith(' — Szikszai Zsu')) {
-      const base = english.replace(' — Szikszai Zsu', '');
-      return (base === 'Page not found' ? 'Pagina nu a fost găsită' : ro[base] || base) + ' — Szikszai Zsu';
+    if (english.endsWith(' — Pixelpin')) {
+      const base = english.replace(' — Pixelpin', '');
+      return (base === 'Page not found' ? 'Pagina nu a fost găsită' : ro[base] || base) + ' — Pixelpin';
     }
-    if (english.startsWith('Szikszai Zsu — ')) return 'Szikszai Zsu — ' + ro['Visual artist · UX/UI designer'];
+    if (english.startsWith('Pixelpin — ')) return 'Pixelpin — ' + ro['Visual artist · UX/UI designer'];
     return english;
   };
   let header = document.querySelector('.site-header');
   if (!header) {
     header = document.createElement('header');
     header.className = 'site-header';
-    header.innerHTML = '<a class="brand" href="/"><span class="notranslate" translate="no">SZI<span class="brand-k">K</span>SZAI ZSU</span></a>';
+    header.innerHTML = '<a class="brand" href="/"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPIN</span></a>';
     document.body.prepend(header);
   }
   const switcher = document.createElement('div');
