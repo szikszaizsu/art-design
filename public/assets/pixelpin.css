@@ -1,0 +1,21 @@
+/* Pixelpin: közös stílus (semleges fehér-szürke-fekete, a piros csak ritkán) és az összetartó pont-vonal háttér. A styles.css után töltődik be. */
+/* ===== Pixelpin: lágy kék-szürke paletta és összetartó pont-vonal háttér (2026-10-30) ===== */
+:root:not([data-theme="dark"]) { --paper: #F1F1F2; --soft: #E6E6E8; --line: rgba(107, 107, 112, .26); --muted: #6B6B70; }
+:root:not([data-theme="dark"]) body { background: #F1F1F2; }
+:root:not([data-theme="dark"]) .site-header { background: rgba(241, 241, 242, .88); }
+.page-dots { display: none !important; }
+.site-network { position: absolute; display: block; pointer-events: none; z-index: 0; }
+.site-network--hero { top: 0; left: 50%; width: 100vw; height: 100%; transform: translateX(-50%); }
+.site-network--footer { top: 0; left: 0; width: 100%; height: 100%; }
+.detail-hero, .category-hero, .hv-hero, .lp-top { position: relative; }
+.detail-hero > :not(canvas), .category-hero > :not(canvas), .lp-top > :not(canvas) { position: relative; z-index: 1; }
+:root:not([data-theme="dark"]) .portfolio-footer { background: #E6E6E8; border-top: 0; }
+/* ===== Pixelpin: neutral fehér-szürke-fekete stílus, a piros csak ritkán (2026-10-30) ===== */
+:root { --red: #c43a3a; }
+:root:not([data-theme="dark"]) { --accent: #111111; }
+.brand .brand-x, .footer-brand .brand-x { color: var(--red) !important; }
+.work-card { border-top-color: #111111 !important; }
+.work-num { color: var(--muted) !important; }
+.work-go { background: #111111 !important; color: #ffffff !important; }
+:root[data-theme="dark"] .work-card { border-top-color: #f1f1f2 !important; }
+:root[data-theme="dark"] .work-go { background: #f1f1f2 !important; color: #111111 !important; }

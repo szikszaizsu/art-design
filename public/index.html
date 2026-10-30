@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#f8f2ed">
   <title>Pixelpin — Vizuális alkotó · UX/UI tervező</title>
   <link rel="icon" type="image/png" href="assets/favicon.png?v=px-1"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=px-1">
-  <link rel="stylesheet" href="styles.css?v=px-1">
-  <script src="script.js?v=theme-1" defer></script><script src="assets/varazs.js?v=1" defer></script><script src="assets/hero-network.js?v=1" defer></script>
-<script src="/romanian.js?v=web-5" defer></script><script src="/language.js?v=web-5" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script><script src="/forest-tile.js?v=tile-3" defer></script><script src="/oldal-pontok.js?v=dots-2" defer></script><script src="/hero-intro.js?v=intro-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=px-5"><link rel="stylesheet" href="/assets/pixelpin.css?v=1">
+  <script src="script.js?v=theme-1" defer></script><script src="assets/varazs.js?v=1" defer></script>
+<script src="/romanian.js?v=web-6" defer></script><script src="/language.js?v=web-6" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script><script src="/forest-tile.js?v=tile-3" defer></script><script src="/oldal-pontok.js?v=dots-2" defer></script><script src="/hero-intro.js?v=intro-1" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pixelpin — Art &amp; Design">
   <meta property="og:locale" content="hu_HU">
@@ -32,22 +32,22 @@
 <style>
 .hv-promo{padding:0 0 8px}
 .hv-promo-link{display:flex;align-items:center;gap:16px;padding:14px 22px;border:1px solid var(--line);border-radius:999px;background:var(--soft);color:var(--ink);text-decoration:none;transition:transform .2s,border-color .2s}
-.hv-promo-link:hover,.hv-promo-link:focus-visible{border-color:#0e7c86;transform:translateY(-2px);outline:none}
-.hv-promo-tag{flex:none;padding:4px 12px;border-radius:999px;background:#0e7c86;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.hv-promo-link:hover,.hv-promo-link:focus-visible{border-color:#111111;transform:translateY(-2px);outline:none}
+.hv-promo-tag{flex:none;padding:4px 12px;border-radius:999px;background:#111111;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .hv-promo-text{flex:1;min-width:0;font-size:1rem}
-.hv-promo-cta{flex:none;display:inline-flex;gap:8px;color:#0e7c86;font-size:.95rem;font-weight:600;white-space:nowrap}
-:root[data-theme="dark"] .hv-promo-cta{color:#4cc3ce}
+.hv-promo-cta{flex:none;display:inline-flex;gap:8px;color:#111111;font-size:.95rem;font-weight:600;white-space:nowrap}
+:root[data-theme="dark"] .hv-promo-cta{color:#f1f1f2}
 @media (max-width:700px){.hv-promo-link{flex-wrap:wrap;gap:10px 12px;border-radius:22px;padding:16px 18px}.hv-promo-text{flex-basis:100%;order:3}.hv-promo-cta{margin-left:auto}}
 .hv-hero{position:relative}
 .hero-network{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;z-index:0}
 .hv-hero-copy{position:relative;z-index:1}
 .hv-hero-copy::before{content:"";position:absolute;inset:-48px -90px;background:radial-gradient(closest-side,var(--paper) 52%,transparent);z-index:-1}
 .page-dots{display:none !important}
-:root:not([data-theme="dark"]){--paper:#EFF2F9;--soft:#E4EBF1;--line:rgba(110,127,141,.26);--muted:#6E7F8D}
-:root:not([data-theme="dark"]) body{background:#EFF2F9}
-:root:not([data-theme="dark"]) .site-header{background:rgba(239,242,249,.88)}
-:root:not([data-theme="dark"]) .hv-promo-link{border:0;background:#EFF2F9;box-shadow:-6px -6px 14px #FAFBFF,6px 6px 14px rgba(22,27,29,.12)}
-:root:not([data-theme="dark"]) .hv-promo-link:hover{box-shadow:-3px -3px 8px #FAFBFF,3px 3px 8px rgba(22,27,29,.14)}.work-cards{display:grid;gap:24px;padding-bottom:8px;margin-top:40px}
+:root:not([data-theme="dark"]){--paper:#F1F1F2;--soft:#E6E6E8;--line:rgba(107,107,112,.26);--muted:#6B6B70}
+:root:not([data-theme="dark"]) body{background:#F1F1F2}
+:root:not([data-theme="dark"]) .site-header{background:rgba(241,241,242,.88)}
+:root:not([data-theme="dark"]) .hv-promo-link{border:0;background:#F1F1F2;box-shadow:-6px -6px 14px #FFFFFF,6px 6px 14px rgba(22,27,29,.12)}
+:root:not([data-theme="dark"]) .hv-promo-link:hover{box-shadow:-3px -3px 8px #FFFFFF,3px 3px 8px rgba(22,27,29,.14)}.work-cards{display:grid;gap:24px;padding-bottom:8px;margin-top:40px}
 @media (min-width:760px){.work-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:1100px){.work-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
 .work-card{min-width:0;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,19,16,.1);border-top:4px solid var(--c,#8f1f1f);border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(42,24,13,.08);text-align:left}
@@ -68,20 +68,21 @@
 :root[data-theme="dark"] .work-desc{color:#cfc6be}
 :root[data-theme="dark"] .work-langs a{border-color:rgba(255,255,255,.14)}
 :root[data-theme="dark"] .work-langs a:hover{color:#110f0e}
-:root:not([data-theme="dark"]) .work-card{background:#EFF2F9;border:0;border-top:4px solid var(--c,#8f1f1f);box-shadow:-8px -8px 18px #FAFBFF,8px 8px 18px rgba(22,27,29,.12)}
-:root:not([data-theme="dark"]) .work-shot{background:#E4EBF1}
-:root:not([data-theme="dark"]) .work-desc{color:#5d6c78}
+:root:not([data-theme="dark"]) .work-card{background:#F1F1F2;border:0;border-top:4px solid var(--c,#8f1f1f);box-shadow:-8px -8px 18px #FFFFFF,8px 8px 18px rgba(22,27,29,.12)}
+:root:not([data-theme="dark"]) .work-shot{background:#E6E6E8}
+:root:not([data-theme="dark"]) .work-desc{color:#5f5f64}
 .hv-proof{margin:34px 0 0;color:var(--muted);font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
 .hv-more{margin-top:40px}
 .hv-craft{display:inline-flex;align-items:center;gap:14px;margin-top:56px;color:var(--muted);font-size:.9rem;text-decoration:none}
 .hv-craft img{width:64px;height:64px;border-radius:14px;object-fit:cover;filter:saturate(.8)}
 .hv-craft:hover{color:var(--accent)}.hv-hero-solo .hv-lead{white-space:normal !important;text-wrap:balance;max-width:min(100%,14em);margin-left:auto;margin-right:auto}
 </style>
+<script src="/assets/site-network.js?v=4" defer></script>
 </head>
 <body class="dots-page">
   <div class="page-dots" data-page-dots aria-hidden="true"><canvas></canvas></div>
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="Ugrás az oldal tetejére"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPIN</span></a>
+    <a class="brand" href="#top" aria-label="Ugrás az oldal tetejére"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPINS</span></a>
     <button class="menu-button" aria-expanded="false" aria-controls="main-nav">Menü</button>
     <nav id="main-nav" aria-label="Fő navigáció">
       <a href="#work">Munkáim</a>
@@ -92,28 +93,28 @@
 
   <main id="top" class="hv">
     <section class="hv-hero hv-hero-solo hv-shell">
-      <canvas class="hero-network" aria-hidden="true"></canvas>
+      
       <div class="hv-hero-copy">
         <p class="hv-label">Weboldalak · Sablonok · Arculat</p>
         <h1 class="visually-hidden">Pixelpin</h1>
         <p class="hv-lead">Weboldal, ami ügyfelet hoz, nem csak jól néz ki.</p>
         <p class="hv-text">Gyors, mobilra tervezett oldalak és kész sablonok fogászatoknak, szépségszalonoknak és helyi vállalkozásoknak.</p>
-        <div class="hv-links"><a href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a><a class="hv-muted" href="https://pixelpin.gumroad.com/" target="_blank" rel="noopener">Kész sablonok</a></div>
+        <div class="hv-links"><a href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a><a class="hv-muted" href="landing-pagek/">Kész sablonok</a></div>
         <p class="hv-proof">6 kész demó: fogászat, építőipar, előadóművész</p>
       </div>
     </section>
 
     <section class="hv-shell hv-promo">
-      <a class="hv-promo-link" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener"><span class="hv-promo-tag">Új</span><span class="hv-promo-text">Fogászati landing page sablon, Figma + HTML.</span><span class="hv-promo-cta"><span>Megnézem a Pixelpinen</span><span aria-hidden="true">↗</span></span></a>
+      <a class="hv-promo-link" href="landing-pagek/"><span class="hv-promo-tag">Új</span><span class="hv-promo-text">Fogászati landing page sablon, Figma + HTML.</span><span class="hv-promo-cta"><span>Megnézem</span><span aria-hidden="true">↗</span></span></a>
     </section>
 
     <section class="hv-block hv-shell" id="work">
       <p class="hv-label">Válogatott munkák</p>
       <h2>Amit építettem</h2>
       <div class="work-cards">
-<article class="work-card" style="--c:#0e7c86;--n:#0e7c86;--go-bg:#0E7C86;--go-fg:#fff">
-<a class="work-shot" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener" aria-label="Fogászati landing page sablon megnyitása"><img src="weboldalak/img/sablon.webp" width="1200" height="750" alt="Fogászati landing page sablon előnézete" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
-<div class="work-body"><p class="work-num">Sablon</p><h3>Fogászati landing page sablon</h3><p class="work-desc">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><div class="work-langs"><a href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener" style="width:auto;padding:0 22px;border-radius:999px">Megnézem a Pixelpinen</a></div></div>
+<article class="work-card" style="--c:#111111;--n:#111111;--go-bg:#111111;--go-fg:#fff">
+<a class="work-shot" href="landing-pagek/" aria-label="Landing pagek megnyitása"><img src="weboldalak/img/sablon.webp" width="1200" height="750" alt="Fogászati landing page sablon előnézete" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Sablon</p><h3>Landing pagek</h3><p class="work-desc">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><div class="work-langs"><a href="landing-pagek/" style="width:auto;padding:0 22px;border-radius:999px">Megnézem</a></div></div>
 </article>
 <article class="work-card" style="--c:#6f8f4a;--n:#6f8f4a;--go-bg:#B7CB98;--go-fg:#26331A">
 <a class="work-shot" href="/demo-site-1/hu/" aria-label="Demo 1 megnyitása"><img src="weboldalak/img/demo-1.webp" width="1200" height="750" alt="Alinia fogszabályozó rendelő weboldala" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
@@ -172,7 +173,7 @@
   <footer class="portfolio-footer">
     <div class="portfolio-footer-grid section-shell">
       <div class="footer-intro">
-        <a class="footer-brand" href=""><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPIN</span></a>
+        <a class="footer-brand" href=""><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPINS</span></a>
         <p><span class="footer-tagline">Weboldalak, sablonok, arculat.</span><span class="footer-description">Letisztult, mobilra tervezett digit&aacute;lis munk&aacute;k.</span></p>
       </div>
       <div class="footer-column">
