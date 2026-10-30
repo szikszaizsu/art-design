@@ -39,7 +39,7 @@
         const c = centers[i % centers.length];
         const a = rnd(0, Math.PI * 2), d = Math.sqrt(Math.random()) * opt.spread * c.size;
         const hx = c.x + Math.cos(a) * d, hy = c.y + Math.sin(a) * d * 0.75;
-        const red = i % 18 === 5;
+        const red = i % 8 === 3;
         nodes.push({
           x: hx, y: hy, hx, hy, ox: hx - c.x, oy: hy - c.y, vx: rnd(-0.3, 0.3), vy: rnd(-0.3, 0.3), c: i % centers.length,
           r: red ? rnd(opt.red[0], opt.red[1]) : rnd(opt.grey[0], opt.grey[1]), red
