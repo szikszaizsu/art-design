@@ -128,7 +128,7 @@
       }
       const sp = Math.min(1, Math.hypot(p.vx || 0, p.vy || 0) / 8);
       const k = cell * (.86 - .35 * sp) * (.45 + .55 * Math.min(1, pull * 1.5));
-      g.fillStyle = p.red ? (dark ? '#d24c45' : '#9b2222') : (dark ? '#f1ece6' : '#161412');
+      g.fillStyle = p.red ? (dark ? '#d24c45' : '#9b2222') : (dark ? '#f1f1f2' : '#161412');
       g.globalAlpha = .35 + .65 * Math.min(1, pull * 1.4);
       g.fillRect(p.x - k / 2 + cell / 2, p.y - k / 2 + cell / 2, k, k);
     }
