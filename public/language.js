@@ -36,7 +36,7 @@
     'Felhasználói élmény, felülettervezés és vizuális rendszerek.': 'User experience, interface design and visual systems.',
     'Gyöngyszövés': 'Bead weaving', 'Tojásírás': 'Wax-resist egg decorating', 'Tojásírás viasztechnikával': 'Wax-resist egg decorating', 'Tojásdíszítés': 'Wax-resist egg decorating', 'Nemezelés': 'Felting',
     'Amikor a gyapjú életre kel.': 'When wool comes to life.',
-    'Hamarosan': 'Coming soon', 'Logó 1': 'Logo 1', 'Félelem nélküli fogászat': 'Fear-free dentistry', 'Tihna Dental, Kolozsvár. Vonalas fog lélegzet-hullámmal, olíva és neonlime.': 'Tihna Dental, Cluj-Napoca. A line-drawn tooth with a breathing wave, olive and neon lime.', 'Bemutató megnyitása': 'Open presentation',
+    'Hamarosan': 'Coming soon', 'Hívj': 'Call me', 'Hívj: 0743 068-652': 'Call: 0743 068-652', 'Hamarosan: megnézhető sablonok': 'Coming soon: templates you can preview', 'Új oldalsablonok készülnek. Ha kell egy, hívj, és megbeszéljük.': 'New page templates are on the way. If you need one, call me and we will talk it through.', 'Logó 1': 'Logo 1', 'Félelem nélküli fogászat': 'Fear-free dentistry', 'Tihna Dental, Kolozsvár. Vonalas fog lélegzet-hullámmal, olíva és neonlime.': 'Tihna Dental, Cluj-Napoca. A line-drawn tooth with a breathing wave, olive and neon lime.', 'Bemutató megnyitása': 'Open presentation',
     'Amit kínálok': 'What I offer',
     'Miben segíthetek?': 'How can I help?',
     'Kampányvizuálok': 'Campaign visuals',
