@@ -80,3 +80,15 @@
 @media (max-width:759px){body:has(.lp-bar) .wa-float{bottom:92px}.wa-float{right:16px;bottom:16px;width:54px;height:54px}}
 .footer-wa{display:flex !important;align-items:center;gap:10px}
 .footer-wa svg{width:22px;height:22px;fill:#25d366;flex:none}
+
+/* Kézműves munkák: szebb üveg-kártya */
+a.hv-craft{position:relative;display:flex !important;align-items:center;gap:26px !important;width:min(100%,560px);margin-top:72px !important;padding:16px 22px 16px 16px !important;border-radius:32px !important;background:rgba(255,255,255,.5) !important;border:1px solid rgba(255,255,255,.85);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 22px 50px rgba(22,27,29,.13),inset 0 1px 0 rgba(255,255,255,.95) !important;color:var(--ink) !important;overflow:hidden}
+a.hv-craft img{width:104px !important;height:104px !important;border-radius:22px !important;filter:none !important;box-shadow:0 10px 24px rgba(22,27,29,.22);transition:transform .35s}
+a.hv-craft span:first-of-type{flex:1;font:600 clamp(1.6rem,3vw,2.1rem)/1.1 "Cormorant Garamond",Georgia,serif !important;letter-spacing:.01em}
+a.hv-craft span:last-of-type{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:50%;background:#111;color:#fff;font-size:1.15rem;transition:transform .25s,background .25s}
+a.hv-craft:hover{transform:translateY(-4px) !important;color:var(--ink) !important}
+a.hv-craft:hover img{transform:scale(1.06) rotate(-2deg)}
+a.hv-craft:hover span:last-of-type{transform:translate(3px,-3px);background:var(--accent,#c43a3a)}
+:root[data-theme="dark"] a.hv-craft{background:rgba(255,255,255,.07) !important;border-color:rgba(255,255,255,.16);box-shadow:0 22px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12) !important}
+:root[data-theme="dark"] a.hv-craft span:last-of-type{background:#f1f1f2;color:#111}
+@media (max-width:600px){a.hv-craft{gap:18px !important}a.hv-craft img{width:84px !important;height:84px !important}}
