@@ -60,6 +60,42 @@
 :root:not([data-theme="dark"]) .site-header{background:rgba(241,241,242,.88)}
 :root:not([data-theme="dark"]) .lp-buy{background:#F1F1F2;box-shadow:-8px -8px 18px #FFFFFF,8px 8px 18px rgba(22,27,29,.12)}
 .page-dots{display:none !important}
+.lp-hero{display:grid;gap:36px;align-items:center;padding-block:48px 24px}
+@media (min-width:980px){.lp-hero{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px}}
+.lp-hero .eyebrow{margin:14px 0}
+.lp-hero h1{margin:0;font-size:clamp(2.4rem,5vw,4rem);line-height:1.04}
+.lp-hero-actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+.lp-hero-actions .lp-cta{width:auto !important}
+.lp-hero-img img{display:block;width:100%;height:auto;border-radius:26px;box-shadow:0 30px 60px rgba(20,20,25,.18)}
+.lp-show{display:grid;gap:36px;padding-block:32px 56px;align-items:start}
+@media (min-width:980px){.lp-show{grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:56px}.lp-phone{position:sticky;top:96px}}
+.lp-phone{justify-self:center;width:100%;max-width:400px;padding:12px;border-radius:44px;background:#151517;box-shadow:0 30px 60px rgba(20,20,25,.25)}
+.lp-phone .lp-scroll{max-height:700px;border:0;border-radius:34px;background:#fff}
+.lp-side{display:grid;gap:22px;min-width:0}
+.lp-side .lp-buy{position:static}
+.lp-card2{padding:28px 30px;border-radius:22px;background:var(--soft)}
+:root:not([data-theme="dark"]) .lp-card2{background:#F1F1F2;box-shadow:-8px -8px 18px #FFFFFF,8px 8px 18px rgba(22,27,29,.12)}
+:root[data-theme="dark"] .lp-card2{background:#141414}
+.lp-card2 h2{margin:0 0 18px;font-size:1.7rem}
+.lp-faq{max-width:none}
+.lp-faq details{padding:20px 0}
+.lp-faq summary::after{content:"+";float:right;font-size:1.4rem;line-height:1;color:var(--muted)}
+.lp-faq details[open] summary::after{content:"−"}
+.lp-hero{padding-block:72px 40px;gap:48px}
+.lp-hero-text .lp-intro{margin-top:24px;line-height:1.7}
+.lp-hero-actions{margin-top:36px}
+.lp-show{padding-block:48px 80px;gap:48px}
+.lp-side{gap:32px}
+.lp-card2{padding:36px 38px}
+.lp-card2 h2{margin-bottom:24px}
+.lp-list{gap:18px;line-height:1.65}
+.lp-specs div{padding:17px 0}
+.lp-buy{padding:36px 38px}
+.lp-buy .lp-text{margin-top:18px;line-height:1.7}
+.lp-cta{margin-top:30px}
+.lp-faq{padding-block:16px 100px}
+.lp-faq details{padding:24px 0}
+.lp-faq details p{margin-top:14px;line-height:1.7}
 </style>
 <script src="/assets/site-network.js?v=11" defer></script>
 </head>
@@ -74,14 +110,10 @@
     </nav>
   </header>
 <main class="detail-main lp-main">
-<section class="lp-top section-shell"><a class="back-link" href="../">← Landing pagek</a><p class="eyebrow">Sablonok</p><h1>Fogászati landing page sablon</h1><p class="lp-intro">Kész, mobilra tervezett oldal, amelyet néhány szövegcserével élesíthetsz.</p></section>
-<section class="lp-product section-shell">
-<div class="lp-gallery"><img src="../img/sablon-cover.webp?v=2" width="1200" height="675" alt="Fogászati landing page sablon előnézete"><div class="lp-scroll" tabindex="0"><img src="../img/sablon-teljes.webp" width="780" height="5748" alt="A fogászati landing page sablon teljes oldala" loading="lazy"></div></div>
-<aside class="lp-buy"><p class="lp-tag">Sablon</p><h2>Fogászati landing page sablon</h2><p class="lp-text">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><a class="button lp-cta" href="tel:+40743068652">Hívj: 0743 068-652</a></aside>
-</section>
-<section class="lp-info section-shell">
-<div><h2>Mit tartalmaz</h2><ul class="lp-list"><li>Figma fájl, 390 px-es mobil elrendezés</li><li>Kész HTML és CSS, keretrendszer nélkül</li><li>10 szekció: hero és foglalás gomb, bizalmi számok, előnyök, előtte/utána, 3 lépés, vélemény, GYIK, záró felhívás, lábléc</li><li>A színek egy helyen átírhatók</li><li>README gyors útmutatóval</li></ul></div>
-<div><h2>Jellemzők</h2><dl class="lp-specs"><div><dt>Formátum</dt><dd>Figma + HTML/CSS (ZIP)</dd></div><div><dt>Szöveg nyelve</dt><dd>Angol, szerkeszthető</dd></div><div><dt>Betűtípus</dt><dd>Inter</dd></div></dl></div>
+<section class="lp-hero section-shell"><div class="lp-hero-text"><a class="back-link" href="../">← Landing pagek</a><p class="eyebrow">Sablonok</p><h1>Fogászati landing page sablon</h1><p class="lp-intro">Kész, mobilra tervezett oldal, amelyet néhány szövegcserével élesíthetsz.</p><div class="lp-hero-actions"><a class="button lp-cta" href="tel:+40743068652">Hívj: 0743 068-652</a></div></div><div class="lp-hero-img"><img src="../img/sablon-cover.webp?v=2" width="1200" height="675" alt="Fogászati landing page sablon előnézete"></div></section>
+<section class="lp-show section-shell">
+<div class="lp-phone"><div class="lp-scroll" tabindex="0"><img src="../img/sablon-teljes.webp" width="780" height="5748" alt="A fogászati landing page sablon teljes oldala" loading="lazy"></div></div>
+<div class="lp-side"><aside class="lp-buy"><p class="lp-tag">Sablon</p><h2>Fogászati landing page sablon</h2><p class="lp-text">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><a class="button lp-cta" href="tel:+40743068652">Hívj: 0743 068-652</a></aside><div class="lp-card2"><div><h2>Mit tartalmaz</h2><ul class="lp-list"><li>Figma fájl, 390 px-es mobil elrendezés</li><li>Kész HTML és CSS, keretrendszer nélkül</li><li>10 szekció: hero és foglalás gomb, bizalmi számok, előnyök, előtte/utána, 3 lépés, vélemény, GYIK, záró felhívás, lábléc</li><li>A színek egy helyen átírhatók</li><li>README gyors útmutatóval</li></ul></div></div><div class="lp-card2"><div><h2>Jellemzők</h2><dl class="lp-specs"><div><dt>Formátum</dt><dd>Figma + HTML/CSS (ZIP)</dd></div><div><dt>Szöveg nyelve</dt><dd>Angol, szerkeszthető</dd></div><div><dt>Betűtípus</dt><dd>Inter</dd></div></dl></div></div></div>
 </section>
 <section class="lp-faq section-shell"><h2>Gyakori kérdések</h2>
 <details><summary>Kell hozzá programozói tudás?</summary><p>Nem. A szöveget és a képeket egy szövegszerkesztőben átírhatod, vagy a Figma fájlban dolgozhatsz.</p></details>
