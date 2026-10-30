@@ -7,8 +7,8 @@
   const rnd = (a, b) => a + Math.random() * (b - a);
   const KEEP = 'a, button, input, textarea, select, summary, label';
 
-  const PAGE = { fixed: true, area: 3200, min: 70, max: 220, spread: 190, reach: 220, red: [3.6, 7.5], grey: [1.6, 3.2], line: 0.2 };
-  const FOOT = { fixed: false, area: 3600, min: 60, max: 160, spread: 160, reach: 200, red: [4, 8.5], grey: [1.8, 3.6], line: 0.24 };
+  const PAGE = { dot: 0.5, fixed: true, area: 3200, min: 70, max: 220, spread: 190, reach: 220, red: [3.6, 7.5], grey: [1.6, 3.2], line: 0.2 };
+  const FOOT = { dot: 0.2, fixed: false, area: 20000, min: 12, max: 30, spread: 160, reach: 200, red: [4, 8.5], grey: [1.8, 3.6], line: 0.07 };
 
   function make(host, opt) {
     if (host.querySelector(':scope > canvas.site-network')) return;
@@ -68,7 +68,7 @@
         const r = el.getBoundingClientRect();
         if (!r.width || !r.height || r.width > 760 || r.height > 140) return;
         if (r.bottom < cr.top - 40 || r.top > cr.bottom + 40) return;
-        keep.push({ x: r.left - cr.left - 12, y: r.top - cr.top - 10, w: r.width + 24, h: r.height + 20 });
+        keep.push({ x: r.left - cr.left - 16, y: r.top - cr.top - 12, w: r.width + 32, h: r.height + 24 });
       });
     }
 
@@ -129,7 +129,7 @@
       }
       for (const n of nodes) {
         ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = n.red ? red : 'rgba(' + rgb + ',0.5)';
+        ctx.fillStyle = n.red ? red : 'rgba(' + rgb + ',' + opt.dot + ')';
         ctx.fill();
       }
 

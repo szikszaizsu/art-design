@@ -19,3 +19,10 @@
 .work-go { background: #111111 !important; color: #ffffff !important; }
 :root[data-theme="dark"] .work-card { border-top-color: #f1f1f2 !important; }
 :root[data-theme="dark"] .work-go { background: #f1f1f2 !important; color: #111111 !important; }
+/* lábléc: áttetsző, elmosott panel a szöveg mögött, hogy a háló ne vágjon bele */
+.portfolio-footer-grid, .footer-bottom { background: rgba(241, 241, 242, .62); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding-left: clamp(22px, 4vw, 48px); padding-right: clamp(22px, 4vw, 48px); }
+.portfolio-footer-grid { padding-top: 40px; padding-bottom: 8px; border-radius: 26px 26px 0 0; }
+.portfolio-footer .footer-bottom { margin-top: 0; padding-top: 22px; padding-bottom: 22px; border-radius: 0 0 26px 26px; }
+:root[data-theme="dark"] .portfolio-footer-grid, :root[data-theme="dark"] .footer-bottom { background: rgba(10, 10, 10, .6); }
+:root[data-theme="dark"] .lp-tag, :root[data-theme="dark"] .lp-list li::before { color: #f1f1f2; }
+:root[data-theme="dark"] .lp-card, :root[data-theme="dark"] .lp-buy { background: #141414; }
