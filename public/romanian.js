@@ -168,6 +168,8 @@ window.portfolioRomanian = {
   'one-time payment': 'plată unică',
   'Buy now': 'Cumpăr acum',
   'View': 'Vezi',
+  'Videos': 'Video-uri',
+  'You can find the short videos I make for companies on TikTok.': 'Videoclipurile scurte pe care le fac pentru companii le găsești pe TikTok.',
   'My clients': 'Clienții mei',
   'Call me': 'Sună-mă',
   'Call: 0743 068-652': 'Sună: 0743 068-652',
