@@ -28,3 +28,12 @@
 :root[data-theme="dark"] .lp-card, :root[data-theme="dark"] .lp-buy { background: #141414; }
 :root:not([data-theme="dark"]) .portfolio-footer-grid, :root:not([data-theme="dark"]) .footer-bottom { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
 :root[data-theme="dark"] .portfolio-footer-grid, :root[data-theme="dark"] .footer-bottom { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* főoldali ügyfél-banner */
+.hv-clients .hv-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 72px;padding:44px 0 12px}
+.hv-logo img{display:block;height:var(--lh,44px);width:auto;filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
+.hv-logo:hover img{filter:none;opacity:1}
+.hv-logo .dk{display:none}
+:root[data-theme="dark"] .hv-logo .lt{display:none}
+:root[data-theme="dark"] .hv-logo .dk{display:block}
+@media (max-width:600px){.hv-clients .hv-logos{gap:24px 40px}.hv-logo img{height:calc(var(--lh,44px) * .8)}}

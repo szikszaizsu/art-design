@@ -168,6 +168,7 @@ window.portfolioRomanian = {
   'one-time payment': 'plată unică',
   'Buy now': 'Cumpăr acum',
   'View': 'Vezi',
+  'My clients': 'Clienții mei',
   'Call me': 'Sună-mă',
   'Call: 0743 068-652': 'Sună: 0743 068-652',
   'Coming soon: templates you can preview': 'În curând: șabloane pe care le poți vedea',
