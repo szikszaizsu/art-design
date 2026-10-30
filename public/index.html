@@ -9,8 +9,8 @@
   <title>Pixelpin — Vizuális alkotó · UX/UI tervező</title>
   <link rel="icon" type="image/png" href="assets/favicon.png?v=px-1"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=px-1">
   <link rel="stylesheet" href="styles.css?v=px-1">
-  <script src="script.js?v=theme-1" defer></script><script src="assets/varazs.js?v=1" defer></script>
-<script src="/romanian.js?v=web-3" defer></script><script src="/language.js?v=web-4" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script><script src="/forest-tile.js?v=tile-3" defer></script><script src="/oldal-pontok.js?v=dots-2" defer></script><script src="/hero-intro.js?v=intro-1" defer></script>
+  <script src="script.js?v=theme-1" defer></script><script src="assets/varazs.js?v=1" defer></script><script src="assets/hero-network.js?v=1" defer></script>
+<script src="/romanian.js?v=web-5" defer></script><script src="/language.js?v=web-5" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script><script src="/forest-tile.js?v=tile-3" defer></script><script src="/oldal-pontok.js?v=dots-2" defer></script><script src="/hero-intro.js?v=intro-1" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pixelpin — Art &amp; Design">
   <meta property="og:locale" content="hu_HU">
@@ -38,6 +38,44 @@
 .hv-promo-cta{flex:none;display:inline-flex;gap:8px;color:#0e7c86;font-size:.95rem;font-weight:600;white-space:nowrap}
 :root[data-theme="dark"] .hv-promo-cta{color:#4cc3ce}
 @media (max-width:700px){.hv-promo-link{flex-wrap:wrap;gap:10px 12px;border-radius:22px;padding:16px 18px}.hv-promo-text{flex-basis:100%;order:3}.hv-promo-cta{margin-left:auto}}
+.hv-hero{position:relative}
+.hero-network{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;z-index:0}
+.hv-hero-copy{position:relative;z-index:1}
+.hv-hero-copy::before{content:"";position:absolute;inset:-48px -90px;background:radial-gradient(closest-side,var(--paper) 52%,transparent);z-index:-1}
+.page-dots{display:none !important}
+:root:not([data-theme="dark"]){--paper:#EFF2F9;--soft:#E4EBF1;--line:rgba(110,127,141,.26);--muted:#6E7F8D}
+:root:not([data-theme="dark"]) body{background:#EFF2F9}
+:root:not([data-theme="dark"]) .site-header{background:rgba(239,242,249,.88)}
+:root:not([data-theme="dark"]) .hv-promo-link{border:0;background:#EFF2F9;box-shadow:-6px -6px 14px #FAFBFF,6px 6px 14px rgba(22,27,29,.12)}
+:root:not([data-theme="dark"]) .hv-promo-link:hover{box-shadow:-3px -3px 8px #FAFBFF,3px 3px 8px rgba(22,27,29,.14)}.work-cards{display:grid;gap:24px;padding-bottom:8px;margin-top:40px}
+@media (min-width:760px){.work-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.work-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
+.work-card{min-width:0;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,19,16,.1);border-top:4px solid var(--c,#8f1f1f);border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(42,24,13,.08);text-align:left}
+.work-shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:#fff}
+.work-go{position:absolute;right:18px;bottom:18px;width:52px;height:52px;border-radius:50%;background:var(--go-bg,#171310);color:var(--go-fg,#fff);display:grid;place-items:center;transition:transform .3s}
+.work-go svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.work-shot:hover .work-go,.work-shot:focus-visible .work-go{transform:rotate(45deg)}
+.work-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.work-shot:hover img{transform:scale(1.03)}
+.work-body{display:flex;flex-direction:column;flex:1;padding:26px 24px}
+.work-num{margin:0;color:var(--n,var(--c));font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.work-card h3{margin:10px 0 0;font:600 30px/1.1 "Cormorant Garamond",Georgia,serif}
+.work-desc{margin:10px 0 0;color:#5b544f;flex:1}
+.work-langs{display:flex;gap:10px;margin-top:24px}
+.work-langs a{display:grid;place-items:center;height:52px;border:1px solid rgba(23,19,16,.14);border-radius:50%;color:var(--ink);font-size:14px;font-weight:600;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.work-langs a:hover,.work-langs a:focus-visible{background:var(--ink);border-color:var(--ink);color:#fff;outline:none}
+:root[data-theme="dark"] .work-card{background:#1f1b19;border-color:rgba(255,255,255,.08);box-shadow:0 14px 36px rgba(0,0,0,.4)}
+:root[data-theme="dark"] .work-desc{color:#cfc6be}
+:root[data-theme="dark"] .work-langs a{border-color:rgba(255,255,255,.14)}
+:root[data-theme="dark"] .work-langs a:hover{color:#110f0e}
+:root:not([data-theme="dark"]) .work-card{background:#EFF2F9;border:0;border-top:4px solid var(--c,#8f1f1f);box-shadow:-8px -8px 18px #FAFBFF,8px 8px 18px rgba(22,27,29,.12)}
+:root:not([data-theme="dark"]) .work-shot{background:#E4EBF1}
+:root:not([data-theme="dark"]) .work-desc{color:#5d6c78}
+.hv-proof{margin:34px 0 0;color:var(--muted);font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.hv-more{margin-top:40px}
+.hv-craft{display:inline-flex;align-items:center;gap:14px;margin-top:56px;color:var(--muted);font-size:.9rem;text-decoration:none}
+.hv-craft img{width:64px;height:64px;border-radius:14px;object-fit:cover;filter:saturate(.8)}
+.hv-craft:hover{color:var(--accent)}.hv-hero-solo .hv-lead{white-space:normal !important;text-wrap:balance;max-width:min(100%,14em);margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body class="dots-page">
@@ -46,7 +84,6 @@
     <a class="brand" href="#top" aria-label="Ugrás az oldal tetejére"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPIN</span></a>
     <button class="menu-button" aria-expanded="false" aria-controls="main-nav">Menü</button>
     <nav id="main-nav" aria-label="Fő navigáció">
-      <a href="#about">Rólam</a>
       <a href="#work">Munkáim</a>
       <a href="#services">Amit kínálok</a>
       <a href="#contact">Elérhetőség</a>
@@ -55,53 +92,61 @@
 
   <main id="top" class="hv">
     <section class="hv-hero hv-hero-solo hv-shell">
+      <canvas class="hero-network" aria-hidden="true"></canvas>
       <div class="hv-hero-copy">
-        <p class="hv-label">Vizuális alkotó · UX/UI tervező</p>
-        <h1 class="visually-hidden">Szikszai Zsu</h1>
-        <p class="hv-lead">Művészi szem. MI-jártasság. Egyetlen vízió.</p>
-        <p class="hv-text">A klasszikus vizuális gondolkodást digitális tapasztalattal kapcsolom össze, hogy karakteres képi világokat és átgondolt felhasználói élményeket alkossak.</p>
-        <div class="hv-links"><a href="#contact">Lépjen kapcsolatba velem <span aria-hidden="true">↗</span></a><a class="hv-muted" href="#work">Munkáim</a></div>
+        <p class="hv-label">Weboldalak · Sablonok · Arculat</p>
+        <h1 class="visually-hidden">Pixelpin</h1>
+        <p class="hv-lead">Weboldal, ami ügyfelet hoz, nem csak jól néz ki.</p>
+        <p class="hv-text">Gyors, mobilra tervezett oldalak és kész sablonok fogászatoknak, szépségszalonoknak és helyi vállalkozásoknak.</p>
+        <div class="hv-links"><a href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a><a class="hv-muted" href="https://pixelpin.gumroad.com/" target="_blank" rel="noopener">Kész sablonok</a></div>
+        <p class="hv-proof">6 kész demó: fogászat, építőipar, előadóművész</p>
       </div>
     </section>
 
     <section class="hv-shell hv-promo">
       <a class="hv-promo-link" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener"><span class="hv-promo-tag">Új</span><span class="hv-promo-text">Fogászati landing page sablon, Figma + HTML.</span><span class="hv-promo-cta"><span>Megnézem a Pixelpinen</span><span aria-hidden="true">↗</span></span></a>
-    </section>    <section class="hv-block hv-shell" id="work">
-      <p class="hv-label">Válogatott munkák</p>
-      <h2>Digitális munkák</h2>
-      <div class="hv-list">
-        <a class="hv-row" href="art-work/fragments-of-tomorrow/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c2 0 3-1 3-3 0-1.5 1-2.5 2.5-2.5S12 15.5 12 17"/><path d="M9.5 14.5 19 5a1.4 1.4 0 0 1 2 2l-9.5 9.5"/></svg><span class="hv-row-t"><h3>Digitális illusztráció</h3><p><em>Történetek pixelekből</em></p></span><span class="hv-arrow" aria-hidden="true">↗</span></a>
-        <a class="hv-row" href="art-work/koncepcio-ai/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/></svg><span class="hv-row-t"><h3>Koncepció és AI-kísérletek</h3><p><em>Ötlettől a promptig</em></p></span><span class="hv-arrow" aria-hidden="true">↗</span></a>
-        <a class="hv-row" href="art-work/grafika-arculat/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 10l3 9h8l3-9-7-7Z"/><circle cx="12" cy="11" r="1.6"/><path d="M12 3v6.4"/></svg><span class="hv-row-t"><h3>Grafika és arculat</h3><p><em>Vizuális identitások</em></p></span><span class="hv-arrow" aria-hidden="true">↗</span></a>
-        <a class="hv-row" href="weboldalak/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18M6.5 6.8h.01M9 6.8h.01"/></svg><span class="hv-row-t"><h3>Webdesign és digitális felületek</h3><p><em>Élmények a képernyőn</em></p></span><span class="hv-arrow" aria-hidden="true">↗</span></a>
-      </div>
-      <div class="hv-subhead"><h2>Hagyományos technikák</h2><a class="hv-label" href="hagyomanyos-munkak/">Mind megnézem ↗</a></div>
-      <div class="hv-chips">
-        <a class="hv-chip" href="art-work/bead-weaving/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/><path d="M2 12h1.8M8.2 12h1.6M14.2 12h1.6M20.2 12H22"/></svg><span>Gyöngyszövés</span></a>
-        <a class="hv-chip" href="art-work/egg-decorating/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 0 6 5 6 9.5A6 6 0 0 1 6 12.5C6 8 8.5 3 12 3Z"/><path d="M7 12.5c1.7-1.3 3.3-1.3 5 0s3.3 1.3 5 0"/></svg><span>Tojásírás viasztechnikával</span></a>
-        <a class="hv-chip" href="art-work/nepi-himzes/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l4 4M9 5 5 9M15 5l4 4M19 5l-4 4M5 15l4 4M9 15l-4 4M15 15l4 4M19 15l-4 4M10 10l4 4M14 10l-4 4"/></svg><span>Népi hímzés</span></a>
-        <a class="hv-chip" href="art-work/felting/"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M5.5 8.5c4 1 8 4.5 9.5 10.8M9 4.5c2.5 3 6 5 10.5 5.5M4.2 13.5c3 .3 5.5 2.4 6.8 6.4"/></svg><span>Nemezelés</span></a>
-      </div>
     </section>
 
-    <section class="hv-block hv-shell" id="about">
-      <p class="hv-label">Rólam</p>
-      <h2>Ahol a klasszikus művészi vízió találkozik a digitális dizájnnal.</h2>
-      <div class="hv-about">
-        <article class="hv-about-item"><span>01</span><h3>A látomásom</h3><p>Képzőművészként kezdtem, ma UX/UI tervezőként dolgozom. A klasszikus vizuális gondolkodást a digitális design logikájával kötöm össze, hogy olyan képek és felületek szülessenek, amelyek nemcsak szépek, hanem megmaradnak az emlékezetben.</p></article>
-        <article class="hv-about-item"><span>02</span><h3>A küldetésem</h3><p>Kampányvizuálokat, arculatot és felhasználói felületeket készítek, a művészi látásmódot a legújabb mesterséges intelligencia eszközeivel ötvözve. Számomra a technológia nem helyettesíti a víziót, hanem új eszközt ad a kezébe: így fér meg egymás mellett a szépség és a használhatóság.</p></article>
-        <article class="hv-about-item"><span>03</span><h3>Filozófiám</h3><p>Minden vonás egy döntés. Nem hiszek a szerencsés véletlenekben, csak a több ezer óra munkával csiszolt ösztönökben. Előbb a szakértelem, aztán a koncepció, és az egészet az őszinteség tartja össze. Bármivel dolgozom, a szívem mélyén mindig művész maradok.</p></article>
+    <section class="hv-block hv-shell" id="work">
+      <p class="hv-label">Válogatott munkák</p>
+      <h2>Amit építettem</h2>
+      <div class="work-cards">
+<article class="work-card" style="--c:#0e7c86;--n:#0e7c86;--go-bg:#0E7C86;--go-fg:#fff">
+<a class="work-shot" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener" aria-label="Fogászati landing page sablon megnyitása"><img src="weboldalak/img/sablon.webp" width="1200" height="750" alt="Fogászati landing page sablon előnézete" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Sablon</p><h3>Fogászati landing page sablon</h3><p class="work-desc">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><div class="work-langs"><a href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener" style="width:auto;padding:0 22px;border-radius:999px">Megnézem a Pixelpinen</a></div></div>
+</article>
+<article class="work-card" style="--c:#6f8f4a;--n:#6f8f4a;--go-bg:#B7CB98;--go-fg:#26331A">
+<a class="work-shot" href="/demo-site-1/hu/" aria-label="Demo 1 megnyitása"><img src="weboldalak/img/demo-1.webp" width="1200" height="750" alt="Alinia fogszabályozó rendelő weboldala" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Weboldal</p><h3>Fogszabályozás</h3><p class="work-desc">Alinia, Marosvásárhely. Fehér alap, olívazöld, üveghatású elemek.</p></div>
+</article>
+<article class="work-card" style="--c:#2f6b5c;--n:#2f6b5c;--go-bg:#A9C2B9;--go-fg:#17231F">
+<a class="work-shot" href="/demo-site-2/hu/" aria-label="Demo 2 megnyitása"><img src="weboldalak/img/demo-2.webp" width="1200" height="750" alt="DentalTop férfi fogászat weboldala" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Weboldal</p><h3>Fogászat férfiaknak</h3><p class="work-desc">DentalTop, Marosvásárhely. Világos alap, sötét zsályazöld.</p></div>
+</article>
+<article class="work-card" style="--c:#c8f04a;--n:#7a9a1a;--go-bg:#D4F03C;--go-fg:#2F371B">
+<a class="work-shot" href="/demo-site-3/hu/" aria-label="Demo 3 megnyitása"><img src="weboldalak/img/demo-3.webp" width="1200" height="750" alt="Tihna Dental fogászat weboldala" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Weboldal</p><h3>Félelem nélküli fogászat</h3><p class="work-desc">Tihna Dental, Kolozsvár. Sötét olíva és neonlime, görgetéses megjelenés.</p></div>
+</article>
+<article class="work-card" style="--c:#b5573b;--n:#b5573b;--go-bg:#F05A2C;--go-fg:#fff">
+<a class="work-shot" href="/demo-site-4/hu/" aria-label="Demo 4 megnyitása"><img src="weboldalak/img/demo-4.webp" width="1200" height="750" alt="Livada Dental családi fogászat weboldala" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Weboldal</p><h3>Családi fogászat</h3><p class="work-desc">Livada Dental, Nagyszeben. Meleg krém, terrakotta és olíva, családi időpont-kártya.</p></div>
+</article>
+<article class="work-card" style="--c:#8f1f1f;--n:#8f1f1f;--go-bg:#8F1F1F;--go-fg:#fff">
+<a class="work-shot" href="art-work/grafika-arculat/" aria-label="Arculatok megnyitása"><img src="assets/grafika-mozaik.webp" width="1200" height="750" alt="" loading="lazy"><span class="work-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+<div class="work-body"><p class="work-num">Arculat</p><h3>Vizuális identitások</h3><p class="work-desc">Logók és arculatok fogászatoknak és helyi cégeknek.</p></div>
+</article>
       </div>
+      <div class="hv-links hv-more"><a href="weboldalak/">Minden munka <span aria-hidden="true">↗</span></a></div>
+      <a class="hv-craft" href="hagyomanyos-munkak/"><img src="assets/bead-weaving.webp" width="64" height="64" alt="" loading="lazy"><span>Kézműves munkák</span><span aria-hidden="true">↗</span></a>
     </section>
 
     <section class="hv-block hv-shell" id="services">
       <p class="hv-label">Amit kínálok</p>
       <h2>Miben segíthetek?</h2>
       <div class="hv-svcs">
-        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10H4Z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><b>01</b></span><h3>Kampányvizuálok</h3><p>Közösségi média posztok és hirdetési képek, amelyek megállítják a görgetést – a márkád stílusában.</p></article>
-        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/><path d="M12 20.5a2.5 2.5 0 0 1 0-5h1.5"/></svg><b>02</b></span><h3>Arculat</h3><p>Logó, színvilág és tipográfia, hogy a márkád első ránézésre felismerhető legyen.</p></article>
-        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg><b>03</b></span><h3>UX/UI tervezés</h3><p>Weboldalak és alkalmazások felülete, amelyet könnyű és jó érzés használni.</p></article>
-        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/></svg><b>04</b></span><h3>Egyedi kézműves darabok</h3><p>Gyöngyszövött ékszer vagy viaszos technikával díszített tojás – egyedi kérésre, ajándékba is.</p></article>
+        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg><b>01</b></span><h3>Weboldal készítés</h3><p>Mobilra tervezett bemutatkozó és foglalási oldal fogászatoknak és helyi vállalkozásoknak.</p></article>
+        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/></svg><b>02</b></span><h3>Kész sablonok</h3><p>Szerkeszthető Figma fájl és kész HTML, hogy gyorsan élesíthesd a saját oldalad.</p></article>
+        <article class="hv-svc"><span class="service-number"><svg class="hv-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="8.5" cy="10" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/><path d="M12 20.5a2.5 2.5 0 0 1 0-5h1.5"/></svg><b>03</b></span><h3>Arculat és hirdetési kreatívok</h3><p>Logó, színvilág és hirdetési képek, hogy a márkád első ránézésre felismerhető legyen.</p></article>
       </div>
       <div class="hv-links"><a href="#contact">Kérj ajánlatot <span aria-hidden="true">↗</span></a></div>
     </section>
@@ -109,8 +154,8 @@
     <section class="hv-block hv-shell hv-contact" id="contact">
       <div class="contact-copy reveal">
           <p class="eyebrow">Elérhetőség</p>
-          <h2>Van egy ötleted?<br>Alkossuk meg együtt.</h2>
-          <p>Legyen szó karakteres hirdetésről, átgondolt felületről vagy egyedi műalkotásról, minden jó projekt egy beszélgetéssel kezdődik.</p>
+          <h2>Mondd el, mit szeretnél elérni.</h2>
+          <p>Szikszai Zsu vagyok, UX/UI tervező. Olyan oldalakat építek, amelyek első ránézésre bizalmat keltenek, és a látogatót a foglalásig vezetik.</p>
         </div>
       <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/szikszaizsu86@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="Portfolio website enquiry">
@@ -118,7 +163,7 @@
           <label>Teljes név<input name="name" autocomplete="name" required></label>
           <label>E-mail cím<input type="email" name="email" autocomplete="email" required></label>
           <label>Üzenet<textarea name="message" rows="5" required></textarea></label>
-          <button class="button" type="submit">Írj nekem <span aria-hidden="true">↗</span></button>
+          <button class="button" type="submit">Elküldöm az üzenetet <span aria-hidden="true">↗</span></button>
           <p class="form-note">Az üzenetet a FormSubmit továbbítja nekem. A küldéshez biztonsági ellenőrzésre lehet szükség.<br><a href="adatvedelem/">Adatvédelmi tájékoztató</a></p>
         </form>
     </section>
@@ -128,14 +173,15 @@
     <div class="portfolio-footer-grid section-shell">
       <div class="footer-intro">
         <a class="footer-brand" href=""><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPIN</span></a>
-        <p><span class="footer-tagline">M&#369;v&eacute;szi szem. MI-j&aacute;rtass&aacute;g. Egyetlen v&iacute;zi&oacute;.</span><span class="footer-description">Digit&aacute;lis &eacute;s hagyom&aacute;nyos alkot&aacute;sok egy szem&eacute;lyes portf&oacute;li&oacute;ban.</span></p>
+        <p><span class="footer-tagline">Weboldalak, sablonok, arculat.</span><span class="footer-description">Letisztult, mobilra tervezett digit&aacute;lis munk&aacute;k.</span></p>
       </div>
       <div class="footer-column">
         <h2>Oldalak</h2>
         <a href="">F&#337;oldal</a>
-        <a href="#about">R&oacute;lam</a>
-        <a href="digitalis-munkak/">Digit&aacute;lis munk&aacute;k</a>
-        <a href="hagyomanyos-munkak/">Hagyom&aacute;nyos technik&aacute;k</a>
+        <a href="#work">Munk&aacute;im</a>
+        <a href="#services">Amit k&iacute;n&aacute;lok</a>
+        <a href="#contact">El&eacute;rhet&#337;s&eacute;g</a>
+        <a href="hagyomanyos-munkak/">K&eacute;zm&#369;ves munk&aacute;k</a>
       </div>
       <div class="footer-column footer-contact">
         <h2>L&eacute;pj kapcsolatba velem</h2>
