@@ -164,7 +164,7 @@ window.portfolioRomanian = {
   'Landing pages': 'Landing page-uri',
   'Open landing pages': 'Deschide landing page-urile',
   'Ready-made, mobile-first pages you can launch with just a few text changes.': 'Pagini gata făcute, create pentru mobil, pe care le poți lansa după câteva schimbări de text.',
-  '$29': '29 USD',
+  '$10': '10 USD',
   'one-time payment': 'plată unică',
   'Buy now': 'Cumpăr acum',
   'View': 'Vezi',
