@@ -22,17 +22,17 @@
     if (!opt.fixed && getComputedStyle(host).position === 'static') host.style.position = 'relative';
     host.insertBefore(canvas, host.firstChild);
     const ctx = canvas.getContext('2d');
-    let w = 0, h = 0, nodes = [], bridges = [], keep = [], raf = 0, last = 0, onScreen = true, resizeTimer = 0, scrollQueued = false;
+    let w = 0, h = 0, nodes = [], bridges = [], centers = [], keep = [], raf = 0, last = 0, onScreen = true, resizeTimer = 0, scrollQueued = false;
 
     function build() {
       const count = Math.max(opt.min, Math.min(opt.max, Math.round((w * h) / opt.area)));
       const k = Math.max(6, Math.min(18, Math.round((w * h) / 80000)));
-      const centers = [];
+      centers = [];
       // stratified centres: the clusters spread over the whole canvas but stay separate groups
       const cols = Math.ceil(Math.sqrt(k * (w / h))), rows = Math.ceil(k / cols);
       for (let i = 0; i < k; i++) {
         const c = i % cols, r = Math.floor(i / cols);
-        centers.push({ x: ((c + rnd(0.25, 0.75)) / cols) * w, y: ((r + rnd(0.25, 0.75)) / rows) * h, size: rnd(0.35, 1.7) });
+        centers.push({ x: ((c + rnd(0.25, 0.75)) / cols) * w, y: ((r + rnd(0.25, 0.75)) / rows) * h, size: rnd(0.35, 1.7), vx: rnd(-0.5, 0.5), vy: rnd(-0.5, 0.5) });
       }
       nodes = [];
       for (let i = 0; i < count; i++) {
@@ -41,7 +41,7 @@
         const hx = c.x + Math.cos(a) * d, hy = c.y + Math.sin(a) * d * 0.75;
         const red = i % 18 === 5;
         nodes.push({
-          x: hx, y: hy, hx, hy, vx: rnd(-0.3, 0.3), vy: rnd(-0.3, 0.3), c: i % centers.length,
+          x: hx, y: hy, hx, hy, ox: hx - c.x, oy: hy - c.y, vx: rnd(-0.3, 0.3), vy: rnd(-0.3, 0.3), c: i % centers.length,
           r: red ? rnd(opt.red[0], opt.red[1]) : rnd(opt.grey[0], opt.grey[1]), red
         });
       }
@@ -95,7 +95,17 @@
       const rgb = dark ? '255,255,255' : '107,107,112';
       const red = getComputedStyle(document.documentElement).getPropertyValue('--red').trim() || '#c43a3a';
 
+      // every web drifts across the whole canvas on its own wandering path
+      for (const c of centers) {
+        c.vx += rnd(-0.02, 0.02) * dt; c.vy += rnd(-0.02, 0.02) * dt;
+        const sp = Math.hypot(c.vx, c.vy);
+        if (sp > 0.8) { c.vx *= 0.8 / sp; c.vy *= 0.8 / sp; } else if (sp < 0.25) { c.vx *= 1.1; c.vy *= 1.1; }
+        c.x += c.vx * dt; c.y += c.vy * dt;
+        if (c.x < 0 || c.x > w) { c.vx = -c.vx; c.x = Math.max(0, Math.min(w, c.x)); }
+        if (c.y < 0 || c.y > h) { c.vy = -c.vy; c.y = Math.max(0, Math.min(h, c.y)); }
+      }
       for (const n of nodes) {
+        const c = centers[n.c]; n.hx = c.x + n.ox; n.hy = c.y + n.oy;
         n.vx += (n.hx - n.x) * 0.0035 * dt + rnd(-0.035, 0.035) * dt;
         n.vy += (n.hy - n.y) * 0.0035 * dt + rnd(-0.035, 0.035) * dt;
         n.vx *= 0.99; n.vy *= 0.99;
