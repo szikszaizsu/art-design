@@ -45,3 +45,8 @@
 :root[data-theme="dark"] .hv-videos-link{background:#f1f1f2 !important;color:#111111 !important}
 .hv-videos-links{display:flex;flex-wrap:wrap;gap:14px}
 .hv-logo{display:block;line-height:0}
+/* üveghatású videó gombok */
+.hv-videos-link{background:rgba(255,255,255,.42) !important;color:var(--ink) !important;border:1px solid rgba(255,255,255,.75) !important;-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 10px 30px rgba(22,27,29,.12),inset 0 1px 0 rgba(255,255,255,.8);transition:transform .2s,background .2s,box-shadow .2s}
+.hv-videos-link:hover{background:rgba(255,255,255,.62) !important;transform:translateY(-2px)}
+:root[data-theme="dark"] .hv-videos-link{background:rgba(255,255,255,.08) !important;color:#f1f1f2 !important;border:1px solid rgba(255,255,255,.2) !important;box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.16)}
+:root[data-theme="dark"] .hv-videos-link:hover{background:rgba(255,255,255,.14) !important}
