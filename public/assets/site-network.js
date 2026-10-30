@@ -22,7 +22,7 @@
     if (!opt.fixed && getComputedStyle(host).position === 'static') host.style.position = 'relative';
     host.insertBefore(canvas, host.firstChild);
     const ctx = canvas.getContext('2d');
-    let w = 0, h = 0, nodes = [], bridges = [], centers = [], keep = [], raf = 0, last = 0, onScreen = true, resizeTimer = 0, scrollQueued = false;
+    let ptr = null, w = 0, h = 0, nodes = [], bridges = [], centers = [], keep = [], raf = 0, last = 0, onScreen = true, resizeTimer = 0, scrollQueued = false;
 
     function build() {
       const count = Math.max(opt.min, Math.min(opt.max, Math.round((w * h) / opt.area)));
@@ -105,10 +105,15 @@
         if (c.x < 0 || c.x > w) { c.vx = -c.vx; c.x = Math.max(0, Math.min(w, c.x)); }
         if (c.y < 0 || c.y > h) { c.vy = -c.vy; c.y = Math.max(0, Math.min(h, c.y)); }
       }
+      // the web senses the cursor: nearby points drift towards it and link up with it
+      let px = -1e4, py = -1e4;
+      if (ptr) { const r = canvas.getBoundingClientRect(); px = ptr.x - r.left; py = ptr.y - r.top; }
       for (const n of nodes) {
         const c = centers[n.c]; n.hx = c.x + n.ox; n.hy = c.y + n.oy;
         n.vx += (n.hx - n.x) * 0.0035 * dt + rnd(-0.035, 0.035) * dt;
         n.vy += (n.hy - n.y) * 0.0035 * dt + rnd(-0.035, 0.035) * dt;
+        const dx = px - n.x, dy = py - n.y, dd = Math.hypot(dx, dy);
+        if (dd < 240 && dd > 1) { const f = (1 - dd / 240) * 0.06 * dt; n.vx += (dx / dd) * f * 12; n.vy += (dy / dd) * f * 12; }
         n.vx *= 0.99; n.vy *= 0.99;
         n.x += n.vx * dt; n.y += n.vy * dt;
       }
@@ -122,6 +127,14 @@
           const s = (1 - d / opt.reach) * (a.red || b.red ? opt.line * 1.6 : opt.line);
           ctx.strokeStyle = 'rgba(' + rgb + ',' + s.toFixed(3) + ')';
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+      if (ptr) {
+        for (const n of nodes) {
+          const d = Math.hypot(px - n.x, py - n.y);
+          if (d > 190) continue;
+          ctx.strokeStyle = 'rgba(' + rgb + ',' + ((1 - d / 190) * opt.line * 3).toFixed(3) + ')';
+          ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(n.x, n.y); ctx.stroke();
         }
       }
       ctx.strokeStyle = 'rgba(' + rgb + ',' + (opt.line * 0.9).toFixed(3) + ')';
@@ -161,6 +174,9 @@
 
     if (!opt.fixed) new IntersectionObserver(entries => { onScreen = entries[0].isIntersecting; if (onScreen) start(); }).observe(canvas);
     document.addEventListener('visibilitychange', start);
+    window.addEventListener('pointermove', e => { ptr = { x: e.clientX, y: e.clientY }; }, { passive: true });
+    document.addEventListener('pointerleave', () => { ptr = null; });
+    window.addEventListener('blur', () => { ptr = null; });
     if (opt.fixed) {
       window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { resize(); start(); }, 120); });
       // the background stays put while the page scrolls, so the cut-outs follow the page content
