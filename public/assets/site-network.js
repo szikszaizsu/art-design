@@ -64,6 +64,7 @@
     function measureKeep() {
       const cr = canvas.getBoundingClientRect();
       keep = [];
+      return; // nincs kivágás a szöveg és a gombok mögött
       host.querySelectorAll(KEEP).forEach(el => {
         const r = el.getBoundingClientRect();
         if (!r.width || !r.height || r.width > 760 || r.height > 140) return;
