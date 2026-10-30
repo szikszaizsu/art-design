@@ -168,6 +168,7 @@ window.portfolioRomanian = {
   'one-time payment': 'plată unică',
   'Buy now': 'Cumpăr acum',
   'View': 'Vezi',
+  'Feel free to get in touch.': 'Scrie-mi cu încredere.',
   'Ready-made websites for dental clinics, a construction company and a performing artist.': 'Site-uri gata făcute pentru cabinete stomatologice, o firmă de construcții și un artist.',
   'Videos': 'Video-uri',
   'You can find the short videos I make for companies on TikTok.': 'Videoclipurile scurte pe care le fac pentru companii le găsești pe TikTok.',
