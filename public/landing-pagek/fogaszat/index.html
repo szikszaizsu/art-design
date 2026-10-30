@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="hu"><head><meta charset="utf-8">
+  <script>try{if(localStorage.getItem("szs-tema")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Kész, mobilra tervezett landing page sablonok fogászatoknak és szépségszalonoknak."><title>Fogászati landing page sablon — Pixelpin</title><link rel="icon" type="image/png" href="../../assets/favicon.png?v=px-1"><link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=px-1"><link rel="stylesheet" href="../../styles.css?v=px-5"><link rel="stylesheet" href="/assets/pixelpin.css?v=1"><script src="/romanian.js?v=web-6" defer></script><script src="/language.js?v=web-6" defer></script><script src="/visits.js?v=own-visits-1" defer></script><script src="/footer-scene.js?v=scene-2" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pixelpin — Art &amp; Design">
+  <meta property="og:locale" content="hu_HU">
+  <meta property="og:url" content="https://szikszaizsu.com/landing-pagek/fogaszat/">
+  <meta property="og:title" content="Fogászati landing page sablon — Pixelpin">
+  <meta property="og:description" content="Kész, mobilra tervezett landing page sablonok fogászatoknak és szépségszalonoknak.">
+  <meta property="og:image" content="https://szikszaizsu.com/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pixelpin — logó, Art &amp; Design">
+  <meta name="twitter:card" content="summary_large_image">
+<style>
+.lp-main{padding-bottom:40px}
+.lp-top{padding-block:56px 8px}
+.lp-top .eyebrow{margin-bottom:14px}
+.lp-top h1{margin:0}
+.lp-intro{max-width:46ch;margin:18px 0 0;color:var(--muted);font-size:1.1rem}
+.lp-product{display:grid;gap:40px;padding-block:32px 56px}
+@media (min-width:980px){.lp-product{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.lp-buy{position:sticky;top:110px}}
+.lp-gallery{display:grid;gap:20px;min-width:0}
+.lp-gallery img{display:block;width:100%;height:auto;border-radius:18px}
+.lp-scroll{max-height:640px;overflow:auto;border-radius:18px;border:1px solid var(--line);background:var(--soft)}
+.lp-scroll img{border-radius:0}
+.lp-buy{padding:30px;border-radius:22px;background:var(--soft)}
+.lp-tag{margin:0;color:#111111;font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.lp-buy h2{margin:10px 0 0;font-size:clamp(1.9rem,3vw,2.5rem)}
+.lp-price{display:flex;align-items:baseline;gap:10px;margin:18px 0 0}
+.lp-price b{font-size:2rem;font-weight:600}
+.lp-price span{color:var(--muted)}
+.lp-text{margin:14px 0 0;color:var(--muted)}
+.lp-cta,.lp-bar .button{display:inline-flex !important;align-items:center;justify-content:center !important;gap:12px !important;padding:17px 28px !important;border:0 !important;border-radius:999px !important;background:#111111 !important;color:#fff !important;font-size:.78rem !important;font-weight:600;letter-spacing:.2em !important;text-transform:uppercase !important;text-decoration:none !important;transition:background .2s,transform .2s}
+.lp-cta{margin-top:24px;width:100% !important}
+.lp-cta:hover,.lp-bar .button:hover{background:#2a2a2a;transform:translateY(-2px)}
+.lp-note{margin:12px 0 0;color:var(--muted);font-size:.86rem;text-align:center}
+.lp-info{display:grid;gap:48px;padding-block:8px 56px}
+@media (min-width:860px){.lp-info{grid-template-columns:1fr 1fr}}
+.lp-info h2,.lp-faq h2{margin-bottom:20px;font-size:1.9rem}
+.lp-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.lp-list li{position:relative;padding-left:28px}
+.lp-list li::before{content:"✓";position:absolute;left:0;color:#111111;font-weight:700}
+.lp-specs{margin:0;display:grid}
+.lp-specs div{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.lp-specs dt{color:var(--muted);font-size:.9rem}
+.lp-specs dd{margin:0}
+.lp-faq{padding-block:0 56px;max-width:820px}
+.lp-faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.lp-faq summary{cursor:pointer;font-weight:600;list-style:none}
+.lp-faq summary::-webkit-details-marker{display:none}
+.lp-faq details p{margin:10px 0 0;color:var(--muted)}
+.lp-soon{padding-block:0 80px}
+.lp-soon-box{border:1px dashed var(--line);border-radius:22px;padding:44px 24px;text-align:center;color:var(--muted)}
+.lp-soon-box b{display:block;margin-bottom:6px;color:var(--ink);font-family:var(--serif);font-size:1.6rem;font-weight:600}
+.lp-bar{display:none}
+@media (max-width:759px){.lp-bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;background:rgba(241,241,242,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line)}.lp-bar b{font-size:1.2rem}.lp-bar .button{margin:0}.lp-main{padding-bottom:74px}}
+:root:not([data-theme="dark"]){--paper:#F1F1F2;--soft:#E6E6E8;--line:rgba(107,107,112,.26);--muted:#6B6B70}
+:root:not([data-theme="dark"]) body{background:#F1F1F2}
+:root:not([data-theme="dark"]) .site-header{background:rgba(241,241,242,.88)}
+:root:not([data-theme="dark"]) .lp-buy{background:#F1F1F2;box-shadow:-8px -8px 18px #FFFFFF,8px 8px 18px rgba(22,27,29,.12)}
+.page-dots{display:none !important}
+</style>
+<script src="/assets/site-network.js?v=6" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../" aria-label="Vissza a főoldalra"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPINS</span></a>
+    <button class="menu-button" aria-expanded="false" aria-controls="main-nav">Menü</button>
+    <nav id="main-nav" aria-label="Fő navigáció">
+      <a href="../../#work">Munkáim</a>
+      <a href="../../#services">Amit kínálok</a>
+      <a href="../../#contact">Elérhetőség</a>
+    </nav>
+  </header>
+<main class="detail-main lp-main">
+<section class="lp-top section-shell"><a class="back-link" href="../">← Landing pagek</a><p class="eyebrow">Sablonok</p><h1>Fogászati landing page sablon</h1><p class="lp-intro">Kész, mobilra tervezett oldal, amelyet néhány szövegcserével élesíthetsz.</p></section>
+<section class="lp-product section-shell">
+<div class="lp-gallery"><img src="../img/sablon-cover.webp" width="1200" height="675" alt="Fogászati landing page sablon előnézete"><div class="lp-scroll" tabindex="0"><img src="../img/sablon-teljes.webp" width="780" height="5748" alt="A fogászati landing page sablon teljes oldala" loading="lazy"></div></div>
+<aside class="lp-buy"><p class="lp-tag">Sablon</p><h2>Fogászati landing page sablon</h2><p class="lp-price"><b>29 dollár</b><span>egyszeri fizetés</span></p><p class="lp-text">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><a class="button lp-cta" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener">Megveszem <span aria-hidden="true">↗</span></a><p class="lp-note">Azonnali letöltés fizetés után.</p></aside>
+</section>
+<section class="lp-info section-shell">
+<div><h2>Mit tartalmaz</h2><ul class="lp-list"><li>Figma fájl, 390 px-es mobil elrendezés</li><li>Kész HTML és CSS, keretrendszer nélkül</li><li>10 szekció: hero és foglalás gomb, bizalmi számok, előnyök, előtte/utána, 3 lépés, vélemény, GYIK, záró felhívás, lábléc</li><li>A színek egy helyen átírhatók</li><li>README gyors útmutatóval</li></ul></div>
+<div><h2>Jellemzők</h2><dl class="lp-specs"><div><dt>Formátum</dt><dd>Figma + HTML/CSS (ZIP)</dd></div><div><dt>Szöveg nyelve</dt><dd>Angol, szerkeszthető</dd></div><div><dt>Betűtípus</dt><dd>Inter</dd></div><div><dt>Licenc</dt><dd>Egy rendelő vagy ügyfélprojekt, szerkesztheted, de a fájlokat nem adhatod tovább.</dd></div><div><dt>Átvétel</dt><dd>Azonnali letöltés fizetés után</dd></div></dl></div>
+</section>
+<section class="lp-faq section-shell"><h2>Gyakori kérdések</h2>
+<details><summary>Hogyan kapom meg a sablont?</summary><p>Fizetés után a Gumroad azonnal elküldi e-mailben a letöltési linket.</p></details>
+<details><summary>Kell hozzá programozói tudás?</summary><p>Nem. A szöveget és a képeket egy szövegszerkesztőben átírhatod, vagy a Figma fájlban dolgozhatsz.</p></details>
+<details><summary>Használhatom több ügyfélnek?</summary><p>Egy vásárlás egy rendelőre vagy egy ügyfélprojektre szól. Több projekthez külön példány kell.</p></details>
+</section>
+<div class="lp-bar"><b>29 dollár</b><a class="button" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener">Megveszem <span aria-hidden="true">↗</span></a></div>
+</main><footer class="portfolio-footer">
+    <div class="portfolio-footer-grid section-shell">
+      <div class="footer-intro">
+        <a class="footer-brand" href="../../"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPINS</span></a>
+        <p><span class="footer-tagline">Weboldalak, sablonok, arculat.</span><span class="footer-description">Letisztult, mobilra tervezett digit&aacute;lis munk&aacute;k.</span></p>
+      </div>
+      <div class="footer-column">
+        <h2>Oldalak</h2>
+        <a href="../../">F&#337;oldal</a>
+        <a href="../../#work">Munk&aacute;im</a>
+        <a href="../../#services">Amit k&iacute;n&aacute;lok</a>
+        <a href="../../#contact">El&eacute;rhet&#337;s&eacute;g</a>
+        <a href="../../hagyomanyos-munkak/">K&eacute;zm&#369;ves munk&aacute;k</a>
+      </div>
+      <div class="footer-column footer-contact">
+        <h2>L&eacute;pj kapcsolatba velem</h2>
+        <a href="tel:+40743068652"><span aria-hidden="true">&#9742;</span> 0743 068-652</a>
+        <h2 class="follow-title">K&ouml;vess engem</h2>
+        <div class="social-links">
+          <a class="social-link facebook" href="https://www.facebook.com/szikszaizsu" target="_blank" rel="noopener noreferrer" aria-label="Szikszai Zsu a Facebookon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v2H6v4h3v7h4v-7h3.4l.6-4h-4V9c0-.7.3-1 1-1Z"/></svg>
+          </a>
+          <a class="social-link instagram" href="https://www.instagram.com/szikszaizsu/" target="_blank" rel="noopener noreferrer" aria-label="Szikszai Zsu az Instagramon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="social-dot"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-scene" data-footer-scene aria-hidden="true"><canvas></canvas></div>
+    <div class="footer-bottom section-shell"><p>&copy; 2026 Szikszai Zsu. Minden jog fenntartva.</p><a href="../../adatvedelem/">Adatvédelem</a><a href="../../">Vissza a f&#337;oldalra &uarr;</a></div>
+  </footer>
+  <script src="../../script.js?v=theme-1"></script>
+<script src="/oldal-pontok.js?v=dots-2" defer></script>
+</body></html>

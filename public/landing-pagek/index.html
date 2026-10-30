@@ -60,8 +60,20 @@
 :root:not([data-theme="dark"]) .site-header{background:rgba(241,241,242,.88)}
 :root:not([data-theme="dark"]) .lp-buy{background:#F1F1F2;box-shadow:-8px -8px 18px #FFFFFF,8px 8px 18px rgba(22,27,29,.12)}
 .page-dots{display:none !important}
+.lp-list-wrap{padding-block:32px 40px}
+.lp-cards{display:grid;gap:28px}
+@media (min-width:760px){.lp-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.lp-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.lp-card{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:var(--soft)}
+:root:not([data-theme="dark"]) .lp-card{background:#F1F1F2;box-shadow:-8px -8px 18px #FFFFFF,8px 8px 18px rgba(22,27,29,.12)}
+.lp-card-img img{display:block;width:100%;height:auto}
+.lp-card-body{padding:24px;display:flex;flex-direction:column;flex:1}
+.lp-card h2{margin:10px 0 0;font-size:1.7rem}
+.lp-card-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;padding-top:20px}
+.lp-card-foot b{font-size:1.4rem;font-weight:600}
+.lp-card .lp-cta{margin:0;width:auto !important}
 </style>
-<script src="/assets/site-network.js?v=4" defer></script>
+<script src="/assets/site-network.js?v=6" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -75,27 +87,10 @@
   </header>
 <main class="detail-main lp-main">
 <section class="lp-top section-shell"><a class="back-link" href="../">← Vissza a főoldalra</a><p class="eyebrow">Sablonok</p><h1>Landing pagek</h1><p class="lp-intro">Kész, mobilra tervezett oldalak, amelyeket néhány szövegcserével élesíthetsz.</p></section>
-<section class="lp-product section-shell">
-<div class="lp-gallery"><img src="img/sablon-cover.webp" width="1200" height="675" alt="Fogászati landing page sablon előnézete"><div class="lp-scroll" tabindex="0"><img src="img/sablon-teljes.webp" width="780" height="5748" alt="A fogászati landing page sablon teljes oldala" loading="lazy"></div></div>
-<aside class="lp-buy"><p class="lp-tag">Sablon</p><h2>Fogászati landing page sablon</h2><p class="lp-price"><b>29 dollár</b><span>egyszeri fizetés</span></p><p class="lp-text">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><a class="button lp-cta" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener">Megveszem <span aria-hidden="true">↗</span></a><p class="lp-note">Azonnali letöltés fizetés után.</p></aside>
-</section>
-<section class="lp-info section-shell">
-<div><h2>Mit tartalmaz</h2><ul class="lp-list"><li>Figma fájl, 390 px-es mobil elrendezés</li><li>Kész HTML és CSS, keretrendszer nélkül</li><li>10 szekció: hero és foglalás gomb, bizalmi számok, előnyök, előtte/utána, 3 lépés, vélemény, GYIK, záró felhívás, lábléc</li><li>A színek egy helyen átírhatók</li><li>README gyors útmutatóval</li></ul></div>
-<div><h2>Jellemzők</h2><dl class="lp-specs"><div><dt>Formátum</dt><dd>Figma + HTML/CSS (ZIP)</dd></div><div><dt>Szöveg nyelve</dt><dd>Angol, szerkeszthető</dd></div><div><dt>Betűtípus</dt><dd>Inter</dd></div><div><dt>Licenc</dt><dd>Egy rendelő vagy ügyfélprojekt, szerkesztheted, de a fájlokat nem adhatod tovább.</dd></div><div><dt>Átvétel</dt><dd>Azonnali letöltés fizetés után</dd></div></dl></div>
-</section>
-<section class="lp-faq section-shell"><h2>Gyakori kérdések</h2>
-<details><summary>Hogyan kapom meg a sablont?</summary><p>Fizetés után a Gumroad azonnal elküldi e-mailben a letöltési linket.</p></details>
-<details><summary>Kell hozzá programozói tudás?</summary><p>Nem. A szöveget és a képeket egy szövegszerkesztőben átírhatod, vagy a Figma fájlban dolgozhatsz.</p></details>
-<details><summary>Használhatom több ügyfélnek?</summary><p>Egy vásárlás egy rendelőre vagy egy ügyfélprojektre szól. Több projekthez külön példány kell.</p></details>
-</section>
+<section class="lp-list-wrap section-shell"><div class="lp-cards">
+<article class="lp-card"><a class="lp-card-img" href="fogaszat/" aria-label="Fogászati landing page sablon megnyitása"><img src="img/sablon-cover.webp" width="1200" height="675" alt="Fogászati landing page sablon előnézete"></a><div class="lp-card-body"><p class="lp-tag">Sablon</p><h2>Fogászati landing page sablon</h2><p class="lp-text">Mobil-első, konverzióra tervezett oldal fogászatoknak és szépségszalonoknak. Figma fájl + kész HTML és CSS.</p><div class="lp-card-foot"><b>29 dollár</b><a class="button lp-cta" href="fogaszat/">Megnézem</a></div></div></article>
+</div></section>
 <section class="lp-soon section-shell"><div class="lp-soon-box"><b>Hamarosan</b>További sablonok készülnek.</div></section>
-<div class="lp-bar"><b>29 dollár</b><a class="button" href="https://pixelpin.gumroad.com/l/jrcthm" target="_blank" rel="noopener">Megveszem <span aria-hidden="true">↗</span></a></div>
-</main><footer class="portfolio-footer">
-    <div class="portfolio-footer-grid section-shell">
-      <div class="footer-intro">
-        <a class="footer-brand" href="../"><span class="notranslate" translate="no">PI<span class="brand-x">X</span>ELPINS</span></a>
-        <p><span class="footer-tagline">Weboldalak, sablonok, arculat.</span><span class="footer-description">Letisztult, mobilra tervezett digit&aacute;lis munk&aacute;k.</span></p>
-      </div>
       <div class="footer-column">
         <h2>Oldalak</h2>
         <a href="../">F&#337;oldal</a>
