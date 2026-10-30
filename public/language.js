@@ -148,7 +148,7 @@
       const title = text.replace(' — Pixelpin', '');
       return (title === 'Az oldal nem található' ? 'Page not found' : translations[title] || title) + ' — Pixelpin';
     }
-    if (text === 'Pixelpin — Vizuális alkotó · UX/UI tervező') return 'Pixelpin — Visual artist · UX/UI designer';
+    if (text === 'Pixelpin — Weboldalak, sablonok, arculat') return 'Pixelpin — Websites, templates, branding';
     return text;
   };
   const texts = [];
@@ -175,6 +175,7 @@
       const base = english.replace(' — Pixelpin', '');
       return (base === 'Page not found' ? 'Pagina nu a fost găsită' : ro[base] || base) + ' — Pixelpin';
     }
+    if (english === 'Pixelpin — Websites, templates, branding') return 'Pixelpin — Site-uri web, șabloane, identitate vizuală';
     if (english.startsWith('Pixelpin — ')) return 'Pixelpin — ' + ro['Visual artist · UX/UI designer'];
     return english;
   };
