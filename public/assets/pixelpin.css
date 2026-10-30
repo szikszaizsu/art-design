@@ -67,3 +67,14 @@
 .contact-trust{margin-top:22px !important;font:italic 500 clamp(1.6rem,3vw,2.3rem)/1.2 "Cormorant Garamond",Georgia,serif;color:var(--ink)}
 .contact-trust::before{content:"";display:block;width:44px;height:1px;margin-bottom:18px;background:var(--accent,#c43a3a)}
 .hv-contact .contact-copy .contact-trust{font:italic 500 clamp(1.9rem,3.4vw,2.6rem)/1.2 "Cormorant Garamond",Georgia,serif !important;color:var(--ink) !important;max-width:none}
+.hv-wa{display:inline-flex;align-items:center;gap:12px;margin-top:26px;padding:15px 28px;border-radius:999px;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.45);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 10px 30px rgba(22,27,29,.12),inset 0 1px 0 rgba(255,255,255,.8);color:var(--ink);font-size:.82rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:transform .2s,background .2s}
+.hv-wa svg{width:22px;height:22px;fill:#25d366}
+.hv-wa:hover{transform:translateY(-2px);background:rgba(255,255,255,.65)}
+:root[data-theme="dark"] .hv-wa{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#f1f1f2;box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.16)}
+
+/* lebegő WhatsApp ikon */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:120;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8);-webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);box-shadow:0 14px 34px rgba(22,27,29,.2),inset 0 1px 0 rgba(255,255,255,.9);transition:transform .2s,box-shadow .2s}
+.wa-float svg{width:30px;height:30px;fill:#25d366}
+.wa-float:hover{transform:translateY(-3px) scale(1.05)}
+:root[data-theme="dark"] .wa-float{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.22);box-shadow:0 14px 34px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.16)}
+@media (max-width:759px){body:has(.lp-bar) .wa-float{bottom:92px}.wa-float{right:16px;bottom:16px;width:54px;height:54px}}
